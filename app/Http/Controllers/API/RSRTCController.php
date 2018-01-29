@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 ini_set('default_socket_timeout', 600);
+libxml_disable_entity_loader(false);
 class RSRTCController extends Controller
 {
 	private $wsdlPath = "http://180.92.170.94:8081/RSRTCServices/RSRTCService?wsdl";

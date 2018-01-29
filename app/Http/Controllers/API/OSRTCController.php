@@ -72,7 +72,7 @@ class OSRTCController extends Controller
     			'password' => 'biwsTest'
     	));
 
-        $journeyDate = date('d/m/Y', strtotime(Carbon::now()->addDays(2)));
+        $journeyDate = date('d/m/Y', strtotime(Carbon::now()->addDays(13)));
 
     	$request['arg0'] = array(
             'wsUser' => array(
