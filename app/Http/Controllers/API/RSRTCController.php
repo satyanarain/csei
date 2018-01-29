@@ -54,7 +54,7 @@ class RSRTCController extends Controller
             'trace' => true, //to debug 
         ));
 
-        echo $dateOfJourney = date('d/m/Y', strtotime(Carbon::now()->addDays(22)));//date('d/m/Y');
+        $dateOfJourney = date('d/m/Y', strtotime(Carbon::now()->addDays(19)));//date('d/m/Y');
         $request['AvailableServiceRequest'] = array(
         	'authentication' => array(
 	        						'userName' => $this->userName,

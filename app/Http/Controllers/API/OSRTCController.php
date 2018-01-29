@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use SoapClient;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 ini_set('default_socket_timeout', 600);
@@ -71,7 +72,7 @@ class OSRTCController extends Controller
     			'password' => 'biwsTest'
     	));
 
-        $journeyDate = date('d/m/Y');
+        $journeyDate = date('d/m/Y', strtotime(Carbon::now()->addDays(2)));
 
     	$request['arg0'] = array(
             'wsUser' => array(
