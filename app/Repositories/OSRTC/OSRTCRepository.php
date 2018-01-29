@@ -21,9 +21,7 @@ class OSRTCRepository implements OSRTCRepositoryContract
     			'trace' => true
     	));
 
-    	echo "<pre>";
-    	//print_r($client->__getTypes());
-        print_r($client->__getFunctions());
+    	return $client;
     }
 
     public function getPlaceList($request)
@@ -54,12 +52,8 @@ class OSRTCRepository implements OSRTCRepositoryContract
     	);
 
     	$getPlaceList = $client->getPlaceList($request);
-        /*echo "<pre>";
-    	print_r($getPlaceList);*/
-
-        $getPlaceList = $getPlaceList->PlaceList;
-
-        return response()->json($getPlaceList);
+        
+        return $getPlaceList;
     }
 
     public function getAvailableServices($journeyDate, $biFromPlace, $biToPlace)

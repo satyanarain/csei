@@ -6,6 +6,7 @@ use SoapClient;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\RSRTC\RSRTCRepositoryContract;
 ini_set('default_socket_timeout', 600);
 libxml_disable_entity_loader(false);
 class RSRTCController extends Controller
@@ -15,34 +16,25 @@ class RSRTCController extends Controller
 	private $password = "trimax";
 	private $userType = 1;
 
+    protected $rsrtc;
+
+    public function __construct(RSRTCRepositoryContract $rsrtc)
+    {
+        $this->rsrtc = $rsrtc;
+    }
+
 	public function getAllFunctions()
 	{
-    	$client = new SoapClient($this->wsdlPath, array(  
-            //'soap_version' => SOAP_1_1,
-            'trace' => true, //to debug 
-        ));
+    	$response = $this->rsrtc->getAllFunctions();
 
-    	echo "<pre>";
-        print_r($client->__getFunctions());
-        print_r($client->__getTypes());
+        echo "<pre>";
+        print_r($response->__getTypes());
+        print_r($response->__getFunctions());
 	}
 
     public function GetAllBusTypes()
     {
-    	$client = new SoapClient($this->wsdlPath, array(  
-            //'soap_version' => SOAP_1_1,
-            'trace' => true, //to debug 
-        ));
-
-        $request['AllBusTypeRequest'] = array(
-        	'authentication' => array(
-	        			'userName' => $this->userName,
-	        			'password' => $this->password,
-	        			'userType' => $this->userType
-    		) 
-        );
-
-		$GetAllBusTypes = $client->GetAllBusTypes($request);
+    	$allBusType = $this->GetAllBusTypes();
 		$allBusType = $GetAllBusTypes->return->allBusType;
 		
 		return response()->json($allBusType);
@@ -50,28 +42,23 @@ class RSRTCController extends Controller
 
     public function getAvailableServices()
     {
-    	$client = new SoapClient($this->wsdlPath, array(  
-            //'soap_version' => SOAP_1_1,
-            'trace' => true, //to debug 
-        ));
+        $data = array();
+        $dateOfJourney = date('d/m/Y', strtotime(Carbon::now()->addDays(19)));
+    	$allAvailableServices = $this->rsrtc->getAvailableServices($dateOfJourney);
 
-        $dateOfJourney = date('d/m/Y', strtotime(Carbon::now()->addDays(19)));//date('d/m/Y');
-        $request['AvailableServiceRequest'] = array(
-        	'authentication' => array(
-	        						'userName' => $this->userName,
-	        						'password' => $this->password,
-	        						'userType' => $this->userType
-        						),
-        	'dateOfJourney' => $dateOfJourney
-        );
-
-		$getAvailableServices = $client->getAvailableServices($request);
-		echo "<pre>";
-		print_r($getAvailableServices);
-		exit();
-		$allAvailableServices = $getAvailableServices->AvailableServiceResponse->availableServices->service;
+        if(isset($rsrtcAvailableServices->serviceError))
+        {
+            $errors['rsrtc']['message'] = $allAvailableServices->serviceError->errorReason;
+            $services['rsrtc'] = '';
+        }else {
+            $services['rsrtc'] = $allAvailableServices->availableServices->service;
+            $errors['rsrtc']['message'] = '';
+        }
 		
-		return response()->json($allAvailableServices);
+        $data['services'] = $services;
+        $data['errors'] = $errors;
+		
+		return response()->json($data);
     }
 
     public function showAvailableServices()

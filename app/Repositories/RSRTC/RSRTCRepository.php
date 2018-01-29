@@ -19,9 +19,7 @@ class RSRTCRepository implements RSRTCRepositoryContract
             'trace' => true, //to debug 
         ));
 
-    	echo "<pre>";
-        //print_r($client->__getTypes());
-        print_r($client->__getFunctions());
+    	return $client;
 	}
 
     public function GetAllBusTypes()

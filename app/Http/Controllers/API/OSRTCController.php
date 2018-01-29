@@ -6,6 +6,7 @@ use SoapClient;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\OSRTC\OSRTCRepositoryContract;
 ini_set('default_socket_timeout', 600);
 class OSRTCController extends Controller
 {
@@ -16,48 +17,25 @@ class OSRTCController extends Controller
     private $userUserName = "APICLIENT@BUSINDIA.COM";
     private $userPassword = "busindiaapi";
     private $userUserType = 101;
+    protected $osrtc;
+    public function __construct(OSRTCRepositoryContract $osrtc)
+    {
+        $this->osrtc = $osrtc;
+    }
 
     public function getAllFunctions()
     {
-    	$client = new SoapClient($this->wsdlPath, array(
-    			'trace' => true
-    	));
+    	$response = $this->osrtc->getAllFunctions();
 
     	echo "<pre>";
-    	print_r($client->__getFunctions());
-        print_r($client->__getTypes());
+    	print_r($response->__getFunctions());
+        print_r($response->__getTypes());
     }
 
     public function getPlaceList(Request $request)
     {
-    	try
-    	{
-    		$client = new SoapClient($this->wsdlPath, array(
-    			'trace' => true,
-    			'login' => 'biwsTest',
-    			'password' => 'biwsTest'
-    		));
-    	}catch (Exception $e) {
-	        echo "<h2>Exception Error!</h2>";
-	        echo $e->getMessage();
-	    }
-    	
-    	$request['arg0'] = array(
-    		//'wsUser' => array(
-    			//'franchUserID' => '',
-    			'password' => $this->userPassword,
-    			'userID' => $this->userID,
-    			//'userKey' => '',
-    			'userName' => $this->userUserName,
-    			//'userRole' => '',
-    			//'userStatus' => '',
-    			'userType' => $this->userUserType
-    		//)
-    	);
 
-    	$getPlaceList = $client->getPlaceList($request);
-        /*echo "<pre>";
-    	print_r($getPlaceList);*/
+    	$getPlaceList = $this->osrtc->getPlaceList($request);
 
         $getPlaceList = $getPlaceList->PlaceList;
 
