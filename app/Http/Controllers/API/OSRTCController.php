@@ -10,14 +10,8 @@ use App\Repositories\OSRTC\OSRTCRepositoryContract;
 ini_set('default_socket_timeout', 600);
 class OSRTCController extends Controller
 {
-    private $wsdlPath = "http://111.93.131.112/biws/buswebservice?wsdl";
-    private $authUserName = "biwsTest";
-    private $authPassword = "biwsTest";
-    private $userID = 440;
-    private $userUserName = "APICLIENT@BUSINDIA.COM";
-    private $userPassword = "busindiaapi";
-    private $userUserType = 101;
     protected $osrtc;
+    
     public function __construct(OSRTCRepositoryContract $osrtc)
     {
         $this->osrtc = $osrtc;
