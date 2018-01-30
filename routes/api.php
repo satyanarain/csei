@@ -42,13 +42,13 @@ Route::group(['prefix'=>'rsrtc', 'as'=>'.rsrtc', 'namespace'=>'API'], function()
 /*
 |--------------------------------------------------------------------------
 | OSRTC Routes
-|--------------------------------------------------------------------------
+|---------------	-----------------------------------------------------------
 */
 
 Route::group(['prefix'=>'osrtc', 'as'=>'.osrtc', 'namespace'=>'API'], function(){	
 	Route::get('getallfunctions', 'OSRTCController@getAllFunctions');
 	Route::get('getplacelist', 'OSRTCController@getPlaceList');
-	Route::get('getavailableservices', 'OSRTCController@getAvailableServices');
+	Route::post('getavailableservices', 'OSRTCController@getAvailableServices');
 	Route::get('getseatlayout', 'OSRTCController@getSeatlayout');
 	Route::get('getboardingpoints', 'OSRTCController@getBoardingPoints');
 	Route::get('getidproofs', 'OSRTCController@getIDProofs');

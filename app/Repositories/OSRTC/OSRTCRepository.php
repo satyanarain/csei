@@ -77,12 +77,12 @@ class OSRTCRepository implements OSRTCRepositoryContract
             ),
     		'biFromPlace' => array(
     			"placeCode" => $biFromPlace['placeCode'],//"AMD",
-                "placeID" => $biFromPlace['placeId'],//"208",
+                "placeID" => $biFromPlace['placeID'],//"208",
                 "placeName" => $biFromPlace['placeName']//"AHMEDABAD"
     		),
     		'biToPlace' => array(
     			"placeCode" => $biToPlace['placeCode'],//"SRT",
-                "placeID" => $biToPlace['placeId'],//"317",
+                "placeID" => $biToPlace['placeID'],//"317",
                 "placeName" => $biToPlace['placeName']//"SURAT"  
     		),
     		'journeyDate' => $journeyDate

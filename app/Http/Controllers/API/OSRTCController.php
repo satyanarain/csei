@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
+error_reporting(0);
 use SoapClient;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\OSRTC\OSRTCRepositoryContract;
 ini_set('default_socket_timeout', 600);
+libxml_disable_entity_loader(false);
 class OSRTCController extends Controller
 {
     protected $osrtc;
@@ -38,46 +40,67 @@ class OSRTCController extends Controller
 
     public function getAvailableServices(Request $request)
     {
-    	$client = new SoapClient($this->wsdlPath, array(
-    			'trace' => true,
-    			'login' => 'biwsTest',
-    			'password' => 'biwsTest'
-    	));
+        /*$this->validate($request, [
+            'journeyDate' => 'required|date',
+            'biFromPlace' => 'required|array',
+            'biToPlace' => 'required|date'
+        ]);*/
+        
 
-        $journeyDate = date('d/m/Y', strtotime(Carbon::now()->addDays(13)));
+        $data = array();
+    	/*$journeyDate = date('d/m/Y', strtotime(Carbon::now()->addDays(46)));
 
-    	$request['arg0'] = array(
-            'wsUser' => array(
-                //'franchUserID' => '',
-                'password' => $this->userPassword,
-                'userID' => $this->userID,
-                //'userKey' => '',
-                'userName' => $this->userUserName,
-                //'userRole' => '',
-                //'userStatus' => '',
-                'userType' => $this->userUserType
-            ),
-    		'biFromPlace' => array(
-    			"placeCode" => "AMD",
-                "placeID" => "208",
-                "placeName" => "AHMEDABAD"
-    		),
-    		'biToPlace' => array(
-    			"placeCode" => "SRT",
-                "placeID" => "317",
-                "placeName" => "SURAT"  
-    		),
-    		'journeyDate' => $journeyDate,
-    	);
+        $biFromPlace = array(
+            "placeCode" => "AMD",
+            "placeID" => "208",
+            "placeName" => "AHMEDABAD"
+        );
 
-    	$getAvailableServices = $client->getAvailableServices($request);
-        echo "<pre>";
-    	print_r($getAvailableServices);
-        return;
+        $biToPlace = array(
+            "placeCode" => "SRT",
+            "placeID" => "317",
+            "placeName" => "SURAT"
+        );*/
+        //echo $request['journeyDate'];exit();
+        $journeyDate = $request['journeyDate'];
+        $biFPlace = $request['biFromPlace'];
+        $biTPlace = $request['biToPlace'];
+        
+        //echo $biFPlace['placeCode'];exit();
+        /*$biFromPlace = array(
+            "placeCode" => $biFPlace['placeCode'],
+            "placeID" => $biFPlace['placeID'],
+            "placeName" => $biFPlace['placeName']
+        );
 
-        $getAvailableServices = $getAvailableServices->AvailableServiceResponse->services->service;
+        $biToPlace = array(
+            "placeCode" => $biTPlace['placeCode'],
+            "placeID" => $biTPlace['placeID'],
+            "placeName" => $biTPlace['placeName']
+        );*/
+    
 
-        return response()->json($getAvailableServices);
+        $getAvailableServices = $this->osrtc->getAvailableServices($journeyDate, $biFPlace, $biTPlace);
+    	
+        /*echo "<pre>";
+        print_r($getAvailableServices);
+        exit();*/
+
+        if(isset($getAvailableServices->wsResponse->statusCode) && $getAvailableServices->wsResponse->statusCode == 0)
+        {
+            $services = $getAvailableServices->services->service;
+            $errors['message'] = $getAvailableServices->wsResponse->message;
+            $errors['statusCode'] = $getAvailableServices->wsResponse->statusCode;
+        }else {
+            $services = array();
+            $errors['message'] = $getAvailableServices->wsResponse->message;
+            $errors['statusCode'] = $getAvailableServices->wsResponse->statusCode;
+        }
+
+        $data['service'] = $services;
+        $data['wsResponse'] = $errors;
+
+        return response()->json($data);
     }
 
 
