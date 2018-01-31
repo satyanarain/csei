@@ -65,6 +65,8 @@ class OSRTCController extends Controller
         $journeyDate = $request['journeyDate'];
         $biFPlace = $request['biFromPlace'];
         $biTPlace = $request['biToPlace'];
+
+        return response()->json($request->all());
         
         //echo $biFPlace['placeCode'];exit();
         /*$biFromPlace = array(
