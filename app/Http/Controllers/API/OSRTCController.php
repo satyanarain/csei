@@ -62,9 +62,9 @@ class OSRTCController extends Controller
             "placeName" => "SURAT"
         );*/
         //echo $request['journeyDate'];exit();
-        $journeyDate = $request['journeyDate'];
-        $biFPlace = $request['biFromPlace'];
-        $biTPlace = $request['biToPlace'];
+        $journeyDate = $request->journeyDate;
+        $biFPlace = $request->biFromPlace;
+        $biTPlace = $request->biToPlace;
 
         //return response()->json($request->all());
         
