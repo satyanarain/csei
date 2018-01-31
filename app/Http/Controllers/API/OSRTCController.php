@@ -82,9 +82,9 @@ class OSRTCController extends Controller
 
         $getAvailableServices = $this->osrtc->getAvailableServices($journeyDate, $biFPlace, $biTPlace);
     	
-        /*echo "<pre>";
+        echo "<pre>";
         print_r($getAvailableServices);
-        exit();*/
+        exit();
 
         if(isset($getAvailableServices->wsResponse->statusCode) && $getAvailableServices->wsResponse->statusCode == 0)
         {
