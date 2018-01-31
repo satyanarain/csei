@@ -76,14 +76,14 @@ class OSRTCRepository implements OSRTCRepositoryContract
                 'userType' => $this->userUserType
             ),
     		'biFromPlace' => array(
-    			"placeCode" => $biFromPlace['placeCode'],//"AMD",
-                "placeID" => $biFromPlace['placeID'],//"208",
-                "placeName" => $biFromPlace['placeName']//"AHMEDABAD"
+    			"placeCode" => "AMD",
+                "placeID" => "208",
+                "placeName" => "AHMEDABAD"
     		),
     		'biToPlace' => array(
-    			"placeCode" => $biToPlace['placeCode'],//"SRT",
-                "placeID" => $biToPlace['placeID'],//"317",
-                "placeName" => $biToPlace['placeName']//"SURAT"  
+    			"placeCode" => "SRT",
+                "placeID" => "317",
+                "placeName" => "SURAT"  
     		),
     		'journeyDate' => $journeyDate
     	);

@@ -62,14 +62,14 @@ class OSRTCController extends Controller
             "placeName" => "SURAT"
         );*/
         //echo $request['journeyDate'];exit();
-        $journeyDate = $request->journeyDate;
+        $journeyDate = date('d/m/Y');//$request->journeyDate;
         $biFPlace = $request->biFromPlace;
         $biTPlace = $request->biToPlace;
 
-        return response()->json(array('place' => $biFPlace['placeCode']));
+        //return response()->json(array('place' => $biFPlace['placeCode']));
         
         //echo $biFPlace['placeCode'];exit();
-        /*$biFromPlace = array(
+        $biFromPlace = array(
             "placeCode" => $biFPlace['placeCode'],
             "placeID" => $biFPlace['placeID'],
             "placeName" => $biFPlace['placeName']
@@ -79,11 +79,12 @@ class OSRTCController extends Controller
             "placeCode" => $biTPlace['placeCode'],
             "placeID" => $biTPlace['placeID'],
             "placeName" => $biTPlace['placeName']
-        );*/
+        );
     
 
-        $getAvailableServices = $this->osrtc->getAvailableServices($journeyDate, $biFPlace, $biTPlace);
+        $getAvailableServices = $this->osrtc->getAvailableServices($journeyDate, $biFromPlace, $biToPlace);
     	
+        //return response()->json($getAvailableServices);
         /*echo "<pre>";
         print_r($getAvailableServices);
         exit();*/
