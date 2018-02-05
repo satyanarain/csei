@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 error_reporting(0);
+use DB;
 use SoapClient;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -31,9 +32,7 @@ class OSRTCController extends Controller
     public function getPlaceList(Request $request)
     {
 
-    	$getPlaceList = $this->osrtc->getPlaceList($request);
-
-        $getPlaceList = $getPlaceList->PlaceList;
+    	$getPlaceList = DB::table('osrtc_places')->get();
 
         return response()->json($getPlaceList);
     }
@@ -82,26 +81,12 @@ class OSRTCController extends Controller
         );
     
 
-        $getAvailableServices = $this->osrtc->getAvailableServices($journeyDate, $biFromPlace, $biToPlace);
+        $getAvailableServices = DB::table('osrtc_services')->get();
     	
-        //return response()->json($getAvailableServices);
-        /*echo "<pre>";
-        print_r($getAvailableServices);
-        exit();*/
+        
 
-        if(isset($getAvailableServices->wsResponse->statusCode) && $getAvailableServices->wsResponse->statusCode == 0)
-        {
-            $services = $getAvailableServices->services->service;
-            $errors['message'] = $getAvailableServices->wsResponse->message;
-            $errors['statusCode'] = $getAvailableServices->wsResponse->statusCode;
-        }else {
-            $services = array();
-            $errors['message'] = $getAvailableServices->wsResponse->message;
-            $errors['statusCode'] = $getAvailableServices->wsResponse->statusCode;
-        }
-
-        $data['service'] = $services;
-        $data['wsResponse'] = $errors;
+        $data['service'] = $getAvailableServices;
+        $data['wsResponse'] = array("message"=>"SUCCESS", 'statusCode' => "0");
 
         return response()->json($data);
     }
@@ -109,53 +94,7 @@ class OSRTCController extends Controller
 
     public function getSeatlayout(Request $request)
     {
-        $client = new SoapClient($this->wsdlPath, array(
-                'trace' => true,
-                'login' => 'biwsTest',
-                'password' => 'biwsTest'
-        ));
-
-        $classID = '1';
-        $classLayoutID = '1';
-        $journeyDate = date('d/m/Y');
-        $serviceID = '9105';
-        $stuFromPlace = '';
-        $stuToPlace = '';
-        $stuID = '2';
-        $totalPassengers = '1';
-
-        $request['arg0'] = array(
-            'wsUser' => array(
-                //'franchUserID' => '',
-                'password' => $this->userPassword,
-                'userID' => $this->userID,
-                //'userKey' => '',
-                'userName' => $this->userUserName,
-                //'userRole' => '',
-                //'userStatus' => '',
-                'userType' => $this->userUserType
-            ),
-            'biFromPlace' => array(
-                "placeCode" => "AMD",
-                "placeID" => "208",
-                "placeName" => "AHMEDABAD"
-            ),
-            'biToPlace' => array(
-                "placeCode" => "SRT",
-                "placeID" => "317",
-                "placeName" => "SURAT"  
-            ),
-            'classID' => $classID,
-            'classLayoutID' => $classLayoutID,
-            'journeyDate' => $journeyDate,
-            'serviceID' => $serviceID,
-            'stuFromPlace' => $stuFromPlace,
-            'stuID' => $stuID,
-            'stuToPlace' => $stuToPlace,
-            'totalPassengers' => $totalPassengers
-        );
-
-        $getSeatlayout = $client->getSeatlayout($request);
+        $getSeatlayout = $this->osrtc->getSeatlayout($request);
         /*echo "<pre>";
         print_r($getSeatlayout);
         return;*/

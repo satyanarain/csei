@@ -149,9 +149,7 @@ class OSRTCRepository implements OSRTCRepositoryContract
         print_r($getSeatlayout);
         return;*/
 
-        $getSeatlayout = $getSeatlayout->Seatlayout;
-
-        return response()->json($getSeatlayout);
+        return $getSeatlayout = $getSeatlayout->Seatlayout;
     }
 
     public function getBoardingPoints($request)

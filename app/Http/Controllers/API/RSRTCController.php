@@ -46,6 +46,9 @@ class RSRTCController extends Controller
         $dateOfJourney = date('d/m/Y', strtotime(Carbon::now()->addDays(19)));
     	$allAvailableServices = $this->rsrtc->getAvailableServices($dateOfJourney);
 
+        echo "<pre>";
+        print_r($allAvailableServices);exit();
+
         if(isset($rsrtcAvailableServices->serviceError))
         {
             $errors['rsrtc']['message'] = $allAvailableServices->serviceError->errorReason;
@@ -276,8 +279,8 @@ class RSRTCController extends Controller
             //'soap_version' => SOAP_1_1,
             'trace' => true, //to debug 
         ));
-        $serviceId = 35;
-        $dateOfJourney = date('d/m/Y', strtotime(Carbon::now()->addDays(22)));
+        $serviceId = 46;
+        $dateOfJourney = date('d/m/Y', strtotime(Carbon::now()->addDays(19)));
         $request['BusServiceStopsRequest'] = array(
             'authentication' => array(
                                     'userName' => $this->userName,
@@ -290,9 +293,9 @@ class RSRTCController extends Controller
 
         $getBusServiceStops = $client->getBusServiceStops($request);
 
-        /*echo "<pre>";
+        echo "<pre>";
         print_r($getBusServiceStops);
-        exit();*/
+        exit();
         $getBusServiceStops = $getBusServiceStops->BusServiceStopsResponse->busServiceStops->busServiceStop;
         
         return response()->json($getBusServiceStops);
