@@ -49,7 +49,7 @@ Route::group(['prefix'=>'osrtc', 'as'=>'.osrtc', 'namespace'=>'API'], function()
 	Route::get('getallfunctions', 'OSRTCController@getAllFunctions');
 	Route::get('getplacelist', 'OSRTCController@getPlaceList');
 	Route::post('getavailableservices', 'OSRTCController@getAvailableServices');
-	Route::get('getseatlayout', 'OSRTCController@getSeatlayout');
+	Route::post('getseatlayout', 'OSRTCController@getSeatlayout');
 	Route::get('getboardingpoints', 'OSRTCController@getBoardingPoints');
 	Route::get('getidproofs', 'OSRTCController@getIDProofs');
 	Route::get('tentativebookings', 'OSRTCController@tentativeBookings');
