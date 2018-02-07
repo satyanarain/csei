@@ -1,6 +1,7 @@
 <?php 
 namespace App\Http\Controllers\API;
 
+use DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -70,5 +71,19 @@ class APIController extends Controller
 		$data['errors'] = $errors;
 
 		return response()->json($data);
+	}
+
+	public function busTypes()
+	{
+		$busTypes = DB::table('bus_types')->select('id', 'name')->get();
+
+		return response()->json($busTypes);
+	}
+
+	public function amenities()
+	{
+		$amenities = DB::table('amenities')->select('id', 'name')->get();
+
+		return response()->json($amenities);
 	}
 }

@@ -71,6 +71,8 @@ Route::group(['prefix'=>'osrtc', 'as'=>'.osrtc', 'namespace'=>'API'], function()
 |-----------------------------------------------------------------------------
 */
 Route::group(['namespace'=>'API'], function(){	
+	Route::get('bustypes', 'APIController@busTypes');
+	Route::get('amenities', 'APIController@amenities');
 	Route::get('available-services', 'APIController@availableServices');
 });
 
