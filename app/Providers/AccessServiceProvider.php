@@ -23,6 +23,11 @@ class AccessServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
+			'App\Repositories\Request\RequestRepositoryContract',
+			'App\Repositories\Request\RequestRepository'
+		);
+
+		$this->app->bind(
 			'App\Repositories\Permission\PermissionRepositoryContract',
 			'App\Repositories\Permission\PermissionRepository'
 		);

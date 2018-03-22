@@ -43,7 +43,8 @@ class UserRepository implements UserRepositoryContract
 		$user->name = $request->name;
 		$user->email = $request->email;
 		$user->contact = $request->contact;
-		$user->description = $request->description;
+		$user->verifiers = implode(',', $request->verifiers);
+		$user->approvers = implode(',', $request->approvers);
 
 		if($request->hasFile('profile_picture'))
 		{
@@ -71,11 +72,6 @@ class UserRepository implements UserRepositoryContract
 
 		$user->roles()->attach($role);
 
-		if($role == 2 || $role == 3)
-		{
-			DB::table('state_user')->insert(['user_id'=>$user->id, 'state_id'=>$request->state]);
-		}
-
 		return $user;
 	}
 
@@ -86,7 +82,8 @@ class UserRepository implements UserRepositoryContract
 		$user->name = $request->name;
 		$user->email = $request->email;
 		$user->contact = $request->contact;
-		$user->description = $request->description;
+		$user->verifiers = implode(',', $request->verifiers);
+		$user->approvers = implode(',', $request->approvers);
 
 		if($request->hasFile('profile_picture'))
 		{
@@ -109,12 +106,9 @@ class UserRepository implements UserRepositoryContract
 
 		$role = $request->roles;
 
-		$user->roles()->sync([$role]);
+		//return response()->json($role);
 
-		if($role == 2 || $role == 3)
-		{
-			DB::table('state_user')->where('user_id', $user->id)->update(['state_id' => $request->state]);
-		}
+		$user->roles()->sync($role);
 
 		return $user;
 	}

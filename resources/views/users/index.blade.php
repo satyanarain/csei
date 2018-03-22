@@ -1,87 +1,87 @@
-@extends('layouts.master')
-
-@section('breadcrumbs')
-<!--breadcrumbs start-->
-<div id="breadcrumbs-wrapper">
-  <!-- Search for small screen -->
-  <div class="header-search-wrapper grey hide-on-large-only">
-    <i class="mdi-action-search active"></i>
-    <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+@extends('layouts.nmaster')
+@section('breadcrumb')
+<!-- Bread crumb -->
+<div class="row page-titles">
+  <div class="col-md-5 align-self-center">
+    <h3 class="text-primary">Users</h3> </div>
+    <div class="col-md-7 align-self-center">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Users</li>
+      </ol>
+    </div>
   </div>
-  <div class="container">
+  <!-- End Bread crumb -->
+  @endsection
+
+  @section('content')
+  <!-- Container fluid  -->
+  <div class="container-fluid">
+    <!-- Start Page Content -->
     <div class="row">
-      <div class="col s12 m12 l12">
-        <h5 class="breadcrumbs-title">Users</h5>
-        <ol class="breadcrumbs">
-          <li><a href="{{route('home')}}">Dashboard</a></li>
-          <li class="active">Users</li>
-        </ol>
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+          <h4 class="card-title">Users List</h4>
+            <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+            <div class="table-responsive m-t-40">
+              <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+               <thead>
+                <tr>
+                 <th>Name</th>
+                 <th>Role (s)</th>
+                 <th>Verifier (s)</th>
+                 <th>Approver (s)</th>
+                 <th>Email</th>
+                 <th>Contact</th>
+                 <th>Action</th>
+               </tr>
+             </thead>
+             <tbody>
+              @foreach($users as $key=>$user)
+              <tr>
+               <td>{{$user->name}}</td>
+               <td>
+                @foreach($user->roles as $index=>$role)
+                @if($index == 0)
+                {{$role->display_name}}
+                @else                
+                {{', '.$role->display_name}}
+                @endif
+                @endforeach
+              </td>
+              <td>
+                @foreach($user->verifiers as $index=>$verifier)
+                @if($index == 0)
+                {{$verifier->name}}
+                @else                
+                {{', '.$verifier->name}}
+                @endif
+                @endforeach
+              </td>
+              <td>
+                @foreach($user->approvers as $index=>$approver)
+                @if($index == 0)
+                {{$approver->name}}
+                @else                
+                {{', '.$approver->name}}
+                @endif
+                @endforeach
+              </td>
+              <td>{{$user->email}}</td>
+              <td>{{$user->contact}}</td>
+              <td>
+                <a href="{{route('users.show', $user->id)}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i> View</a>
+                <a href="{{route('users.edit', $user->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
-<!--breadcrumbs end-->
-@endsection
-
-@section('content')
-<div class="section">
-
-  <p class="caption">There are basically three types of users in this system. Super Admin, is having the access to entire system.</p>
-  <div class="divider"></div>
-
-  <!--Borderless Table-->
-  <div id="borderless-table">
-    <h4 class="header">All Users </h4>
-    <div class="row">
-      <div class="col s12 m12 l12">
-        <table id="data-table-simple" class="responsive-table display" cellspacing="0">
-         <thead>
-          <tr>
-           <th>Name</th>
-           <th>Role (s)</th>
-           <th>Email</th>
-           <th>Contact</th>
-           <th>Action</th>
-         </tr>
-       </thead>
-       <tbody>
-        @foreach($users as $key=>$user)
-        <tr>
-         <td>{{$user->name}}</td>
-         <td>
-          @foreach($user->roles as $index=>$role)
-          @if($index == 0)
-          @if($role->id == 2 || $role->id == 3)
-          {{$role->display_name}} ({{isset($user->state[0]->name) ? $user->state[0]->name : ''}})
-          @else 
-          {{$role->display_name}}
-          @endif
-          @else 
-          @if($role->id == 2 || $role->id == 2)
-          {{', '.$role->display_name}} ({{isset($user->state[0]->name) ? $user->state[0]->name : ''}})
-          @else 
-          {{', '.$role->display_name}}
-          @endif
-          @endif
-          @endforeach
-        </td>
-        <td>{{$user->email}}</td>
-        <td>{{$user->contact}}</td>
-        <td>
-          <a href="{{route('users.show', $user->id)}}" class="btn waves-effect waves-light cyan darken-2"><i class="mdi-action-search left"></i> View</a>
-          <a href="{{route('users.edit', $user->id)}}" class="btn waves-effect waves-light teal"><i class="mdi-editor-mode-edit left"></i> Edit</a>
-        </td>
-      </tr>
-      @endforeach
-    </tbody>
-  </table>
-</div>
-</div>
 </div>
 </div>
 @endsection
-@push('scripts')
-<!-- <script type="text/javascript">
-	$('select[name="data-table-simple_length"]').css('display', 'inline-block !important');
-</script> -->
-@endpush

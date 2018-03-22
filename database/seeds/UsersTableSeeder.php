@@ -17,22 +17,46 @@ class UsersTableSeeder extends Seeder
 
         $user = new User();
         $user->name = 'Administrator';
-        $user->email = 'admin@admin.com';
-        $user->password = bcrypt('admin@123');
+        $user->verifiers = '3';
+        $user->approvers = '4';
+        $user->email = 'admin@gmail.com';
+        $user->password = bcrypt('123123');
         $user->contact = '9971361243';
         $user->save();
 
         $user = new User();
-        $user->name = 'State Administrator';
-        $user->email = 'stateadmin@stateadmin.com';
-        $user->password = bcrypt('stateadmin@123');
+        $user->name = 'Requester';
+        $user->verifiers = '3';
+        $user->approvers = '4';
+        $user->email = 'requester@gmail.com';
+        $user->password = bcrypt('123123');
         $user->contact = '9971361243';
         $user->save();
 
         $user = new User();
-        $user->name = 'Operator';
-        $user->email = 'operator@operator.com';
-        $user->password = bcrypt('operator@123');
+        $user->name = 'Verifier';
+        $user->verifiers = '3';
+        $user->approvers = '4';
+        $user->email = 'verifier@gmail.com';
+        $user->password = bcrypt('123123');
+        $user->contact = '9971361243';
+        $user->save();
+
+        $user = new User();
+        $user->name = 'Approver';
+        $user->verifiers = '3';
+        $user->approvers = '4';
+        $user->email = 'approver@gmail.com';
+        $user->password = bcrypt('123123');
+        $user->contact = '9971361243';
+        $user->save();
+
+        $user = new User();
+        $user->name = 'Accountant';
+        $user->verifiers = '3';
+        $user->approvers = '4';
+        $user->email = 'accountant@gmail.com';
+        $user->password = bcrypt('123123');
         $user->contact = '9971361243';
         $user->save();
     }

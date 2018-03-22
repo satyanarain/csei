@@ -17,7 +17,8 @@ class AddAdditionalColumnsToUserTable extends Migration
             $table->string('contact')->nullable();
             $table->string('profile_picture')->nullable();
             $table->string('manual_reset_password_token')->nullable();
-            $table->string('description')->nullable();
+            $table->string('approvers');
+            $table->string('verifiers');
         });
     }
 
@@ -32,7 +33,8 @@ class AddAdditionalColumnsToUserTable extends Migration
             $table->dropColumn('contact');
             $table->dropColumn('profile_picture');
             $table->dropColumn('manual_reset_password_token');
-            $table->dropColumn('description');
+            $table->dropColumn('approvers');
+            $table->dropColumn('verifiers');
         });
     }
 }

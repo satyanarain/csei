@@ -16,23 +16,30 @@ class PermissionsTableSeeder extends Seeder
 
         $permission = new Permission();
 
-        $permission->name = 'create-state-admin';
-        $permission->display_name = 'Create state admin';
-        $permission->description = 'Roles with create state admin permission can create state admin.';
+        $permission->name = 'create-user';
+        $permission->display_name = 'Create User';
+        $permission->description = 'Roles with create user permission can create users.';
         $permission->save();
 
         $permission = new Permission();
 
-        $permission->name = 'create-operator';
-        $permission->display_name = 'Create operator';
-        $permission->description = 'Roles with create operator permission can create operator. The operator created by stated admin will belong th the state admin belongs to.';
+        $permission->name = 'create-request';
+        $permission->display_name = 'Create request';
+        $permission->description = 'Roles with create request permission can create requests.';
         $permission->save();
 
         $permission = new Permission();
 
-        $permission->name = 'generate-ticket';
-        $permission->display_name = 'Generate ticket';
-        $permission->description = 'Roles with generate ticket permission can generate ticket. The operator can create the ticket for the state he/she belongs to.';
+        $permission->name = 'generate-po';
+        $permission->display_name = 'Generate Purchage Order';
+        $permission->description = 'Roles with generate po permission can generate purchage orders.';
+        $permission->save();
+
+        $permission = new Permission();
+
+        $permission->name = 'reconcile-bills';
+        $permission->display_name = 'Reconcile Bills';
+        $permission->description = 'Roles with reconcile bills permission can reconcile bills and close the request.';
         $permission->save();
     }
 }

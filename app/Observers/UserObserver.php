@@ -21,7 +21,7 @@ class UserObserver
 
 	public function created(User $user)
 	{
-		$url = url('create/password', [$user->manual_reset_password_token]);
-		Mail::to($user->email)->send(new UserCreated($user, $url));
+		//$url = url('create/password', [$user->manual_reset_password_token]);
+		//Mail::to($user->email)->send(new UserCreated($user, $url));
 	}
 }

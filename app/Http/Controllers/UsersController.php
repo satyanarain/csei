@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\User;
 use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,10 +29,13 @@ class UsersController extends Controller
     public function index()
     {
         $users = $this->users->all();
+        foreach ($users as $key => $user) {
+            $user->verifiers = User::whereIn('id', explode(',', $user->verifiers))->get();
+            $user->approvers = User::whereIn('id', explode(',', $user->approvers))->get();
+        }
 
         //return response()->json($users);
-        return view('users.index')
-            ->withUsers($users);
+        return view('users.index', compact('users'));
     }
 
     /**
@@ -41,24 +45,11 @@ class UsersController extends Controller
      */
     public function create()
     {
-        if(auth()->user()->hasRole('administrator'))
-        {
-            $roles = Role::pluck('display_name', 'id');
-        }else if(auth()->user()->hasRole('state-administrator')){
-            $roles = Role::whereId('3')->pluck('display_name', 'id');
-        }
-
-        if(auth()->user()->hasRole('administrator'))
-        {
-            $states = State::orderBy('name', 'ASC')->pluck('name', 'id');
-        }else if(auth()->user()->hasRole('state-administrator')){
-            $stateId = auth()->user()->state[0]->id;
-            $states = State::whereId($stateId)->orderBy('name', 'ASC')->pluck('name', 'id');
-        }
+        $roles = Role::pluck('display_name', 'id');
+        $users = User::pluck('name', 'id');
         
-        return view('users.create')
-            ->withRoles($roles)
-            ->withStates($states);
+        
+        return view('users.create', compact('roles', 'users'));
     }
 
     /**
@@ -101,10 +92,11 @@ class UsersController extends Controller
         $states = State::orderBy('name', 'ASC')->pluck('name', 'id');
         $user = $this->users->find($id);
 
-        return view('users.edit')
-            ->withUser($user)
-            ->withRoles($roles)
-            ->withStates($states);
+        $user->verifiers = User::whereIn('id', explode(',', $user->verifiers))->get()->pluck('id');
+        $user->approvers = User::whereIn('id', explode(',', $user->approvers))->get()->pluck('id');
+        $users = User::pluck('name', 'id');
+        //return response()->json($user);
+        return view('users.edit', compact('user', 'roles', 'users'));
     }
 
     /**

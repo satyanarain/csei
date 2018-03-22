@@ -43,5 +43,17 @@ Route::group(['middleware'=>'auth'], function(){
 	*/
 	Route::resource('users', 'UsersController');
 
+	/*
+	|--------------------------------------------------------------------
+	|Requests Routes
+	|--------------------------------------------------------------------
+	*/
+	Route::get('verifiers/requests', 'RequestsController@requestsToVerify')->name('verifiers.requests');
+	Route::post('verifiers/requests/{id}/reject', 'RequestsController@rejectRequest')->name('verifiers.requests.reject');
+	Route::post('verifiers/requests/{id}/verify', 'RequestsController@verifyRequest')->name('verifiers.requests.verify');
+	Route::get('approvers/requests', 'RequestsController@requestsToApprove')->name('approvers.requests');
+	Route::get('accountants/requests', 'RequestsController@requestsToReconcile')->name('accountants.requests');
+	Route::resource('requests', 'RequestsController');
+
 });
 
