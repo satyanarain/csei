@@ -131,7 +131,7 @@ class RequestsController extends Controller
     {
         $request = CSEIRequest::whereId($id)->firstOrFail();
 
-        $request->status = 
+       // $request->status = 
     }
 
     public function approveRequest(Request $request, $id)
