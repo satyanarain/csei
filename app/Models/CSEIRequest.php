@@ -13,7 +13,8 @@ class CSEIRequest extends Model
 	const APPROVED_REQUEST = '2';
 	const BILL_SUBMITTED_REQUEST = '3';
 	const CLOSED_REQUEST = '4';
-	const REJECTED_BY__REQUEST = '5';
+	const REJECTED_BY_APPROVER = '5';
+        const REJECTED_BY_VERIFIER = '6';
     protected $table = 'requests';
 
     protected $fillable = ['category_id', 'amount', 'purpose', 'due_date', 'status'];
