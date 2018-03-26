@@ -24,7 +24,7 @@
                                 <input class="form-control" placeholder="Password" id="password" type="password" name="password">
                                 @if ($errors->has('password'))
                                 <span class="help-block">
-                                    <strong>{{ $errors->first('password') }}</strong>
+                                    <strong style="color:#ff0000;">{{ $errors->first('password') }}</strong>
                                 </span>
                                 @endif
                             </div>

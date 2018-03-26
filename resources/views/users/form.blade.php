@@ -22,18 +22,23 @@
           {!!Form::select('roles[]', $roles, isset($user->roles)?$user->roles:[2], ["class"=>"form-control", 'multiple'=>'multiple'])!!}
         </div>        
     </div> 
+
     <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="roles">Verifier (s) <span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!!Form::select('verifiers[]', $users, isset($user->verifiers)?$user->verifiers:null, ["class"=>"form-control", 'multiple'=>'multiple', 'id'=>'verifiers', 'required'])!!}
         </div>        
     </div> 
+
+
     <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="roles">Approver (s) <span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!!Form::select('approvers[]', $users, isset($user->approvers)?$user->approvers:null, ["class"=>"form-control", 'multiple'=>'multiple', 'required'])!!}
         </div>        
-    </div>    
+    </div> 
+
+
     <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="profile_picture">Profile Picture</label>
         <div class="col-lg-6">
