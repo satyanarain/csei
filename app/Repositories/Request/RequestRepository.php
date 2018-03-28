@@ -6,9 +6,11 @@ use Auth;
 use App\Models\CSEIRequest;
 use Illuminate\Support\Facades\Session;
 use App\Repositories\Request\RequestRepositoryContract;
+use App\Traits\activityLog;
 
 class RequestRepository implements RequestRepositoryContract
 {
+    use activityLog;
 	public function all()
 	{
 		if(auth()->user()->hasRole('administrator'))
@@ -30,7 +32,7 @@ class RequestRepository implements RequestRepositoryContract
 		return $users;
 	}
 
-	public function find($id)
+       public function find($id)
 	{
 		$user = User::findOrFail($id);
 
@@ -39,33 +41,26 @@ class RequestRepository implements RequestRepositoryContract
 
 	public function create($request)
 	{
-		$cseirequest = new CSEIRequest();
-
-		$cseirequest->category_id = $request->categories;
-		$cseirequest->created_by = Auth::id();
-		$cseirequest->amount = $request->amount;
-		$cseirequest->purpose = $request->purpose;
-		$cseirequest->due_date = $request->due_date;
-		$cseirequest->status = CSEIRequest::REQUESTED_REQUEST;
-
-		$cseirequest->save();
-
-		return $cseirequest;
+                 $input = $request->all();
+                 $input['user_id'] = Auth::id();
+                 $input['due_date'] = $this->insertDate($request->due_date);
+                 $input['status'] = 1;
+                 $resquests_data=  CSEIRequest::create($input);
+                 Session::flash('flash_message', "Request Created Successfully."); //Snippet in Master.blade.php
+                 return $resquests_data;
 	}
 
-	public function update($request, $id)
-	{
-		$request = CSEIRequest::whereId($id)->firstOrFail();
+	    public function update($id, $requestData) {
+	       $this->createLog('App\Models\CSEIRequest','App\Models\CSEIRequestLog',$id);
+                 $CSEIRequest= CSEIRequest::findorFail($id);
+                 $input = $requestData->all();
+                 $input['user_id'] = Auth::id();
+                 $input['due_date'] = $this->insertDate($requestData->due_date);
+                 $input['status'] = 1;
+                $CSEIRequest->fill($input)->save();
+                 Session::flash('flash_message', "Request Updated Successfully.");
+                 return $resquests_data;;
 
-		$request->category_id = $request->categories;
-		$request->amount = $request->amount;
-		$request->purpose = $request->purpose;
-		$request->due_date = $request->due_date;
-		$request->status = CSEIRequest::REQUESTED_REQUEST;
-
-		$request->save();
-
-		return $request;
 	}
 
 	public function destroy($id)

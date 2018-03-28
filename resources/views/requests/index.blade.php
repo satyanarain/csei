@@ -31,6 +31,7 @@
                  <th>Category</th>
                  <th>Amount</th>
                  <th>Due Date</th>
+                 <th>Created Date</th>
                  <th>Purpose</th>
                  <th>Status</th>
                  <th>Action</th>
@@ -39,32 +40,23 @@
              <tbody>
               @foreach($requests as $key=>$request)
               <tr>
-               <td>{{$request->category->name}}</td>
+               <td>{{$request->name}}</td>
                <td>{{$request->amount}}</td>
               <td>
-                {{$request->due_date}}
+                {{dateView($request->due_date)}}
+              </td>
+              <td>
+                {{dateView($request->created_at)}}
               </td>
               <td>
                 {{$request->purpose}}
               </td>
               <td>
-              @if($request->status == '0')
-                <span class="badge badge-primary">Requested</span>
-              @elseif($request->status == '1')
-                <span class="badge badge-secondary">Verified</span>
-              @elseif($request->status == '2')
-                <span class="badge badge-info">Approved</span>
-              @elseif($request->status == '3')
-                <span class="badge badge-warning">Reconciliation</span>
-              @elseif($request->status == '4')
-                <span class="badge badge-success">Closed</span>
-              @else
-                <span class="badge badge-danger">Rejected</span>
-              @endif
+            <div class="badge badge-primary">  {{$request->c_status}}</div>
               </td>
               <td>
                 <a href="{{route('requests.show', $request->id)}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i> View</a>
-                @if($request->status == '0' || $request->status == '5')
+                @if($request->status == 1)
                 <a href="{{route('requests.edit', $request->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
                 @endif
               </td>

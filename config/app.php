@@ -182,7 +182,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Barryvdh\Cors\ServiceProvider::class,
-
+        App\Providers\HelperServiceProvider::class,
     ],
 
     /*
@@ -234,6 +234,8 @@ return [
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Helper' => App\Helpers\Helper::class,
+        
     ],
 
 ];

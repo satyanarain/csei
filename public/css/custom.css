@@ -1,0 +1,62 @@
+.loder_id
+{
+width:100%;
+height:100%;
+position:absolute;
+z-index:1000000;
+background:#fff;
+text-align: center;
+ opacity:0.7;
+      filter:alpha(opacity=70); /* For IE8 and earlier */
+display:none;
+}
+.loader_main {
+     position:absolute;
+    left: 48%;
+    top: 50%;
+  
+ }
+
+.loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #999; /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+   
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.dt_col_hide{display: none;}
+
+.formmain
+{
+padding:10px 50px 0px 10px;
+min-height:40px; 
+margin-top:10px;
+background-color: #3a485c;
+color: #fff;
+
+cursor:pointer;
+font-weight: bold;
+}
+.row1{
+   border-top:none;
+   border:1px #ddd solid;
+    
+}
+.plusminusbutton
+{
+ font-size:16px;
+ float:left;
+ font-weight:bold;
+    
+}
+
+

@@ -42,7 +42,10 @@
                <td>{{$request->category->name}}</td>
                <td>{{$request->amount}}</td>
               <td>
-                {{$request->due_date}}
+                {{dateView($request->due_date)}}
+              </td>
+              <td>
+                {{dateView($request->due_date)}}
               </td>
               <td>
                 {{$request->purpose}}

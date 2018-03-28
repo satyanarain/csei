@@ -7,8 +7,11 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\CSEIRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\Requests\UpdateRequestsRequest;
+use App\Http\Requests\Requests\StoreRequestsRequest;
 use App\Repositories\Request\RequestRepositoryContract;
-
+use DB;
+use Mail;
 class RequestsController extends Controller
 {
     public $request;
@@ -24,9 +27,14 @@ class RequestsController extends Controller
      */
     public function index()
     {
-        $requests = CSEIRequest::where('created_by', Auth::id())->get();
-
-        return view('requests.index', compact('requests'));
+     
+      $requests = DB::table('requests')->select('*','requests.id as id','c_status.name as c_status','categories.name as name','requests.created_at as created_at','requests.updated_at as updated_at')
+              ->leftjoin('users','users.id','requests.user_id')
+              ->leftjoin('categories','categories.id','requests.category_id')
+              ->leftjoin('c_status','c_status.id','requests.status')
+              ->get();
+    
+      return view('requests.index', compact('requests'));
     }
 
     /**
@@ -53,6 +61,62 @@ class RequestsController extends Controller
 
         return redirect()->route('requests.index');
     }
+    
+     public function verifyRequestUpdateStatus($id,Request $request)
+        {
+         $user_id= Auth::user();
+         $verifire_name= $user_id->name;
+         $verifire_id= $user_id->id;
+        
+         $user_id=$request->user_id;
+         $request_data= CSEIRequest::whereId($id)->first();
+        $amount= $request_data->amount;
+        $due_date  =$request_data->due_date;
+        
+         $sql_appover= User::whereId($user_id)->first();
+         $approvers = User::whereIn('id', explode(',', $sql_appover->approvers))->get();
+        
+         
+           $status = 2; //we assume status is true (1) at the begining;
+           CSEIRequest::where('id', $id)->update(['status' =>$status,'verifire_id'=>$verifire_id]); 
+		foreach ($approvers as $a_value) 
+		{
+                   $name= $a_value->name;
+                   Mail::send('emails.approvers',['verifire_name'=>$verifire_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date], function ($m) use ($a_value) {
+                   $m->from('info@opiant.online', 'Approval Mail');
+                   $m->to($a_value->email, $a_value->name)->subject('Request!'); });
+		}
+       
+       
+      }
+     public function requestReject($id,Request $request)
+        {
+         $user_id= Auth::user();
+         $verifire_name= $user_id->name;
+         $verifire_id= $user_id->id;
+        
+         $user_id=$request->user_id;
+         $request_data= CSEIRequest::whereId($id)->first();
+        $amount= $request_data->amount;
+        $due_date  =$request_data->due_date;
+        
+         $sql_appover= User::whereId($user_id)->first();
+         $approvers = User::whereIn('id', explode(',', $sql_appover->approvers))->get();
+        
+         
+           $status = 2; //we assume status is true (1) at the begining;
+           CSEIRequest::where('id', $id)->update(['status' =>$status,'verifire_id'=>$verifire_id]); 
+		foreach ($approvers as $a_value) 
+		{
+                   $name= $a_value->name;
+                   Mail::send('emails.approvers',['verifire_name'=>$verifire_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date], function ($m) use ($a_value) {
+                   $m->from('info@opiant.online', 'Approval Mail');
+                   $m->to($a_value->email, $a_value->name)->subject('Request!'); });
+		}
+       
+       
+      }
+    
 
     /**
      * Display the specified resource.
@@ -62,7 +126,14 @@ class RequestsController extends Controller
      */
     public function show($id)
     {
-        //
+     
+          $requests = DB::table('requests')->select('*','requests.id as id','c_status.name as c_status','categories.name as name','requests.created_at as created_at','requests.updated_at as updated_at')
+              ->leftjoin('users','users.id','requests.user_id')
+              ->leftjoin('categories','categories.id','requests.category_id')
+              ->leftjoin('c_status','c_status.id','requests.status')
+              ->get();
+    
+      return view('requests.show', compact('requests'));
     }
 
     /**
@@ -75,7 +146,6 @@ class RequestsController extends Controller
     {
         $categories = Category::pluck('name', 'id');
         $request = CSEIRequest::whereId($id)->firstOrFail();
-
         return view('requests.edit', compact('categories', 'request'));
     }
 
@@ -84,12 +154,16 @@ class RequestsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *@author Satya 
+     *@24 March 2018 
      */
-    public function update(Request $request, $id)
+      public function update($id,Request $request)
     {
-        //
-    }
+       
+       $this->request->update($id, $request);
+        return redirect()->route('requests.index');
+    
+    } 
 
     /**
      * Remove the specified resource from storage.
@@ -105,20 +179,27 @@ class RequestsController extends Controller
 
     public function requestsToVerify()
     {
-        $userIsVerifierOf = User::where('verifiers', 'LIKE', Auth::id())->get()->pluck('id');
-        //return response()->json($userIsVerifierOf);
-        $requests = CSEIRequest::where([['status', '0']])
-                                ->whereIn('created_by', $userIsVerifierOf)
-                                ->get();
+
+        $requests = DB::table('requests')->select('*','requests.id as id','c_status.name as c_status','categories.name as name','requests.created_at as created_at','requests.updated_at as updated_at')
+              ->leftjoin('users','users.id','requests.user_id')
+              ->leftjoin('categories','categories.id','requests.category_id')
+              ->leftjoin('c_status','c_status.id','requests.status')
+              ->where('requests.status',1) 
+              ->get();
+       
+                
         return view('requests.verify', compact('requests'));
     }
 
     public function requestsToApprove()
     {
-        $requests = CSEIRequest::where([['status', '1']])
-                                ->whereIn('created_by', explode(',', Auth::user()->approvers))
-                                ->get();
-        return view('requests.approve', compact('requests'));
+      $requests = DB::table('requests')->select('*','requests.id as id','c_status.name as c_status','categories.name as name','requests.created_at as created_at','requests.updated_at as updated_at')
+              ->leftjoin('users','users.id','requests.user_id')
+              ->leftjoin('categories','categories.id','requests.category_id')
+              ->leftjoin('c_status','c_status.id','requests.status')
+              ->where('requests.status',2) 
+              ->get();
+          return view('requests.verify', compact('requests'));
     }
 
     public function requestsToReconcile()
@@ -133,10 +214,14 @@ class RequestsController extends Controller
 
     }
 
+    
+    
+    
     public function approveRequest(Request $request, $id)
     {
 
     }
+   
 
     public function rejectRequestVerifier(Request $request, $id)
     {

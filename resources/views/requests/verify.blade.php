@@ -17,7 +17,7 @@
   @section('content')
   <!-- Container fluid  -->
   <div class="container-fluid">
-    <!-- Start Page Content -->
+  <!-- Start Page Content -->
     <div class="row">
       <div class="col-12">
         <div class="card">
@@ -30,6 +30,7 @@
                 <tr>
                  <th>Category</th>
                  <th>Amount</th>
+                 <th>Created Date</th>
                  <th>Due Date</th>
                  <th>Purpose</th>
                  <th>Status</th>
@@ -38,34 +39,25 @@
              </thead>
              <tbody>
               @foreach($requests as $key=>$request)
-              <tr>
-               <td>{{$request->category->name}}</td>
+              <tr id="{{$request->id}}">
+               <td>{{$request->name}}</td>
                <td>{{$request->amount}}</td>
+               <td>
+                {{dateView($request->created_at)}}
+              </td>
               <td>
-                {{$request->due_date}}
+                {{dateView($request->due_date)}}
               </td>
               <td>
                 {{$request->purpose}}
               </td>
               <td>
-              @if($request->status == '0')
-                <span class="badge badge-primary">Requested</span>
-              @elseif($request->status == '1')
-                <span class="badge badge-secondary">Verified</span>
-              @elseif($request->status == '2')
-                <span class="badge badge-info">Approved</span>
-              @elseif($request->status == '3')
-                <span class="badge badge-warning">Reconciliation</span>
-              @elseif($request->status == '4')
-                <span class="badge badge-success">Closed</span>
-              @else
-                <span class="badge badge-danger">Rejected</span>
-              @endif
+               <span class="{{$request->b_class}}">{{$request->c_status}}</span>
               </td>
               <td>
-                <a href="{{route('verifiers.requests.reject', $request->id)}}" class="btn btn-danger m-b-10 m-l-5"><i class="fa fa-close"></i> Reject</a>
-                @if($request->status == '0' || $request->status == '5')
-                <a href="{{route('verifiers.requests.verify', $request->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-check"></i> Verify</a>
+                <span  class="btn btn-danger m-b-10 m-l-5" onclick="showRejection({{$request->id}},{{$request->user_id}})" data-target="#myModal"><i class="fa fa-close"></i> Reject</span>
+                @if($request->status == 1 || $request->status == 6)
+                <span  class="btn btn-success m-b-10 m-l-5" onclick="verifyRequest({{$request->id}},{{$request->user_id}})"><i class="fa fa-check"></i> Verify</span>
                 @endif
               </td>
             </tr>
@@ -78,4 +70,111 @@
 </div>
 </div>
 </div>
+  
+<div class="modal fade" id="common_details" role="dialog">
+  <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header-view" >
+<!--                <button type="button" class="close" data-dismiss="modal"><font class="white">&times;</font></button>-->
+                <h4 class="viewdetails_details"><i class="fa fa-comments-o" style="font-size:48px;color:blue"></i>&nbsp;Comment</h4>
+            </div>
+            <div class="modal-body-view">
+                 <div class="alert-new-success" id="add_new_data" style="display:none;"></div>
+                 <div class="list-group-item alert alert-danger" id="add_new_data_danger" style="display:none;"></div>
+                 <table class="table table-responsive.view">
+                    <tr>       
+                        <td>Name</td>
+                        <td class="table_normal">
+                            <texterea name="comment" id="comment" class="form-control">
+                            <input name="request_id" id="request_id" class="form-control" type="hidden">
+                            <input name="user_id" id="user_id" class="form-control" type="hidden">
+                           
+                        </td>
+                    </tr>
+                   </table>  
+                  <div class="modal-footer">
+                     <div  class="btn btn-success pull-left" onclick="AddNew()">Add New</div><button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+ 
+<script>
+function showRejection(request_id,user_id)
+{
+
+$("#common_details").modal('show');
+ } 
+    
+    
+    
+    
+function verifyRequest(id,user_id)
+          {
+            var r = confirm("Are you sure to verify?");
+if (r == true) {
+    if(id!='')
+    {
+         $(".loder_id").show(); 
+     $.ajax({
+             type :'get',
+             url:'/requests/verify_request/'+id,
+             data:"user_id="+user_id,
+             success:function(data)
+             {
+              $(".loder_id").hide();  
+               $("#"+id).fadeOut( "slow" ); 
+              
+             }
+                  
+            });
+        }         
+           
+         
+} else {
+     return false;
+    
+} 
+} 
+function requestReject(id,user_id)
+          {
+            var r = confirm("Are you sure to verify?");
+if (r == true) {
+    if(id!='')
+    {
+         $(".loder_id").show(); 
+     $.ajax({
+             type :'get',
+             url:'/requests/request_reject/'+id,
+             data:"user_id="+user_id,
+             success:function(data)
+             {
+              $(".loder_id").hide();  
+               $("#"+id).fadeOut( "slow" ); 
+              
+             }
+                  
+            });
+        }         
+           
+         
+} else {
+     return false;
+    
+} 
+} 
+
+
+
+
+
+
+
+</script>
+  
+  
+  
 @endsection

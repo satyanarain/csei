@@ -27,7 +27,11 @@
                             <div class="col s12 m12 l12">
                                 <div class="card-panel">
                                     <h4 class="header2">Requests Details</h4>
-                                    {!!Form::open(['route'=>'requests.store', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
+                                    {!!Form::open(['route'=>'requests.store',
+                                    'id'=>'formValidate',
+                                    'class'=>'formValidate',
+                                    'autocomplete'=>'off',
+                                    'files'=>true])!!}
                                     @include('requests.form')
                                     {!!Form::close()!!}
                                 </div>

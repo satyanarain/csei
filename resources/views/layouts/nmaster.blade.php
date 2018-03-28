@@ -15,16 +15,32 @@
     <link href="{{asset('css/lib/dropzone/dropzone.css')}}" rel="stylesheet">
     <link href="{{asset('css/lib/bootstrap/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
-
+   <link rel="stylesheet" href="{{ asset(elixir('plugins/datepicker/datepicker3.css')) }}">
+        <!-- Daterange picker -->
+    <link rel="stylesheet" href="{{ asset(elixir('plugins/daterangepicker/daterangepicker.css')) }}">
     <link href="{{asset('css/lib/calendar2/semantic.ui.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/lib/calendar2/pignose.calendar.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/lib/owl.carousel.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/lib/owl.theme.default.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/helper.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('css/custom.css')}}" rel="stylesheet">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 </head>
-
-<body class="fix-header fix-sidebar">
+ <body class="hold-transition skin-blue sidebar-mini">
+             <div class="loder_id">
+                 <div class="loader_main">
+                 <div class="loader"></div>
+             </div>
+             </div>
+<!--     <div id="map1">
+     <div id="map">
+     <div class="loading_bar">
+	
+     </div>
+    
+ </div>-->
+ </div>
     <!-- Preloader - style you can find in spinners.css -->
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
@@ -219,7 +235,10 @@
                         <!-- End Messages -->
                         <!-- Profile -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{URL::to('images/users/5.jpg')}}" alt="user" class="profile-pic" /></a>
+                            <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{URL::to('images/users/5.jpg')}}" alt="user" class="profile-pic" /><?php
+                            $user=Auth::user();
+                            echo "&nbsp;". $user->name;
+                            ?></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
                                     <li><a href="#"><i class="ti-user"></i> Profile</a></li>
@@ -274,106 +293,7 @@
                                 <li class="{{($active2 == 'create' && $active == 'requests') ? 'active' : ''}}"><a href="{{route('requests.create')}}">New Request</a></li>
                             </ul>
                         </li>
-                        <!--<li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-bar-chart"></i><span class="hide-menu">Charts</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="chart-flot.html">Flot</a></li>
-                                <li><a href="chart-morris.html">Morris</a></li>
-                                <li><a href="chart-chartjs.html">ChartJs</a></li>
-                                <li><a href="chart-chartist.html">Chartist </a></li>
-                                <li><a href="chart-amchart.html">AmChart</a></li>
-                                <li><a href="chart-echart.html">EChart</a></li>
-                                <li><a href="chart-sparkline.html">Sparkline</a></li>
-                                <li><a href="chart-peity.html">Peity</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-label">Features</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Bootstrap UI <span class="label label-rouded label-warning pull-right">6</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="ui-alert.html">Alert</a></li>
-                                <li><a href="ui-button.html">Button</a></li>
-                                <li><a href="ui-dropdown.html">Dropdown</a></li>
-                                <li><a href="ui-progressbar.html">Progressbar</a></li>
-                                <li><a href="ui-tab.html">Tab</a></li>
-                                <li><a href="ui-typography.html">Typography</a></li>
-                            </ul>
-                        </li>
-						<li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-suitcase"></i><span class="hide-menu">Components <span class="label label-rouded label-danger pull-right">6</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="uc-calender.html">Calender</a></li>
-                                <li><a href="uc-datamap.html">Datamap</a></li>
-                                <li><a href="uc-nestedable.html">Nestedable</a></li>
-                                <li><a href="uc-sweetalert.html">Sweetalert</a></li>
-                                <li><a href="uc-toastr.html">Toastr</a></li>
-                                <li><a href="uc-weather.html">Weather</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-wpforms"></i><span class="hide-menu">Forms</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="form-basic.html">Basic Forms</a></li>
-                                <li><a href="form-layout.html">Form Layout</a></li>
-                                <li><a href="form-validation.html">Form Validation</a></li>
-                                <li><a href="form-editor.html">Editor</a></li>
-                                <li><a href="form-dropzone.html">Dropzone</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">Tables</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="table-bootstrap.html">Basic Tables</a></li>
-                                <li><a href="table-datatable.html">Data Tables</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-label">Layout</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-columns"></i><span class="hide-menu">Layout</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="layout-blank.html">Blank</a></li>
-                                <li><a href="layout-boxed.html">Boxed</a></li>
-                                <li><a href="layout-fix-header.html">Fix Header</a></li>
-                                <li><a href="layout-fix-sidebar.html">Fix Sidebar</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-label">EXTRA</li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Pages <span class="label label-rouded label-success pull-right">8</span></span></a>
-                            <ul aria-expanded="false" class="collapse">
-
-                                <li><a href="#" class="has-arrow">Authentication <span class="label label-rounded label-success">6</span></a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="page-login.html">Login</a></li>
-                                        <li><a href="page-register.html">Register</a></li>
-                                        <li><a href="page-invoice.html">Invoice</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#" class="has-arrow">Error Pages</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="page-error-400.html">400</a></li>
-                                        <li><a href="page-error-403.html">403</a></li>
-                                        <li><a href="page-error-404.html">404</a></li>
-                                        <li><a href="page-error-500.html">500</a></li>
-                                        <li><a href="page-error-503.html">503</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-map-marker"></i><span class="hide-menu">Maps</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="map-google.html">Google</a></li>
-                                <li><a href="map-vector.html">Vector</a></li>
-                            </ul>
-                        </li>
-                        <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-level-down"></i><span class="hide-menu">Multi level dd</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">item 1.1</a></li>
-                                <li><a href="#">item 1.2</a></li>
-                                <li> <a class="has-arrow" href="#" aria-expanded="false">Menu 1.3</a>
-                                    <ul aria-expanded="false" class="collapse">
-                                        <li><a href="#">item 1.3.1</a></li>
-                                        <li><a href="#">item 1.3.2</a></li>
-                                        <li><a href="#">item 1.3.3</a></li>
-                                        <li><a href="#">item 1.3.4</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">item 1.4</a></li>
-                            </ul>
-                        </li> -->
+                     
                         @if(Entrust::hasRole('administrator'))
                         <li class="nav-label">SETTINGS</li>
 
@@ -444,6 +364,8 @@
     <!-- End Wrapper -->
     <!-- All Jquery -->
     <script src="{{asset('js/lib/jquery/jquery.min.js')}}"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+  
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset('js/lib/bootstrap/js/popper.min.js')}}"></script>
     <script src="{{asset('js/lib/bootstrap/js/bootstrap.min.js')}}"></script>
@@ -455,7 +377,9 @@
     <script src="{{asset('js/lib/sticky-kit-master/dist/sticky-kit.min.js')}}"></script>
     <!--Custom JavaScript -->
 
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Amchart -->
     <script src="{{asset('js/lib/morris-chart/raphael-min.js')}}"></script>
     <script src="{{asset('js/lib/morris-chart/morris.js')}}"></script>
@@ -495,6 +419,35 @@
     <script src="{{asset('js/custom.min.js')}}"></script>
     <script src="{{asset('js/lib/dropzone/dropzone.js')}}"></script>
 
+<script type="text/javascript">
+  
+$('body').on('focus',".multiple_date", function(){
+         $(this).datepicker({
+              dateFormat: 'dd-mm-yy',
+               startView: "year", 
+                changeYear: true,
+              yearRange: "-80Y:-0Y",
+minDate: "-80Y",
+maxDate: "-0Y"
+          });
+}); 
+
+  $('#map1').append('<div style="" id="map"><div class="loading_bar"></div></div>');
+$(window).on('load', function(){
+  setTimeout(removeLoader, 200); //wait for page load PLUS two seconds.
+});
+function removeLoader(){
+    $( "#map" ).fadeOut(100, function() {
+      // fadeOut complete. Remove the loading div
+      $( "#map" ).remove(); //makes page more lightweight 
+      $( "#map1" ).hide(); //makes page more lightweight 
+  });  
+}  
+$(document).ready(function()
+          {      
+          // $("#example23_info").hide(); 
+           } ) ;
+</script>
     @stack('scripts')
 </body>
 

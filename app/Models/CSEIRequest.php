@@ -8,18 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class CSEIRequest extends Model
 {
-	const REQUESTED_REQUEST = '0';
-	const VERIFIED_REQUEST = '1';
-	const APPROVED_REQUEST = '2';
-	const BILL_SUBMITTED_REQUEST = '3';
-	const CLOSED_REQUEST = '4';
-	const REJECTED_BY_APPROVER = '5';
-        const REJECTED_BY_VERIFIER = '6';
+	
     protected $table = 'requests';
 
-    protected $fillable = ['category_id', 'amount', 'purpose', 'due_date', 'status'];
-
+    protected $guarded = ['action'];
+ 
     public function category()
+    {
+    	return $this->belongsTo(Category::class);
+    }
+    public function cstatus()
     {
     	return $this->belongsTo(Category::class);
     }

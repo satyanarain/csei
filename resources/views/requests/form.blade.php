@@ -1,7 +1,7 @@
     <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="roles">Category <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!!Form::select('categories', $categories, isset($request->categories)?$request->categories:[], ["class"=>"form-control", 'required', 'placeholder'=>'Please select a catrgory'])!!}
+           {!!Form::select('category_id', $categories,isset($request->category_id) ? $request->category_id : selected,["class"=>"form-control", 'required', 'placeholder'=>'Please select a catrgory'])!!}
         </div>        
     </div>
 
@@ -22,11 +22,10 @@
     <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="due_date">Due Date <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-        <input id="due_date" name="due_date" type="date" min="{{date('Y-m-d')}}" class="form-control" required>
+        <input  name="due_date"  min="{{date('Y-m-d')}}" class="form-control multiple_date" required value="{{isset($request->due_date)?dateView($request->due_date):''}}" >
         </div>
     </div>
-     
-    <div class="form-group row">
+  <div class="form-group row">
         <div class="col-lg-4">
         </div>
         <div class="col-lg-6">
