@@ -19,7 +19,7 @@
   <!-- End Bread crumb -->
   @endsection
 
-  @section('content')
+ @section('content')
   <!-- Container fluid  -->
   <div class="container-fluid">
     <!-- Start Page Content -->
