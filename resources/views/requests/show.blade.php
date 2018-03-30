@@ -3,11 +3,15 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Users</h3> </div>
+     @if($requests->status==1)
+    <h3 class="text-primary">Requested Request Details</h3> </div>
+    @else
+    <h3 class="text-primary">Verified Request Details</h3> </div>
+    @endif
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('users.index')}}">Users</a></li>
+        <li class="breadcrumb-item"><a href="{{route('verifiers.requests')}}">Requested Requests</a></li>
         <li class="breadcrumb-item active">Details</li>
       </ol>
     </div>
@@ -25,72 +29,156 @@
           <div class="card-body">
             <div class="row">
              <div class="col s12 m6 l6">	
-              <div id="profile-card" class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="{{URL::to('images/user-bg.jpg')}}" alt="user bg">
-                </div>
-                <div class="card-content">
-                  <img src="{{URL::to('images/userProfiles/'.$user->profile_picture)}}" alt="" class="circle responsive-img activator card-profile-image profile-image">
-                  <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
-                    <i class="mdi-editor-mode-edit"></i>
-                  </a>
+               <div class="col s12 m12 l12">
+                                <div class="card-panel">
+                                    <h4 class="header2">Requests Details</h4>
+                                     {!!Form::open(['route'=>'requests.store',
+                                    'id'=>'formValidate',
+                                    'class'=>'formValidate',
+                                    'autocomplete'=>'off',
+                                      'id'=>'theForm',
+                                     'files'=>true])!!}
+                                     <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="roles">Category </label>
+        <div class="col-lg-6">{{$requests->cat_name}}
+       
+        </div>        
+    </div>
 
-                  <span class="card-title activator grey-text text-darken-4">{{$user->name}}</span>
-                  <p><i class="mdi-action-perm-identity"></i> {{$user->roles[0]->name}}</p>
-                  <p><i class="mdi-action-perm-phone-msg"></i> {{$user->contact}}</p>
-                  <p><i class="mdi-communication-email"></i> {{$user->email}}</p>
+    <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="amount">Amount (Rs) </label>
+        <div class="col-lg-6">
+            {{$requests->amount}}
+        </div>
+    </div>
 
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">{{$user->name}} <i class="mdi-navigation-close right"></i></span>
-                  <p>Here is some more information about this card.</p>
-                  <p><i class="mdi-action-perm-identity"></i> {{$user->roles[0]->name}}</p>
-                  <p><i class="mdi-action-perm-phone-msg"></i> {{$user->contact}}</p>
-                  <p><i class="mdi-communication-email"></i> {{$user->email}}</p>
-                  <p><i class="mdi-social-cake"></i> 18th June 1990</p>
-                </div>
+    <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="purpose">Purpose </label>
+        <div class="col-lg-6">
+                   {{$requests->purpose}}
+        </div>
+    </div>
 
-                <div class="col s12 m6 l6">
-                  <ul id="task-card" class="collection with-header">
-                    <li class="collection-header cyan">
-                      <h4 class="task-card-title">My Task</h4>
-                      <p class="task-card-date">March 26, 2015</p>
-                    </li>
-                    <li class="collection-item dismissable">
-                      <input type="checkbox" id="task1" />
-                      <label for="task1">Create Mobile App UI. <a href="#" class="secondary-content"><span class="ultra-small">Today</span></a>
-                      </label>
-                      <span class="task-cat teal">Mobile App</span>
-                    </li>
-                    <li class="collection-item dismissable">
-                      <input type="checkbox" id="task2" />
-                      <label for="task2">Check the new API standerds. <a href="#" class="secondary-content"><span class="ultra-small">Monday</span></a>
-                      </label>
-                      <span class="task-cat purple">Web API</span>
-                    </li>
-                    <li class="collection-item dismissable">
-                      <input type="checkbox" id="task3" checked="checked" />
-                      <label for="task3">Check the new Mockup of ABC. <a href="#" class="secondary-content"><span class="ultra-small">Wednesday</span></a>
-                      </label>
-                      <span class="task-cat pink">Mockup</span>
-                    </li>
-                    <li class="collection-item dismissable">
-                      <input type="checkbox" id="task4" checked="checked" disabled="disabled" />
-                      <label for="task4">I did it !</label>
-                      <span class="task-cat cyan">Mobile App</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+    <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="due_date">Due Date </label>
+        <div class="col-lg-6">
+        {{dateView($requests->due_date)}}
+        </div>
+    </div>
+   <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="due_date">Status</label>
+        <div class="col-lg-6">
+        {{$requests->c_status}}
+        </div>
+    </div>
+<?php 
+$request_only_view=Request::fullUrl();
+$view=end(explode('?',$request_only_view));
+
+
+?>
+@if($view!='view')
+
+<input  type="hidden"  name="id" value="{{$requests->id}}">
+<input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
+ <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="purpose">Comments</label>
+        <div class="col-lg-6">
+        <textarea  name="comments" id="comments"  class="form-control"></textarea>
+        </div>
+    </div>
+
+  <div class="form-group row">
+        <div class="col-lg-4">
+        </div>
+     <?php //echo $requests->status; ?>
+      
+        <div class="col-lg-6">
+          @if($requests->status==1)
+         <input class="btn btn-primary submit" type="submit" name="verify"  value="Verify" onclick="return loadAdd()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <input class="btn btn-danger submit" type="submit" name="rejected" value="Rejected" onclick="return Validate()">
+         @else
+         <input class="btn btn-primary submit" type="submit" name="approve"  value="Approve" onclick="return loadAdd()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <input class="btn btn-danger submit" type="submit" name="approverejected" value="Rejected" onclick="return Validate()">
+        @endif
+        </div>
+  </div>
+                                    {!!Form::close()!!}
+                      @endif               
+                                </div>
+                            </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+ </div>
 </div>
 @endsection
+<script>
+  function loadAdd()
+  {
+     $(".loder_id").show();  
+  }
+
+  function Validate()
+  {
+   
+   var  comments=  $("#comments").val();
+   
+    if(comments=='') 
+    {
+     alert("Please enter comment.");
+     return false;
+    }else
+    {
+     $(".loder_id").show();
+     document.getElementById('theForm').submit();
+     
+   }
+   }
+   
+   
+   
+   
+</script>
+<!--
+<script>
+function verifyRequest(id,user_id)
+          {
+            var r = confirm("Are you sure to verify?");
+if (r == true) {
+    if(id!='')
+    {
+         $(".loder_id").show(); 
+     $.ajax({
+             type :'get',
+             url:'/requests/verify_request/',
+             data:"user_id="+user_id+"&id="+id,
+             success:function(data)
+             {
+                 alert(data)
+              $(".loder_id").hide();  
+               $("#"+id).fadeOut( "slow" ); 
+              
+             }
+                  
+            });
+        }         
+           
+         
+} else {
+     return false;
+    
+} 
+} 
+
+
+</script>-->
+
+
+
 
 @push('scripts')
 

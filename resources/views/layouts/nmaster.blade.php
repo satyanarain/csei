@@ -1,3 +1,10 @@
+<?php
+$segments_var = '';
+$segments_var = Request::segments();
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,13 +40,13 @@
                  <div class="loader"></div>
              </div>
              </div>
-<!--     <div id="map1">
+    <div id="map1">
      <div id="map">
      <div class="loading_bar">
 	
      </div>
     
- </div>-->
+ </div>
  </div>
     <!-- Preloader - style you can find in spinners.css -->
     <div class="preloader">
@@ -274,6 +281,7 @@
                         <li class="nav-devider"></li>
                         <li class="nav-label">Home</li>
                         <li style="padding: 8px 20px;"><span class="fa fa-user" style="color: green;"></span>@foreach(Auth::user()->roles as $role) {{$role->display_name}} @endforeach</li>
+                        
                         <li class="{{$active == 'home' ? 'active' : ''}}"><a href="{{route('home')}}"><i class="fa fa-home"></i> Dashboard </a></li>
                         <li class="nav-label">Apps</li>
                         @if(Entrust::hasRole('administrator'))
@@ -286,10 +294,18 @@
                         @endif
                         <li class="{{$active == 'requests' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Requests</span></a>
                             <ul aria-expanded="false" class="collapse">
+                                
+                                
+                                
                                 <li class="{{($active2 == '' && $active == 'requests') ? 'active' : ''}}"><a href="{{route('requests.index')}}">My Requests</a></li>
-                                <li class="{{($active2 == 'requests' && $active == 'verifiers') ? 'active' : ''}}"><a href="{{route('verifiers.requests')}}">Requested Requests</a></li>
-                                <li class="{{($active2 == 'requests' && $active == 'approvers') ? 'active' : ''}}"><a href="{{route('approvers.requests')}}">Verified Requests</a></li>
+                                <?php    $request_only_verifire=Request::fullUrl();
+                                          $request_only_verifire=end(explode('?',$request_only_verifire));
+                                       ?> 
+                              <li class="{{($active2 == 'requests' && $active == 'verifiers') ? 'active' : ''}}"><a href="{{route('verifiers.requests')}}" class="{{($request_only_verifire == 'requested_requests') ? 'active' : ''}}">Requested Requests</a></li>
+                               <li class="{{($active2 == 'requests' && $active == 'approvers') ? 'active' : ''}}"><a href="{{route('approvers.requests')}}" class="{{($request_only_verifire == 'verifireactive') ? 'active' : ''}}">Verified Requests</a></li>
+                               @if(Entrust::hasRole('Admin Associate'))
                                 <li class="{{($active2 == 'requests' && $active == 'accountants') ? 'active' : ''}}"><a href="{{route('accountants.requests')}}">Approved Requests</a></li>
+                                @endif
                                 <li class="{{($active2 == 'create' && $active == 'requests') ? 'active' : ''}}"><a href="{{route('requests.create')}}">New Request</a></li>
                             </ul>
                         </li>
@@ -310,7 +326,7 @@
                                 <li class="{{($active2 == 'create' && $active == 'permissions') ? 'active' : ''}}"><a href="{{route('permissions.create')}}">New Permission</a></li>
                             </ul>
                         </li>
-                        <li><a href="page-invoice.html"><i class="fa fa-cog"></i> Miscellenious</a></li>
+<!--                        <li><a href="page-invoice.html"><i class="fa fa-cog"></i> Miscellenious</a></li>-->
                         @endif
                     </ul>
                 </nav>
@@ -377,9 +393,7 @@
     <script src="{{asset('js/lib/sticky-kit-master/dist/sticky-kit.min.js')}}"></script>
     <!--Custom JavaScript -->
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <!-- Amchart -->
     <script src="{{asset('js/lib/morris-chart/raphael-min.js')}}"></script>
     <script src="{{asset('js/lib/morris-chart/morris.js')}}"></script>
@@ -416,7 +430,7 @@
 
     <!-- scripit init-->
 
-    <script src="{{asset('js/custom.min.js')}}"></script>
+  
     <script src="{{asset('js/lib/dropzone/dropzone.js')}}"></script>
 
 <script type="text/javascript">
@@ -432,7 +446,7 @@ maxDate: "-0Y"
           });
 }); 
 
-  $('#map1').append('<div style="" id="map"><div class="loading_bar"></div></div>');
+  $('#map1').append('<div style="" id="map"><div class="loader"></div></div>');
 $(window).on('load', function(){
   setTimeout(removeLoader, 200); //wait for page load PLUS two seconds.
 });
@@ -447,6 +461,10 @@ $(document).ready(function()
           {      
           // $("#example23_info").hide(); 
            } ) ;
+           
+           
+           
+           
 </script>
     @stack('scripts')
 </body>

@@ -22,7 +22,10 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-          <h4 class="card-title">Requested Requests List</h4>
+          <h4 class="card-title">
+              Request for Verify List
+<!--              Requested Requests List-->
+          </h4>
             <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
             <div class="table-responsive m-t-40">
               <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
@@ -54,12 +57,9 @@
               <td>
                <span class="{{$request->b_class}}">{{$request->c_status}}</span>
               </td>
-              <td>
-                <span  class="btn btn-danger m-b-10 m-l-5" onclick="showRejection({{$request->id}},{{$request->user_id}})" data-target="#myModal"><i class="fa fa-close"></i> Reject</span>
-                @if($request->status == 1 || $request->status == 6)
-                <span  class="btn btn-success m-b-10 m-l-5" onclick="verifyRequest({{$request->id}},{{$request->user_id}})"><i class="fa fa-check"></i> Verify</span>
-                @endif
-              </td>
+                <td>
+                    <a href="{{route('requests.show', [$request->id,'requested_requests'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i>View</a>
+               </td>
             </tr>
             @endforeach
           </tbody>

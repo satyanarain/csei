@@ -22,27 +22,33 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-          <h4 class="card-title">Requests List</h4>
+          <h4 class="card-title">
+              Request for Approval List
+<!--              Requests List-->
+          </h4>
             <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
             <div class="table-responsive m-t-40">
               <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                <thead>
+               
                 <tr>
                  <th>Category</th>
                  <th>Amount</th>
+                 <th>Created Date</th>
                  <th>Due Date</th>
                  <th>Purpose</th>
                  <th>Status</th>
                  <th>Action</th>
                </tr>
+            
              </thead>
-             <tbody>
+            <tbody>
               @foreach($requests as $key=>$request)
-              <tr>
-               <td>{{$request->category->name}}</td>
+              <tr id="{{$request->id}}">
+               <td>{{$request->name}}</td>
                <td>{{$request->amount}}</td>
-              <td>
-                {{dateView($request->due_date)}}
+               <td>
+                {{dateView($request->created_at)}}
               </td>
               <td>
                 {{dateView($request->due_date)}}
@@ -51,30 +57,22 @@
                 {{$request->purpose}}
               </td>
               <td>
-              @if($request->status == '0')
-                <span class="badge badge-primary">Requested</span>
-              @elseif($request->status == '1')
-                <span class="badge badge-secondary">Verified</span>
-              @elseif($request->status == '2')
-                <span class="badge badge-info">Approved</span>
-              @elseif($request->status == '3')
-                <span class="badge badge-warning">Reconciliation</span>
-              @elseif($request->status == '4')
-                <span class="badge badge-success">Closed</span>
-              @else
-                <span class="badge badge-danger">Rejected</span>
-              @endif
+               <span class="{{$request->b_class}}">{{$request->c_status}}</span>
               </td>
-              <td>
-                <a href="{{route('requests.show', $request->id)}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i> View</a>
-                @if($request->status == '0' || $request->status == '5')
-                <a href="{{route('requests.edit', $request->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
+                <td>
+                    <a href="{{route('requests.show', [$request->id,'verifireactive'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i> View</a>
+                @if($request->status == 1 || $request->status == 6)
+<!--                <span  class="btn btn-success m-b-10 m-l-5" onclick="verifyRequest({{$request->id}},{{$request->user_id}})"><i class="fa fa-check"></i> Verify</span>-->
                 @endif
               </td>
             </tr>
             @endforeach
           </tbody>
         </table>
+                
+                
+                
+                
       </div>
     </div>
   </div>
