@@ -114,14 +114,12 @@ class RequestsController extends Controller
 //                 ->leftjoin('users','users.id','role_user.user_id')
 //                ->where('role_user.role_id',5) 
 //                 ->get();
-         
 //        echo "<pre>";
 //        print_r($associates);
 //        exit();
            /****************************************************************************************/
           $requester = DB::table('requests')->select('*','requests.id as id')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
-          
-             $status = 3; 
+            $status = 3; 
            //update status
           CSEIRequest::where('id', $id)->update(['status' =>$status,'approver_id'=>$approver_id]); 
 //		foreach ($associates as $a_value) 
