@@ -116,6 +116,7 @@ class RequestsController extends Controller
 //                 ->get();
 //        echo "<pre>";
 //        print_r($associates);
+//        
 //        exit();
            /****************************************************************************************/
           $requester = DB::table('requests')->select('*','requests.id as id')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
