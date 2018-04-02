@@ -23,7 +23,7 @@
         <div class="card">
           <div class="card-body">
           <h4 class="card-title">Users List</h4>
-            <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+<!--            <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>-->
             <div class="table-responsive m-t-40">
               <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                <thead>
@@ -32,8 +32,8 @@
                  <th>Role (s)</th>
                  <th>Verifier (s)</th>
                  <th>Approver (s)</th>
-                 <th>Email</th>
-                 <th>Contact</th>
+<!--                 <th>Email</th>-->
+<!--                 <th>Contact</th>-->
                  <th>Action</th>
                </tr>
              </thead>
@@ -68,10 +68,10 @@
                 @endif
                 @endforeach
               </td>
-              <td>{{$user->email}}</td>
-              <td>{{$user->contact}}</td>
+<!--              <td>{{$user->email}}</td>-->
+<!--              <td>{{$user->contact}}</td>-->
               <td>
-                <a href="{{route('users.show', $user->id)}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i> View</a>
+                <a href="{{route('users.show', $user->id)}}" class="btn btn-primary m-b-10 m-l-5 left"><i class="fa fa-search"></i> View</a>
                 <a href="{{route('users.edit', $user->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
               </td>
             </tr>
