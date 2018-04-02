@@ -25,92 +25,26 @@
 @section('content')
 <!-- Container fluid  -->
 <div class="container-fluid">
-    <!-- Start Page Content -->
-     @if($requests->status==3 || $requests->status==5)
-     <div class="row justify-content-center">
+
+                <!-- Start Page Content -->
+                <div class="row justify-content-center">
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
-<!--                                <table class="table-bordered">
-                                    <tr><td>Voucher No </td><td>{{$requests->id}}</td><tr>
-                                </table>-->
-                                
-                                
                                 <div class="form-validation">
                                     <form class="form-valide" action="#" method="post">
-                                      
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Voucher No.</label>
+                                            <label class="col-lg-4 col-form-label" for="val-username">Username <span class="text-danger">*</span></label>
                                             <div class="col-lg-6">
-                                              {{$requests->id}}  
+                                                <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Enter a username..">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Name of Requester</label>
-                                            <div class="col-lg-6">
-                                              {{$requests->requester_name}}  
-                                            </div>
+                                       
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Category</label>
-                                            <div class="col-lg-6">
-                                              {{$requests->cat_name}}  
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Amount Requested</label>
-                                            <div class="col-lg-6">
-                                              {{$requests->amount}}  
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Purpose</label>
-                                            <div class="col-lg-6">
-                                              {{$requests->purpose}}  
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Date Requested</label>
-                                            <div class="col-lg-6">
-                                              {{$requests->due_date}}  
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Amount Requested</label>
-                                            <div class="col-lg-6">
-                                              {{$requests->amount}}  
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Amount Issued<span class="text-danger">*</span></label>
-                                            <div class="col-lg-6">
-                                                 <input type="text" class="form-control" id="amount_issued" name="amount_issued" placeholder="Enter a username..">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Date Issued<span class="text-danger">*</span></label>
-                                            <div class="col-lg-6">
-      
-                               <input type="text" class="form-control multiple_date" id="date_issued" name="date_issued" placeholder="Enter a username..">
-                                            </div>
-                                        </div>
-                                          </div>
-                                 <div class="form-group row">
                                             <div class="col-lg-8 ml-auto">
-                                                <div type="submit" class="btn btn-primary" onclick="verifyRequest( {{$requests->id}}  )" id="save">Save</div>
+                                                <button type="submit" class="btn btn-primary">Submit</button>
                                             </div>
-                                            </div>
-                                <div class="form-group row">
-                                    
-                                            <div class="col-lg-8 ml-auto" id="hiddenpdf" style="display:none">
-                                                <div type="submit" class="btn btn-primary" onclick="verifyRequest( {{$requests->id}}  )">Print</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <div type="submit" class="btn btn-primary" onclick="verifyRequest( {{$requests->id}}  )">Pdf</div>
-                                            </div>
-                                    
-                                            </div>
-                              
                                         </div>
                                     </form>
                                 </div>
@@ -118,15 +52,17 @@
                             </div>
                         </div>
                     </div>
-    @else
+             
     
-    <div class="row">
+    <!-- Start Page Content -->
+<!--    <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
                         <div class="col s12 m6 l6">	
                             <div class="col s12 m12 l12">
+                             
                                 <div class="card-panel">
                                     <h4 class="header2">Requests Details</h4>
                                     {!!Form::open(['route'=>'requests.store',
@@ -135,20 +71,55 @@
                                     'autocomplete'=>'off',
                                     'id'=>'theForm',
                                     'files'=>true])!!}
-                                    <div class="form-group row">
+                                     @if($requests->status==3)
+                                   <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="roles">Voucher No.</label>
+                                        <div class="col-lg-6">{{$requests->id}}</div>        
+                                    </div>
+                                       <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="roles">Name of Requester.</label>
+                                        <div class="col-lg-6">{{$requests->requester_name}}</div>        
+                                    </div>
+                                      @endif
+                                  <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="roles">Category </label>
                                         <div class="col-lg-6">{{$requests->cat_name}}
 
                                         </div>        
                                     </div>
-
+                                      
+                                      
+                                      @if($requests->status==3)
+                                      
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="amount">Amount (Rs) </label>
+                                        <label class="col-lg-4 col-form-label" for="amount">Requested Amount(Rs) </label>
                                         <div class="col-lg-6">
                                             {{$requests->amount}}
                                         </div>
                                     </div>
-
+                                      @else
+                                      <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="amount">Amount(Rs) </label>
+                                        <div class="col-lg-6">
+                                            {{$requests->amount}}
+                                        </div>
+                                    </div>
+                                       @endif
+                                      
+                                     @if($requests->status==3)
+                                       <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="amount">Amount Issued</label>
+                                        <div class="col-lg-6">
+                                            {{$requests->amount}}
+                                        </div>
+                                    </div>
+                                       <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="amount">Date Issued </label>
+                                        <div class="col-lg-6">
+                                            {{$requests->amount}}
+                                        </div>
+                                    </div>
+                                       @endif
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="purpose">Purpose </label>
                                         <div class="col-lg-6">
@@ -162,6 +133,7 @@
                                             {{dateView($requests->due_date)}}
                                         </div>
                                     </div>
+                                        @if($requests->status!=3)
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="due_date">Status</label>
                                         <div class="col-lg-6">
@@ -182,7 +154,10 @@
                                             <textarea  name="comments" id="comments"  class="form-control"></textarea>
                                         </div>
                                     </div>
-
+                                      @endif
+                                    
+                                    
+                                    
                                     <div class="form-group row">
                                          <div class="col-lg-4">
                                          </div>
@@ -209,8 +184,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    @endif
+    </div>-->
 </div>
 </div>
 @endsection
@@ -236,27 +210,44 @@
 
         }
     }
-</script>
 
+
+
+
+</script>
+<!--
 <script>
 function verifyRequest(id,user_id)
-{
-   var amount_issued  =  $("#amount_issued").val();
-   var date_issued    =  $("#date_issued").val();
+          {
+            var r = confirm("Are you sure to verify?");
+if (r == true) {
+    if(id!='')
+    {
+         $(".loder_id").show(); 
      $.ajax({
              type :'get',
-             url:'/requests/'+id+'/save_voucher',
-             data:"amount_issued="+amount_issued+"&date_issued="+date_issued,
+             url:'/requests/verify_request/',
+             data:"user_id="+user_id+"&id="+id,
              success:function(data)
              {
-                 $("#hiddenpdf").show();
-                 $("#save").hide();
-                          
+                 alert(data)
+              $(".loder_id").hide();  
+               $("#"+id).fadeOut( "slow" ); 
+              
              }
                   
             });
+        }         
+           
+         
+} else {
+     return false;
+    
 } 
-</script>
+} 
+
+
+</script>-->
 
 
 

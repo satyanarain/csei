@@ -12,10 +12,11 @@ use App\Http\Requests\Requests\StoreRequestsRequest;
 use App\Repositories\Request\RequestRepositoryContract;
 use DB;
 use Mail;
+use \App\Traits\activityLog;
 class RequestsController extends Controller
 {
-    public $request;
-
+public $request;
+use activityLog;
     public function __construct(RequestRepositoryContract $request)
     {
         $this->request = $request;
@@ -27,7 +28,7 @@ class RequestsController extends Controller
      */
     public function index()
     {
-        $id= Auth::id();
+     $id= Auth::id();
      $requests = DB::table('requests')->select('*','requests.id as id','c_status.name as c_status','categories.name as name','requests.created_at as created_at','requests.updated_at as updated_at')
               ->leftjoin('users','users.id','requests.user_id')
               ->leftjoin('categories','categories.id','requests.category_id')
@@ -79,7 +80,9 @@ class RequestsController extends Controller
           
        //  exit();
            $status = 2; //we assume status is true (1) at the begining;
-           CSEIRequest::where('id', $id)->update(['status' =>$status,'verifire_id'=>$verifire_id]); 
+          $result=CSEIRequest::where('id', $id)->update(['status' =>$status,'verifire_id'=>$verifire_id]); 
+         
+           
 	/*	foreach ($approvers as $a_value) 
 		{
                    $name= $a_value->name;
@@ -88,11 +91,16 @@ class RequestsController extends Controller
                    $m->to($a_value->email, $a_value->name)->subject('Request!'); });
 		}
                 
-                */$verify_aprove='verify';
+                */
+          if($result==1)
+          {
+          $verify_aprove='verify';
                    Mail::send('emails.requester',['verifire_name'=>$verifire_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verify_aprove'=>$verify_aprove], function ($m) use ($requester) {
                    $m->from('info@opiant.online', 'Vrerification Mail');
                    $m->to($requester->email, $requester->name)->subject('Your Request has been verified!'); });
+          }
 		   return redirect()->route('verifiers.requests'); 
+        
          }
      else if($request->approve=='Approve')
         {
@@ -122,7 +130,7 @@ class RequestsController extends Controller
           $requester = DB::table('requests')->select('*','requests.id as id')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
             $status = 3; 
            //update status
-          CSEIRequest::where('id', $id)->update(['status' =>$status,'approver_id'=>$approver_id]); 
+        $result=  CSEIRequest::where('id', $id)->update(['status' =>$status,'approver_id'=>$approver_id]); 
 //		foreach ($associates as $a_value) 
 //		{
 //                   $name= $a_value->name;
@@ -130,11 +138,13 @@ class RequestsController extends Controller
 //                   $m->from('info@opiant.online', 'Approval Mail');
 //                   $m->to($a_value->email, $a_value->name)->subject('Request!'); });
 //		}
-          
+          if($result==1)
+          {
           $verify_aprove='aprove';
                    Mail::send('emails.requester',['apporver_name'=>$apporver_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verify_aprove'=>$verify_aprove], function ($m) use ($requester) {
                    $m->from('info@opiant.online', 'Approval Mail');
                    $m->to($requester->email, $requester->name)->subject('Request!'); });
+          }
              return redirect()->route('approvers.requests'); 
          }
           else if($request->rejected=='Rejected'){
@@ -142,7 +152,7 @@ class RequestsController extends Controller
           $id=  $request->id;
          $comments=  $request->comments;
          $user_id_login= Auth::user();
-         echo $rejector_name= $user_id_login->name;
+         $rejector_name= $user_id_login->name;
          $rejectore_id= $user_id_login->id;
         
          $requester_user_id=$request->user_id;
@@ -157,13 +167,16 @@ class RequestsController extends Controller
          
       //exit();
            $status = 7; //we assume status is true (1) at the begining;
-           CSEIRequest::where('id', $id)->update(['status' =>$status,'rejectore_id'=>$rejectore_id,'comments'=>$comments]); 
+          $result= CSEIRequest::where('id', $id)->update(['status' =>$status,'rejectore_id'=>$rejectore_id,'comments'=>$comments]); 
 		//foreach ($approvers as $a_value) 
 		//{
                    $name= $sql_requester_name->name;
+                      if($result==1)
+          {
                    Mail::send('emails.reject',['rejector_name'=>$rejector_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($sql_requester_name) {
                    $m->from('info@opiant.online', 'Request Rejection Mail');
                    $m->to($sql_requester_name->email, $sql_requester_name->name)->subject('Request Rejection Mail!'); });
+          }
 		//}
                   return redirect()->route('verifiers.requests'); 
          
@@ -188,28 +201,25 @@ class RequestsController extends Controller
         
          $sql_requester_name= User::whereId($requester_user_id)->first();
          //$approvers = User::whereIn('id', explode(',', $sql_appover->approvers))->get();
-     // $sql_requester_name->name;
-     // $sql_requester_name->email;
+         // $sql_requester_name->name;
+         // $sql_requester_name->email;
       
-           $status = 7; //we assume status is true (1) at the begining;
-           CSEIRequest::where('id', $id)->update(['status' =>$status,'rejectore_id'=>$rejectore_id,'comments'=>$comments]); 
-		//foreach ($approvers as $a_value) 
-		//{
-                   $name= $sql_requester_name->name;
+           $status = 6; //we assume status is true (1) at the begining;
+           $result = CSEIRequest::where('id', $id)->update(['status' =>$status,'rejectore_id'=>$rejectore_id,'comments'=>$comments]); 
+	  $name= $sql_requester_name->name;
+                                if($result==1)
+          {
                    Mail::send('emails.reject',['rejector_name'=>$rejector_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($sql_requester_name) {
                    $m->from('info@opiant.online', 'Request Rejection Mail');
                    $m->to($sql_requester_name->email, $sql_requester_name->name)->subject('Request Rejection Mail!'); });
-		//}
+	}
                   return redirect()->route('approvers.requests'); 
         }
            else{
          $this->request->create($request);
          return redirect()->route('requests.index');
         }
-        
-        
-        
-    }
+       }
     
      public function verifyRequestUpdateStatus($id,Request $request)
         {
@@ -269,7 +279,7 @@ class RequestsController extends Controller
     {
    
        $user_id= Auth::id();
-       $requests = DB::table('requests')->select('*','c_status.name as c_status','categories.name as cat_name','requests.created_at as created_at','requests.updated_at as updated_at','requests.id as id')
+       $requests = DB::table('requests')->select('*','c_status.name as c_status','categories.name as cat_name','users.name as requester_name','requests.created_at as created_at','requests.updated_at as updated_at','requests.id as id')
               ->leftjoin('users','users.id','requests.user_id')
               ->leftjoin('categories','categories.id','requests.category_id')
               ->leftjoin('c_status','c_status.id','requests.status')
@@ -339,6 +349,9 @@ $login_user_id=Auth::id();
         return view('requests.verify', compact('requests'));
     }
 
+    
+    /**************************request to approve*******************************************************************************/
+    
     public function requestsToApprove()
     {
      $login_user_id=Auth::id();
@@ -356,10 +369,22 @@ $login_user_id=Auth::id();
           return view('requests.approve', compact('requests'));
     }
 
+    
+    
     public function requestsToReconcile()
     {
         $requests = CSEIRequest::where('status', '2')->get();
         return view('requests.accountant', compact('requests'));
+    }
+    public function requestsApproved()
+    {
+    $requests = DB::table('requests')->select('*','requests.id as id','c_status.name as c_status','categories.name as name','users.name as requester_name','requests.created_at as created_at','requests.updated_at as updated_at')
+              ->leftjoin('users','users.id','requests.user_id')
+              ->leftjoin('categories','categories.id','requests.category_id')
+              ->leftjoin('c_status','c_status.id','requests.status')
+              ->where('requests.status',3) 
+              ->get();
+   return view('requests.accountant', compact('requests'));
     }
 
     public function verifyRequest(Request $request, $id)
@@ -386,4 +411,18 @@ $login_user_id=Auth::id();
     {
         
     }
+    
+    
+     public function saveVoucher($id ,Request $request)
+    {
+
+    $amount_issued=$request->amount_issued;
+     $date_issued=$this->insertDate($request->date_issued);
+      
+       $status = 5; //we assume status is true (1) at the begining;
+          $result= CSEIRequest::where('id', $id)->update(['status' =>$status,'amount_issued'=>$amount_issued,'date_issued'=>$date_issued]);     
+         
+    }
+    
+    
 }

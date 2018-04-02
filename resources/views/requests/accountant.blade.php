@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Requests</h3> </div>
+    <h3 class="text-primary">Approved Request Lists</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Requests</li>
+        <li class="breadcrumb-item active">Approved Request List</li>
       </ol>
     </div>
   </div>
@@ -22,8 +22,8 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-          <h4 class="card-title">Requests List</h4>
-            <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+<!--          <h4 class="card-title">Requests List</h4>-->
+<!--            <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>-->
             <div class="table-responsive m-t-40">
               <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                <thead>
@@ -31,6 +31,10 @@
                  <th>Category</th>
                  <th>Amount</th>
                  <th>Due Date</th>
+                 <th>Requester Name</th>
+                 <th>Requester Email</th>
+                 <th>Verifier Name</th>
+                 <th>Approver Name</th>
                  <th>Purpose</th>
                  <th>Status</th>
                  <th>Action</th>
@@ -39,28 +43,29 @@
              <tbody>
               @foreach($requests as $key=>$request)
               <tr>
-               <td>{{$request->category->name}}</td>
+               <td>{{$request->name}}</td>
                <td>{{$request->amount}}</td>
               <td>
                 {{$request->due_date}}
               </td>
               <td>
+                {{$request->requester_name}}
+              </td>
+              <td>
+                {{$request->email}}
+              </td>
+              <td>
+            
+                {{displayIdBaseName('users',$request->verifire_id,'name')}}
+              </td>
+              <td>
+               {{displayIdBaseName('users',$request->approver_id,'name')}}
+              </td>
+              <td>
                 {{$request->purpose}}
               </td>
               <td>
-              @if($request->status == '0')
-                <span class="badge badge-primary">Requested</span>
-              @elseif($request->status == '1')
-                <span class="badge badge-secondary">Verified</span>
-              @elseif($request->status == '2')
-                <span class="badge badge-info">Approved</span>
-              @elseif($request->status == '3')
-                <span class="badge badge-warning">Reconciliation</span>
-              @elseif($request->status == '4')
-                <span class="badge badge-success">Closed</span>
-              @else
-                <span class="badge badge-danger">Rejected</span>
-              @endif
+               <div class="{{$request->b_class}}">  {{$request->c_status}}</div>
               </td>
               <td>
                 <a href="{{route('requests.show', $request->id)}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i> View</a>

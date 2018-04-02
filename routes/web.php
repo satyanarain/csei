@@ -56,9 +56,12 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::post('verifiers/requests/{id}/verify', 'RequestsController@verifyRequest')->name('verifiers.requests.verify');
         Route::get('verifiers/requests', 'RequestsController@requestsToVerify')->name('verifiers.requests');
 	Route::get('approvers/requests', 'RequestsController@requestsToApprove')->name('approvers.requests');
-	Route::get('accountants/requests', 'RequestsController@requestsToReconcile')->name('accountants.requests');
+	//Route::get('accountants/requests', 'RequestsController@requestsToReconcile')->name('accountants.requests');
+	Route::get('accountants/requests', 'RequestsController@requestsApproved')->name('accountants.requests');
 	Route::post('requests/verify_request', 'RequestsController@verifyRequestUpdateStatus');
-	Route::resource('requests', 'RequestsController');
+	Route::post('requests/verify_request', 'RequestsController@verifyRequestUpdateStatus');
+        Route::get('/requests/{id}/save_voucher', 'RequestsController@saveVoucher');
+        Route::resource('requests', 'RequestsController');
         
          /*
 	|--------------------------------------------------------------------

@@ -305,9 +305,11 @@ $segments_var = Request::segments();
                                        ?> 
                               <li class="{{($active2 == 'requests' && $active == 'verifiers') ? 'active' : ''}}"><a href="{{route('verifiers.requests')}}" class="{{($request_only_verifire == 'requested_requests') ? 'active' : ''}}"><i class="fa fa-share-square"></i> Requested Requests</a></li>
                                <li class="{{($active2 == 'requests' && $active == 'approvers') ? 'active' : ''}}"><a href="{{route('approvers.requests')}}" class="{{($request_only_verifire == 'verifireactive') ? 'active' : ''}}"><i class="fa fa-check-circle"></i> Verified Requests</a></li>
+                              
                                @if(Entrust::hasRole('Admin Associate'))
                                 <li class="{{($active2 == 'requests' && $active == 'accountants') ? 'active' : ''}}"><a href="{{route('accountants.requests')}}"><i class="fa fa-check-circle" aria-hidden="true"></i> Approved Requests</a></li>
                                 @endif
+                                
                                 <li class="{{($active2 == 'create' && $active == 'requests') ? 'active' : ''}}"><a href="{{route('requests.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Request</a></li>
                             </ul>
                         </li>

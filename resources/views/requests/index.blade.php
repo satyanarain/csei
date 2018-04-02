@@ -52,7 +52,7 @@
                 {{$request->purpose}}
               </td>
               <td>
-            <div class="badge badge-primary">  {{$request->c_status}}</div>
+            <div class="{{$request->b_class}}">  {{$request->c_status}}</div>
               </td>
               <td>
                 <a href="{{route('requests.show',[$request->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i> View</a>
