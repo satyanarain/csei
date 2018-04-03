@@ -267,8 +267,6 @@ use activityLog;
                    $m->to($a_value->email, $a_value->name)->subject('Request!'); });
 		}
           }
-    
-
     /**
      * Display the specified resource.
      *
@@ -376,6 +374,7 @@ $login_user_id=Auth::id();
         $requests = CSEIRequest::where('status', '2')->get();
         return view('requests.accountant', compact('requests'));
     }
+    
     public function requestsApproved()
     {
     $requests = DB::table('requests')->select('*','requests.id as id','c_status.name as c_status','categories.name as name','users.name as requester_name','requests.created_at as created_at','requests.updated_at as updated_at')
@@ -384,6 +383,12 @@ $login_user_id=Auth::id();
               ->leftjoin('c_status','c_status.id','requests.status')
               ->where('requests.status',3) 
               ->get();
+//    echo "<pre>";
+//    print_r($requests)
+//    
+//    exit();
+//    
+//    
    return view('requests.accountant', compact('requests'));
     }
 
@@ -416,11 +421,38 @@ $login_user_id=Auth::id();
      public function saveVoucher($id ,Request $request)
     {
 
-    $amount_issued=$request->amount_issued;
-     $date_issued=$this->insertDate($request->date_issued);
+   $amount_issued=$request->amount_issued;
+   $date_issued=$this->insertDate($request->date_issued);
       
        $status = 5; //we assume status is true (1) at the begining;
-          $result= CSEIRequest::where('id', $id)->update(['status' =>$status,'amount_issued'=>$amount_issued,'date_issued'=>$date_issued]);     
+          $result= CSEIRequest::where('id', $id)->update(['status' =>$status,'amount_issued'=>$amount_issued,'date_issued'=>$date_issued]);  
+          
+          ?>
+           <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-username">Amount Issued</label>
+                                            <div class="col-lg-6">
+                                                <?php
+                                                if($amount_issued!='')
+                                                {
+                                                   echo  $amount_issued; 
+                                                }
+                                                ?>
+                                               
+                                              </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="val-username">Date Issued</label>
+                                            <div class="col-lg-6">
+                                                <?php
+                                                if($date_issued!='')
+                                                {
+                                                 echo  $this->dateView($date_issued); 
+                                                }
+                                                ?>
+                                              </div>
+                                        </div>
+          
+       <?php   
          
     }
     

@@ -2,35 +2,33 @@
 @section('breadcrumb')
 <!-- Bread crumb -->
 <div class="row page-titles">
-  <div class="col-md-5 align-self-center">
-    @if($requests->status==1)
-   <h3 class="text-primary">Requested Request Details</h3>
-   @elseif($requests->status==2)
-    <h3 class="text-primary">Verified Request Details</h3>
+    <div class="col-md-5 align-self-center">
+   @if($requests->status==1)
+   <h3 class="text-primary">Requested Request Details</h3> </div>
+   @endif
+    @elseif($requests->status==2)
+    <h3 class="text-primary">Verified Request Details</h3> </div>
+    @endif
     @elseif($requests->status==3)
-     <h3 class="text-primary">Aproved Request Details</h3>
-  @else
-  <h3 class="text-primary">Request Details</h3> 
-@endif
-  </div>
-
-    <div class="col-md-7 align-self-center">
-      <ol class="breadcrumb">
+     <h3 class="text-primary">Aproved Request Details</h3> </div>
+  @endif
+<div class="col-md-7 align-self-center">
+    <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Requests</li>
-      </ol>
-    </div>
-  </div>
-  <!-- End Bread crumb -->
-  @endsection
+        <li class="breadcrumb-item"><a href="{{route('verifiers.requests')}}">Requested Requests</a></li>
+        <li class="breadcrumb-item active">Details</li>
+    </ol>
+</div>
+</div>
+<!-- End Bread crumb -->
+@endsection
 
-  @section('content')
-
+@section('content')
 <!-- Container fluid  -->
 <div class="container-fluid">
     <!-- Start Page Content -->
-     @if($requests->status==3 || $requests->status==5)
-     <div class="row justify-content-center" id='printableArea'>
+     @if($requests->status==3)
+     <div class="row justify-content-center">
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-body">
@@ -121,7 +119,7 @@
    @endif
                                 <div class="form-group row">
                                      <div class="col-lg-8 ml-auto" id="hiddenpdf" @if($requests->date_issued!='') @else style="display:none" @endif>
-                                                <div type="submit" class="btn btn-primary" onclick="printDiv('printableArea')">Print</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <div type="submit" class="btn btn-primary" onclick="verifyRequest122( {{$requests->id}}  )">Print</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <div type="submit" class="btn btn-primary" onclick="verifyRequest11111( {{$requests->id}}  )">Pdf</div>
                                             </div>
                                     
@@ -256,22 +254,9 @@
 </div>
 </div>
 
+
 @endsection
 <script>
-    
-    function printDiv(divName) {
-     var printContents = document.getElementById(divName).innerHTML;
-     var originalContents = document.body.innerHTML;
-
-     document.body.innerHTML = printContents;
-
-     window.print();
-
-     document.body.innerHTML = originalContents;
-}
-    
-    
-    
     function loadAdd()
     {
         $(".loder_id").show();
