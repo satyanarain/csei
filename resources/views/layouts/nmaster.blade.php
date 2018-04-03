@@ -1,9 +1,6 @@
 <?php
 $segments_var = '';
 $segments_var = Request::segments();
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,14 +74,14 @@ $segments_var = Request::segments();
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                         <!-- Messages -->
-                        <li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-th-large"></i></a>
+<!--                        <li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-th-large"></i></a>
                             <div class="dropdown-menu animated zoomIn">
                                 <ul class="mega-dropdown-menu row">
 
 
                                     <li class="col-lg-3  m-b-30">
                                         <h4 class="m-b-20">CONTACT US</h4>
-                                        <!-- Contact -->
+                                         Contact 
                                         <form>
                                             <div class="form-group">
                                                 <input type="text" class="form-control" id="exampleInputname1" placeholder="Enter Name"> </div>
@@ -98,7 +95,7 @@ $segments_var = Request::segments();
                                     </li>
                                     <li class="col-lg-3 col-xlg-3 m-b-30">
                                         <h4 class="m-b-20">List style</h4>
-                                        <!-- List style -->
+                                         List style 
                                         <ul class="list-style-none">
                                             <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
                                             <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
@@ -109,7 +106,7 @@ $segments_var = Request::segments();
                                     </li>
                                     <li class="col-lg-3 col-xlg-3 m-b-30">
                                         <h4 class="m-b-20">List style</h4>
-                                        <!-- List style -->
+                                         List style 
                                         <ul class="list-style-none">
                                             <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
                                             <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
@@ -120,7 +117,7 @@ $segments_var = Request::segments();
                                     </li>
                                     <li class="col-lg-3 col-xlg-3 m-b-30">
                                         <h4 class="m-b-20">List style</h4>
-                                        <!-- List style -->
+                                         List style 
                                         <ul class="list-style-none">
                                             <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
                                             <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
@@ -131,7 +128,7 @@ $segments_var = Request::segments();
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li>-->
                         <!-- End Messages -->
                     </ul>
                     <!-- User profile and search -->
@@ -287,30 +284,28 @@ $segments_var = Request::segments();
                         <li class="{{$active == 'home' ? 'active' : ''}}"><a href="{{route('home')}}"><i class="fa fa-home"></i> Dashboard </a></li>
 <!--                        <li class="nav-label">Apps</li>-->
                         @if(Entrust::hasRole('administrator'))
-                        <li class="{{$active == 'users' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Users</span></a>
+                        <li class="{{$active == 'users' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Users</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li class="{{($active2 == '' && $active == 'users') ? 'active' : ''}}"><a href="{{route('users.index')}}">All Users</a></li>
-                                <li class="{{($active2 == 'create' && $active == 'users') ? 'active' : ''}}"><a href="{{route('users.create')}}"><i class="fa fa-plus" aria-hidden="true"></i>+New User</a></li>
+                                <li class="{{($active2 == 'create' && $active == 'users') ? 'active' : ''}}"><a href="{{route('users.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New User</a></li>
+                                <li class="{{($active2 == '' && $active == 'users') ? 'active' : ''}}"><a href="{{route('users.index')}}"><i class="fa fa-users"></i> All Users</a></li>
+
                             </ul>
                         </li>
                         @endif
                         <li class="{{$active == 'requests' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Requests</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                
-                                
-                                
-                                <li class="{{($active2 == '' && $active == 'requests') ? 'active' : ''}}"><a href="{{route('requests.index')}}">My Requests</a></li>
+                                 <li class="{{($active2 == 'create' && $active == 'requests') ? 'active' : ''}}"><a href="{{route('requests.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Request</a></li>
+                                 <li class="{{($active2 == '' && $active == 'requests') ? 'active' : ''}}"><a href="{{route('requests.index')}}"><i class="ti-menu"></i> My Requests</a></li>
                                 <?php    $request_only_verifire=Request::fullUrl();
                                           $request_only_verifire=end(explode('?',$request_only_verifire));
                                        ?> 
-                              <li class="{{($active2 == 'requests' && $active == 'verifiers') ? 'active' : ''}}"><a href="{{route('verifiers.requests')}}" class="{{($request_only_verifire == 'requested_requests') ? 'active' : ''}}"><i class="fa fa-share-square"></i> Requested Requests</a></li>
-                               <li class="{{($active2 == 'requests' && $active == 'approvers') ? 'active' : ''}}"><a href="{{route('approvers.requests')}}" class="{{($request_only_verifire == 'verifireactive') ? 'active' : ''}}"><i class="fa fa-check-circle"></i> Verified Requests</a></li>
-                              
+                              <li class="{{($active2 == 'requests' && $active == 'verifiers') ? 'active' : ''}}"><a href="{{route('verifiers.requests')}}" class="{{($request_only_verifire == 'requested_requests') ? 'active' : ''}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i> Pending Verification</a></li>
+                               <li class="{{($active2 == 'requests' && $active == 'approvers') ? 'active' : ''}}"><a href="{{route('approvers.requests')}}" class="{{($request_only_verifire == 'verifireactive') ? 'active' : ''}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i> Pending Approval</a></li>
                                @if(Entrust::hasRole('Admin Associate'))
-                                <li class="{{($active2 == 'requests' && $active == 'accountants') ? 'active' : ''}}"><a href="{{route('accountants.requests')}}"><i class="fa fa-check-circle" aria-hidden="true"></i> Approved Requests</a></li>
+                               <li class="{{($active2 == 'requests' && $active == 'accountants') ? 'active' : ''}}"><a href="{{route('accountants.requests')}}"  class="{{($request_only_verifire == 'accountants') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Approved Requests</a></li>
                                 @endif
                                 
-                                <li class="{{($active2 == 'create' && $active == 'requests') ? 'active' : ''}}"><a href="{{route('requests.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Request</a></li>
+                               
                             </ul>
                         </li>
                      
@@ -319,15 +314,17 @@ $segments_var = Request::segments();
 
                         <li class="{{$active == 'roles' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-key"></i><span class="hide-menu"><i class="fas fa-role"></i>Roles</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li class="{{($active2 == '' && $active == 'roles') ? 'active' : ''}}"><a href="{{route('roles.index')}}"><i class="fas fa-role"></i>All Roles</a></li>
-                                <li class="{{($active2 == 'create' && $active == 'roles') ? 'active' : ''}}"><a href="{{route('roles.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Role</a></li>
+                                                                <li class="{{($active2 == 'create' && $active == 'roles') ? 'active' : ''}}"><a href="{{route('roles.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Role</a></li>
+                                <li class="{{($active2 == '' && $active == 'roles') ? 'active' : ''}}"><a href="{{route('roles.index')}}"><i class="fa fa-bars"></i> All Roles</a></li>
+
                             </ul>
                         </li>
                         
                         <li class="{{$active == 'permissions' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-lock"></i><span class="hide-menu"><i class="fas fa-permission"></i>Permissions</span></a>
                             <ul aria-expanded="false" class="collapse">
+                                                             <li class="{{($active2 == 'create' && $active == 'permissions') ? 'active' : ''}}"><a href="{{route('permissions.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Permission</a></li>
                                 <li class="{{($active2 == '' && $active == 'permissions') ? 'active' : ''}}"><a href="{{route('permissions.index')}}"><i class="fas fa-permission"></i> All Permissions</a></li>
-                                <li class="{{($active2 == 'create' && $active == 'permissions') ? 'active' : ''}}"><a href="{{route('permissions.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Permission</a></li>
+
                             </ul>
                         </li>
 <!--                        <li><a href="page-invoice.html"><i class="fa fa-cog"></i> Miscellenious</a></li>-->
@@ -376,7 +373,7 @@ $segments_var = Request::segments();
                   <!-- Flash message ends -->
             @yield('content')
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a></footer>
+            <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="http://opiant.in/">Opiant</a></footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->
@@ -439,8 +436,7 @@ $segments_var = Request::segments();
 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>-->
 
 <script type="text/javascript">
-  
-$('body').on('focus',".multiple_date", function(){
+  $('body').on('focus',".multiple_date", function(){
          $(this).datepicker({
               dateFormat: 'dd-mm-yy',
                startView: "year", 
@@ -448,6 +444,17 @@ $('body').on('focus',".multiple_date", function(){
               yearRange: "-80Y:-0Y",
 minDate: "-80Y",
 maxDate: "-0Y"
+          });
+}); 
+
+$('body').on('focus',".multiple_date_due", function(){
+         $(this).datepicker({
+              dateFormat: 'dd-mm-yy',
+               startView: "year", 
+                changeYear: true,
+              yearRange: "-80Y:+20Y",
+minDate: "-80Y"
+//maxDate: "-0Y"
           });
 }); 
 

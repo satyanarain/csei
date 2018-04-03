@@ -22,14 +22,14 @@
     <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="due_date">Due Date <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-        <input  name="due_date"  min="{{date('Y-m-d')}}" class="form-control multiple_date" required value="{{isset($request->due_date)?dateView($request->due_date):''}}" >
+        <input  name="due_date"  min="{{date('Y-m-d')}}" class="form-control multiple_date_due" required value="{{isset($request->due_date)?dateView($request->due_date):''}}" >
         </div>
     </div>
   <div class="form-group row">
         <div class="col-lg-4">
         </div>
         <div class="col-lg-6">
-        <button class="btn btn-primary submit" type="submit" name="action">Submit
+            <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Submit
         </button>
         </div>
     </div>

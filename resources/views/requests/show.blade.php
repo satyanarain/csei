@@ -2,141 +2,142 @@
 @section('breadcrumb')
 <!-- Bread crumb -->
 <div class="row page-titles">
-  <div class="col-md-5 align-self-center">
-    @if($requests->status==1)
-   <h3 class="text-primary">Requested Request Details</h3>
-   @elseif($requests->status==2)
-    <h3 class="text-primary">Verified Request Details</h3>
-    @elseif($requests->status==3)
-     <h3 class="text-primary">Aproved Request Details</h3>
-  @else
-  <h3 class="text-primary">Request Details</h3> 
-@endif
-  </div>
+    <div class="col-md-5 align-self-center">
+        @if($requests->status==1)
+        <h3 class="text-primary">Requested Request Details</h3>
+        @elseif($requests->status==2)
+        <h3 class="text-primary">Verified Request Details</h3>
+        @elseif($requests->status==3)
+        <h3 class="text-primary">Aproved Request Details</h3>
+        @else
+        <h3 class="text-primary">Request Details</h3> 
+        @endif
+    </div>
 
     <div class="col-md-7 align-self-center">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Requests</li>
-      </ol>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
+            <li class="breadcrumb-item active">Requests</li>
+        </ol>
     </div>
-  </div>
-  <!-- End Bread crumb -->
-  @endsection
+</div>
+<!-- End Bread crumb -->
+@endsection
 
-  @section('content')
+@section('content')
 
 <!-- Container fluid  -->
 <div class="container-fluid">
     <!-- Start Page Content -->
-     @if($requests->status==3 || $requests->status==5)
-     <div class="row justify-content-center" id='printableArea'>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-<!--                                <table class="table-bordered">
-                                    <tr><td>Voucher No </td><td>{{$requests->id}}</td><tr>
-                                </table>-->
-                                
-                                
-                                <div class="form-validation">
-                                    <form class="form-valide" action="#" method="post">
-                                      
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Voucher No.</label>
-                                            <div class="col-lg-6">
-                                              {{$requests->id}}  
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Name of Requester</label>
-                                            <div class="col-lg-6">
-                                              {{$requests->requester_name}}  
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Category</label>
-                                            <div class="col-lg-6">
-                                              {{$requests->cat_name}}  
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Amount Requested</label>
-                                            <div class="col-lg-6">
-                                              {{$requests->amount}}  
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Purpose</label>
-                                            <div class="col-lg-6">
-                                              {{$requests->purpose}}  
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Date Requested</label>
-                                            <div class="col-lg-6">
-                                              {{$requests->due_date}}  
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Amount Requested</label>
-                                            <div class="col-lg-6">
-                                              {{$requests->amount}}  
-                                            </div>
-                                        </div>
-                                        
-                                        <span id="amount_date">
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Amount Issued
-                                                @if($requests->amount_issued!='')  <span class="text-danger">*</span> @endif
-                                            </label>
-                                            <div class="col-lg-6">
-                                                 @if($requests->amount_issued!='')
-                                                   {{$requests->amount_issued}}
-                                                @else
-                                                 <input type="text" class="form-control" id="amount_issued" name="amount_issued" placeholder="Ammount Issued">
-                                                @endif
-                                              </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Date Issued @if($requests->date_issued!='')<span class="text-danger">*</span>@endif</label>
-                                            <div class="col-lg-6">
-                                                  @if($requests->date_issued!='')
-                                                   {{$requests->date_issued}}
-                                                @else
-                               <input type="text" class="form-control multiple_date" id="date_issued" name="date_issued" placeholder="Enter a date..">
-                                @endif
-                                            </div>
-                                        </div>
-                                         </span>
-                                        
- @if($requests->date_issued=='')
-                                 <div class="form-group row">
-                                            <div class="col-lg-8 ml-auto">
-                                                <div type="submit" class="btn btn-primary" onclick="verifyRequest( {{$requests->id}}  )" id="save">Save</div>
-                                            </div>
-                                 </div>
-   @endif
-                                <div class="form-group row">
-                                     <div class="col-lg-8 ml-auto" id="hiddenpdf" @if($requests->date_issued!='') @else style="display:none" @endif>
-                                                <div type="submit" class="btn btn-primary" onclick="printDiv('printableArea')">Print</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <div type="submit" class="btn btn-primary" onclick="verifyRequest11111( {{$requests->id}}  )">Pdf</div>
-                                            </div>
-                                    
-                                  </div>
-                              
+    <?php    $request_account=Request::fullUrl();
+                                       $request_account=end(explode('?',$request_account));
                                        
-                                    </form>
-                                     </div>
-                                </div>
+                                       
+                                       ?> 
+    @if(($requests->status==3 || $requests->status==5) && ($request_account=='accountants'))
+    <div class="row justify-content-center" id='printableArea'>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                 <div class="form-validation">
+<!--                     <table class="table">
+                         <tr><td>Name</td><td>Test</td></tr>
+                         
+                     </table>-->
+                        <form class="form-valide" action="#" method="post">
 
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">Voucher No.</label>
+                                <div class="col-lg-6">
+                                    {{$requests->id}}  
+                                </div>
                             </div>
-                        </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">Name of Requester</label>
+                                <div class="col-lg-6">
+                                    {{$requests->requester_name}}  
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">Category</label>
+                                <div class="col-lg-6">
+                                    {{$requests->cat_name}}  
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">Amount Requested</label>
+                                <div class="col-lg-6">
+                                    {{$requests->amount}}  
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">Purpose</label>
+                                <div class="col-lg-6">
+                                    {{$requests->purpose}}  
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">Date Requested</label>
+                                <div class="col-lg-6">
+                                    {{$requests->due_date}}  
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">Amount Requested</label>
+                                <div class="col-lg-6">
+                                    {{$requests->amount}}  
+                                </div>
+                            </div>
+
+                            <span id="amount_date">
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-username">Amount Issued
+                                        @if($requests->amount_issued=='')  <span class="text-danger">*</span> @endif
+                                    </label>
+                                    <div class="col-lg-6">
+                                        @if($requests->amount_issued!='')
+                                        {{$requests->amount_issued}}
+                                        @else
+                                        <input type="text" class="form-control" id="amount_issued" name="amount_issued" placeholder="Ammount Issued">
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="val-username">Date Issued @if($requests->date_issued=='')<span class="text-danger">*</span>@endif</label>
+                                    <div class="col-lg-6">
+                                        @if($requests->date_issued!='')
+                                        {{$requests->date_issued}}
+                                        @else
+                                        <input type="text" class="form-control multiple_date" id="date_issued" name="date_issued" placeholder="Enter a date..">
+                                        @endif
+                                    </div>
+                                </div>
+                            </span>
+
+                            @if($requests->date_issued=='')
+                            <div class="form-group row">
+                                <div class="col-lg-8 ml-auto">
+                                    <div type="submit" class="btn btn-primary" onclick="verifyRequest( {{$requests->id}}  )" id="save">Save</div>
+                                </div>
+                            </div>
+                            @endif
+                            <div class="form-group row">
+                                <div class="col-lg-8 ml-auto" id="hiddenpdf" @if($requests->date_issued!='') @else style="display:none" @endif>
+                                     <div type="submit" class="btn btn-primary" onclick="printDiv('printableArea')"><i class="fa fa-print"></i>&nbsp;Print</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!--                                    <div type="submit" class="btn btn-primary" onclick="verifyRequest11111( {{$requests->id}}  )">Pdf</div>-->
+                                </div>
+                            </div>
+                        </form>
                     </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     @else
-    
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -201,9 +202,9 @@
                                     </div>
 
                                     <div class="form-group row">
-                                         <div class="col-lg-4">
-                                         </div>
-                                         <div class="col-lg-6">
+                                        <div class="col-lg-4">
+                                        </div>
+                                        <div class="col-lg-6">
                                             @if($requests->status==1)
                                             <button class="btn btn-primary submit" type="submit" name="verify"  value="Verify" onclick="return loadAdd()"><i class="fa fa-check-circle"></i> Verify</button>
 
@@ -215,7 +216,7 @@
                                             <button class="btn btn-danger submit" type="submit" name="approverejected" value="Rejected" onclick="return Validate()"><i class="fa fa-times-circle" aria-hidden="true"></i>
                                                 Rejected</button>
                                             @endif
-                                         </div>
+                                        </div>
                                     </div>
                                     {!!Form::close()!!}
                                     @endif               
@@ -228,109 +229,102 @@
         </div>
     </div>
     @endif
-    
-<!--    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
- Modal 
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-     Modal content
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-
-  </div>
-</div>-->
+    <!--    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
     
+     Modal 
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
     
+         Modal content
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>
+          <div class="modal-body">
+            <p>Some text in the modal.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+    
+      </div>
+    </div>-->
+
+
 </div>
 </div>
 
 @endsection
 <script>
-    
+
     function printDiv(divName) {
-     var printContents = document.getElementById(divName).innerHTML;
-     var originalContents = document.body.innerHTML;
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+    }
 
-     document.body.innerHTML = printContents;
 
-     window.print();
 
-     document.body.innerHTML = originalContents;
-}
-    
-    
-    
     function loadAdd()
     {
-        $(".loder_id").show();
+    $(".loder_id").show();
     }
 
     function Validate()
     {
 
-        var comments = $("#comments").val();
-
-        if (comments == '')
-        {
-            alert("Please enter comment.");
-            return false;
-        } else
-        {
-            $(".loder_id").show();
-            document.getElementById('theForm').submit();
-
-        }
+    var comments = $("#comments").val();
+    if (comments == '')
+    {
+    alert("Please enter comment.");
+    return false;
+    } else
+    {
+    $(".loder_id").show();
+    document.getElementById('theForm').submit();
+    }
     }
 </script>
 
 <script>
-function verifyRequest(id,user_id)
-{
-   var amount_issued  =  $("#amount_issued").val();
-   var date_issued    =  $("#date_issued").val();
-   
-   if(amount_issued=='')
-   {
-       alert("Please enter amount issued");
-       return false
-   }
-  else if(date_issued=='')
-   {
-       alert("Please enter issued date");
-       return false
-   }else{
-   
-   
-   
-     $.ajax({
-             type :'get',
-             url:'/requests/'+id+'/save_voucher',
-             data:"amount_issued="+amount_issued+"&date_issued="+date_issued,
-             success:function(data)
-             {
-                 $("#amount_date").html(data);
-                 $("#hiddenpdf").show();
-                 $("#save").hide();
-                 $("#amount_issued").hide();
-                 $("#date_issued").hide();
-                          
-             }
-                  
+    function verifyRequest(id, user_id)
+            {
+            var amount_issued = $("#amount_issued").val();
+            var date_issued = $("#date_issued").val();
+            if (amount_issued == '')
+            {
+            alert("Please enter amount issued");
+            return false
+            }
+            else if (date_issued == '')
+            {
+            alert("Please enter issued date");
+            return false
+            } else{
+
+
+
+            $.ajax({
+            type :'get',
+                    url:'/requests/' + id + '/save_voucher',
+                    data:"amount_issued=" + amount_issued + "&date_issued=" + date_issued,
+                    success:function(data)
+                    {
+                    $("#amount_date").html(data);
+                    $("#hiddenpdf").show();
+                    $("#save").hide();
+                    $("#amount_issued").hide();
+                    $("#date_issued").hide();
+                    }
+
             });
-        }
-} 
+            }
+            }
 </script>
 
 

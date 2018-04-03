@@ -6,7 +6,7 @@
 <body>
 <h2>Hi, {{$name}}</h2>
 <br/>
-A request of amount Rs {{$amount}}  has been approve by {{$apporver_name}}. Please review and create vouchers.
+Your request for Rs. {{$amount}}  has been approved.
 <br/>
 Thanks,<br/>
 </body>

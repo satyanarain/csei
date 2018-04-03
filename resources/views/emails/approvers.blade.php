@@ -6,7 +6,7 @@
 <body>
 <h2>Hi, {{$name}}</h2>
 <br/>
-A request of amount Rs {{$amount}}  has been verify by {{$verifire_name}}. Please review and Approve.
+Your request for Rs. {{$amount}}  has been verified.
 <br/>
 Thanks,<br/>
 </body>

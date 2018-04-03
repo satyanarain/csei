@@ -6,14 +6,15 @@
 <body>
 <h2>Hi, {{$name}}</h2>
 <br/>
-Your  request of amount Rs {{$amount}}  has been rejected.
+Your request for  Rs. {{$amount}}  has been rejected.
  {{--$rejector_name--}}
-for following reason given below:
+for reason(s) given below:
 <br/>
 <br/>
 {{$comments}}
 <br/>
 <br/>
 Thanks,<br/>
+CSEI team
 </body>
 </html>

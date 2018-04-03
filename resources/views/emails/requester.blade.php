@@ -6,7 +6,7 @@
 <body>
 <h2>Dear, {{$name}}</h2>
 <br/>
-Your of amount Rs {{$amount}}  has been {{$verify_aprove}} by {{$verifire_name}}.
+Your request for Rs. {{$amount}}  has been {{$verified_approved}}.
 <br/>
 Thanks,<br/>
 CSEI team
