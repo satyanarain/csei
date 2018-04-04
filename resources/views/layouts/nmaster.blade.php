@@ -14,7 +14,7 @@ $segments_var = Request::segments();
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" href="{{URL::to('images/logonicons/favicon.ico')}}">
-    <title>{{config('app.name')}}</title>
+    <title>{{config('app.name')}}wewewew</title>
     <!-- Bootstrap Core CSS -->
     <link href="{{asset('css/lib/dropzone/dropzone.css')}}" rel="stylesheet">
     <link href="{{asset('css/lib/bootstrap/bootstrap.min.css')}}" rel="stylesheet">
