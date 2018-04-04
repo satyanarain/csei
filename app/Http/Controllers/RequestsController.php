@@ -94,8 +94,8 @@ use activityLog;
                 */
           if($result==1)
           {
-          $verify_aprove='verify';
-                   Mail::send('emails.requester',['verifire_name'=>$verifire_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verify_aprove'=>$verify_aprove], function ($m) use ($requester) {
+          $verified_approved='verify';
+                   Mail::send('emails.pending_verification',['verifire_name'=>$verifire_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verified_approved'=>$verified_approved], function ($m) use ($requester) {
                    $m->from('info@opiant.online', 'Vrerification Mail');
                    $m->to($requester->email, $requester->name)->subject('Your Request has been verified!'); });
           }
@@ -140,8 +140,8 @@ use activityLog;
 //		}
           if($result==1)
           {
-          $verify_aprove='aprove';
-                   Mail::send('emails.requester',['apporver_name'=>$apporver_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verify_aprove'=>$verify_aprove], function ($m) use ($requester) {
+          $verified_approved='aprove';
+                   Mail::send('emails.pending_verification',['apporver_name'=>$apporver_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verified_approved'=>$verified_approved], function ($m) use ($requester) {
                    $m->from('info@opiant.online', 'Approval Mail');
                    $m->to($requester->email, $requester->name)->subject('Request!'); });
           }
