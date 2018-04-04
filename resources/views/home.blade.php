@@ -17,7 +17,7 @@
     <!-- Container fluid  -->
     <div class="container-fluid">
         <!-- Start Page Content -->
-        <div class="row">
+<!--        <div class="row">
             <div class="col-md-3">
                 <div class="card p-30">
                     <div class="media">
@@ -70,16 +70,16 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         
         <div class="row">
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-title">
-                        <h4>Recent Orders </h4>
+                        <h1>Welcome CSEI </h1>
                     </div>
-                    <div class="card-body">
+<!--                    <div class="card-body">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -140,10 +140,10 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
-            <div class="col-lg-6">
+<!--            <div class="col-lg-6">
                 <div class="card">
                     <div class="card-title">
                         <h4>Recent Requests </h4>
@@ -211,7 +211,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <!-- End PAge Content -->
     </div>

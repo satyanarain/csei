@@ -12,17 +12,21 @@ class StoreUserRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+//    public function authorize()
+//    {
+//        if(Auth::check())
+//        {
+//            return true;
+//        }else {
+//            return false;
+//        }
+//        
+//    }
+  public function authorize()
     {
-        if(Auth::check())
-        {
-            return true;
-        }else {
-            return false;
-        }
-        
+        return true;
+        //return auth()->user()->can('user-create');
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -32,9 +36,11 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => 'required',
-           // 'email' => 'required|email|unique:users,email',
+             'email' => 'required|email|unique:users,email',
             'roles' => 'required',
-            'state' => 'required_if:roles,2,3'
+            'state' => 'required_if:roles,2,3',
+            'password' => 'required',
+            'confirm_password' => 'required_with:password|same:password'
         ];
     }
 
@@ -46,7 +52,9 @@ class StoreUserRequest extends FormRequest
             'email.email' => 'Email must be a valid email.',
             'email.unique' => 'This email is already registered.',
             'roles.required' => 'Role field is required.',
-            'state.required_id' => 'State field is required if role is state admin.'
+            'state.required_id' => 'State field is required if role is state admin.',
+            'password.required' => 'Password field is required.',
+            'confirm_password.required' => 'The Confirm password field is required.'
         ];
     }
 }

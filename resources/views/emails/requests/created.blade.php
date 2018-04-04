@@ -4,5 +4,5 @@
 A request for Rs. {{$request->amount}} has been created. Please review and Verify.
 
 Thanks,<br>
-{{$requester_name}}
+{{Auth::user()->name}}
 @endcomponent

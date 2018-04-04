@@ -5,6 +5,7 @@ use DB;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use App\Repositories\User\UserRepositoryContract;
+use Illuminate\Support\Facades\Hash;
 
 class UserRepository implements UserRepositoryContract
 {
@@ -43,6 +44,8 @@ class UserRepository implements UserRepositoryContract
 		$user->name = $request->name;
 		$user->email = $request->email;
 		$user->contact = $request->contact;
+               
+		$user->password = Hash::make($request->password);
 		$user->verifiers = implode(',', $request->verifiers);
 		$user->approvers = implode(',', $request->approvers);
 
@@ -65,6 +68,9 @@ class UserRepository implements UserRepositoryContract
 
 		//set manual_reset_password_token
 		$user->manual_reset_password_token = str_random(60);
+//                echo "<pre>";
+//                print_r($_POST);
+//                exit();
 
 		$user->save();
 
@@ -79,7 +85,14 @@ class UserRepository implements UserRepositoryContract
 	{
 		$user = User::whereId($id)->first();
 
-		$user->name = $request->name;
+                if($request->password!='')
+                {
+                $user->password =Hash::make($request->password);   
+                    
+                } else {
+                 $user->password =$user->password;   
+                }
+                $user->name = $request->name;
 		$user->email = $request->email;
 		$user->contact = $request->contact;
 		$user->verifiers = implode(',', $request->verifiers);

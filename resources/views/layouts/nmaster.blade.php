@@ -323,7 +323,7 @@ $segments_var = Request::segments();
                         <li class="{{$active == 'permissions' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-lock"></i><span class="hide-menu"><i class="fas fa-permission"></i>Permissions</span></a>
                             <ul aria-expanded="false" class="collapse">
                                                              <li class="{{($active2 == 'create' && $active == 'permissions') ? 'active' : ''}}"><a href="{{route('permissions.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Permission</a></li>
-                                <li class="{{($active2 == '' && $active == 'permissions') ? 'active' : ''}}"><a href="{{route('permissions.index')}}"><i class="fas fa-permission"></i> All Permissions</a></li>
+                                <li class="{{($active2 == '' && $active == 'permissions') ? 'active' : ''}}"><a href="{{route('permissions.index')}}"><i class="fa fa-bars"></i> All Permissions</a></li>
 
                             </ul>
                         </li>
@@ -370,6 +370,17 @@ $segments_var = Request::segments();
                     </button>
                   </div>
                   @endif
+                   @if($errors->any())
+                  <div class="card" style="margin-left: 10px;">
+                  <ul class="list-group" id='error_message_red'> 
+                        @foreach($errors->all() as $error)
+                        <li class="list-group-item alert alert-danger">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    </div>
+                   @endif
+                  
+                  
                   <!-- Flash message ends -->
             @yield('content')
             <!-- footer -->

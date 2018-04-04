@@ -26,10 +26,8 @@
             <div class="row">
              <div class="col s12 m6 l6">	
               <div id="profile-card" class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="{{URL::to('images/user-bg.jpg')}}" alt="user bg">
-                </div>
-                <div class="card-content">
+                  @if($user->profile_picture!='')
+                    <div class="card-content">
                   <img src="{{URL::to('images/userProfiles/'.$user->profile_picture)}}" alt="" class="circle responsive-img activator card-profile-image profile-image">
                   <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
                     <i class="mdi-editor-mode-edit"></i>
@@ -41,6 +39,11 @@
                   <p><i class="mdi-communication-email"></i> {{$user->email}}</p>
 
                 </div>
+                  @else
+                <div class="card-image waves-effect waves-block waves-light">
+                  <img class="activator" src="{{URL::to('images/user-bg.jpg')}}" alt="user bg">
+                </div>
+              @endif
                 <div class="card-reveal">
                   <span class="card-title grey-text text-darken-4">{{$user->name}} <i class="mdi-navigation-close right"></i></span>
                   <p>Here is some more information about this card.</p>
@@ -50,7 +53,7 @@
                   <p><i class="mdi-social-cake"></i> 18th June 1990</p>
                 </div>
 
-                <div class="col s12 m6 l6">
+<!--                <div class="col s12 m6 l6">
                   <ul id="task-card" class="collection with-header">
                     <li class="collection-header cyan">
                       <h4 class="task-card-title">My Task</h4>
@@ -80,7 +83,7 @@
                       <span class="task-cat cyan">Mobile App</span>
                     </li>
                   </ul>
-                </div>
+                </div>-->
               </div>
             </div>
           </div>

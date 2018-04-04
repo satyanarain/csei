@@ -40,6 +40,101 @@
     </div>
     @endsection
 
+    
+    
+    
     @push('scripts')
+<script>
+    
+    var form_validation = function() {
+    var e = function() {
+            jQuery("#formValidate").validate({
+                ignore: [],
+                errorClass: "invalid-feedback animated fadeInDown",
+                errorElement: "div",
+                errorPlacement: function(e, a) {
+                    jQuery(a).parents(".form-group > div").append(e)
+                },
+                highlight: function(e) {
+                    jQuery(e).closest(".form-group").removeClass("is-invalid").addClass("is-invalid")
+                },
+                success: function(e) {
+                    jQuery(e).closest(".form-group").removeClass("is-invalid"), jQuery(e).remove()
+                },
+                rules: {
+                    "name": {
+                        required: !0,
+                        minlength: 3
+                    },
+                    "email": {
+                        required: !0,
+                        email: !0
+                    },
+                    "password": {
+                        required: !0,
+                        password: !0
+                    },
+                    "confirm_password": {
+                        required: !0,
+                        confirm_password: !0
+                    },
+                    "roles": {
+                        required: !0
+                    },
+                    "verifires": {
+                        required: !0
+                    },
+                    "approvers": {
+                        required: !0
+                    },
+                    "contact": {
+                        required: !0,
+                        minlength: 10,
+                        number: !0
+                    }
+                },
+                messages: {
+                    "name": {
+                        required: "Please enter a username",
+                        minlength: "Your username must consist of at least 3 characters"
+                    },
+                    "email": "Please enter a valid email address",
+                     "password": {
+                        required: "Please enter a password"
+                    },
+                     "confirm_password": {
+                        required: "Please enter a confirm password"
+                    },
+                    "roles": {
+                        required: "Please select atleast one role"
+                    },
+                    "approvers": {
+                        required: "Please select atleast one approver"
+                    },
+                    "verifires": {
+                        required: "Please select atleast one verifire"
+                    },
+                    "contact": {
+                        required: "Please provide a contact number",
+                        minlength: "Your contact number must be at least 10 characters long",
+                        number: "Contact number must be numeric"
+                    }
+                }
+            })
+        }
+    return {
+        init: function() {
+            e(), a(), jQuery(".js-select2").on("change", function() {
+                jQuery(this).valid()
+            })
+        }
+    }
+}();
+jQuery(function() {
+    form_validation.init()
+});
 
+    
+    
+    </script>
     @endpush

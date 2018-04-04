@@ -1,45 +1,94 @@
     <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="name">Name <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-            <input id="name" name="name" type="text" id="name" value="{{isset($user->name)?$user->name:''}}" class="form-control">
+            
+             {!! Form::text('name',null , ['class' => 'form-control']) !!}
         </div>
     </div>
-    <div class="form-group row">
+  <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="email">Email <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-        <input id="email" name="email" type="email" value="{{isset($user->email)?$user->email:''}}" class="form-control">
+       {!! Form::text('email',null , ['class' => 'form-control']) !!}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="password">Password 
+              @if($user->name=='')
+            <span class="text-danger">*</span>
+         @endif
+        </label>
+        <div class="col-lg-6">
+        <input id="password" name="password" type="password" value="" class="form-control">
         </div>
     </div>
     <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="confirm_password">Confirm Password 
+            @if($user->name=='')
+            <span class="text-danger">*</span>
+            @endif
+        </label>
+        <div class="col-lg-6">
+        <input id="confirm_password" name="confirm_password" type="password" value="" class="form-control">
+        </div>
+    </div>
+
+   <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="contact">Contact <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-        <input id="contact" name="contact" type="text" value="{{isset($user->contact)?$user->contact:''}}" class="form-control">
+          {!! Form::text('contact',null , ['class' => 'form-control']) !!}
         </div>
     </div>
     <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="roles">Role (s) <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!!Form::select('roles[]', $roles, isset($user->roles)?$user->roles:[2], ["class"=>"form-control", 'multiple'=>'multiple'])!!}
+          {!!Form::select('roles[]', $roles, isset($user->roles)?$user->roles:[2], ["class"=>"form-control", 'multiple'=>'multiple','style'=>'min-height:100px;'])!!}
         </div>        
     </div> 
 
     <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="roles">Verifier (s) <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!!Form::select('verifiers[]', $users, isset($user->verifiers)?$user->verifiers:null, ["class"=>"form-control", 'multiple'=>'multiple', 'id'=>'verifiers', 'required'])!!}
+          {!!Form::select('verifiers[]', $users, isset($user->verifiers)?$user->verifiers:null, ["class"=>"form-control", 'multiple'=>'multiple', 'id'=>'verifiers', 'required','style'=>'min-height:100px;'])!!}
         </div>        
     </div> 
-
-
-    <div class="form-group row">
+   <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="roles">Approver (s) <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!!Form::select('approvers[]', $users, isset($user->approvers)?$user->approvers:null, ["class"=>"form-control", 'multiple'=>'multiple', 'required'])!!}
+          {!!Form::select('approvers[]', $users, isset($user->approvers)?$user->approvers:null, ["class"=>"form-control", 'multiple'=>'multiple', 'required','style'=>'min-height:100px;'])!!}
         </div>        
     </div> 
 
 
-    <div class="form-group row">
+<div class="form-group row">
+@if($user->profile_picture!='')
+<label class="col-lg-4 col-form-label" for="roles">Existing Image</label>
+  <div class="col-lg-6">
+{{Html::image('images/userProfiles/'.$user->profile_picture, 'a picture', array('width' => '100','height'=>'100'))}}
+</div>
+@else
+<label class="col-lg-4 col-form-label" for="roles">Existing Image</label>
+  <div class="col-lg-6" id="noimage">
+{{Html::image('images/photo/noimage.png', 'a picture', array('width' => '100','height'=>'100'))}}
+</div>
+@endif
+</div>
+
+<div class="form-group row" style="display:none;" id="output_display">
+    {!! Form::label('image_path', Lang::get('&nbsp;'), ['class' => 'col-lg-4 col-form-label']) !!}
+     <div class="col-lg-6">
+   <img id="output" width="100" height="100"/>
+</div>
+</div>
+ <div class="form-group row">
+
+    <label class="col-lg-4 col-form-label" for="roles">Profile Picture</label>
+     <div class="col-lg-6">
+    {!! Form::file('profile_picture',['class' => 'form-control','onchange'=>'loadFile(event)','id'=>'profile_picture']) !!}
+</div>
+</div>
+
+<!--    <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="profile_picture">Profile Picture</label>
         <div class="col-lg-6">
         @if(isset($user->profile_picture))
@@ -48,90 +97,64 @@
         <input type="file" name="profile_picture" id="input-file-now" class="form-control" data-default-file="" />
         @endif
         </div>
-    </div>
+    </div>-->
     <div class="form-group row">
         <div class="col-lg-4">
         </div>
         <div class="col-lg-6">
-            <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-save"></i> Submit
+            <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Submit
         </button>
         </div>
     </div>
 
 @push('scripts')
 <script type="text/javascript">
-  var form_validation = function() {
-    var e = function() {
-            jQuery("#formValidate").validate({
-                ignore: [],
-                errorClass: "invalid-feedback animated fadeInDown",
-                errorElement: "div",
-                errorPlacement: function(e, a) {
-                    jQuery(a).parents(".form-group > div").append(e)
-                },
-                highlight: function(e) {
-                    jQuery(e).closest(".form-group").removeClass("is-invalid").addClass("is-invalid")
-                },
-                success: function(e) {
-                    jQuery(e).closest(".form-group").removeClass("is-invalid"), jQuery(e).remove()
-                },
-                rules: {
-                    "name": {
-                        required: !0,
-                        minlength: 3
-                    },
-                    "email": {
-                        required: !0,
-                        email: !0
-                    },
-                    "roles": {
-                        required: !0
-                    },
-                    "verifires": {
-                        required: !0
-                    },
-                    "approvers": {
-                        required: !0
-                    },
-                    "contact": {
-                        required: !0,
-                        minlength: 10,
-                        number: !0
-                    }
-                },
-                messages: {
-                    "name": {
-                        required: "Please enter a username",
-                        minlength: "Your username must consist of at least 3 characters"
-                    },
-                    "email": "Please enter a valid email address",
-                    "roles": {
-                        required: "Please select atleast one role"
-                    },
-                    "approvers": {
-                        required: "Please select atleast one approver"
-                    },
-                    "verifires": {
-                        required: "Please select atleast one verifire"
-                    },
-                    "contact": {
-                        required: "Please provide a contact number",
-                        minlength: "Your contact number must be at least 10 characters long",
-                        number: "Contact number must be numeric"
-                    }
-                }
-            })
-        }
-    return {
-        init: function() {
-            e(), a(), jQuery(".js-select2").on("change", function() {
-                jQuery(this).valid()
-            })
-        }
-    }
-}();
-jQuery(function() {
-    form_validation.init()
+  
+
+$('#profile_picture').change(function () {
+  var ext = $('#profile_picture').val().split('.').pop().toLowerCase();
+ if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+    $("#output").hide();
+    $("#output_display").hide();
+    alert('Only JPG, JPEG, PNG &amp; GIF files are allowed.' );
+    return false;
+    
+}
+
 });
+ var loadFile = function(event) {
+     
+       $("#output_display").show();
+       $("#output").show();
+       $("#noimage").hide();
+       
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+  };  
+ 
+     function validateForm(){
+      var usernane=   $("#user_name").val();
+     nospace = usernane.split(' '); //we split the string in an array of strings using     whitespace as separator
+     
+     if(nospace.length>1)
+     {
+         alert("Space is not allowed in user name");
+           return false; 
+     }
+     
+     var ext = $('#profile_picture').val().split('.').pop().toLowerCase();
+     if(ext!='')
+     {
+      if($.inArray(ext, ['gif','png','jpg','jpeg']) == -1) {
+       $("#output").hide();
+       alert('invalid extension!');
+       return false;
+
+       }
+     }
+ }  
+</script>
+
+
 </script>
 @endpush

@@ -80,7 +80,7 @@ use activityLog;
           
        //  exit();
            $status = 2; //we assume status is true (1) at the begining;
-          $result=CSEIRequest::where('id', $id)->update(['status' =>$status,'verifire_id'=>$verifire_id]); 
+           $result=CSEIRequest::where('id', $id)->update(['status' =>$status,'verifire_id'=>$verifire_id]); 
          
            
 	/*	foreach ($approvers as $a_value) 
@@ -90,8 +90,12 @@ use activityLog;
                    $m->from('info@opiant.online', 'Approval Mail');
                    $m->to($a_value->email, $a_value->name)->subject('Request!'); });
 		}
-                
+           
                 */
+        
+        //..print_r($requester);
+        
+          //  .. exit();  
           if($result==1)
           {
           $verified_approved='verify';
