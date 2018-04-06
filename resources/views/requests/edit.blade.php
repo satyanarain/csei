@@ -1,5 +1,6 @@
 @extends('layouts.nmaster')
 @section('breadcrumb')
+
 <!-- Bread crumb -->
 <div class="row page-titles">
 	<div class="col-md-5 align-self-center">
@@ -14,10 +15,10 @@
 	</div>
 	<!-- End Bread crumb -->
 	@endsection
-
-	@section('content')
+@section('content')
 	<!-- Container fluid  -->
 	<div class="container-fluid">
+     
 		<!-- Start Page Content -->
 		<div class="row">
 			<div class="col-12">

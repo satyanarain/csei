@@ -7,6 +7,8 @@ use App\Models\CSEIRequest;
 use Illuminate\Support\Facades\Session;
 use App\Repositories\Request\RequestRepositoryContract;
 use App\Traits\activityLog;
+use Mail;
+use App\Models\User;
 
 class RequestRepository implements RequestRepositoryContract
 {
@@ -43,9 +45,33 @@ class RequestRepository implements RequestRepositoryContract
 	{
                  $input = $request->all();
                  $input['user_id'] = Auth::id();
+                 
                  $input['due_date'] = $this->insertDate($request->due_date);
                  $input['status'] = 1;
                  $resquests_data=  CSEIRequest::create($input);
+                 $sql_verifiers= User::where('id',$input['user_id'])->first();
+                 $verifier = User::whereIn('id', explode(',', $sql_verifiers->verifiers))->get();
+                
+                if($resquests_data==1)
+         {
+        foreach ($verifier as $a_value) 
+		{
+                 $verifire_name= $a_value->name;
+                  $amount= $request->amount;
+                   
+                   Mail::send('emails.verifier',['verifire_name'=>$verifire_name,'amount'=>$amount], function ($m) use ($a_value) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($a_value->email, $a_value->name)->subject('Request for verification!');
+                   });
+		}
+           
+             }
+                 
+                 
+                 
+               
+                 
+                 
                  Session::flash('flash_message', "Request Created Successfully."); //Snippet in Master.blade.php
                  return $resquests_data;
 	}

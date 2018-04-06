@@ -81,9 +81,7 @@ use activityLog;
        //  exit();
            $status = 2; //we assume status is true (1) at the begining;
            $result=CSEIRequest::where('id', $id)->update(['status' =>$status,'verifire_id'=>$verifire_id]); 
-         
-           
-	/*	foreach ($approvers as $a_value) 
+             /*foreach ($approvers as $a_value) 
 		{
                    $name= $a_value->name;
                    Mail::send('emails.approvers',['verifire_name'=>$verifire_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date], function ($m) use ($a_value) {
@@ -100,8 +98,8 @@ use activityLog;
           {
           $verified_approved='verify';
                    Mail::send('emails.pending_verification',['verifire_name'=>$verifire_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verified_approved'=>$verified_approved], function ($m) use ($requester) {
-                   $m->from('info@opiant.online', 'Vrerification Mail');
-                   $m->to($requester->email, $requester->name)->subject('Your Request has been verified!'); });
+                   $m->from('info@opiant.online', 'Verification Mail');
+                   $m->to($requester->email, $requester->name)->subject('Your request has been verified!'); });
           }
 		   return redirect()->route('verifiers.requests'); 
         
@@ -114,12 +112,10 @@ use activityLog;
          $user_id_login= Auth::user();
          $apporver_name= $user_id_login->name;
          $approver_id= $user_id_login->id;
-        
          $user_id=$request->user_id;
          $request_data= CSEIRequest::whereId($id)->first();
-        $amount= $request_data->amount;
-        $due_date  =$request_data->due_date;
-        
+         $amount= $request_data->amount;
+         $due_date  =$request_data->due_date;
          $sql_appover= User::whereId($user_id)->first();
          /*********************app associates*************************/
 //         $associates = DB::table('role_user')
@@ -132,7 +128,7 @@ use activityLog;
 //        exit();
            /****************************************************************************************/
           $requester = DB::table('requests')->select('*','requests.id as id')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
-            $status = 3; 
+          $status = 3; 
            //update status
         $result=  CSEIRequest::where('id', $id)->update(['status' =>$status,'approver_id'=>$approver_id]); 
 //		foreach ($associates as $a_value) 
@@ -144,10 +140,10 @@ use activityLog;
 //		}
           if($result==1)
           {
-          $verified_approved='aprove';
+                   $verified_approved='approve';
                    Mail::send('emails.pending_verification',['apporver_name'=>$apporver_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verified_approved'=>$verified_approved], function ($m) use ($requester) {
                    $m->from('info@opiant.online', 'Approval Mail');
-                   $m->to($requester->email, $requester->name)->subject('Request!'); });
+                   $m->to($requester->email, $requester->name)->subject('Your request has been approved!!'); });
           }
              return redirect()->route('approvers.requests'); 
          }
@@ -178,7 +174,7 @@ use activityLog;
                       if($result==1)
           {
                    Mail::send('emails.reject',['rejector_name'=>$rejector_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($sql_requester_name) {
-                   $m->from('info@opiant.online', 'Request Rejection Mail');
+                   $m->from('info@opiant.online', 'CSEI');
                    $m->to($sql_requester_name->email, $sql_requester_name->name)->subject('Request Rejection Mail!'); });
           }
 		//}
@@ -191,8 +187,7 @@ use activityLog;
              /****************Veri Fy Reject section start here*******************************************************************************/
               //echo "========================";
               //exit();
-              
-          $id=  $request->id;
+         $id=  $request->id;
          $comments=  $request->comments;
          $user_id_login= Auth::user();
          $rejector_name= $user_id_login->name;
@@ -208,18 +203,19 @@ use activityLog;
          // $sql_requester_name->name;
          // $sql_requester_name->email;
       
-           $status = 6; //we assume status is true (1) at the begining;
-           $result = CSEIRequest::where('id', $id)->update(['status' =>$status,'rejectore_id'=>$rejectore_id,'comments'=>$comments]); 
-	  $name= $sql_requester_name->name;
+         $status = 6; //we assume status is true (1) at the begining;
+         $result = CSEIRequest::where('id', $id)->update(['status' =>$status,'rejectore_id'=>$rejectore_id,'comments'=>$comments]); 
+	 $name= $sql_requester_name->name;
                                 if($result==1)
           {
                    Mail::send('emails.reject',['rejector_name'=>$rejector_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($sql_requester_name) {
-                   $m->from('info@opiant.online', 'Request Rejection Mail');
+                   $m->from('info@opiant.online', 'CSEI');
                    $m->to($sql_requester_name->email, $sql_requester_name->name)->subject('Request Rejection Mail!'); });
 	}
                   return redirect()->route('approvers.requests'); 
         }
            else{
+          
          $this->request->create($request);
          return redirect()->route('requests.index');
         }
@@ -242,7 +238,7 @@ use activityLog;
 		{
                    $name= $a_value->name;
                    Mail::send('emails.approvers',['verifire_name'=>$verifire_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date], function ($m) use ($a_value) {
-                   $m->from('info@opiant.online', 'Approval Mail');
+                   $m->from('info@opiant.online', 'CSEI');
                    $m->to($a_value->email, $a_value->name)->subject('Request!'); });
 		}
        return redirect()->route('requests.index');
@@ -267,7 +263,7 @@ use activityLog;
 		{
                    $name= $a_value->name;
                    Mail::send('emails.approvers',['verifire_name'=>$verifire_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date], function ($m) use ($a_value) {
-                   $m->from('info@opiant.online', 'Approval Mail');
+                   $m->from('info@opiant.online', 'CSEI');
                    $m->to($a_value->email, $a_value->name)->subject('Request!'); });
 		}
           }
@@ -350,13 +346,10 @@ $login_user_id=Auth::id();
         
         return view('requests.verify', compact('requests'));
     }
-
-    
-    /**************************request to approve*******************************************************************************/
-    
-    public function requestsToApprove()
-    {
-     $login_user_id=Auth::id();
+  /**************************request to approve*******************************************************************************/
+ public function requestsToApprove()
+ {
+ $login_user_id=Auth::id();
  $query = DB::table('users') ->whereRaw('FIND_IN_SET(?,approvers)', [$login_user_id])->get();
  foreach($query as $query)
  {
@@ -369,11 +362,9 @@ $login_user_id=Auth::id();
               ->where('requests.status',2) 
               ->get();
           return view('requests.approve', compact('requests'));
-    }
+ }
 
-    
-    
-    public function requestsToReconcile()
+     public function requestsToReconcile()
     {
         $requests = CSEIRequest::where('status', '2')->get();
         return view('requests.accountant', compact('requests'));
@@ -387,12 +378,7 @@ $login_user_id=Auth::id();
               ->leftjoin('c_status','c_status.id','requests.status')
               ->where('requests.status',3) 
               ->get();
-//    echo "<pre>";
-//    print_r($requests)
-//    
-//    exit();
-//    
-//    
+ 
    return view('requests.accountant', compact('requests'));
     }
 
@@ -402,9 +388,6 @@ $login_user_id=Auth::id();
 
     }
 
-    
-    
-    
     public function approveRequest(Request $request, $id)
     {
 
@@ -433,7 +416,7 @@ $login_user_id=Auth::id();
           
           ?>
            <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Amount Issued</label>
+                                   <label class="col-lg-4 col-form-label" for="val-username">Amount Issued</label>
                                             <div class="col-lg-6">
                                                 <?php
                                                 if($amount_issued!='')
