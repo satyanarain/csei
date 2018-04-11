@@ -58,5 +58,31 @@ font-weight: bold;
  font-weight:bold;
     
 }
+.table-row{
+    
+    height:40px;
+    margin-bottom: 10px;
+    padding-bottom:20px;
+}
+.table-row-nopadding{
+    
+   
+    margin-bottom: 0px;
+    padding-bottom:0px;
+}
 
-
+.table-row-heading
+{
+ 
+ background-color:#204d74;
+ color:#fff; font-weight: bold;
+ padding:0px 0px 0px 10px; 
+}
+.table-row-heading.product-name
+{
+ 
+ background-color:#204d74;
+ color:#fff; font-weight: bold;
+ padding:0px 0px 0px 10px; 
+ width:20%;
+}

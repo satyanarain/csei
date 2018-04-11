@@ -308,6 +308,12 @@ $segments_var = Request::segments();
                                
                             </ul>
                         </li>
+                        <li class="{{$active == 'purchases' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Purchase Order</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                 <li class="{{($active2 == 'create' && $active == 'purchases') ? 'active' : ''}}"><a href="{{route('purchases.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Purchase Order</a></li>
+                                 
+                            </ul>
+                        </li>
                      
                         @if(Entrust::hasRole('administrator'))
                         <li class="nav-label">SETTINGS</li>
@@ -489,6 +495,212 @@ $(document).ready(function()
            
            
 </script>
+<script>
+    
+ $(document).ready(function() {
+    var max_fields      = 10000; //maximum input boxes allowed
+    var wrapper         = $("#input_fields_wrap_classes"); //Fields wrapper
+    var add_button      = $("#add_field_button_classes"); //Add button ID
+    var add_button      = $("#add_field_button_classes");
+    
+   //var maxvalue= $("#maxvalue").val();
+   //alert(maxvalue)
+//  if(maxvalue != 'undefined')
+//  {
+    var x = 1;  
+//  }else
+//  {
+//    var x = maxvalue;   
+//  }
+
+    
+    //initlal text box count
+    $("#add_field_button_classes").click(function(e){ //on add input button click
+     
+        e.preventDefault();
+         if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+$("#input_fields_wrap_classes").append('<div id="div_remove_field'+ x +'" style="padding-left:0px;  margin-bottom:0px;">\n\
+<table width="100%" align="left"  valign="top"  style="text-align:left; margin-top:0px; " border="0">\n\
+<tr class="table-row-nopadding">\n\
+<td  colspan="" align="left" valign="top" style="text-align:left; border-top:none;"  width="10%">\n\
+<input type="" class="form-control" name="product_code[]" id="product_code" style="height:32px; padding:0px; margin:0px;"></td>\n\
+<td  colspan="" align="left" valign="top" style="text-align:left; border-top:none;"  width="30%">\n\
+<input type="" name="product_name" id="product_name[]" class="form-control" style="height:32px;" ></td>\n\
+<td  colspan="" align="left" valign="top" style="text-align:left; border-top:none;"  width="10%">\n\
+<input type=""  name="quantity[]" id="quantity" class="form-control" style="height:32px;" ></td>\n\
+<td  colspan="" align="left" valign="top"  style="text-align:left; border-top:none;"  width="20%">\n\
+<input type=""  name="unit_price[]" id="unit_price" class="form-control" style="height:32px;"></td>\n\
+<td  colspan="" align="left" valign="top"  style="text-align:left; border-top:none;"  width="15%">\n\
+<input type=""  name="total[]" id="total" class="form-control" style="height:32px; "></td>\n\
+<td colspan="" align="left" valign="top"  style="text-align:left;border:1px solid #ccc; border-top:none;"  width="15%">\n\
+<button class="btn btn-danger remove" type="button" id="remove_field'+ x+'" onclick="removeFunction(this.id)" style="height:31px;">\n\
+<i class="glyphicon glyphicon-remove"></i> Remove</button></td></tr>\n\
+</table></div>'); //add input box
+   }
+ });
+   
+    
+});
+function removeFunction(id)
+{
+
+       $("#"+id).parent('div').remove();
+      $("#div_"+id).remove();
+    
+}
+
+
+// $("#unit_price").keyup(function() {
+//    $row = $(this).closest("tr");    // Find the row
+//    $qty = parseFloat($row.find("#quantity").val()); // Find the text
+//    if($qty!='')
+//    {
+//    $net = parseFloat($row.find("#unit_price").val()); // Find the text
+//    var $total = $qty * $net;
+//    $row.find("#total").val($total);
+//    }
+//});
+$(document).on("keyup", "#quantity", function() {
+ $row = $(this).closest("tr");    // Find the row
+    $qty = $row.find("#quantity").val(); // Find the text
+  //  $product_name = parseFloat($row.find("#product_name").val()); // Find the text
+    //$product_code = parseFloat($row.find("#product_code").val()); // Find the text
+     $net = parseFloat($row.find("#unit_price").val());
+
+    if($net!='' && $qty!='')
+    {
+      
+    var $total = $qty * $net;
+   // alert($total)
+    $row.find("#total").val($total);
+    }
+   
+});
+$(document).on("keyup", "#unit_price", function() {
+ $row = $(this).closest("tr");    // Find the row
+    $qty = $row.find("#quantity").val(); // Find the text
+  //  $product_name = parseFloat($row.find("#product_name").val()); // Find the text
+    //$product_code = parseFloat($row.find("#product_code").val()); // Find the text
+     $net = parseFloat($row.find("#unit_price").val());
+   alert($qty);
+    // alert($net);
+    if($qty=='')
+    {
+      alert("Please Enter Quantity");
+      return false;
+        }else
+        {
+    if($net!='' && $qty!='')
+    {
+    var $total = $qty * $net;
+    //alert($total)
+    $row.find("#total").val($total);
+    }
+    }
+});
+$(document).on("keyup", ".form-control", function() {
+
+     var add = 0;
+                $(".form-control1").each(function() {
+                    add += Number($(this).val());
+                });
+                $("#totalsum").val(add);
+	
+   
+});
+
+ function isNumberKey(evt)
+       {
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode != 46 && charCode > 31 
+            && (charCode < 48 || charCode > 57))
+             return false;
+
+          return true;
+       }
+ function isIntegerKey(evt)
+       {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+       
+       
+ } 
+/***********************************************************************************/
+	$(document).ready(function(){
+
+		//iterate through each textboxes and add keyup
+		//handler to trigger sum event
+		$(".txt").each(function() {
+
+			$(this).keyup(function(){
+				calculateSum();
+			});
+		});
+
+	});
+
+	function calculateSum() {
+
+		var sum = 0;
+		//iterate through each textboxes and add the values
+		$(".txt").each(function() {
+
+			//add only if the value is number
+			if(!isNaN(this.value) && this.value.length!=0) {
+				sum += parseFloat(this.value);
+			}
+
+		});
+		//.toFixed() method will roundoff the final sum to 2 decimal places
+		$("#sum").html(sum.toFixed(2));
+	}
+
+
+$('#add_bank_info').click(function() {
+    $(".rm_first").show();
+    
+  var ele = $('.bank_table tbody tr:last');
+  var ele_clone = ele.clone();
+
+  ele_clone.find('input, select').prop("disabled", false).val('');
+  ele_clone.find('td div.dummy').removeClass('has-error has-success');
+  ele_clone.find('td div.input-icon i').removeClass('fa-check fa-warning');
+  ele_clone.find('td:last').show();
+  ele.after(ele_clone);
+});
+
+$(document).on("click", ".remove_bank_row", function() {
+  var $table = $(this).closest('table');
+  $(this).closest('tr').remove();
+  $table.trigger("recalc");      
+});
+
+$(document).on("keyup", ".bank_table input", function() {
+  $(this).trigger("recalc");
+});
+
+$(document).on("recalc", ".bank_table tr", function() {
+  var total = +$(this).find(".quantity2").val() * +$(this).find(".rate").val();
+  $(this).find(".tamnt").val(total.toFixed(2));
+});
+
+$(document).on("recalc", ".bank_table", function () {
+  var grandTotal = 0;
+  $(this).find(".tamnt").each(function () {
+    grandTotal += +$(this).val();
+  });
+  $("#grandTotal").val(grandTotal.toFixed(2));
+});
+
+$(".bank_table").trigger("recalc");
+</script>
+
+
     @stack('scripts')
 </body>
 

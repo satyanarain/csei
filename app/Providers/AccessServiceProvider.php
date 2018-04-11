@@ -33,6 +33,10 @@ class AccessServiceProvider extends ServiceProvider
 		);
 
 		$this->app->bind(
+			'App\Repositories\Purchase\PurchaseRepositoryContract',
+			'App\Repositories\Purchase\PurchaseRepository'
+		);
+		$this->app->bind(
 			'App\Repositories\RSRTC\RSRTCRepositoryContract',
 			'App\Repositories\RSRTC\RSRTCRepository'
 		);

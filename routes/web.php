@@ -63,6 +63,10 @@ Route::group(['middleware'=>'auth'], function(){
         Route::get('/requests/{id}/save_voucher', 'RequestsController@saveVoucher');
         Route::resource('requests', 'RequestsController');
         
+        
+        
+        Route::resource('purchases', 'PurchasesController');
+        
          /*
 	|--------------------------------------------------------------------
 	|Requests Verifier
