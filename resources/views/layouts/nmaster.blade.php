@@ -310,7 +310,10 @@ $segments_var = Request::segments();
                         </li>
                         <li class="{{$active == 'purchases' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Purchase Order</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                 <li class="{{($active2 == 'create' && $active == 'purchases') ? 'active' : ''}}"><a href="{{route('purchases.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Purchase Order</a></li>
+                                 <li class="{{($active2 == 'create' && $active == 'purchases') ? 'active' : ''}}"><a href="{{route('purchases.create')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+ New Purchase Order</a></li>
+                                 <li class="{{($active2 == 'create' && $active == 'purchases') ? 'active' : ''}}"><a href="{{route('purchases.index')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+ All Purchase Order</a></li>
                                  
                             </ul>
                         </li>

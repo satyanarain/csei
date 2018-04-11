@@ -227,7 +227,7 @@
 
                                                 <tr style="text-align:left;height:50px; ">
                                                     <td width="20%" align="left" vlign="top" style="text-align:left;" >Name</td><td>
-                                                        <input type="" name class="form-control" style="height:32px;">
+                                                  
                                                           {!! Form::text('requisitioner', null, ['class' => 'form-control','style'=>"height:32px;",'required'=>'required']) !!}
                                                     </td>
                                                 </tr>
