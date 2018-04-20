@@ -49,7 +49,7 @@ font-weight: bold;
 .row1{
    border-top:none;
    border:1px #ddd solid;
-    
+    padding: 10px;
 }
 .plusminusbutton
 {

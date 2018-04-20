@@ -53,13 +53,13 @@
                     Requirement
                 </td>
                 <td   align="left" class="table-row-heading" style="text-align:left;"  width="20%">   
-                    Time (Excluding holidays)
+                    Time (Excluding Holidays)
                 </td>
 
             </tr>
             <tr>
                 <td  colspan="" align="left"  style="text-align:left;" width="10%">   
-                    Cash/Bank
+                    Cash / Bank
                 </td>
                 <td   align="left"  style="text-align:left;"  width="20%">   
                     3 days before
@@ -67,7 +67,7 @@
             </tr>
             <tr>
                 <td  colspan="" align="left"  style="text-align:left;" width="10%">   
-                    Equipment/Fixed assets
+                    Equipment / Fixed assets
                 </td>
                 <td   align="left"  style="text-align:left;"  width="20%">   
                     15 days before
@@ -75,11 +75,11 @@
             </tr>
             <tr>
                 <td  colspan="" align="left"  style="text-align:left;" width="10%">   
-                    Equipment like pen drive ,charger, letterhead, printing books pamphlets 
+                    Equipment like pen drive, charger, letterhead, printing books pamphlets 
                 </td>
                 <td   align="left"  style="text-align:left;"  width="20%">   
                     10 days  
-                    for pamphlets/book printing depend on quantity  
+                    for pamphlets / book printing depend on quantity  
                 </td>
             </tr>
             <tr>

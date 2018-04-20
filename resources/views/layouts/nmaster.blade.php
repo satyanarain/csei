@@ -224,6 +224,16 @@ $segments_var = Request::segments();
                             </ul>
                         </li>
                         @endif
+                        
+                        @if(Entrust::hasRole('administrator'))
+                        <li class="{{$active == 'users' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Vendors</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li class="{{($active2 == 'create' && $active == 'vendors') ? 'active' : ''}}"><a href="{{route('vendors.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Vendor</a></li>
+                                <li class="{{($active2 == '' && $active == 'vendors') ? 'active' : ''}}"><a href="{{route('vendors.index')}}"><i class="fa fa-users"></i> All Vendors</a></li>
+
+                            </ul>
+                        </li>
+                        @endif
                         <li class="{{$active == 'requests' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Requests</span></a>
                             <ul aria-expanded="false" class="collapse">
                                  <li class="{{($active2 == 'create' && $active == 'requests') ? 'active' : ''}}"><a href="{{route('requests.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Request</a></li>
@@ -380,11 +390,9 @@ $segments_var = Request::segments();
 
     <!-- Form validation -->
     <script src="{{asset('js/lib/form-validation/jquery.validate.min.js')}}"></script>
-
-    <!-- scripit init-->
-
-  
-    <script src="{{asset('js/lib/dropzone/dropzone.js')}}"></script>
+    <script src="{{asset('js/custom.js')}}"></script>
+  <!-- scripit init-->
+<script src="{{asset('js/lib/dropzone/dropzone.js')}}"></script>
 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>-->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
