@@ -1,0 +1,1 @@
+</tr></table><a class="btn btn-danger remove" href="" type="button" class="remove_field"  style="height:31px;"><i class="glyphicon glyphicon-remove"></i> Remove</a> </div>

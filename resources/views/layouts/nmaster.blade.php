@@ -29,8 +29,8 @@ $segments_var = Request::segments();
     <link href="{{asset('css/helper.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <link href="{{asset('css/custom.css')}}" rel="stylesheet">
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
-</head>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+  </head>
  <body class="hold-transition skin-blue sidebar-mini">
              <div class="loder_id">
                  <div class="loader_main">
@@ -73,78 +73,13 @@ $segments_var = Request::segments();
                         <!-- This is  -->
                         <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted  " href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
                         <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        <!-- Messages -->
-<!--                        <li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-th-large"></i></a>
-                            <div class="dropdown-menu animated zoomIn">
-                                <ul class="mega-dropdown-menu row">
-
-
-                                    <li class="col-lg-3  m-b-30">
-                                        <h4 class="m-b-20">CONTACT US</h4>
-                                         Contact 
-                                        <form>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" id="exampleInputname1" placeholder="Enter Name"> </div>
-                                            <div class="form-group">
-                                                <input type="email" class="form-control" placeholder="Enter email"> </div>
-                                            <div class="form-group">
-                                                <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Message"></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-info">Submit</button>
-                                        </form>
-                                    </li>
-                                    <li class="col-lg-3 col-xlg-3 m-b-30">
-                                        <h4 class="m-b-20">List style</h4>
-                                         List style 
-                                        <ul class="list-style-none">
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="col-lg-3 col-xlg-3 m-b-30">
-                                        <h4 class="m-b-20">List style</h4>
-                                         List style 
-                                        <ul class="list-style-none">
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="col-lg-3 col-xlg-3 m-b-30">
-                                        <h4 class="m-b-20">List style</h4>
-                                         List style 
-                                        <ul class="list-style-none">
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> This Is Another Link</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>-->
-                        <!-- End Messages -->
+                      
                     </ul>
                     <!-- User profile and search -->
                     <ul class="navbar-nav my-lg-0">
 
-                        <!-- Search -->
-<!--                        <li class="nav-item hidden-sm-down search-box"> <a class="nav-link hidden-sm-down text-muted  " href="javascript:void(0)"><i class="ti-search"></i></a>
-                            <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search here"> <a class="srh-btn"><i class="ti-close"></i></a> </form>
-                        </li>-->
-                        <!-- Comment -->
                         <li class="nav-item dropdown">
-<!--                            <a class="nav-link dropdown-toggle text-muted text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-bell"></i>
-								<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-							</a>-->
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
+                         <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn">
                                 <ul>
                                     <li>
                                         <div class="drop-title">Notifications</div>
@@ -190,10 +125,7 @@ $segments_var = Request::segments();
                         <!-- End Comment -->
                         <!-- Messages -->
                         <li class="nav-item dropdown">
-<!--                            <a class="nav-link dropdown-toggle text-muted  " href="#" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-envelope"></i>
-								<div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-							</a>-->
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn" aria-labelledby="2">
+                         <div class="dropdown-menu dropdown-menu-right mailbox animated zoomIn" aria-labelledby="2">
                                 <ul>
                                     <li>
                                         <div class="drop-title">You have 4 new messages</div>
@@ -434,7 +366,7 @@ $segments_var = Request::segments();
     <script src="{{asset('js/lib/owl-carousel/owl.carousel.min.js')}}"></script>
     <script src="{{asset('js/lib/owl-carousel/owl.carousel-init.js')}}"></script>
     <script src="{{asset('js/scripts.js')}}"></script>
-    
+   
     <!-- DataTables -->
     <script src="{{asset('js/lib/datatables/datatables.min.js')}}"></script>
     <script src="{{asset('js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js')}}"></script>
@@ -454,7 +386,8 @@ $segments_var = Request::segments();
   
     <script src="{{asset('js/lib/dropzone/dropzone.js')}}"></script>
 <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>-->
-
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
 <script type="text/javascript">
   $('body').on('focus',".multiple_date", function(){
          $(this).datepicker({
@@ -545,13 +478,54 @@ $("#input_fields_wrap_classes").append('<div id="div_remove_field'+ x +'" style=
    
     
 });
-function removeFunction(id)
-{
 
-       $("#"+id).parent('div').remove();
-      $("#div_"+id).remove();
+/************************************************************************************************/
     
-}
+ $(document).ready(function() {
+    var max_fields      = 10000; //maximum input boxes allowed
+    var wrapper         = $("#input_fields_wrap_request"); //Fields wrapper
+    var add_button      = $("#add_field_button_request"); //Add button ID
+    var add_button      = $("#add_field_button_request");
+    
+   //var maxvalue= $("#maxvalue").val();
+   //alert(maxvalue)
+//  if(maxvalue != 'undefined')
+//  {
+    var x = 1;  
+//  }else
+//  {
+//    var x = maxvalue;   
+//  }
+
+    
+    //initlal text box count
+$("#add_field_button_request").click(function(e){ //on add input button click
+e.preventDefault();
+if(x < max_fields){ //max input box allowed
+x++; //text box increment
+$("#input_fields_wrap_request").append('<div id="div_remove_field'+ x +'" style="padding-left:0px;  margin-bottom:0px;">\n\
+<table width="100%" align="left"  valign="top"  style="text-align:left; margin-top:0px; " border="0" >\n\
+<tr class="table-row-nopadding"><td  colspan="" align="left" valign="top" style="text-align:left;" width="10%">   <input type="" name="s_no[]" id="s_no" class="form-control" style="height:32px; padding:0px; margin:0px;" required></td><td  colspan=""   align="left" valign="top" style="text-align:left;" width="35%">   <input type="" name="brief_details[]" id="product_name" class="form-control" style="height:32px;" required></td>\n\
+<td  colspan="" align="left" valign="top" style="text-align:left;" width="15%"><input  name="expected_expense[]" id="expected_expense" type="" class="form-control expected_expense" style="height:32px;"></td><td  colspan="" align="left" valign="top"  style="text-align:left;" width="25%">   <input type=""  name="remark[]" id="remark" class="form-control" style="height:32px;"   ></td><td  colspan="" align="left" valign="top"  style="text-align:left;"  width="15%"><a href="#" class="btn btn-danger remove remove_field"><i class="glyphicon glyphicon-remove"></i>Remove</a></td>\n\
+</tr></table></div>'); //add input box
+   }
+ });
+ 
+$(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); $(this).closest('div').remove(); x--;
+    })
+    
+});
+
+
+
+//function removeFunction(id)
+//{
+//var x = 1;  
+//       $("#"+id).parent('div').remove(); x--;
+//      $("#div_"+id).remove(); x--;
+//    
+//}
 
 
 // $("#unit_price").keyup(function() {
@@ -701,6 +675,14 @@ $(document).on("recalc", ".bank_table", function () {
 });
 
 $(".bank_table").trigger("recalc");
+
+/******************************************************************/
+    $(document).ready(function() {
+
+        $('#multiple-checkboxes').multiselect();
+
+    });
+
 </script>
 
 

@@ -2692,8 +2692,9 @@ table.dataTable thead .sorting::after {
   cursor: pointer;
 }
 .btn-group label {
-  color: #ffffff !important;
+  color: #000000 !important;
   margin-bottom: 0;
+
 }
 .btn-group label.btn-secondary {
   color: #333333 !important;
@@ -4870,6 +4871,31 @@ footer p {
   box-shadow: none;
   border-color: #878787;
 }
+.form-control-new {
+  height: 42px;
+  border-radius: 0;
+  box-shadow: none;
+  border-color: #e7e7e7;
+  font-family: 'Poppins', sans-serif;
+}
+.form-control-new:hover {
+  box-shadow: none;
+  border-color: #e7e7e7;
+}
+.form-control-new.active,
+.form-control:focus {
+  box-shadow: none;
+  border-color: #878787;
+}
+
+
+
+
+
+
+
+
+
 .input-default {
   border-radius: 4px;
 }

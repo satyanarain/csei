@@ -28,6 +28,8 @@
               <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                <thead>
                 <tr>
+                     <th style="display:none">id</th>
+                 <th>Request No.</th>
                  <th>Category</th>
                  <th>Amount</th>
                  <th>Due Date</th>
@@ -40,8 +42,10 @@
              <tbody>
               @foreach($requests as $key=>$request)
               <tr>
+                  <td style="display:none">{{$request->id}}</td>
+               <td>{{$request->request_no}}</td>
                <td>{{$request->name}}</td>
-               <td>{{$request->amount}}</td>
+                <td>{{$request->amount}}</td>
               <td>
                 {{dateView($request->due_date)}}
               </td>
@@ -55,9 +59,9 @@
             <div class="{{$request->b_class}}">  {{$request->c_status}}</div>
               </td>
               <td>
-                <a href="{{route('requests.show',[$request->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i> View</a>
+                <a href="{{route('requests.show',[$request->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
                 @if($request->status == 1)
-                <a href="{{route('requests.edit', $request->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
+                <a href="{{route('requests.edit', $request->id)}}" class="btn btn-success m-b-10 m-l-5 pull-left"><i class="fa fa-pencil"></i> Edit</a>
                 @endif
               </td>
             </tr>
@@ -70,4 +74,23 @@
 </div>
 </div>
 </div>
+ 
 @endsection
+@push('scripts')
+<script>
+    
+    //var table = $('#example23').DataTable();
+   // var table = $('#example23').DataTable({order:[]});
+//   $('#example23').DataTable({
+//       dom: 'Bfrtip',
+//       order:[],
+//      buttons: [
+//            'copy', 'csv', 'excel', 'pdf', 'print'
+//        ]
+//   });
+   
+   //var table = $('#example').DataTable({order:[]});
+   
+   
+   </script>
+@endpush

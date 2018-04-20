@@ -15,6 +15,18 @@ function displayIdBaseName($table = '', $id = '', $fieldname = '') {
         echo "N/A";
     }
 }
+function displayNameFoMultipleID($table = '', $idIn = '', $fieldname = '') {
+$array=explode(',', $fieldname);
+$sql = DB::table($table)->whereIn('id', $array)->get();
+
+ foreach($sql as $value)
+ {
+  $all[]= $value->name;   
+     
+ }
+echo implode(', ', $all);
+ 
+}
 
 function displayView($fieldname) {
     if ($fieldname != '') {

@@ -31,6 +31,7 @@
               <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                <thead>
                 <tr>
+                 <th>Request No</th>
                  <th>Category</th>
                  <th>Amount</th>
                  <th>Created Date</th>
@@ -43,6 +44,7 @@
              <tbody>
               @foreach($requests as $key=>$request)
               <tr id="{{$request->id}}">
+               <td>{{$request->request_no}}</td>
                <td>{{$request->name}}</td>
                <td>{{$request->amount}}</td>
                <td>
@@ -70,8 +72,7 @@
 </div>
 </div>
 </div>
-  
-<div class="modal fade" id="common_details" role="dialog">
+ <div class="modal fade" id="common_details" role="dialog">
   <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -108,10 +109,6 @@ function showRejection(request_id,user_id)
 
 $("#common_details").modal('show');
  } 
-    
-    
-    
-    
 function verifyRequest(id,user_id)
           {
             var r = confirm("Are you sure to verify?");
@@ -140,9 +137,9 @@ if (r == true) {
 } 
 } 
 function requestReject(id,user_id)
-          {
-            var r = confirm("Are you sure to verify?");
-if (r == true) {
+ {
+ var r = confirm("Are you sure to reject?");
+    if (r == true) {
     if(id!='')
     {
          $(".loder_id").show(); 
@@ -168,13 +165,5 @@ if (r == true) {
 } 
 
 
-
-
-
-
-
 </script>
-  
-  
-  
 @endsection

@@ -23,14 +23,14 @@
 				<div class="card">
 					<div class="card-body">
 					<h4 class="card-title">Roles</h4>
-						<h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+<!--						<h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>-->
 						<div class="table-responsive m-t-40">
 							<table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 								<thead>
 									<tr>
 										<th>Name</th>
 										<th>Description</th>
-										<th>Action</th>
+<!--										<th>Action</th>-->
 									</tr>
 								</thead>
 								<tbody>
@@ -38,14 +38,11 @@
 									<tr>
 										<td>{{$role->display_name}}</td>
 										<td>{{$role->description}}</td>
-										<td>
-											@if($role->id == 1 || $role->id == 2)
-											@else 
-											{!!Form::open(['method'=>'DELETE', 'route'=>['roles.destroy', $role->id]])!!}
-											<button type="submit" class="btn btn-danger">Delete</button>
-											{!!Form::close()!!}
-											@endif
-										</td>
+<!--										<td>
+											
+										<a href="{{route('roles.edit', $user->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
+											
+										</td>-->
 									</tr>
 									@endforeach
 								</tbody>

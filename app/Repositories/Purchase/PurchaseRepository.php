@@ -30,63 +30,7 @@ class PurchaseRepository implements PurchaseRepositoryContract {
     }
     
 public function create($requestData) {
-    echo "<pre>";
- print_r($_POST);
- /*Array
-(
-    [_token] => HKXz2eMflj91ctGkov4IYvTOyJ52OxTt7C0nAS2r
-    [po_number] => 1
-    [po_date] => 
-    [v_name] => Vendor Name
-    [v_address] => Vendor Address
-    [v_phone] => Vendor Phone
-    [v_mobile] => Vendor Mobile
-    [s_name] => Ship Name
-    [s_address] => Ship Address
-    [s_phone] => Ship Phone
-    [s_mobile] => Ship Mobile
-    [product_code] => Array
-        (
-            [0] => #1
-            [1] => #2
-            [2] => #3
-        )
 
-    [product_name] => Array
-        (
-            [0] => product1
-            [1] => product2
-            [2] => product3
-        )
-
-    [purchase_quantity] => Array
-        (
-            [0] => 1
-            [1] => 2
-            [2] => 1
-        )
-
-    [purchase_unit_rate] => Array
-        (
-            [0] => 1000
-            [1] => 10000
-            [2] => 5000
-        )
-
-    [purchase_unit_amount] => Array
-        (
-            [0] => 1000.00  
-            [1] => 20000.00
-            [2] => 5000.00
-        )
-
-    [action] => 
-)SELECT `id`, `user_id`, `perchase_id`, `product_code`, `product_name`, `unit_rate`, `total_amount`, `total`, `s_name`, `s_address`, `s_mobile`, 
-  * `s_phone`, `requisitioner`, `created_at`, `updated_at` FROM `purchase_details` WHERE 1
-  * */
-  
-    
-  //exit();  
 $input=$requestData->all();
 $userid = Auth::id();
 $userid = Auth::id();

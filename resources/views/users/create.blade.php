@@ -39,11 +39,7 @@
         </div>
     </div>
     @endsection
-
-    
-    
-    
-    @push('scripts')
+ @push('scripts')
 <script>
     
     var form_validation = function() {

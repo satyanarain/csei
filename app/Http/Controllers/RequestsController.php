@@ -28,11 +28,13 @@ use activityLog;
      */
     public function index()
     {
+
      $id= Auth::id();
      $requests = DB::table('requests')->select('*','requests.id as id','c_status.name as c_status','categories.name as name','requests.created_at as created_at','requests.updated_at as updated_at')
               ->leftjoin('users','users.id','requests.user_id')
               ->leftjoin('categories','categories.id','requests.category_id')
               ->leftjoin('c_status','c_status.id','requests.status')
+              ->orderBy('requests.id','desc')
                ->where('requests.user_id',$id)
               ->get();
      return view('requests.index', compact('requests'));
@@ -62,43 +64,38 @@ use activityLog;
         {
           $id=  $request->id;
           $comments=  $request->comments;
-         $user_id_login= Auth::user();
-         $verifire_name= $user_id_login->name;
-         $verifire_id= $user_id_login->id;
-        
-         $user_id=$request->user_id;
-         $request_data= CSEIRequest::whereId($id)->first();
-        $amount= $request_data->amount;
-        $due_date  =$request_data->due_date;
-        
-         $sql_appover= User::whereId($user_id)->first();
+          $name_of_project=  $request->name_of_project;
+          $project_expense_head=  $request->project_expense_head;
+          $user_id_login= Auth::user();
+          $verifire_name= $user_id_login->name;
+          $verifire_id= $user_id_login->id;
+          $user_id=$request->user_id;
+          $request_data= CSEIRequest::whereId($id)->first();
+          $amount= $request_data->amount;
+          $due_date  =$request_data->due_date;
+          $sql_appover= User::whereId($user_id)->first();
          /*********************app approver email*************************/
-         //$approvers = User::whereIn('id', explode(',', $sql_appover->approvers))->get();
+          $approvers = User::whereIn('id', explode(',', $sql_appover->approvers))->get();
           $requester = DB::table('requests')->select('*','requests.id as id')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
-          
-      // print_r($requester);
-          
-       //  exit();
-           $status = 2; //we assume status is true (1) at the begining;
-           $result=CSEIRequest::where('id', $id)->update(['status' =>$status,'verifire_id'=>$verifire_id]); 
-             /*foreach ($approvers as $a_value) 
+          $status = 2; //we assume status is true (1) at the begining;
+          $result=CSEIRequest::where('id', $id)->update(['name_of_project'=>$name_of_project,'project_expense_head'=>$project_expense_head,'status' =>$status,'verifire_id'=>$verifire_id]); 
+           /************************************mail to approver******************************************/
+            if($result==1)
+          {
+             foreach ($approvers as $a_value) 
 		{
                    $name= $a_value->name;
-                   Mail::send('emails.approvers',['verifire_name'=>$verifire_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date], function ($m) use ($a_value) {
-                   $m->from('info@opiant.online', 'Approval Mail');
-                   $m->to($a_value->email, $a_value->name)->subject('Request!'); });
+                   Mail::send('emails.verifier',['verifire_name'=>$verifire_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date], function ($m) use ($a_value) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($a_value->email, $a_value->name)->subject('Request for Approval!'); });
 		}
-           
-                */
-        
-        //..print_r($requester);
-        
-          //  .. exit();  
+          }
+           /************************************mail to requester******************************************/
           if($result==1)
           {
           $verified_approved='verify';
-                   Mail::send('emails.pending_verification',['verifire_name'=>$verifire_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verified_approved'=>$verified_approved], function ($m) use ($requester) {
-                   $m->from('info@opiant.online', 'Verification Mail');
+                   Mail::send('emails.mail_to_requester_for_va',['verifire_name'=>$verifire_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verified_approved'=>$verified_approved], function ($m) use ($requester) {
+                   $m->from('info@opiant.online', 'CSEI');
                    $m->to($requester->email, $requester->name)->subject('Your request has been verified!'); });
           }
 		   return redirect()->route('verifiers.requests'); 
@@ -118,32 +115,33 @@ use activityLog;
          $due_date  =$request_data->due_date;
          $sql_appover= User::whereId($user_id)->first();
          /*********************app associates*************************/
-//         $associates = DB::table('role_user')
-//                 ->leftjoin('users','users.id','role_user.user_id')
-//                ->where('role_user.role_id',5) 
-//                 ->get();
-//        echo "<pre>";
-//        print_r($associates);
-//        
-//        exit();
-           /****************************************************************************************/
+         $associates = DB::table('role_user')
+                 ->leftjoin('users','users.id','role_user.user_id')
+                ->where('role_user.role_id',5) 
+                 ->get();
+   /****************************************************************************************/
           $requester = DB::table('requests')->select('*','requests.id as id')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
           $status = 3; 
            //update status
         $result=  CSEIRequest::where('id', $id)->update(['status' =>$status,'approver_id'=>$approver_id]); 
-//		foreach ($associates as $a_value) 
-//		{
-//                   $name= $a_value->name;
-//                   Mail::send('emails.associates',['apporver_name'=>$apporver_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date], function ($m) use ($a_value) {
-//                   $m->from('info@opiant.online', 'Approval Mail');
-//                   $m->to($a_value->email, $a_value->name)->subject('Request!'); });
-//		}
+        /******************************************email for associates*********************************/
           if($result==1)
+ {
+		foreach ($associates as $a_value) {
+                    $name = $a_value->name;
+                    Mail::send('emails.associates', ['apporver_name' => $apporver_name, 'name' => $name, 'amount' => $amount, 'due_date' => $due_date], function ($m) use ($a_value) {
+                        $m->from('info@opiant.online', 'CSEI');
+                        $m->to($a_value->email, $a_value->name)->subject('Request for quotation!');
+                    });
+                }
+            }
+         /******************************************email for requester*********************************/   
+            if($result==1)
           {
                    $verified_approved='approve';
-                   Mail::send('emails.pending_verification',['apporver_name'=>$apporver_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verified_approved'=>$verified_approved], function ($m) use ($requester) {
-                   $m->from('info@opiant.online', 'Approval Mail');
-                   $m->to($requester->email, $requester->name)->subject('Your request has been approved!!'); });
+                   Mail::send('emails.mail_to_requester_for_va',['apporver_name'=>$apporver_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verified_approved'=>$verified_approved], function ($m) use ($requester) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($requester->email, $requester->name)->subject('Your request has been approved!'); });
           }
              return redirect()->route('approvers.requests'); 
          }
@@ -160,13 +158,8 @@ use activityLog;
         $amount= $request_data->amount;
         $due_date  =$request_data->due_date;
         
-         $sql_requester_name= User::whereId($requester_user_id)->first();
-         //$approvers = User::whereIn('id', explode(',', $sql_appover->approvers))->get();
-     // $sql_requester_name->name;
-     // $sql_requester_name->email;
-         
-      //exit();
-           $status = 7; //we assume status is true (1) at the begining;
+          $sql_requester_name= User::whereId($requester_user_id)->first();
+          $status = 7; //we assume status is true (1) at the begining;
           $result= CSEIRequest::where('id', $id)->update(['status' =>$status,'rejectore_id'=>$rejectore_id,'comments'=>$comments]); 
 		//foreach ($approvers as $a_value) 
 		//{
@@ -185,8 +178,6 @@ use activityLog;
          }
           else if($request->approverejected=='Rejected'){
              /****************Veri Fy Reject section start here*******************************************************************************/
-              //echo "========================";
-              //exit();
          $id=  $request->id;
          $comments=  $request->comments;
          $user_id_login= Auth::user();
@@ -281,10 +272,15 @@ use activityLog;
               ->leftjoin('users','users.id','requests.user_id')
               ->leftjoin('categories','categories.id','requests.category_id')
               ->leftjoin('c_status','c_status.id','requests.status')
-              //->where('requests.user_id',$user_id)
               ->where('requests.id',$id)
               ->first();
-      return view('requests.show', compact('requests'));
+       
+              $request_details = DB::table('request_details')->select('*')
+              ->where('request_details.request_id',$id)
+              ->get();
+       
+       
+      return view('requests.show', compact('requests','request_details'));
     }
 
     /**
@@ -341,6 +337,7 @@ $login_user_id=Auth::id();
               ->leftjoin('categories','categories.id','requests.category_id')
               ->leftjoin('c_status','c_status.id','requests.status')
               ->where('requests.status',1) 
+              ->orderBy('requests.id','desc')
              ->whereIn('requests.user_id',$requester_appoved_by_login_user)
             ->get();
         

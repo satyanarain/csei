@@ -1,5 +1,9 @@
 @extends('layouts.nmaster')
 @section('breadcrumb')
+ <?php
+                                    $request_only_view = Request::fullUrl();
+                                    $view = end(explode('?', $request_only_view));
+                                    ?>
 <!-- Bread crumb -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
@@ -27,29 +31,25 @@
 @section('content')
 
 <!-- Container fluid  -->
-<div class="container-fluid">
-    <!-- Start Page Content -->
-    <?php    $request_account=Request::fullUrl();
-                                       $request_account=end(explode('?',$request_account));
-                                       
-                                       
-                                       ?> 
-    @if(($requests->status==3 || $requests->status==5) && ($request_account=='accountants'))
-    <div class="row justify-content-center" id='printableArea'>
+  <div class="row justify-content-center" id='printableArea'>
         <div class="col-lg-6">
+    <!-- Start Page Content -->
+    <?php    
+    $request_account=Request::fullUrl();
+     $request_account=end(explode('?',$request_account));
+    ?> 
+    @if(($requests->status==3 || $requests->status==5) && ($request_account=='accountants'))
+	
             <div class="card">
                 <div class="card-body">
                  <div class="form-validation">
-<!--                     <table class="table">
-                         <tr><td>Name</td><td>Test</td></tr>
-                         
-                     </table>-->
+
                         <form class="form-valide" action="#" method="post">
 
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label" for="val-username">Voucher No.</label>
                                 <div class="col-lg-6">
-                                    {{$requests->id}}  
+                                    {{$requests->request_no}}  
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -61,7 +61,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label" for="val-username">Category</label>
                                 <div class="col-lg-6">
-                                    {{$requests->cat_name}}  
+                                    {{$requests->category_id}}  
                                 </div>
                             </div>
 
@@ -90,8 +90,7 @@
                                     {{$requests->amount}}  
                                 </div>
                             </div>
-
-                            <span id="amount_date">
+                           <span id="amount_date">
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="val-username">Amount Issued
                                         @if($requests->amount_issued=='')  <span class="text-danger">*</span> @endif
@@ -115,14 +114,68 @@
                                     </div>
                                 </div>
                             </span>
-
-                            @if($requests->date_issued=='')
+                            
+                            <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="due_date"><b>Project Expense Head</b></label>
+                                        <div class="col-lg-6">
+                                            {{displayView($requests->project_expense_head)}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="due_date"><b>Status</b></label>
+                                        <div class="col-lg-6">
+                                            {{$requests->c_status}}
+                                        </div>
+                                    </div>
+                                    
+                                <div class="form-group row">
+                                    <table class="table table-bordered table-striped table-hover bank_table">
+                                        <tr class="table-row" >
+                                            <td  colspan="" align="left" class="table-row-heading" style="text-align:left;" width="10%">   
+                                                S. No.
+                                            </td>
+                                            <td   align="left" class="table-row-heading" style="text-align:left;"  width="40">   
+                                                Brief Detail<span class="text-danger">*</span>
+                                            </td>
+                                            <td  align="left" class="table-row-heading" style="text-align:left;"  width="15%">   
+                                                Amount Requested
+                                            </td>
+                                            <td  align="left" class="table-row-heading" style="text-align:left;"  width="35%">   
+                                                Remarks
+                                            </td>
+                                           
+                                        </tr>
+                                    </table>
+                                    <?php // print_r($request_details); ?>
+                                    @foreach($request_details as $value)
+                                    <table class="table table-bordered table-striped table-hover bank_table" >
+                                        <tr class="table-row-nopadding">
+                                            <td  colspan="" align="left" valign="top" style="text-align:left;" width="10%">   
+                                               {{ $value->s_no}}
+                                            </td>
+                                            <td  colspan=""   align="left" valign="top" style="text-align:left;" width="40%">   
+                                            {{ $value->brief_details}}
+                                            </td>
+                                            <td  colspan="" align="left" valign="top" style="text-align:left;" width="15%">   
+                                              {{ $value->expected_expense}}
+                                            </td>
+                                            <td  colspan="" align="left" valign="top"  style="text-align:left;" width="35%">   
+                                                  {{ $value->remark}}
+                                            </td>
+                                          </tr>   
+                                        </table>  
+                                    @endforeach
+                                    
+                                     </div>
+                             @if($requests->date_issued=='')
                             <div class="form-group row">
                                 <div class="col-lg-8 ml-auto">
                                     <div type="submit" class="btn btn-primary" onclick="verifyRequest( {{$requests->id}}  )" id="save">Save</div>
                                 </div>
                             </div>
                             @endif
+                                          
+                             
                             <div class="form-group row">
                                 <div class="col-lg-8 ml-auto" id="hiddenpdf" @if($requests->date_issued!='') @else style="display:none" @endif>
                                      <div type="submit" class="btn btn-primary" onclick="printDiv('printableArea')"><i class="fa fa-print"></i>&nbsp;Print</div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -134,9 +187,7 @@
                 </div>
 
             </div>
-        </div>
-    </div>
-    @else
+      @else
 
     <div class="row">
         <div class="col-12">
@@ -154,42 +205,120 @@
                                     'id'=>'theForm',
                                     'files'=>true])!!}
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="roles">Category </label>
-                                        <div class="col-lg-6">{{$requests->cat_name}}
-
+                                        <label class="col-lg-4 col-form-label" for="roles"><b>Request No.</b></label>
+                                        <div class="col-lg-6">{{$requests->request_no}}
+                                      </div>        
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="roles"><b>Category</b></label>
+                                        <div class="col-lg-6">
+                                          {{displayNameFoMultipleID('categories','id',$requests->category_id) }}
                                         </div>        
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="amount">Amount (Rs) </label>
+                                        <label class="col-lg-4 col-form-label" for="amount"><b> Total Amount (Rs)</b></label>
                                         <div class="col-lg-6">
                                             {{$requests->amount}}
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="purpose">Purpose </label>
+                                        <label class="col-lg-4 col-form-label" for="purpose"><b>Purpose</b></label>
                                         <div class="col-lg-6">
                                             {{$requests->purpose}}
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="due_date">Due Date </label>
+                                        <label class="col-lg-4 col-form-label" for="due_date"><b>Date</b></label>
                                         <div class="col-lg-6">
                                             {{dateView($requests->due_date)}}
                                         </div>
                                     </div>
+                            
                                     <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="due_date">Status</label>
+                                           @if($view=='requested_requests')
+                                        <label class="col-lg-4 col-form-label" for="due_date"><b>Name of Project<span class="text-danger">*</span></b></label>
+                                              @endif
+                                                 @if($view=='view'  || $view=='verifireactive')
+                                               <label class="col-lg-4 col-form-label" for="due_date"><b>Name of Project</b></label>
+                                                  @endif
+                                        <div class="col-lg-6">
+                                        <?php //echo $view; ?>
+                                        @if($view=='requested_requests')
+                                        <input type="text" name="name_of_project"  class="form-control"  value="{{$requests->name_of_project}}" required="">
+                                             @endif
+                                             @if($view=='view'  || $view=='verifireactive')
+                                            {{displayView($requests->name_of_project)}}
+                                          @endif
+                                        
+                                        </div>
+                                    </div>
+                                     <div class="form-group row">
+                                          @if($view=='requested_requests')
+                                        <label class="col-lg-4 col-form-label" for="due_date"><b>Project Expense Head</b><span class="text-danger">*</span></label>
+                                        @endif
+                                        @if($view=='view'  || $view=='verifireactive')
+                                          <label class="col-lg-4 col-form-label" for="due_date"><b>Project Expense Head</b></label>
+                                           @endif
+                                        <div class="col-lg-6">
+                                          @if($view=='requested_requests')
+                                          <input type="text" name="project_expense_head" class="form-control" value="{{$requests->project_expense_head}}" required="">
+                                             @endif
+                                             @if($view=='view'  || $view=='verifireactive')
+                                            {{displayView($requests->project_expense_head)}}
+                                          @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-4 col-form-label" for="due_date"><b>Status</b></label>
                                         <div class="col-lg-6">
                                             {{$requests->c_status}}
                                         </div>
                                     </div>
-                                    <?php
-                                    $request_only_view = Request::fullUrl();
-                                    $view = end(explode('?', $request_only_view));
-                                    ?>
+                                    
+                                <div class="form-group row">
+                                    <table class="table table-bordered table-striped table-hover bank_table">
+                                        <tr class="table-row" >
+                                            <td  colspan="" align="left" class="table-row-heading" style="text-align:left;" width="10%">   
+                                                S. No.
+                                            </td>
+                                            <td   align="left" class="table-row-heading" style="text-align:left;"  width="40">   
+                                                Brief Detail<span class="text-danger">*</span>
+                                            </td>
+                                            <td  align="left" class="table-row-heading" style="text-align:left;"  width="15%">   
+                                                Amount Requested
+                                            </td>
+                                            <td  align="left" class="table-row-heading" style="text-align:left;"  width="35%">   
+                                                Remarks
+                                            </td>
+                                           
+                                        </tr>
+                                    </table>
+                                    <?php // print_r($request_details); ?>
+                                    @foreach($request_details as $value)
+                                    <table class="table table-bordered table-striped table-hover bank_table" >
+                                        <tr class="table-row-nopadding">
+                                            <td  colspan="" align="left" valign="top" style="text-align:left;" width="10%">   
+                                               {{ $value->s_no}}
+                                            </td>
+                                            <td  colspan=""   align="left" valign="top" style="text-align:left;" width="40%">   
+                                            {{ $value->brief_details}}
+                                            </td>
+                                            <td  colspan="" align="left" valign="top" style="text-align:left;" width="15%">   
+                                              {{ $value->expected_expense}}
+                                            </td>
+                                            <td  colspan="" align="left" valign="top"  style="text-align:left;" width="35%">   
+                                                  {{ $value->remark}}
+                                            </td>
+                                          </tr>   
+                                        </table>  
+                                    @endforeach
+                                    
+                                     </div>
+                        
+                                   
                                     @if($view!='view')
 
                                     <input  type="hidden"  name="id" value="{{$requests->id}}">
@@ -200,8 +329,7 @@
                                             <textarea  name="comments" id="comments"  class="form-control"></textarea>
                                         </div>
                                     </div>
-
-                                    <div class="form-group row">
+                                      <div class="form-group row">
                                         <div class="col-lg-4">
                                         </div>
                                         <div class="col-lg-6">
@@ -255,6 +383,8 @@
 
 
 </div>
+
+</div>
 </div>
 
 @endsection
@@ -272,8 +402,24 @@
 
     function loadAdd()
     {
-    $(".loder_id").show();
+        
+      var  name_of_project    =   $("name_of_project").val();
+      var  project_expense_head  =  $("project_expense_head").val();
+       
+    if(name_of_project!='')
+    {
+       alert("please enter name of project")     
+        return false;
+   
+    }else if(&& project_expense_head!='')
+    {
+   alert("please enter project expense head")     
+        return false;
+    }else {
+       $(".loder_id").show();  
     }
+}
+
 
     function Validate()
     {

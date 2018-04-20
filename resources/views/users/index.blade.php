@@ -11,6 +11,11 @@
       </ol>
     </div>
   </div>
+<style>
+  .no-sort::after { display: none!important; }
+
+.no-sort { pointer-events: none!important; cursor: default!important; }  
+</style>
   <!-- End Bread crumb -->
   @endsection
 
@@ -28,19 +33,19 @@
               <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                <thead>
                 <tr>
-                 <th>Name</th>
-                 <th>Role (s)</th>
-                 <th>Verifier (s)</th>
-                 <th>Approver (s)</th>
-<!--                 <th>Email</th>-->
-<!--                 <th>Contact</th>-->
-                 <th>Action</th>
+                 <th width="10%">Name</th>
+                 <th width="10%">Email</th>
+                 <th width="20%">Role (s)</th>
+                 <th width="20%">Verifier (s)</th>
+                 <th width="20%">Approver (s)</th>
+                 <th width="20%" class="no-sort">Action</th>
                </tr>
              </thead>
              <tbody>
               @foreach($users as $key=>$user)
               <tr>
                <td>{{$user->name}}</td>
+               <td>{{$user->email}}</td>
                <td>
                 @foreach($user->roles as $index=>$role)
                 @if($index == 0)
@@ -68,9 +73,7 @@
                 @endif
                 @endforeach
               </td>
-<!--              <td>{{$user->email}}</td>-->
-<!--              <td>{{$user->contact}}</td>-->
-              <td>
+             <td>
                 <a href="{{route('users.show', $user->id)}}" class="btn btn-primary m-b-10 m-l-5 left"><i class="fa fa-search"></i> View</a>
                 <a href="{{route('users.edit', $user->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
               </td>

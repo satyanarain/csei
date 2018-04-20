@@ -25,13 +25,11 @@
                             <h4 class="header2">Role Details</h4>
                             {!!Form::open(['route'=>'roles.store', 'id'=>'formValidate', 'class'=>'formValidate'])!!}
                             <div class="form-group row">
-
-                                <label class="col-lg-4 col-form-label" for="name">Name <span class="text-danger">*</span></label>
+                               <label class="col-lg-4 col-form-label" for="name">Name <span class="text-danger">*</span></label>
                                 <div class="col-lg-6">
                                     <input id="name" name="name" type="text" class="form-control"> 
                                 </div>
-                                
-                            </div>
+                              </div>
                             <div class="row form-group">
                                 <label class="col-lg-4 col-form-label" for="name">Description <span class="text-danger">*</span></label>
                                 <div class="col-lg-6">

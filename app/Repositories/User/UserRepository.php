@@ -48,6 +48,7 @@ class UserRepository implements UserRepositoryContract
 		$user->password = Hash::make($request->password);
 		$user->verifiers = implode(',', $request->verifiers);
 		$user->approvers = implode(',', $request->approvers);
+		$user->credit_limit = $request->credit_limit;
 
 		if($request->hasFile('profile_picture'))
 		{
@@ -95,6 +96,7 @@ class UserRepository implements UserRepositoryContract
                 $user->name = $request->name;
 		$user->email = $request->email;
 		$user->contact = $request->contact;
+		$user->credit_limit = $request->credit_limit;
 		$user->verifiers = implode(',', $request->verifiers);
 		$user->approvers = implode(',', $request->approvers);
 
@@ -137,7 +139,7 @@ class UserRepository implements UserRepositoryContract
 
 	public function setPassword($request)
 	{
-		$user = User::where([['email', $request->email], ['manual_reset_password_token', $request->token]])->firstOrFail();
+        $user = User::where([['email', $request->email], ['manual_reset_password_token', $request->token]])->firstOrFail();
         $user->password = bcrypt($request->password);
         $user->manual_reset_password_token = null;
 

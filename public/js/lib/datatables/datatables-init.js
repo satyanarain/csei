@@ -37,9 +37,16 @@ $(document).ready(function() {
             });
         });
     });
-    $('#example23').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
+//    $('#example23').DataTable({
+//        dom: 'Bfrtip',
+//        buttons: [
+//            'copy', 'csv', 'excel', 'pdf', 'print'
+//        ]
+//    });
+   $('#example23').DataTable({
+       dom: 'Bfrtip',
+       order:[],
+      buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]
-    });
+   });

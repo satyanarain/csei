@@ -1,8 +1,7 @@
     <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="name">Name <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-            
-             {!! Form::text('name',null , ['class' => 'form-control']) !!}
+              {!! Form::text('name',null , ['class' => 'form-control']) !!}
         </div>
     </div>
   <div class="form-group row">
@@ -36,7 +35,7 @@
    <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="contact">Contact <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::text('contact',null , ['class' => 'form-control']) !!}
+          {!! Form::text('contact',null , ['class' => 'form-control','onkeypress'=>'return isIntegerKey(event)','pattern'=>"[1-9]{1}[0-9]{9}",'maxlength'=>"10"]) !!}
         </div>
     </div>
     <div class="form-group row">
@@ -80,6 +79,7 @@
    <img id="output" width="100" height="100"/>
 </div>
 </div>
+
  <div class="form-group row">
 
     <label class="col-lg-4 col-form-label" for="roles">Profile Picture</label>
@@ -87,18 +87,13 @@
     {!! Form::file('profile_picture',['class' => 'form-control','onchange'=>'loadFile(event)','id'=>'profile_picture']) !!}
 </div>
 </div>
-
-<!--    <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="profile_picture">Profile Picture</label>
-        <div class="col-lg-6">
-        @if(isset($user->profile_picture))
-        <input type="file" name="profile_picture" id="input-file-now" class="form-control" data-default-file="   {{URL::to('images/userProfiles/'.$user->profile_picture)}}" />
-        @else 
-        <input type="file" name="profile_picture" id="input-file-now" class="form-control" data-default-file="" />
-        @endif
-        </div>
-    </div>-->
     <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="name">Credit Limit <span class="text-danger">*</span></label>
+        <div class="col-lg-6">
+              {!! Form::text('credit_limit',null , ['class' => 'form-control']) !!}
+        </div>
+    </div>
+<div class="form-group row">
         <div class="col-lg-4">
         </div>
         <div class="col-lg-6">
