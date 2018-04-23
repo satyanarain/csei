@@ -6947,3 +6947,11 @@ tbody tr td:last-child {
     display: inline-block !important;
   }
 }
+h4.header2 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  height: 40px;
+  text-transform: uppercase;
+  
+  
+}

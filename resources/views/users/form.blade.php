@@ -88,7 +88,7 @@
 </div>
 </div>
     <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="name">Credit Limit <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="name">Credit Limit</label>
         <div class="col-lg-6">
               {!! Form::text('credit_limit',null , ['class' => 'form-control']) !!}
         </div>

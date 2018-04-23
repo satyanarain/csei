@@ -1,8 +1,6 @@
 <div class="form-group row" >
                             <div class="col-lg-12">
-
-
-                                <table width="100%" cellspacing="4" cellpadding="4" >
+                            <table width="100%" cellspacing="4" cellpadding="4" >
                                     <tr>
                                         <td  align="left"  style="text-align:center; background-color:#f2f2f2; border-bottom:#f8f8f8f8 ipx solid;" colspan="4">   
                                             {{Html::image('/images/logonicons/csei-60x60.png',array('style'=>''))}}</td>

@@ -3,7 +3,7 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Users</h3> </div>
+    <h3 class="text-primary">Venders</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
@@ -35,9 +35,9 @@
                 <tr>
                  <th width="10%">Name</th>
                  <th width="10%">Email</th>
-                 <th width="20%">Role (s)</th>
-                 <th width="20%">Verifier (s)</th>
-                 <th width="20%">Approver (s)</th>
+                 <th width="10%">Contact</th>
+                 <th width="10%">Created at</th>
+                 <th width="10%">Updated at</th>
                  <th width="20%" class="no-sort">Action</th>
                </tr>
              </thead>
@@ -46,37 +46,12 @@
               <tr>
                <td>{{$user->name}}</td>
                <td>{{$user->email}}</td>
-               <td>
-                @foreach($user->roles as $index=>$role)
-                @if($index == 0)
-                {{$role->display_name}}
-                @else                
-                {{', '.$role->display_name}}
-                @endif
-                @endforeach
-              </td>
+               <td>{{$user->contact}}</td>
+               <td>{{dateView($user->created_at)}}</td>
+               <td>{{dateView($user->updated_at)}}</td>
               <td>
-                @foreach($user->verifiers as $index=>$verifier)
-                @if($index == 0)
-                {{$verifier->name}}
-                @else                
-                {{', '.$verifier->name}}
-                @endif
-                @endforeach
-              </td>
-              <td>
-                @foreach($user->approvers as $index=>$approver)
-                @if($index == 0)
-                
-                {{$approver->name}}
-                @else                
-                {{', '.$approver->name}}
-                @endif
-                @endforeach
-              </td>
-             <td>
-                <a href="{{route('users.show', $user->id)}}" class="btn btn-primary m-b-10 m-l-5 left"><i class="fa fa-search"></i> View</a>
-                <a href="{{route('users.edit', $user->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
+                <a href="{{route('vendors.show', $user->id)}}" class="btn btn-primary m-b-10 m-l-5 left"><i class="fa fa-search"></i> View</a>
+                <a href="{{route('vendors.edit', $user->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
               </td>
             </tr>
             @endforeach

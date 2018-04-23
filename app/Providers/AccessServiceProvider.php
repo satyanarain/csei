@@ -21,6 +21,10 @@ class AccessServiceProvider extends ServiceProvider
 			'App\Repositories\User\UserRepositoryContract',
 			'App\Repositories\User\UserRepository'
 		);
+		$this->app->bind(
+			'App\Repositories\Vendor\VendorRepositoryContract',
+			'App\Repositories\Vendor\VendorRepository'
+		);
 
 		$this->app->bind(
 			'App\Repositories\Request\RequestRepositoryContract',

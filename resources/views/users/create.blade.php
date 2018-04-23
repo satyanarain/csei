@@ -27,7 +27,9 @@
                             <div class="col s12 m12 l12">
                                 <div class="card-panel">
                                     <h4 class="header2">User Details</h4>
-                                    {!!Form::open(['route'=>'users.store', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
+                                    {!!Form::open(['route'=>'users.store', 'id'=>'formValidate',
+                                    'class'=>'formValidate',
+                                      'files'=>true])!!}
                                     @include('users.form')
                                     {!!Form::close()!!}
                                 </div>

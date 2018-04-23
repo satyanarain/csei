@@ -7,7 +7,7 @@
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('users.index')}}">Users</a></li>
+        <li class="breadcrumb-item"><a href="{{route('venders.index')}}">Users</a></li>
         <li class="breadcrumb-item active">Details</li>
       </ol>
     </div>
@@ -53,37 +53,6 @@
                   <p><i class="mdi-social-cake"></i> 18th June 1990</p>
                 </div>
 
-<!--                <div class="col s12 m6 l6">
-                  <ul id="task-card" class="collection with-header">
-                    <li class="collection-header cyan">
-                      <h4 class="task-card-title">My Task</h4>
-                      <p class="task-card-date">March 26, 2015</p>
-                    </li>
-                    <li class="collection-item dismissable">
-                      <input type="checkbox" id="task1" />
-                      <label for="task1">Create Mobile App UI. <a href="#" class="secondary-content"><span class="ultra-small">Today</span></a>
-                      </label>
-                      <span class="task-cat teal">Mobile App</span>
-                    </li>
-                    <li class="collection-item dismissable">
-                      <input type="checkbox" id="task2" />
-                      <label for="task2">Check the new API standerds. <a href="#" class="secondary-content"><span class="ultra-small">Monday</span></a>
-                      </label>
-                      <span class="task-cat purple">Web API</span>
-                    </li>
-                    <li class="collection-item dismissable">
-                      <input type="checkbox" id="task3" checked="checked" />
-                      <label for="task3">Check the new Mockup of ABC. <a href="#" class="secondary-content"><span class="ultra-small">Wednesday</span></a>
-                      </label>
-                      <span class="task-cat pink">Mockup</span>
-                    </li>
-                    <li class="collection-item dismissable">
-                      <input type="checkbox" id="task4" checked="checked" disabled="disabled" />
-                      <label for="task4">I did it !</label>
-                      <span class="task-cat cyan">Mobile App</span>
-                    </li>
-                  </ul>
-                </div>-->
               </div>
             </div>
           </div>

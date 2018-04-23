@@ -3,21 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
-use App\Models\User;
+//use App\Models\Vendor;
 use App\Models\Vendor;
+//use App\Models\Vendor;
 use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\User\StoreUserRequest;
-use App\Http\Requests\User\UpdateUserRequest;
-use App\Http\Requests\User\SetPasswordRequest;
-use App\Repositories\User\UserRepositoryContract;
+use App\Http\Requests\Vendor\StoreVendorRequest;
+use App\Http\Requests\Vendor\UpdateVendorRequest;
+use App\Http\Requests\Vendor\SetPasswordRequest;
+use App\Repositories\Vendor\VendorRepositoryContract;
 
 class VendorController extends Controller
 {
     protected $users;
 
-    public function __construct(UserRepositoryContract $users)
+    public function __construct(VendorRepositoryContract $users)
     {
         $this->users = $users;
         $this->middleware('eitherAdminOrStateAdmin')->except(['createPassword', 'setPassword']);
@@ -29,13 +30,9 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $users = $this->users->all();
-        foreach ($users as $key => $user) {
-            $user->verifiers = User::whereIn('id', explode(',', $user->verifiers))->get();
-            $user->approvers = User::whereIn('id', explode(',', $user->approvers))->get();
-        }
-
-        //return response()->json($users);
+        $users = Vendor::select('*')->where('roles',9)->get();
+        //print_r($users);
+        
         return view('vendors.index', compact('users'));
     }
 
@@ -47,7 +44,7 @@ class VendorController extends Controller
     public function create()
     {
         $roles = Role::pluck('display_name', 'id');
-        $users = User::pluck('name', 'id');
+        $users = Vendor::pluck('name', 'id');
         
         
         return view('vendors.create', compact('roles', 'users'));
@@ -59,7 +56,7 @@ class VendorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreVendorRequest $request)
     {
         //print_r($request);exit();
         $this->users->create($request);
@@ -75,10 +72,8 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-        $user = $this->users->find($id);
-
-        return view('vendors.show')
-            ->withUser($user);
+    $users = Vendor::select('*')->where('roles',$id)->first();
+    return view('vendors.index', compact('users'));
     }
 
     /**
@@ -92,10 +87,9 @@ class VendorController extends Controller
         $roles = Role::pluck('display_name', 'id');
         $states = State::orderBy('name', 'ASC')->pluck('name', 'id');
         $user = $this->users->find($id);
-
-        $user->verifiers = User::whereIn('id', explode(',', $user->verifiers))->get()->pluck('id');
-        $user->approvers = User::whereIn('id', explode(',', $user->approvers))->get()->pluck('id');
-        $users = User::pluck('name', 'id');
+        $user->verifiers = Vendor::whereIn('id', explode(',', $user->verifiers))->get()->pluck('id');
+        $user->approvers = Vendor::whereIn('id', explode(',', $user->approvers))->get()->pluck('id');
+        $users = Vendor::pluck('name', 'id');
         //return response()->json($user);
         return view('vendors.edit', compact('user', 'roles', 'users'));
     }
@@ -107,7 +101,7 @@ class VendorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, $id)
+    public function update(UpdateVendorRequest $request, $id)
     {
         $this->users->update($request, $id);
 

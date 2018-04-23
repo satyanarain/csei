@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Vendor extends Authenticatable
 {
     use Notifiable, EntrustUserTrait;
 
@@ -19,7 +19,11 @@ class User extends Authenticatable
 //    protected $fillable = [
 //        'name', 'email', 'password',
 //    ];
-    protected $guarded = ['confirm_password','bank_name', 'account_no', 'ifsc_code', 'branch_address', 'registration_no', 'pan_no', 'gst_no'];
+    /*SELECT `id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`, `contact`, `profile_picture`, `manual_reset_password_token`, `approvers`, `verifiers`, `credit_limit`, `bank_name`, `account_no`, `ifsc_code`, `branch_address`, `registration_no`,
+     *  `registration_no_upload`, `pan_no`, `pan_no_upload`, `gst_no`, `gst_no_upload` FROM `users` WHERE 1*/
+   
+    protected $table = 'users';
+    protected $guarded = ['confirm_password','action','profile_picture','approvers', 'verifiers', 'credit_limit'];
 
     /**
      * The attributes that should be hidden for arrays.

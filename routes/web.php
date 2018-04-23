@@ -64,6 +64,7 @@ Route::group(['middleware'=>'auth'], function(){
         Route::resource('requests', 'RequestsController');
         
         /************************************************************************/
+        Route::post('vendors/show','VendorController@whow');
         Route::resource('vendors', 'VendorController');
         /************************************************************************/
         Route::resource('purchases', 'PurchasesController');
