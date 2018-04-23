@@ -19,6 +19,7 @@ class UpdateVendorRequest extends FormRequest
             return true;
         }else {
             return false;
+            
         }
         
     }
