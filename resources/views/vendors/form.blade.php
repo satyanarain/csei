@@ -67,7 +67,7 @@
         </div>
     </div>
      <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="branch_address">Brabch Address <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="branch_address">Branch Address <span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!! Form::textarea('branch_address',null , ['class' => 'form-control']) !!}
         </div>

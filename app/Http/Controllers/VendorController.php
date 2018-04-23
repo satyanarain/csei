@@ -72,8 +72,8 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-    $users = Vendor::select('*')->where('roles',$id)->first();
-    return view('vendors.index', compact('users'));
+    $user = Vendor::select('*')->where('roles',9)->where('id',$id)->first();
+    return view('vendors.show', compact('user'));
     }
 
     /**

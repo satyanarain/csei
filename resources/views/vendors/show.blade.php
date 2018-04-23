@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Users</h3> </div>
+    <h3 class="text-primary">Verder</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('venders.index')}}">Users</a></li>
+        <li class="breadcrumb-item"><a href="{{route('vendors.index')}}">Verder</a></li>
         <li class="breadcrumb-item active">Details</li>
       </ol>
     </div>
@@ -17,50 +17,43 @@
 
   @section('content')
   <!-- Container fluid  -->
-  <div class="container-fluid">
-    <!-- Start Page Content -->
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <div class="row">
-             <div class="col s12 m6 l6">	
-              <div id="profile-card" class="card">
-                  @if($user->profile_picture!='')
-                    <div class="card-content">
-                  <img src="{{URL::to('images/userProfiles/'.$user->profile_picture)}}" alt="" class="circle responsive-img activator card-profile-image profile-image">
-                  <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
-                    <i class="mdi-editor-mode-edit"></i>
-                  </a>
-
-                  <span class="card-title activator grey-text text-darken-4">{{$user->name}}</span>
-                  <p><i class="mdi-action-perm-identity"></i> {{$user->roles[0]->name}}</p>
-                  <p><i class="mdi-action-perm-phone-msg"></i> {{$user->contact}}</p>
-                  <p><i class="mdi-communication-email"></i> {{$user->email}}</p>
-
-                </div>
-                  @else
-                <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src="{{URL::to('images/user-bg.jpg')}}" alt="user bg">
-                </div>
-              @endif
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">{{$user->name}} <i class="mdi-navigation-close right"></i></span>
-                  <p>Here is some more information about this card.</p>
-                  <p><i class="mdi-action-perm-identity"></i> {{$user->roles[0]->name}}</p>
-                  <p><i class="mdi-action-perm-phone-msg"></i> {{$user->contact}}</p>
-                  <p><i class="mdi-communication-email"></i> {{$user->email}}</p>
-                  <p><i class="mdi-social-cake"></i> 18th June 1990</p>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+   <div class="row justify-content-center" id='printableArea'>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                 <div class="form-validation">
+                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Vendor Details</h4>
+      
+                       <div   class="formmain" onclick="showHide(this.id)" id="personal1">
+<div class="plusminusbutton" id="plusminusbuttonpersonal1">+</div>&nbsp;&nbsp; Personal Info
 </div>
+<div class="row1"  id="formpersonal1" style="display:none;">
+<div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="name">Name Vendor</label>
+        <div class="col-lg-6">
+              {{$user->name}}
+        </div>
+    </div>
+  <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="email">Email Vendor</label>
+        <div class="col-lg-6">
+       {{$user->email}}
+        </div>
+    </div>
+
+
+   <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="contact">Contact Vendor</label>
+        <div class="col-lg-6">
+          {{$user->contact}}
+        </div>
+    </div>
+    </div>          
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
 </div>
 @endsection
 
