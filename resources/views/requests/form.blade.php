@@ -14,7 +14,7 @@
         <div class="form-group row">
     <label class="col-lg-4 col-form-label" for="roles">Category <span class="text-danger">*</span></label>
     <div class="col-lg-6">
-        {!!Form::select('category_id[]', array('1'=>'Cash'), isset($request->category_id)?$user->category_id:'selected', ["class"=>"form-control", "id"=>"multiple-checkboxes111", 'multiple'=>'multiple','style'=>'width:100px;','onclick'=>'selectCate(this.value)'])!!}
+        {!!Form::select('category_id[]', array('1'=>'Cash'),isset($request->category_id)?$user->category_id:null,["class"=>"form-control", "id"=>"multiple-checkboxes111",'onclick'=>'selectCate(this.value)'])!!}
  </div>        
 </div>
 <div class="form-group row">
@@ -195,7 +195,7 @@
         <div class="form-group row">
     <label class="col-lg-4 col-form-label" for="roles">Category <span class="text-danger">*</span></label>
     <div class="col-lg-6">
-        {!!Form::select('category_id[]', array('2'=>'Material'), isset($request->category_id)?$user->category_id:null, ["class"=>"form-control", "id"=>"multiple-checkboxes111", 'multiple'=>'multiple','style'=>'width:100px;','onclick'=>'selectCate(this.value)'])!!}
+        {!!Form::select('category_id[]', array('2'=>'Material'), isset($request->category_id)?$user->category_id:null, ["class"=>"form-control", "id"=>"multiple-checkboxes111",'onclick'=>'selectCate(this.value)'])!!}
  </div>        
 </div>
 <div class="form-group row">
@@ -375,7 +375,7 @@
         <div class="form-group row">
     <label class="col-lg-4 col-form-label" for="roles">Category <span class="text-danger">*</span></label>
     <div class="col-lg-6">
-        {!!Form::select('category_id[]', array('3'=>'Service'), isset($request->category_id)?$user->category_id:null, ["class"=>"form-control", "id"=>"multiple-checkboxes111", 'multiple'=>'multiple','style'=>'width:100px;','onclick'=>'selectCate(this.value)'])!!}
+        {!!Form::select('category_id[]', array('3'=>'Service'), isset($request->category_id)?$user->category_id:null, ["class"=>"form-control", "id"=>"multiple-checkboxes111",'onclick'=>'selectCate(this.value)'])!!}
  </div>        
 </div>
 <div class="form-group row">
