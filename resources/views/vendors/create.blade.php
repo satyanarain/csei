@@ -16,18 +16,7 @@
     @endsection
 
     @section('content')
-    
-<!--       <div class="row justify-content-center" id='printableArea'>
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                 <div class="form-validation">
-                                    <h4 class="header2">Requests Details</h4>-->
-    
-    
-    
-    <!-- Container fluid  -->
-     <div class="row justify-content-center" id='printableArea'>
+  <div class="row justify-content-center" id='printableArea'>
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">

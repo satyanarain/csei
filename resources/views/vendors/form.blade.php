@@ -80,13 +80,13 @@
         </div>
     </div>
      <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="contact">Pan No. <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="contact">PAN No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!! Form::text('pan_no',null , ['class' => 'form-control']) !!}
         </div>
     </div>
      <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="contact">Pan No. Upload <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="contact">PAN No. Upload <span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!! Form::file('pan_no_upload',null , ['class' => 'form-control']) !!}
         </div>
