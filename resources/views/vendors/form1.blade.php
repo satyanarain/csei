@@ -112,7 +112,7 @@
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="gst_no_upload">Status<span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::select('status',array('1'=>'Active','0'=>'Inactive',required),null , ['class' => 'form-control']) !!}
+          {!! Form::select('status',array('1'=>'Active','0'=>'Inactive'),null , ['class' => 'form-control','placeholder'=>'Select Status',required]) !!}
         </div>
     </div>
 <br>
