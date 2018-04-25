@@ -36,11 +36,11 @@ class StoreVendorRequest extends FormRequest
     {
         return [
             'name' => 'required',
-             'email' => 'required|email|unique:users,email',
+             'email' => 'required|email|unique:vendors,email',
             //'roles' => 'required',
             //'state' => 'required_if:roles,2,3',
-            'password' => 'required',
-            'confirm_password' => 'required_with:password|same:password'
+            //'password' => 'required',
+            //'confirm_password' => 'required_with:password|same:password'
         ];
     }
 
@@ -50,11 +50,11 @@ class StoreVendorRequest extends FormRequest
             'name.required' => 'Name field is required.',
             'email.required' => 'Email filed is required.',
             'email.email' => 'Email must be a valid email.',
-            'email.unique' => 'This email is already registered.',
+            'email.unique' => 'This email is already registered.'
             //'roles.required' => 'Role field is required.',
             //'state.required_id' => 'State field is required if role is state admin.',
-            'password.required' => 'Password field is required.',
-            'confirm_password.required' => 'The Confirm password field is required.'
+          //  'password.required' => 'Password field is required.',
+           // 'confirm_password.required' => 'The Confirm password field is required.'
         ];
     }
 }

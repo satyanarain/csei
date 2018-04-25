@@ -11,7 +11,7 @@ use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\User\SetPasswordRequest;
 use App\Repositories\User\UserRepositoryContract;
-
+use DB;
 class UsersController extends Controller
 {
     protected $users;
@@ -75,8 +75,15 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = $this->users->find($id);
-
-        return view('users.show')
+        
+        $role_sql=DB::table('role_user')->select('*')->leftJoin('roles','role_user.user_id','roles.id')->where('role_user.user_id',$id)->get();
+        foreach($role_sql as $role_id)
+        {
+          $roleid_array[]=  $role_id->role_id;
+        }
+       $roleid_array = implode(',', $roleid_array);
+       
+        return view('users.show',compact('roleid_array'))
             ->withUser($user);
     }
 
@@ -141,4 +148,26 @@ class UsersController extends Controller
             return redirect()->route('home');
         }        
     }
+    
+     public function statusUpdate($id)
+    {
+    $sql=DB::table('users')->where('id',$id)->first(); 
+     if($sql->status==0)
+       {
+       $status=  $sql->status;
+       $user = User::findorFail($id);
+       $user->status=1;
+       $user->save();
+       echo 1;
+      }else
+       {
+       $status=  $sql->status;
+       $user = User::findorFail($id);
+       $user->status=0;
+       $user->save();
+       echo 0;
+       }
+    }
+    
+    
 }

@@ -22,10 +22,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-validation">
-<!--                     <table class="table">
-                        <tr><td>Name</td><td>Test</td></tr>
-                        
-                    </table>-->
+                <h4 class="header2">Purchase Create</h4>
                    {!! Form::open([
                 'route' => 'purchases.store',
                 'files'=>true,

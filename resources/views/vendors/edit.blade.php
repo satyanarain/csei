@@ -21,10 +21,10 @@
             <div class="card">
                 <div class="card-body">
                  <div class="form-validation">
-                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Vendor Update</h4>
+                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Update Vendor</h4>
 									
-										{!!Form::model($user, ['route'=>['vendors.update', $user->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
-										@include('vendors.form')
+										{!!Form::model($vendors, ['route'=>['vendors.update', $vendors->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
+										@include('vendors.form1')
 										{!!Form::close()!!}
 									
 								</div>
@@ -87,8 +87,8 @@
                 },
                 messages: {
                     "name": {
-                        required: "Please enter a username",
-                        minlength: "Your username must consist of at least 3 characters"
+                        required: "Please enter a vendorname",
+                        minlength: "Your vendorname must consist of at least 3 characters"
                     },
                     "email": "Please enter a valid email address",
 //                     "password": {

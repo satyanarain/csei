@@ -35,10 +35,11 @@
                 <tr>
                  <th width="10%">Name</th>
                  <th width="10%">Email</th>
-                 <th width="20%">Role (s)</th>
-                 <th width="20%">Verifier (s)</th>
+                 <th width="10%">Role (s)</th>
+                 <th width="10%">Verifier (s)</th>
                  <th width="20%">Approver (s)</th>
-                 <th width="20%" class="no-sort">Action</th>
+                 <th width="10%">Status</th>
+                 <th width="30%" class="no-sort">Action</th>
                </tr>
              </thead>
              <tbody>
@@ -73,6 +74,24 @@
                 @endif
                 @endforeach
               </td>
+              
+              <td>
+                  <div 
+                 <?php if($user->status==1)
+                 { ?>
+                 class="btn btn-small btn-success" 
+               <?php }else{ ?>
+                    class="btn btn-small btn-danger" 
+              <?php } ?>
+                 id="<?php echo $user->id; ?>" onclick="statusUpdate(this.id)">
+                   <?php if($user->status==1)
+                 { ?>
+                    <span id="<?php echo "ai".$user->id; ?>"><i class="fa fa-check-circle"></i>&nbsp;Active</span>
+               <?php }else{ ?>
+                     <span id="<?php echo "ai".$user->id; ?>"><i class="fa fa-times-circle"></i>&nbsp;Inctive</span>
+              <?php } ?></div>
+              
+                </td>
              <td>
                 <a href="{{route('users.show', $user->id)}}" class="btn btn-primary m-b-10 m-l-5 left"><i class="fa fa-search"></i> View</a>
                 <a href="{{route('users.edit', $user->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
@@ -88,3 +107,29 @@
 </div>
 </div>
 @endsection
+<script type="text/javascript">
+ function statusUpdate(id)
+{
+ $.ajax({
+    type:'get',
+    url:'/users/statusupdate/'+id,
+   success:function(data)
+    {
+   
+    if(data==1)
+    {
+    $("#"+id).removeClass('btn-danger');   
+    $("#"+id).addClass('btn-success');  
+    $("#ai"+id).html('<i class="fa fa-check-circle"></i>Active');    
+    }else{
+    $("#"+id).removeClass('btn-success');   
+    $("#"+id).addClass('btn-danger');    
+    $("#ai"+id).html('<i class="fa fa-times-circle"></i>Inactive');    
+    }
+    
+    }
+});
+}  
+    
+    
+</script>

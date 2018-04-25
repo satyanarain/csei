@@ -15,29 +15,9 @@
         </div>
     </div>
 
-    <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="password">Password 
-              @if($user->name=='')
-            <span class="text-danger">*</span>
-         @endif
-        </label>
-        <div class="col-lg-6">
-        <input id="password" name="password" type="password" value="" class="form-control">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="confirm_password">Confirm Password 
-            @if($user->name=='')
-            <span class="text-danger">*</span>
-            @endif
-        </label>
-        <div class="col-lg-6">
-        <input id="confirm_password" name="confirm_password" type="password" value="" class="form-control">
-        </div>
-    </div>
 
    <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="contact">Contact <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="contact">Mobile <span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!! Form::text('contact',null , ['class' => 'form-control','onkeypress'=>'return isIntegerKey(event)','pattern'=>"[1-9]{1}[0-9]{9}",'maxlength'=>"10"]) !!}
         </div>
@@ -51,72 +31,91 @@
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="contact">Bank Name <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::text('bank_name',null , ['class' => 'form-control']) !!}
+          {!! Form::text('bank_name',null , ['class' => 'form-control',required]) !!}
         </div>
     </div>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="contact">Account No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::text('account_no',null , ['class' => 'form-control','onkeypress'=>'return isIntegerKey(event)']) !!}
+          {!! Form::text('account_no',null , ['class' => 'form-control','onkeypress'=>'return isIntegerKey(event)',required]) !!}
         </div>
     </div>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="ifsc_code">IFSC Code <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::text('ifsc_code',null , ['class' => 'form-control']) !!}
+          {!! Form::text('ifsc_code',null , ['class' => 'form-control',required]) !!}
         </div>
     </div>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="branch_address">Branch Address <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::textarea('branch_address',null , ['class' => 'form-control']) !!}
+          {!! Form::textarea('branch_address',null , ['class' => 'form-control',required]) !!}
         </div>
     </div>
-</div><br>
+     <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="upload_document"></label>
+        <div class="col-lg-6">
+          {!! Form::file('upload_document',null , ['class' => 'form-control']) !!} 
+             
+        </div>
+    </div>
+</div>
+
+<br>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="registration_no">Registration No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::text('registration_no',null , ['class' => 'form-control']) !!}
+          {!! Form::text('registration_no',null , ['class' => 'form-control',required]) !!}
         </div>
     </div>
-     <div class="form-group row">
+    <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="registration_no_upload">Registration No. Upload <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::file('registration_no_upload',null , ['class' => 'form-control']) !!}
+          {!! Form::file('registration_no_upload',null , ['class' => 'form-control',required]) !!} 
+        
         </div>
     </div>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="pan_no">PAN No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::text('pan_no',null , ['class' => 'form-control','id'=>'pan_no']) !!}
+          {!! Form::text('pan_no',null , ['class' => 'form-control','id'=>'pan_no',required]) !!}
         </div>
     </div>
-     <div class="form-group row">
+    <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="pan_no_upload">PAN No. Upload <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::file('pan_no_upload',null , ['class' => 'form-control']) !!}
-        </div>
+          {!! Form::file('pan_no_upload',null , ['class' => 'form-control',required]) !!}
+           
+           </div>
     </div>
-     <div class="form-group row">
+    <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="gst_no">GST No.<span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::text('gst_no',null , ['class' => 'form-control']) !!}
+          {!! Form::text('gst_no',null , ['class' => 'form-control',required]) !!}
         </div>
     </div>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="gst_no_upload">GST No. Upload<span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::file('gst_no_upload',null , ['class' => 'form-control']) !!}
+          {!! Form::file('gst_no_upload',null , ['class' => 'form-control',required]) !!}
+          
         </div>
     </div>
-<input type="hidden" name="roles" value="9">
+     <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="gst_no_upload">Status<span class="text-danger">*</span></label>
+        <div class="col-lg-6">
+          {!! Form::select('status',array('1'=>'Active','0'=>'Inactive'),null , ['class' => 'form-control','placeholder' => 'Select Status',required]) !!}
+        </div>
+    </div>
+<br>
 
- <br>
  <div class="form-group row">
         <div class="col-lg-4">
         </div>
         <div class="col-lg-6">
-            <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Submit
+            <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> 
+               
+                Submit
         </button>
         </div>
     </div>

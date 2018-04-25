@@ -21,7 +21,7 @@
             <div class="card">
                 <div class="card-body">
                  <div class="form-validation">
-                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Vendor Create</h4>
+                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Create Vendor</h4>
       
                                     {!!Form::open(['route'=>'vendors.store', 'id'=>'formValidate', 
                                     'onsubmit'=>'return validatePan()',

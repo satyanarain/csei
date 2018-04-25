@@ -13,5 +13,5 @@ interface VendorRepositoryContract
 
 	public function destroy($id);
 
-	public function setPassword($request);
+	//public function setPassword($request);
 }

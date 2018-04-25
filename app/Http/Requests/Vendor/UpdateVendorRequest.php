@@ -34,8 +34,8 @@ class UpdateVendorRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required',
-            'roles' => 'required',
-            'state' => 'required_if:roles,2'
+           // 'roles' => 'required',
+           // 'state' => 'required_if:roles,2'
         ];
     }
 
@@ -45,9 +45,9 @@ class UpdateVendorRequest extends FormRequest
             'name.required' => 'Name field is required.',
             'email.required' => 'Email filed is required.',
             'email.email' => 'Email must be a valid email.',
-            'email.unique' => 'This email is already registered.',
-            'roles.required' => 'Role field is required.',
-            'state.required_id' => 'State field is required if role is state admin.'
+            'email.unique' => 'This email is already registered.'
+            //'roles.required' => 'Role field is required.',
+            //'state.required_id' => 'State field is required if role is state admin.'
         ];
     }
 }

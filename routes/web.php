@@ -41,6 +41,7 @@ Route::group(['middleware'=>'auth'], function(){
 	|Users Routes
 	|--------------------------------------------------------------------
 	*/
+        Route::get('users/statusupdate/{id}', 'UsersController@statusUpdate');
 	Route::resource('users', 'UsersController');
         /*
 	|--------------------------------------------------------------------
@@ -62,9 +63,12 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::post('requests/verify_request', 'RequestsController@verifyRequestUpdateStatus');
         Route::get('/requests/{id}/save_voucher', 'RequestsController@saveVoucher');
         Route::resource('requests', 'RequestsController');
-        
         /************************************************************************/
-        Route::post('vendors/show','VendorController@whow');
+        Route::resource('teams', 'TeamController');
+        /************************************************************************/
+        Route::resource('purchase_committees', 'PurchaseCommitteeController');
+        /************************************************************************/
+        Route::get('vendors/statusupdate/{id}', 'VendorController@statusUpdate');
         Route::resource('vendors', 'VendorController');
         /************************************************************************/
         Route::resource('purchases', 'PurchasesController');

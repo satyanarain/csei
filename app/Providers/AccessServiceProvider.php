@@ -25,6 +25,18 @@ class AccessServiceProvider extends ServiceProvider
 			'App\Repositories\Vendor\VendorRepositoryContract',
 			'App\Repositories\Vendor\VendorRepository'
 		);
+		$this->app->bind(
+			'App\Repositories\Team\TeamRepositoryContract',
+			'App\Repositories\Team\TeamRepository'
+		);
+		$this->app->bind(
+			'App\Repositories\Team\TeamRepositoryContract',
+			'App\Repositories\Team\TeamRepository'
+		);
+		$this->app->bind(
+			'App\Repositories\PurchaseCommittee\PurchaseCommitteeRepositoryContract',
+			'App\Repositories\PurchaseCommittee\PurchaseCommitteeRepository'
+		);
 
 		$this->app->bind(
 			'App\Repositories\Request\RequestRepositoryContract',

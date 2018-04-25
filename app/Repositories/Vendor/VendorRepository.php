@@ -11,28 +11,14 @@ class VendorRepository implements VendorRepositoryContract
 {
 	public function all()
 	{
-		if(auth()->user()->hasRole('administrator'))
-		{
-			$users = Vendor::orderBy('name', 'ASC')
-			->with('roles')
-			->with('state')->get();
-		}else if(auth()->user()->hasRole('state-administrator'))
-		{
-			$stateId = auth()->user()->state[0]->id;
-			$users = Vendor::orderBy('name', 'ASC')
-			->with('roles')
-			->whereHas('state', function($query) use ($stateId){
-				$query->where('state_id', $stateId);
-			})->get();
-		}
-		return $users;
+		
 	}
 
 	public function find($id)
 	{
-		$user = Vendor::findOrFail($id);
+		$vendors = Vendor::findOrFail($id);
 
-		return $user;
+		return $vendors;
 	}
 
 	public function create($request)
@@ -51,7 +37,7 @@ class VendorRepository implements VendorRepositoryContract
             
            $request->all(); 
             
-                $input[password] = Hash::make($request->password);
+             //   $input[password] = Hash::make($request->password);
 		
 
 		if($request->hasFile('registration_no_upload'))
@@ -106,9 +92,25 @@ class VendorRepository implements VendorRepositoryContract
 
 			$input[gst_no_upload] = $fileName;
 		}
+		if($request->hasFile('upload_document'))
+		{
+			if(!is_dir(public_path().'/images/upload_document'))
+			{
+				mkdir(public_path().'/images/upload_document', 0777, true);
+			}
+
+			$file = $request->file('upload_document');
+
+			$destinationPath = public_path().'/images/upload_document';
+			$fileName = str_random(8).'_'.$file->getClientOriginalName();
+
+			$file->move($destinationPath, $fileName);
+
+			$input[upload_document] = $fileName;
+		}
 		
                 //set manual_reset_password_token
-		$input[manual_reset_password_token] = str_random(60);
+		//$input[manual_reset_password_token] = str_random(60);
                 Vendor::create($input);
                 $ven = new Vendor();
 		//$role = $request->roles;
@@ -121,13 +123,13 @@ class VendorRepository implements VendorRepositoryContract
 		
                 $vendors = Vendor::findorFail($id);
                 $input = $request->all();
-                 if($request->password!='')
-                {
-                $input[password] =Hash::make($request->password);   
-                    
-                } else {
-                 $input[password] =$user->password;   
-                }
+//                 if($request->password!='')
+//                {
+//                $input[password] =Hash::make($request->password);   
+//                    
+//                } else {
+//                 $input[password] =$vendors->password;   
+//                }
                 
                if($request->hasFile('registration_no_upload'))
 		{
@@ -181,9 +183,30 @@ class VendorRepository implements VendorRepositoryContract
 
 			$input[gst_no_upload] = $fileName;
 		}
+                
+                if($request->hasFile('upload_document'))
+		{
+			if(!is_dir(public_path().'/images/upload_document'))
+			{
+				mkdir(public_path().'/images/upload_document', 0777, true);
+			}
+
+			$file = $request->file('upload_document');
+
+			$destinationPath = public_path().'/images/upload_document';
+			$fileName = str_random(8).'_'.$file->getClientOriginalName();
+
+			$file->move($destinationPath, $fileName);
+
+			$input[upload_document] = $fileName;
+		}
+		
+                
+                
+                
 
 		 $vendors->fill($input)->save();
-                  return $user;
+                  return $vendors;
 	}
 
 	public function destroy($id)
@@ -195,14 +218,5 @@ class VendorRepository implements VendorRepositoryContract
         }
 	}
 
-	public function setPassword($request)
-	{
-        $user = Vendor::where([['email', $request->email], ['manual_reset_password_token', $request->token]])->firstOrFail();
-        $user->password = bcrypt($request->password);
-        $user->manual_reset_password_token = null;
-
-        $user->save();
-
-        return $user;
-	}
+	
 }

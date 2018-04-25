@@ -49,6 +49,7 @@ class UserRepository implements UserRepositoryContract
 		$user->verifiers = implode(',', $request->verifiers);
 		$user->approvers = implode(',', $request->approvers);
 		$user->credit_limit = $request->credit_limit;
+		$user->status = $request->status;
 
 		if($request->hasFile('profile_picture'))
 		{
@@ -96,6 +97,7 @@ class UserRepository implements UserRepositoryContract
                 $user->name = $request->name;
 		$user->email = $request->email;
 		$user->contact = $request->contact;
+		$user->status = $request->status;
 		$user->credit_limit = $request->credit_limit;
 		$user->verifiers = implode(',', $request->verifiers);
 		$user->approvers = implode(',', $request->approvers);

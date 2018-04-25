@@ -4,7 +4,7 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
 	<div class="col-md-5 align-self-center">
-		<h3 class="text-primary">Requests</h3> </div>
+		<h3 class="text-primary">Request</h3> </div>
 		<div class="col-md-7 align-self-center">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
@@ -27,7 +27,7 @@
 						<div class="row">
 							<div class="col s12 m12 l12">
 								<div class="card-panel">
-									<h4 class="header2">Request Details</h4>
+									<h4 class="header2">Update Request</h4>
 									
 										{!!Form::model($request, ['route'=>['requests.update', $request->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
 										@include('requests.form')

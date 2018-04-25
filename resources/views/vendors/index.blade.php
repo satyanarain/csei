@@ -38,20 +38,38 @@
                  <th width="10%">Contact</th>
                  <th width="10%">Created at</th>
                  <th width="10%">Updated at</th>
+                 <th width="10%">Status</th>
                  <th width="20%" class="no-sort">Action</th>
                </tr>
              </thead>
              <tbody>
-              @foreach($users as $key=>$user)
+              @foreach($vendors as $key=>$vendor)
               <tr>
-               <td>{{$user->name}}</td>
-               <td>{{$user->email}}</td>
-               <td>{{$user->contact}}</td>
-               <td>{{dateView($user->created_at)}}</td>
-               <td>{{dateView($user->updated_at)}}</td>
+               <td>{{$vendor->name}}</td>
+               <td>{{$vendor->email}}</td>
+               <td>{{$vendor->contact}}</td>
+               <td>{{dateView($vendor->created_at)}}</td>
+               <td>{{dateView($vendor->updated_at)}}</td>
+                 <td>
+                  <div 
+                 <?php if($vendor->status==1)
+                 { ?>
+                 class="btn btn-small btn-success" 
+               <?php }else{ ?>
+                    class="btn btn-small btn-danger" 
+              <?php } ?>
+                 id="<?php echo $vendor->id; ?>" onclick="statusUpdate(this.id)">
+                   <?php if($vendor->status==1)
+                 { ?>
+                    <span id="<?php echo "ai".$vendor->id; ?>"><i class="fa fa-check-circle"></i>&nbsp;Active</span>
+               <?php }else{ ?>
+                     <span id="<?php echo "ai".$vendor->id; ?>"><i class="fa fa-times-circle"></i>&nbsp;Inctive</span>
+              <?php } ?></div>
+              
+                </td>
               <td>
-                <a href="{{route('vendors.show', $user->id)}}" class="btn btn-primary m-b-10 m-l-5 left"><i class="fa fa-search"></i> View</a>
-                <a href="{{route('vendors.edit', $user->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
+                <a href="{{route('vendors.show', $vendor->id)}}" class="btn btn-primary m-b-10 m-l-5 left"><i class="fa fa-search"></i> View</a>
+                <a href="{{route('vendors.edit', $vendor->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
               </td>
             </tr>
             @endforeach
@@ -64,3 +82,29 @@
 </div>
 </div>
 @endsection
+<script type="text/javascript">
+ function statusUpdate(id)
+{
+ $.ajax({
+    type:'get',
+    url:'/vendors/statusupdate/'+id,
+   success:function(data)
+    {
+   
+    if(data==1)
+    {
+    $("#"+id).removeClass('btn-danger');   
+    $("#"+id).addClass('btn-success');  
+    $("#ai"+id).html('<i class="fa fa-check-circle"></i>Active');    
+    }else{
+    $("#"+id).removeClass('btn-success');   
+    $("#"+id).addClass('btn-danger');    
+    $("#ai"+id).html('<i class="fa fa-times-circle"></i>Inactive');    
+    }
+    
+    }
+});
+}  
+    
+    
+</script>

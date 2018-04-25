@@ -13,14 +13,14 @@ use App\Http\Requests\Vendor\StoreVendorRequest;
 use App\Http\Requests\Vendor\UpdateVendorRequest;
 use App\Http\Requests\Vendor\SetPasswordRequest;
 use App\Repositories\Vendor\VendorRepositoryContract;
-
+use DB;
 class VendorController extends Controller
 {
-    protected $users;
+    protected $vendors;
 
-    public function __construct(VendorRepositoryContract $users)
+    public function __construct(VendorRepositoryContract $vendors)
     {
-        $this->users = $users;
+        $this->vendors = $vendors;
         $this->middleware('eitherAdminOrStateAdmin')->except(['createPassword', 'setPassword']);
     }
     /**
@@ -30,10 +30,10 @@ class VendorController extends Controller
      */
     public function index()
     {
-        $users = Vendor::select('*')->where('roles',9)->get();
-        //print_r($users);
+        $vendors = Vendor::all();
+        //print_r($vendors);
         
-        return view('vendors.index', compact('users'));
+        return view('vendors.index', compact('vendors'));
     }
 
     /**
@@ -44,10 +44,8 @@ class VendorController extends Controller
     public function create()
     {
         $roles = Role::pluck('display_name', 'id');
-        $users = Vendor::pluck('name', 'id');
-        
-        
-        return view('vendors.create', compact('roles', 'users'));
+        $vendors = Vendor::pluck('name', 'id');
+         return view('vendors.create', compact('roles', 'vendors'));
     }
 
     /**
@@ -59,7 +57,7 @@ class VendorController extends Controller
     public function store(StoreVendorRequest $request)
     {
         //print_r($request);exit();
-        $this->users->create($request);
+        $this->vendors->create($request);
 
         return redirect()->route('vendors.index');
     }
@@ -72,8 +70,8 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-    $user = Vendor::select('*')->where('roles',9)->where('id',$id)->first();
-    return view('vendors.show', compact('user'));
+    $vendors = Vendor::select('*')->where('id',$id)->first();
+    return view('vendors.show', compact('vendors'));
     }
 
     /**
@@ -84,14 +82,8 @@ class VendorController extends Controller
      */
     public function edit($id)
     {
-        $roles = Role::pluck('display_name', 'id');
-        $states = State::orderBy('name', 'ASC')->pluck('name', 'id');
-        $user = $this->users->find($id);
-        $user->verifiers = Vendor::whereIn('id', explode(',', $user->verifiers))->get()->pluck('id');
-        $user->approvers = Vendor::whereIn('id', explode(',', $user->approvers))->get()->pluck('id');
-        $users = Vendor::pluck('name', 'id');
-        //return response()->json($user);
-        return view('vendors.edit', compact('user', 'roles', 'users'));
+     $vendors = $this->vendors->find($id);
+        return view('vendors.edit', compact('vendors'));
     }
 
     /**
@@ -103,7 +95,7 @@ class VendorController extends Controller
      */
     public function update(UpdateVendorRequest $request, $id)
     {
-        $this->users->update($request, $id);
+        $this->vendors->update($request, $id);
 
         return redirect()->route('vendors.index');
     }
@@ -114,24 +106,40 @@ class VendorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+ 
+  
+     public function statusUpdate($id)
     {
-        //
+    $sql=DB::table('vendors')->where('id',$id)->first(); 
+     if($sql->status==0)
+       {
+       $status=  $sql->status;
+       $vendor = Vendor::findorFail($id);
+       $vendor->status=1;
+       $vendor->save();
+       echo 1;
+      }else
+       {
+       $status=  $sql->status;
+       $vendor = Vendor::findorFail($id);
+       $vendor->status=0;
+       $vendor->save();
+       echo 0;
+       }
     }
-
     public function createPassword($token)
     {
-        return view('users.reset')
+        return view('vendors.reset')
             ->withToken($token);
     }
 
     public function setPassword(SetPasswordRequest $request)
     {
-        $user = $this->users->setPassword($request);
+        $vendors = $this->vendors->setPassword($request);
 
-        if($user)
+        if($vendors)
         {
-            Auth::loginUsingId($user->id);
+            Auth::loginUsingId($vendors->id);
 
             return redirect()->route('home');
         }        

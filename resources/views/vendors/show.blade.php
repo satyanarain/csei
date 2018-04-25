@@ -31,21 +31,21 @@
 <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="name">Name Vendor</label>
         <div class="col-lg-6">
-              {{$user->name}}
+              {{$vendors->name}}
         </div>
     </div>
   <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="email">Email Vendor</label>
         <div class="col-lg-6">
-       {{$user->email}}
+       {{$vendors->email}}
         </div>
     </div>
 
 
    <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="contact">Contact Vendor</label>
+        <label class="col-lg-4 col-form-label" for="contact">Mobile</label>
         <div class="col-lg-6">
-          {{$user->contact}}
+          {{$vendors->contact}}
         </div>
     </div>
     </div> 
@@ -58,73 +58,93 @@
         <label class="col-lg-4 col-form-label" for="contact">Bank Name <span class="text-danger">*</span></label>
         <div class="col-lg-6">
          
-            {{$user->bank_name}}
+            {{$vendors->bank_name}}
         </div>
     </div>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="contact">Account No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
          
-          {{$user->account_no}}
+          {{$vendors->account_no}}
         </div>
     </div>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="ifsc_code">IFSC Code <span class="text-danger">*</span></label>
         <div class="col-lg-6">
         
-          {{$user->ifsc_code}}
+          {{$vendors->ifsc_code}}
         </div>
     </div>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="branch_address">Branch Address <span class="text-danger">*</span></label>
         <div class="col-lg-6">
          
-          {{$user->bank_name}}
+          {{$vendors->bank_name}}
         </div>
     </div>
+    
+   @if($vendors->upload_document!='')
+    <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="upload_document">Other Document<span class="text-danger">*</span></label>
+        <div class="col-lg-6">
+            <a href="{{('/images/upload_document/'.$vendors->upload_document)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i>
+</i>Download</a>
+        </div>
+    </div>
+    @endif
+
+    
+    
+    
 </div><br>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="registration_no">Registration No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
          
-          {{$user->registration_no}}
+          {{$vendors->registration_no}}
         </div>
     </div>
-     <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="registration_no_upload">Registration No. Upload <span class="text-danger">*</span></label>
+     @if($vendors->registration_no_upload!='')
+    <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="registration_no_upload"></label>
         <div class="col-lg-6">
-          
-          {{$user->registration_no_upload}}
+            <a href="{{('/images/registration_no_upload/'.$vendors->registration_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i>
+</i>Download</a>
         </div>
     </div>
+    @endif
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="pan_no">PAN No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
   
-          {{$user->pan_no}}
+          {{$vendors->pan_no}}
         </div>
     </div>
-     <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="pan_no_upload">PAN No. Upload <span class="text-danger">*</span></label>
+      @if($vendors->pan_no_upload!='')
+    <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="pan_no_upload"></label>
         <div class="col-lg-6">
-      
-          {{$user->pan_no_upload}}
+            <a href="{{('/images/pan_no_upload/'.$vendors->pan_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i>
+</i>Download</a>
         </div>
     </div>
+    @endif
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="gst_no">GST No.<span class="text-danger">*</span></label>
         <div class="col-lg-6">
         
-          {{$user->gst_no}}
+          {{$vendors->gst_no}}
         </div>
     </div>
-     <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="gst_no_upload">GST No. Upload<span class="text-danger">*</span></label>
+     @if($vendors->gst_no_upload!='')
+    <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="gst_no_upload"></label>
         <div class="col-lg-6">
-          
-          {{$user->gst_no_upload}}
+            <a href="{{('/images/gst_no_upload/'.$vendors->gst_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i>
+</i>Download</a>
         </div>
-    </div>             
+    </div>
+    @endif        
                      
                      
                      

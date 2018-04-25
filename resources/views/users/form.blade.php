@@ -33,13 +33,13 @@
     </div>
 
    <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="contact">Contact <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="contact">Mobile <span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!! Form::text('contact',null , ['class' => 'form-control','onkeypress'=>'return isIntegerKey(event)','pattern'=>"[1-9]{1}[0-9]{9}",'maxlength'=>"10"]) !!}
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="roles">Role (s) <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="roles">Designation<span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!!Form::select('roles[]', $roles, isset($user->roles)?$user->roles:[2], ["class"=>"form-control", 'multiple'=>'multiple','style'=>'min-height:100px;'])!!}
         </div>        
@@ -57,8 +57,14 @@
           {!!Form::select('approvers[]', $users, isset($user->approvers)?$user->approvers:null, ["class"=>"form-control", 'multiple'=>'multiple', 'required','style'=>'min-height:100px;'])!!}
         </div>        
     </div> 
+   <div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="roles">Status<span class="text-danger">*</span></label>
+        <div class="col-lg-6">
+          {!!Form::select('status', array('1'=>'Active','0'=>'Inactive'), isset($user->status)?$user->status:null, ["class"=>"form-control", 'required','placeholder'=>'Select Status'])!!}
+        </div>        
+    </div> 
 
-
+<!--
 <div class="form-group row">
 @if($user->profile_picture!='')
 <label class="col-lg-4 col-form-label" for="roles">Existing Image</label>
@@ -86,13 +92,13 @@
      <div class="col-lg-6">
     {!! Form::file('profile_picture',['class' => 'form-control','onchange'=>'loadFile(event)','id'=>'profile_picture']) !!}
 </div>
-</div>
-    <div class="form-group row">
+</div>-->
+<!--    <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="name">Credit Limit</label>
         <div class="col-lg-6">
               {!! Form::text('credit_limit',null , ['class' => 'form-control']) !!}
         </div>
-    </div>
+    </div>-->
 <div class="form-group row">
         <div class="col-lg-4">
         </div>
