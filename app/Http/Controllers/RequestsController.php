@@ -58,6 +58,13 @@ use activityLog;
      * @param  created by satya
      * @return 29-12-2018
      */
+    public function Voucher(Request $request)
+    {
+        echo "rtrt";
+        
+        exit();
+        
+    }
     public function store(Request $request)
     {
            $user_details=Auth::user();
@@ -212,14 +219,15 @@ use activityLog;
           else if($request->approverejected=='Rejected'){
              /****************Veri Fy Reject section start here*******************************************************************************/
          $id=  $request->id;
+         
          $comments=  $request->comments;
          $user_id_login= Auth::user();
          $rejector_name= $user_id_login->name;
          $rejectore_id= $user_id_login->id;
-          $requester_user_id=$request->user_id;
+         $requester_user_id=$request->user_id;
          $request_data= CSEIRequest::whereId($id)->first();
-        $amount= $request_data->amount;
-        $due_date  =$request_data->due_date;
+         $amount= $request_data->amount;
+         $due_date  =$request_data->due_date;
          $sql_requester_name= User::whereId($requester_user_id)->first();
          $status = 6; //we assume status is true (1) at the begining;
          $result = CSEIRequest::where('id', $id)->update(['status' =>$status,'rejectore_id'=>$rejectore_id,'comments'=>$comments]); 
@@ -243,6 +251,12 @@ use activityLog;
 	  }
         
           /*******************************mail to verifier***********************************************************************/
+          
+          
+          
+          
+          
+          
         
 //	 $name= $sql_requester_name->name;
 //                                if($result==1)

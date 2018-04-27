@@ -68,7 +68,7 @@
                <div class="{{$request->b_class}}">  {{$request->c_status}}</div>
               </td>
               <td>
-                <a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i> View</a>
+                <a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-pencil"></i>Edit</a>
                 @if($request->status == '0' || $request->status == '5')
                 <a href="{{route('requests.edit', $request->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
                 @endif
