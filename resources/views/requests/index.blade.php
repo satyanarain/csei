@@ -28,13 +28,14 @@
               <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                <thead>
                 <tr>
-                     <th style="display:none">id</th>
+                 <th style="display:none">id</th>
+                  <th>Date of Requisition</th>
                  <th>Request No.</th>
                  <th>Category</th>
-                 <th>Amount</th>
-                 <th>Due Date</th>
-                 <th>Created Date</th>
-                 <th>Purpose</th>
+                
+                <th>Purpose</th>
+                <th>Amount</th>
+                
                  <th>Status</th>
                  <th>Action</th>
                </tr>
@@ -43,18 +44,22 @@
               @foreach($requests as $key=>$request)
               <tr>
                   <td style="display:none">{{$request->id}}</td>
-               <td>{{$request->request_no}}</td>
-               <td>{{$request->name}}</td>
-                <td>{{$request->amount}}</td>
-              <td>
+               <td>
                 {{dateView($request->due_date)}}
               </td>
-              <td>
-                {{dateView($request->created_at)}}
+                   <td>
+                {{$request->request_no}}
               </td>
-              <td>
-                {{$request->purpose}}
+               <td>
+                {{displayView($request->name)}}
+                
               </td>
+               
+               <td>{{$request->purpose}}</td>
+              
+                <td>{{$request->amount}}</td>
+                
+
               <td>
             <div class="{{$request->b_class}}">  {{$request->c_status}}</div>
               </td>

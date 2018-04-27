@@ -23,21 +23,14 @@
                 <div class="card-body">
                  <div class="form-validation">
                                     <h4 class="header2">Create Request</h4>
-                                    {!!Form::open(['route'=>'requests.store',
-                                    'id'=>'formValidate',
-                                    'class'=>'formValidate',
-                                    'autocomplete'=>'off',
-                                      'onsubmit'=>'return validateForm()',
-                                    'files'=>true])!!}
+                                 
                                     @include('requests.form')
-                                    {!!Form::close()!!}
+                                 
                                 </div>
                             </div>
                         </div>
                     </div>
-              
-        </div>
-    
+    </div>
     @endsection
 
     @push('scripts')

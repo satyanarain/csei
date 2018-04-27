@@ -204,12 +204,7 @@ $segments_var = Request::segments();
                   <nav class="sidebar-nav">
                       <ul id="sidebarnav">
                           <li class="nav-devider"></li>
-                          <!--                        <li class="nav-label">Home</li>-->
-                          <!--                        <li style="padding: 8px 20px;">
-                                                      <span class="fa fa-user" style="color: green;"></span>@foreach(Auth::user()->roles as $role) {{$role->display_name}} @endforeach
-                                                  </li>-->
-
-                          <li class="{{$active == 'home' ? 'active' : ''}}"><a href="{{route('home')}}"><i class="fa fa-home"></i> Dashboard </a></li>
+                           <li class="{{$active == 'home' ? 'active' : ''}}"><a href="{{route('home')}}"><i class="fa fa-home"></i> Dashboard </a></li>
                           <!--                        <li class="nav-label">Apps</li>-->
                           @if(Entrust::hasRole('administrator'))
                           <li class="{{$active == 'users' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Users</span></a>
@@ -259,7 +254,7 @@ $segments_var = Request::segments();
                                   ?> 
                                   <li class="{{($active2 == 'requests' && $active == 'verifiers') ? 'active' : ''}}"><a href="{{route('verifiers.requests')}}" class="{{($request_only_verifire == 'requested_requests') ? 'active' : ''}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i> Pending Verification</a></li>
                                   <li class="{{($active2 == 'requests' && $active == 'approvers') ? 'active' : ''}}"><a href="{{route('approvers.requests')}}" class="{{($request_only_verifire == 'verifireactive') ? 'active' : ''}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i> Pending Approval</a></li>
-                                  @if(Entrust::hasRole('Admin Associate'))
+                                  @if(Entrust::hasRole('Director'))
                                   <li class="{{($active2 == 'requests' && $active == 'accountants') ? 'active' : ''}}"><a href="{{route('accountants.requests')}}"  class="{{($request_only_verifire == 'accountants') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Approved Requests</a></li>
                                   @endif
 
@@ -424,14 +419,16 @@ $segments_var = Request::segments();
                 });
       }); 
 
+
+
+
       $('body').on('focus',".multiple_date_due", function(){
                $(this).datepicker({
                     dateFormat: 'dd-mm-yy',
-                     startView: "year", 
+                     startView: "year",
+                      minDate:new Date(),
                       changeYear: true,
-                    yearRange: "-80Y:+20Y",
-      minDate: "-80Y"
-      //maxDate: "-0Y"
+                    yearRange: "-80Y:+20Y"
                                                       });
                                                   });
 

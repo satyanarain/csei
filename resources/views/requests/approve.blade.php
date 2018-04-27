@@ -32,11 +32,13 @@
                <thead>
                
                 <tr>
+                  <th>Date of Requisition</th>
+                 <th>Request No.</th>
                  <th>Category</th>
-                 <th>Amount</th>
-                 <th>Created Date</th>
-                 <th>Due Date</th>
-                 <th>Purpose</th>
+                
+                <th>Purpose</th>
+                <th>Amount</th>
+                
                  <th>Status</th>
                  <th>Action</th>
                </tr>
@@ -45,17 +47,17 @@
             <tbody>
               @foreach($requests as $key=>$request)
               <tr id="{{$request->id}}">
-               <td>{{$request->name}}</td>
-               <td>{{$request->amount}}</td>
                <td>
-                {{dateView($request->created_at)}}
-              </td>
-              <td>
                 {{dateView($request->due_date)}}
               </td>
+               <td>
+                {{$request->request_no}}
+              </td>
+               <td>{{$request->name}}</td>
               <td>
                 {{$request->purpose}}
               </td>
+               <td>{{$request->amount}}</td>
               <td>
                <span class="{{$request->b_class}}">{{$request->c_status}}</span>
               </td>

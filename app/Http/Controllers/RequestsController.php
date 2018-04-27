@@ -60,8 +60,17 @@ use activityLog;
      */
     public function store(Request $request)
     {
+           $user_details=Auth::user();
+//           echo "<pre>";
+//           print_r($_POST);
+//           
+//       exit();    
+//           
      if($request->verify=='Verify')
         {
+         /********************************************************/
+        /********************************************************/
+         
           $id=  $request->id;
           $comments=  $request->comments;
           $name_of_project=  $request->name_of_project;
@@ -79,27 +88,37 @@ use activityLog;
           $requester = DB::table('requests')->select('*','requests.id as id')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
           $status = 2; //we assume status is true (1) at the begining;
           $result=CSEIRequest::where('id', $id)->update(['name_of_project'=>$name_of_project,'project_expense_head'=>$project_expense_head,'status' =>$status,'verifire_id'=>$verifire_id]); 
-           /************************************mail to approver******************************************/
+         
+          /************************************mail to approver******************************************/
             if($result==1)
           {
              foreach ($approvers as $a_value) 
 		{
                    $name= $a_value->name;
-                   Mail::send('emails.verifier',['verifire_name'=>$verifire_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date], function ($m) use ($a_value) {
+                   Mail::send('emails.ve_r_to_approver',['verifire_name'=>$verifire_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date,'verifier_name'=>$user_details->name], function ($m) use ($a_value) {
                    $m->from('info@opiant.online', 'CSEI');
-                   $m->to($a_value->email, $a_value->name)->subject('Request for Approval!'); });
+                   $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Approval'); });
 		}
           }
+           /************************************mail to verifier******************************************/
+          
+           if($result==1)
+          {
+               Mail::send('emails.user_who_will_verify',['name'=>$user_details->name,'amount'=>$amount], function ($m) use ($user_details) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($user_details->email, $user_details->name)->subject('CSEI | Request Verifed'); });
+             }
            /************************************mail to requester******************************************/
           if($result==1)
           {
           $verified_approved='verify';
                    Mail::send('emails.mail_to_requester_for_va',['verifire_name'=>$verifire_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verified_approved'=>$verified_approved], function ($m) use ($requester) {
                    $m->from('info@opiant.online', 'CSEI');
-                   $m->to($requester->email, $requester->name)->subject('Your request has been verified!'); });
-          }
-		   return redirect()->route('verifiers.requests'); 
-        
+                   $m->to($requester->email, $requester->name)->subject('CSEI | Request Verified'); });
+             }
+		 
+             return redirect()->route('verifiers.requests'); 
+                  
          }
      else if($request->approve=='Approve')
         {
@@ -115,69 +134,47 @@ use activityLog;
          $due_date  =$request_data->due_date;
          $sql_appover= User::whereId($user_id)->first();
          /*********************app associates*************************/
-         $associates = DB::table('role_user')
+          $associates = DB::table('role_user')
                  ->leftjoin('users','users.id','role_user.user_id')
                 ->where('role_user.role_id',5) 
                  ->get();
-   /****************************************************************************************/
+          /****************************************************************************************/
           $requester = DB::table('requests')->select('*','requests.id as id')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
           $status = 3; 
            //update status
         $result=  CSEIRequest::where('id', $id)->update(['status' =>$status,'approver_id'=>$approver_id]); 
         /******************************************email for associates*********************************/
           if($result==1)
- {
+            {
 		foreach ($associates as $a_value) {
                     $name = $a_value->name;
-                    Mail::send('emails.associates', ['apporver_name' => $apporver_name, 'name' => $name, 'amount' => $amount, 'due_date' => $due_date], function ($m) use ($a_value) {
+                    Mail::send('emails.associates', ['apporver_name' => $apporver_name, 'name' => $name,'associate_name'=>$a_value->name, 'amount' => $amount, 'due_date' => $due_date], function ($m) use ($a_value) {
                         $m->from('info@opiant.online', 'CSEI');
-                        $m->to($a_value->email, $a_value->name)->subject('Request for quotation!');
+                        $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for take action');
                     });
                 }
             }
-         /******************************************email for requester*********************************/   
+            
+            /******************************************email for verifier who will verify email*********************************/ 
+            
+               if($result==1)
+          {
+               Mail::send('emails.user_who_will_approve',['name'=>$user_details->name,'amount'=>$amount], function ($m) use ($user_details) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($user_details->email, $user_details->name)->subject('CSEI |  Request Verifed'); });
+             }
+            /******************************************email for requester*********************************/   
             if($result==1)
           {
                    $verified_approved='approve';
                    Mail::send('emails.mail_to_requester_for_va',['apporver_name'=>$apporver_name,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verified_approved'=>$verified_approved], function ($m) use ($requester) {
                    $m->from('info@opiant.online', 'CSEI');
-                   $m->to($requester->email, $requester->name)->subject('Your request has been approved!'); });
+                   $m->to($requester->email, $requester->name)->subject('CSEI | Request Approved'); });
           }
              return redirect()->route('approvers.requests'); 
          }
           else if($request->rejected=='Rejected'){
              /****************Reject section start here*******************************************************************************/
-          $id=  $request->id;
-         $comments=  $request->comments;
-         $user_id_login= Auth::user();
-         $rejector_name= $user_id_login->name;
-         $rejectore_id= $user_id_login->id;
-        
-         $requester_user_id=$request->user_id;
-         $request_data= CSEIRequest::whereId($id)->first();
-        $amount= $request_data->amount;
-        $due_date  =$request_data->due_date;
-        
-          $sql_requester_name= User::whereId($requester_user_id)->first();
-          $status = 7; //we assume status is true (1) at the begining;
-          $result= CSEIRequest::where('id', $id)->update(['status' =>$status,'rejectore_id'=>$rejectore_id,'comments'=>$comments]); 
-		//foreach ($approvers as $a_value) 
-		//{
-                   $name= $sql_requester_name->name;
-                      if($result==1)
-          {
-                   Mail::send('emails.reject',['rejector_name'=>$rejector_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($sql_requester_name) {
-                   $m->from('info@opiant.online', 'CSEI');
-                   $m->to($sql_requester_name->email, $sql_requester_name->name)->subject('Request Rejection Mail!'); });
-          }
-		//}
-                  return redirect()->route('verifiers.requests'); 
-         
-         
-         
-         }
-          else if($request->approverejected=='Rejected'){
-             /****************Veri Fy Reject section start here*******************************************************************************/
          $id=  $request->id;
          $comments=  $request->comments;
          $user_id_login= Auth::user();
@@ -189,20 +186,74 @@ use activityLog;
         $amount= $request_data->amount;
         $due_date  =$request_data->due_date;
         
+        /************************************requester details**************************************************************/
+          $sql_requester_name= User::whereId($requester_user_id)->first();
+          $status = 7; //we assume status is true (1) at the begining;
+          $result= CSEIRequest::where('id', $id)->update(['status' =>$status,'rejectore_id'=>$rejectore_id,'comments'=>$comments]); 
+          /*******************************mail to requester when request reject at verification time***********************************************************************/
+            $name= $sql_requester_name->name;
+                      if($result==1)
+          {
+                   Mail::send('emails.request_reject_verification_time',['rejector_name'=>$rejector_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($sql_requester_name) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($sql_requester_name->email, $sql_requester_name->name)->subject('CSEI | Request Rejection Mail'); });
+          }
+	/*******************************mail to requester verifier***********************************************************************/
+         
+           if($result==1)
+          {
+               Mail::send('emails.reject_mail_to_verifier',['name'=>$user_details->name,'amount'=>$amount], function ($m) use ($user_details) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($user_details->email, $user_details->name)->subject('CSEI | Request Rejection Mail'); });
+             }
+          
+                  return redirect()->route('verifiers.requests'); 
+           }
+          else if($request->approverejected=='Rejected'){
+             /****************Veri Fy Reject section start here*******************************************************************************/
+         $id=  $request->id;
+         $comments=  $request->comments;
+         $user_id_login= Auth::user();
+         $rejector_name= $user_id_login->name;
+         $rejectore_id= $user_id_login->id;
+          $requester_user_id=$request->user_id;
+         $request_data= CSEIRequest::whereId($id)->first();
+        $amount= $request_data->amount;
+        $due_date  =$request_data->due_date;
          $sql_requester_name= User::whereId($requester_user_id)->first();
-         //$approvers = User::whereIn('id', explode(',', $sql_appover->approvers))->get();
-         // $sql_requester_name->name;
-         // $sql_requester_name->email;
-      
          $status = 6; //we assume status is true (1) at the begining;
          $result = CSEIRequest::where('id', $id)->update(['status' =>$status,'rejectore_id'=>$rejectore_id,'comments'=>$comments]); 
+         
+           /*******************************mail to requester when request reject at verification time***********************************************************************/
+            $name= $sql_requester_name->name;
+                      if($result==1)
+          {
+                   Mail::send('emails.request_reject_approver_time',['rejector_name'=>$rejector_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($sql_requester_name) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($sql_requester_name->email, $sql_requester_name->name)->subject('CSEI | Request Rejection Mail'); });
+          }
+          /*******************************mail to approver***********************************************************************/
+        
 	 $name= $sql_requester_name->name;
                                 if($result==1)
           {
-                   Mail::send('emails.reject',['rejector_name'=>$rejector_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($sql_requester_name) {
+                   Mail::send('emails.reject_mail_to_approver',['rejector_name'=>$rejector_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($sql_requester_name) {
                    $m->from('info@opiant.online', 'CSEI');
-                   $m->to($sql_requester_name->email, $sql_requester_name->name)->subject('Request Rejection Mail!'); });
-	}
+                   $m->to($sql_requester_name->email, $sql_requester_name->name)->subject('CSEI | Request Rejection Mail'); });
+	  }
+        
+          /*******************************mail to verifier***********************************************************************/
+        
+//	 $name= $sql_requester_name->name;
+//                                if($result==1)
+//          {
+//                   Mail::send('emails.reject_mail_to_approver',['rejector_name'=>$rejector_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($request_data) {
+//                   $m->from('info@opiant.online', 'CSEI');
+//                   $m->to($request_data->email, $request_data->name)->subject('CSEI | Request Rejection Mail'); });
+//	  }
+        
+        
+        
                   return redirect()->route('approvers.requests'); 
         }
            else{
@@ -230,7 +281,7 @@ use activityLog;
                    $name= $a_value->name;
                    Mail::send('emails.approvers',['verifire_name'=>$verifire_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date], function ($m) use ($a_value) {
                    $m->from('info@opiant.online', 'CSEI');
-                   $m->to($a_value->email, $a_value->name)->subject('Request!'); });
+                   $m->to($a_value->email, $a_value->name)->subject('CSEI | Request!'); });
 		}
        return redirect()->route('requests.index');
        

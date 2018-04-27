@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 use App\Models\Fare;
+use App\Models\CSEIRequest;
 use App\Brand;
 
 trait activityLog {
@@ -53,6 +54,17 @@ function displayIdBaseName($table = '', $id = '', $fieldname = '') {
     } else {
         echo "N/A";
     }
+}
+function requestNo($request_no) {
+            $date=date('Y/m/d');
+           $total= CSEIRequest::count();
+           if($total==0)
+           {
+         return  $request_no="CSEI"."/S-1/".$date;    
+           } else {
+           $total_all=$total+1;
+         return  $request_no="CSEI"."/S-".$total_all."/".$date;
+           }
 }
 
 

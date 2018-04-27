@@ -12,11 +12,13 @@
                     <tbody><tr>
                             <td class="m_3012731993381030246content-cell" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;padding:35px"><span class="im">
                                     <h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">Hi {{$name}},</h1>
-                                    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">Your request for Rs. {{$amount}} has been {{$verified_approved}} successfully.</p>
-                                </span><p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">Thanks,<br>
-                                    CSEI Team</p>
-
-                            </td>
+                                    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">Your request for  Rs. {{$amount}}  has been rejected by {{$rejector_name}}.</p>
+                                    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">for reason(s) given below:</p>
+                                    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">{{$comments}} </p>
+                                    Please <a href="{{route('requests.create')}}">click here</a> to raise a new request.
+                                    </span><p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">Thanks,<br>
+                                    CSEI Team.</p>
+                             </td>
                         </tr>
                     </tbody>
                 </table>
@@ -33,6 +35,3 @@
         </tr>
     </tbody>
 </table>
-
-
-

@@ -43,20 +43,14 @@ class RequestRepository implements RequestRepositoryContract
 
 	public function create($request)
 	{
-           $total= CSEIRequest::count();
-           if($total==0)
-           {
-          $request_no="CSEI"."/1";    
-           } else {
-               $total_all=$total+1;
-           $request_no="CSEI"."/".$total_all;
-           }
-          // exit();
+        $requester= Auth::user();
+         
+        $request_no= $this->requestNo($result);
         $input = $request->all();
         $input['user_id'] = Auth::id();
         $input['due_date'] = $this->insertDate($request->due_date);
+        $input['required_by_date'] = $this->insertDate($request->required_by_date);
         $input['request_no'] = $request_no;
-        $input['category_id'] = implode(',', $request->category_id);
         $input['status'] = 1;
         $request_id = CSEIRequest::create($input)->id;
         
@@ -82,31 +76,40 @@ class RequestRepository implements RequestRepositoryContract
                 $verifire_name = $a_value->name;
                 $amount = $request->amount;
 
-                Mail::send('emails.request_to_verifier', ['verifire_name' => $verifire_name, 'amount' => $amount], function ($m) use ($a_value) {
+                Mail::send('emails.request_to_verifier', ['verifire_name' => $verifire_name, 'amount' => $amount,'requester_name'=>$requester->name], function ($m) use ($a_value) {
                     $m->from('info@opiant.online', 'CSEI');
-                    $m->to($a_value->email, $a_value->name)->subject('Request for verification!');
+                    $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Verification');
                 });
             }
         }
-
+          /************************************mail to requester******************************************/
+         //$requester = DB::table('requests')->select('*','requests.id as id')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
+        if ($request_id != '') {
+          $verified_approved='created';
+                   Mail::send('emails.mail_to_requester_for_va',['amount'=>$request->amount,'verified_approved'=>$verified_approved,'name'=>$requester->name], function ($m) use ($requester) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($requester->email, $requester->name)->subject('CSEI | Request created'); });
+          }
+        
         Session::flash('flash_message', "Request Created Successfully."); //Snippet in Master.blade.php
         return $resquests_data;
     }
 
-	    public function update($id, $requestData) {
-	       $this->createLog('App\Models\CSEIRequest','App\Models\CSEIRequestLog',$id);
-                 $CSEIRequest= CSEIRequest::findorFail($id);
-                 $input = $requestData->all();
-                 $input['user_id'] = Auth::id();
-                 $input['due_date'] = $this->insertDate($requestData->due_date);
-                 $input['status'] = 1;
-                $CSEIRequest->fill($input)->save();
-                 Session::flash('flash_message', "Request Updated Successfully.");
-                 return $resquests_data;;
+    public function update($id, $requestData) {
+        $this->createLog('App\Models\CSEIRequest', 'App\Models\CSEIRequestLog', $id);
+        $CSEIRequest = CSEIRequest::findorFail($id);
+        $input = $requestData->all();
+        $input['user_id'] = Auth::id();
+        $input['due_date'] = $this->insertDate($requestData->due_date);
+        $input['required_by_date'] = $this->insertDate($requestData->required_by_date);
+        $input['status'] = 1;
+        $CSEIRequest->fill($input)->save();
+        Session::flash('flash_message', "Request Updated Successfully.");
+        return $resquests_data;
+        ;
+    }
 
-	}
-
-	public function destroy($id)
+    public function destroy($id)
 	{
         if ($id !== 1) {
             Role::whereId($id)->delete();

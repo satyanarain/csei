@@ -16,22 +16,17 @@
 	<!-- End Bread crumb -->
 	@endsection
 @section('content')
-	<!-- Container fluid  -->
-	<div class="container-fluid">
-     
-		<!-- Start Page Content -->
-		<div class="row">
-			<div class="col-12">
-				<div class="card">
-					<div class="card-body">
-						<div class="row">
-							<div class="col s12 m12 l12">
-								<div class="card-panel">
-									<h4 class="header2">Update Request</h4>
+	  <!-- Container fluid  -->
+      <div class="row justify-content-center" id='printableArea'>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                 <div class="form-validation">
+                                    <h4 class="header2">Create Request</h4>
 									
-										{!!Form::model($request, ['route'=>['requests.update', $request->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
-										@include('requests.form')
-										{!!Form::close()!!}
+										
+                                                                                @include('requests.form')
+										
 									
 								</div>
 							</div>
