@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Models\User;
+use App\Models\Voucher;
 use App\Models\Category;
 use App\Models\CSEIRequest;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use App\Http\Requests\Requests\StoreRequestsRequest;
 use App\Repositories\Request\RequestRepositoryContract;
 use DB;
 use Mail;
+
 use \App\Traits\activityLog;
 class RequestsController extends Controller
 {
@@ -251,26 +253,36 @@ use activityLog;
 	  }
         
           /*******************************mail to verifier***********************************************************************/
-          
-          
-          
-          
-          
-          
-        
-//	 $name= $sql_requester_name->name;
-//                                if($result==1)
-//          {
-//                   Mail::send('emails.reject_mail_to_approver',['rejector_name'=>$rejector_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($request_data) {
-//                   $m->from('info@opiant.online', 'CSEI');
-//                   $m->to($request_data->email, $request_data->name)->subject('CSEI | Request Rejection Mail'); });
-//	  }
+              $request_data= CSEIRequest::whereId($id)->first();
+             $verifier_id_user= $request_data->verifier->id;
+               $verifier_user= CSEIRequest::whereId($verifier_id_user)->first();
+              
+          	 $name= $verifier_user->name;
+                 
+                                if($result==1)
+          {
+                   Mail::send('emails.reject_mail_to_verifier',['rejector_name'=>$rejector_name,'name'=>$name,'amount'=>$amount,'comments'=>$comments], function ($m) use ($verifier_user) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($verifier_user->email, $verifier_user->name)->subject('CSEI | Request Rejection Mail'); });
+	  }
         
         
         
-                  return redirect()->route('approvers.requests'); 
+        return redirect()->route('approvers.requests'); 
         }
-           else{
+        else if($request->savevoucher=='savevoucher')
+        {
+            $status=5;
+            $director_id= $user_id_login->id;
+            $id=$request->id;
+            $result=CSEIRequest::where('id', $id)->update(['status' =>$status]);
+            $input=  $request->all();
+            $input['request_id']=$id;
+            $input['date_of_release']=$this->insertDate($request->date_of_release); 
+            Voucher::create($input);
+             return redirect()->route('accountants.requests'); 
+         }
+        else{
           
          $this->request->create($request);
          return redirect()->route('requests.index');
