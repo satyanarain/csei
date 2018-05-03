@@ -11,10 +11,10 @@
                 <table class="m_3012731993381030246inner-body" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;background-color:#ffffff;margin:0 auto;padding:0;width:570px" cellspacing="0" cellpadding="0" align="center" width="570">
                     <tbody><tr>
                             <td class="m_3012731993381030246content-cell" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;padding:35px"><span class="im">
-                                    <h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">Hi {{$associate_name}},</h1>
-                                    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">A request for Rs. {{$amount}} has been approve by {{$apporver_name}}. Please <a href="{{route('verifiers.requests')}}">click here</a> to take action.</p>
+                                    <h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">Dear {{$associate_name}},</h1>
+                                    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">A request number {{$request_no}} for Rs. {{$amount}} has been approved by {{$apporver_name}}. Please <a href="{{route('verifiers.requests')}}">click here</a> to take appropriate action.</p>
                                 </span><p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">Thanks,<br>
-                                    {{--Auth::user()->name--}}CSEI team
+                                  CSEI Team
                                 </p>
                              </td>
                         </tr>

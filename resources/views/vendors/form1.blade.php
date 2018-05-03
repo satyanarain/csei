@@ -53,7 +53,7 @@
         </div>
     </div>
      <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="upload_document"></label>
+        <label class="col-lg-4 col-form-label" for="upload_document">Other Document</label>
         <div class="col-lg-6">
           {!! Form::file('upload_document',null , ['class' => 'form-control']) !!} 
               @if($vendors->upload_document!='')

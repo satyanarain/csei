@@ -25,7 +25,7 @@
             <div class="card">
                 <div class="card-body">
                  <div class="form-validation">
-                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Team Details</h4>
+                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">User Details</h4>
                      
                   @if($user->profile_picture!='')
                     <div class="card-content">

@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Requests</h3> </div>
+    <h3 class="text-primary">Requests Pending for Approval</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Requests</li>
+        <li class="breadcrumb-item active">Pending Approval</li>
       </ol>
     </div>
   </div>
@@ -23,26 +23,22 @@
         <div class="card">
           <div class="card-body">
           <h4 class="card-title">
-              Request for Approval List
+             Requisition List
 <!--              Requests List-->
           </h4>
-            <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+           
             <div class="table-responsive m-t-40">
               <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                <thead>
-               
-                <tr>
+               <tr>
                   <th>Date of Requisition</th>
-                 <th>Request No.</th>
+                 <th>Requisition No.</th>
                  <th>Category</th>
-                
-                <th>Purpose</th>
+                 <th>Purpose</th>
                 <th>Amount</th>
-                
-                 <th>Status</th>
+                <th>Status</th>
                  <th>Action</th>
                </tr>
-            
              </thead>
             <tbody>
               @foreach($requests as $key=>$request)

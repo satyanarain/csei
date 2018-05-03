@@ -4,7 +4,6 @@ $segments_var = Request::segments();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -254,8 +253,8 @@ $segments_var = Request::segments();
                                   ?> 
                                   <li class="{{($active2 == 'requests' && $active == 'verifiers') ? 'active' : ''}}"><a href="{{route('verifiers.requests')}}" class="{{($request_only_verifire == 'requested_requests') ? 'active' : ''}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i> Pending Verification</a></li>
                                   <li class="{{($active2 == 'requests' && $active == 'approvers') ? 'active' : ''}}"><a href="{{route('approvers.requests')}}" class="{{($request_only_verifire == 'verifireactive') ? 'active' : ''}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i> Pending Approval</a></li>
-                                  @if(Entrust::hasRole('Director'))
-                                  <li class="{{($active2 == 'requests' && $active == 'accountants') ? 'active' : ''}}"><a href="{{route('accountants.requests')}}"  class="{{($request_only_verifire == 'accountants') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Approved Requests</a></li>
+                                  @if(Entrust::hasRole('administrator'))
+                                  <li class="{{($active2 == 'requests' && $active == 'accountants') ? 'active' : ''}}"><a href="{{route('accountants.requests')}}"  class="{{($request_only_verifire == 'accountants') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Pending Action</a></li>
                                   @endif
 
 
@@ -460,18 +459,8 @@ $segments_var = Request::segments();
               var add_button = $("#add_field_button_classes"); //Add button ID
               var add_button = $("#add_field_button_classes");
 
-              //var maxvalue= $("#maxvalue").val();
-              //alert(maxvalue)
-      //  if(maxvalue != 'undefined')
-      //  {
               var x = 1;
-      //  }else
-      //  {
-      //    var x = maxvalue;   
-      //  }
-
-
-              //initlal text box count
+    
               $("#add_field_button_classes").click(function (e) { //on add input button click
 
                   e.preventDefault();
@@ -496,30 +485,46 @@ $segments_var = Request::segments();
       </table></div>'); //add input box
                   }
               });
+             });
+          
+          
+          /************************************************************************************************/
+$(document).ready(function () {
+              var max_fields = 10000; //maximum input boxes allowed
+              var wrapper = $("#input_doc"); //Fields wrapper
+              var add_button = $("#add_field_doc"); //Add button ID
+            
 
+              var x = 1;
+   
+              $("#add_field_doc").click(function (e) { //on add input button click
+                  e.preventDefault();
+                  if (x < max_fields) { //max input box allowed
+                      x++; //text box increment
+                      $("#input_doc").append('<div id="div_remove_field' + x + '" style="padding-left:0px;  margin-bottom:0px; width:100%;">\n\
+<table   border="0" width="95%" style="margin:0px 20px 20px 20px;"><tr  style="padding:10px 0px 10px 20px"><td  colspan="" align="left" valign="top" style="text-align:left;">Document</td><td  colspan="" align="left" valign="top" style="text-align:left;">{!! Form::file('document[]',null , ['class' => 'form-control',required]) !!}</td>\n\
+<td  colspan="" align="left" valign="top"  style="text-align:left;"  width="15%"><a href="#" class="btn btn-danger remove remove_field"><i class="glyphicon glyphicon-remove"></i>Remove</a></td></tr></table></div>'); //add input box
+                  }
+              });
+
+              $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                  e.preventDefault();
+                  $(this).closest('div').remove();
+                  x--;
+              })
 
           });
-
-          /************************************************************************************************/
-
+          
+          
+          
           $(document).ready(function () {
               var max_fields = 10000; //maximum input boxes allowed
               var wrapper = $("#input_fields_wrap_request"); //Fields wrapper
               var add_button = $("#add_field_button_request"); //Add button ID
               var add_button = $("#add_field_button_request");
 
-              //var maxvalue= $("#maxvalue").val();
-              //alert(maxvalue)
-      //  if(maxvalue != 'undefined')
-      //  {
               var x = 1;
-      //  }else
-      //  {
-      //    var x = maxvalue;   
-      //  }
-
-
-              //initlal text box count
+   
               $("#add_field_button_request").click(function (e) { //on add input button click
                   e.preventDefault();
                   if (x < max_fields) { //max input box allowed
@@ -541,26 +546,6 @@ $segments_var = Request::segments();
           });
 
 
-
-      //function removeFunction(id)
-      //{
-      //var x = 1;  
-      //       $("#"+id).parent('div').remove(); x--;
-      //      $("#div_"+id).remove(); x--;
-      //    
-      //}
-
-
-      // $("#unit_price").keyup(function() {
-      //    $row = $(this).closest("tr");    // Find the row
-      //    $qty = parseFloat($row.find("#quantity").val()); // Find the text
-      //    if($qty!='')
-      //    {
-      //    $net = parseFloat($row.find("#unit_price").val()); // Find the text
-      //    var $total = $qty * $net;
-      //    $row.find("#total").val($total);
-      //    }
-      //});
           $(document).on("keyup", "#quantity", function () {
               $row = $(this).closest("tr");    // Find the row
               $qty = $row.find("#quantity").val(); // Find the text
@@ -580,8 +565,7 @@ $segments_var = Request::segments();
           $(document).on("keyup", "#unit_price", function () {
               $row = $(this).closest("tr");    // Find the row
               $qty = $row.find("#quantity").val(); // Find the text
-              //  $product_name = parseFloat($row.find("#product_name").val()); // Find the text
-              //$product_code = parseFloat($row.find("#product_code").val()); // Find the text
+        
               $net = parseFloat($row.find("#unit_price").val());
               alert($qty);
               // alert($net);
@@ -713,3 +697,4 @@ $segments_var = Request::segments();
   </body>
 
 </html>
+

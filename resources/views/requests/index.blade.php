@@ -30,7 +30,7 @@
                 <tr>
                  <th style="display:none">id</th>
                   <th>Date of Requisition</th>
-                 <th>Request No.</th>
+                 <th>Requisition No.</th>
                  <th>Category</th>
                 
                 <th>Purpose</th>
@@ -67,6 +67,9 @@
                 <a href="{{route('requests.show',[$request->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
                 @if($request->status == 1)
                 <a href="{{route('requests.edit', $request->id)}}" class="btn btn-success m-b-10 m-l-5 pull-left"><i class="fa fa-pencil"></i> Edit</a>
+                @endif
+                @if($request->status == 5)
+                <a href="{{route('requests.show', [$request->id,'submit_bill'])}}" class="btn btn-success m-b-10 m-l-5 pull-left"><i class="fa fa-money"></i> Submit Bill</a>
                 @endif
               </td>
             </tr>

@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use App\Repositories\User\UserRepositoryContract;
 use Illuminate\Support\Facades\Hash;
-
+use Mail;
 class UserRepository implements UserRepositoryContract
 {
 	public function all()
@@ -68,18 +68,19 @@ class UserRepository implements UserRepositoryContract
 			$user->profile_picture = $fileName;
 		}
 
-		//set manual_reset_password_token
 		$user->manual_reset_password_token = str_random(60);
-//                echo "<pre>";
-//                print_r($_POST);
-//                exit();
-
-		$user->save();
-
-		$role = $request->roles;
-
-		$user->roles()->attach($role);
-
+               echo  $result=  $user->save();
+                $role = $request->roles;
+                $user->roles()->attach($role);
+            
+         
+           if($result==1)
+          {
+               Mail::send('emails.users.user_email',['email'=>$request->email,'name'=>$request->name,'password'=>$request->password], function ($m) use ($request) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($request->email, $request->name)->subject('CSEI | Account Created'); });
+             }
+         
 		return $user;
 	}
 
@@ -122,8 +123,6 @@ class UserRepository implements UserRepositoryContract
 		$user->save();
 
 		$role = $request->roles;
-
-		//return response()->json($role);
 
 		$user->roles()->sync($role);
 

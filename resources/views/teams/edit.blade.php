@@ -4,7 +4,7 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
 	<div class="col-md-5 align-self-center">
-		<h3 class="text-primary">Requests</h3> </div>
+		<h3 class="text-primary">Team</h3> </div>
 		<div class="col-md-7 align-self-center">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>

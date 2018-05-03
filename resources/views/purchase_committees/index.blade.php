@@ -34,9 +34,9 @@
                <thead>
                 <tr>
                  <th>Name</th>
-                 <th>Member</th>
-                 <th>Head</th>
-                 <th>Created at</th>
+                 <th>Members</th>
+                 <th>Committee Head</th>
+                 <th>Date Created</th>
                  <th width="20%" class="no-sort">Action</th>
                </tr>
              </thead>

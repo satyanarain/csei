@@ -76,7 +76,7 @@ class RequestRepository implements RequestRepositoryContract
                 $verifire_name = $a_value->name;
                 $amount = $request->amount;
 
-                Mail::send('emails.request_to_verifier', ['verifire_name' => $verifire_name, 'amount' => $amount,'requester_name'=>$requester->name], function ($m) use ($a_value) {
+                Mail::send('emails.request_to_verifier', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
                     $m->from('info@opiant.online', 'CSEI');
                     $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Verification');
                 });
@@ -85,13 +85,13 @@ class RequestRepository implements RequestRepositoryContract
           /************************************mail to requester******************************************/
          //$requester = DB::table('requests')->select('*','requests.id as id')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
         if ($request_id != '') {
-          $verified_approved='created';
-                   Mail::send('emails.mail_to_requester_for_va',['amount'=>$request->amount,'verified_approved'=>$verified_approved,'name'=>$requester->name], function ($m) use ($requester) {
+          $verified_approved='Submitted';
+                   Mail::send('emails.mail_to_requester_for_va',['amount'=>$request->amount,'request_no'=>$request_no,'verified_approved'=>$verified_approved,'name'=>$requester->name], function ($m) use ($requester) {
                    $m->from('info@opiant.online', 'CSEI');
-                   $m->to($requester->email, $requester->name)->subject('CSEI | Request created'); });
+                   $m->to($requester->email, $requester->name)->subject('CSEI | Request Submitted'); });
           }
         
-        Session::flash('flash_message', "Request Created Successfully."); //Snippet in Master.blade.php
+        Session::flash('flash_message', "Request Submitted Successfully."); //Snippet in Master.blade.php
         return $resquests_data;
     }
 

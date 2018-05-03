@@ -53,7 +53,7 @@
         </div>
     </div>
      <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="upload_document"></label>
+        <label class="col-lg-4 col-form-label" for="upload_document">Other Document</label>
         <div class="col-lg-6">
           {!! Form::file('upload_document',null , ['class' => 'form-control']) !!} 
              
@@ -69,7 +69,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="registration_no_upload">Registration No. Upload <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="registration_no_upload">Registration No. Copy <span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!! Form::file('registration_no_upload',null , ['class' => 'form-control',required]) !!} 
         
@@ -82,7 +82,7 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="pan_no_upload">PAN No. Upload <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="pan_no_upload">PAN No. Copy <span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!! Form::file('pan_no_upload',null , ['class' => 'form-control',required]) !!}
            
@@ -95,7 +95,7 @@
         </div>
     </div>
      <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="gst_no_upload">GST No. Upload<span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="gst_no_upload">GST No. Copy<span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!! Form::file('gst_no_upload',null , ['class' => 'form-control',required]) !!}
           

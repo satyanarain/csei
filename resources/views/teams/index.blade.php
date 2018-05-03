@@ -3,7 +3,7 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Users</h3> </div>
+    <h3 class="text-primary">Teams</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
@@ -34,7 +34,7 @@
                <thead>
                 <tr>
                  <th>Name</th>
-                 <th>Created at</th>
+                 <th>Date Created</th>
                  <th width="20%" class="no-sort">Action</th>
                </tr>
              </thead>

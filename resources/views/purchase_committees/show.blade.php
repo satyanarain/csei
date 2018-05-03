@@ -7,7 +7,7 @@
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('vendors.index')}}">Purchase Committees</a></li>
+        <li class="breadcrumb-item"><a href="{{route('purchase_committees.index')}}">Purchase Committees</a></li>
         <li class="breadcrumb-item active">Details</li>
       </ol>
     </div>

@@ -39,7 +39,7 @@
   <div class="form-group row">
     <label class="col-lg-4 col-form-label" for="purpose">Purpose <span class="text-danger">*</span></label>
     <div class="col-lg-6">
-          {!!Form::select('purpose', array('Personal'=>'Personal','Official'=>'Official'), isset($request->purpose)?$user->purpose:null, ["class"=>"form-control", 'required','placeholder'=>'Select purpose'])!!}
+          {!!Form::select('purpose', array('Personal'=>'Personal','Official'=>'Official'), isset($request->purpose)?$user->purpose:null, ["class"=>"form-control", 'required','placeholder'=>'Select Purpose'])!!}
     </div>
 </div>
  <div class="form-group row">

@@ -17,7 +17,7 @@
     <label class="col-lg-4 col-form-label" for="amount">Head<span class="text-danger">*</span></label>
    
     <div class="col-lg-6">
-       {!! Form::select('head_id',$userall,isset($purchase_committees->head_id)?$purchase_committees->head_id:null,['class'=>'form-control','required'=>'required','placeholder'=>'Select Member Head'])!!}
+       {!! Form::select('head_id',$userall,isset($purchase_committees->head_id)?$purchase_committees->head_id:null,['class'=>'form-control','required'=>'required','placeholder'=>'Select Purchase Committee Head'])!!}
     </div>
 </div> 
 

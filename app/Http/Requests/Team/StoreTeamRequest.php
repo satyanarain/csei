@@ -40,17 +40,17 @@ class StoreTeamRequest extends FormRequest
         ];
     }
 
-//    public function message()
-//    {
-//        return [
-//            'name.required' => 'Name field is required.',
+   public function message()
+    {
+       return [
+            'name.required' => 'Name field is required.',
 //            'email.required' => 'Email filed is required.',
 //            'email.email' => 'Email must be a valid email.',
-//            'email.unique' => 'This email is already registered.',
+           'name.unique' => 'This team is already registered.'
 //            //'roles.required' => 'Role field is required.',
 //            //'state.required_id' => 'State field is required if role is state admin.',
 //            'password.required' => 'Password field is required.',
 //            'confirm_password.required' => 'The Confirm password field is required.'
-//        ];
-//    }
+       ];
+    }
 }

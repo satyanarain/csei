@@ -1,7 +1,7 @@
     <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="name">Name <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-              {!! Form::text('name',null , ['class' => 'form-control']) !!}
+              {!! Form::text('name',null , ['class' => 'form-control','required']) !!}
         </div>
     </div>
   <div class="form-group row">
@@ -41,7 +41,7 @@
     <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="roles">Designation<span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!!Form::select('roles[]', $roles, isset($user->roles)?$user->roles:[2], ["class"=>"form-control", 'multiple'=>'multiple','style'=>'min-height:100px;'])!!}
+          {!!Form::select('roles[]', $roles, isset($user->roles)?$user->roles:[2], ["class"=>"form-control"])!!}
         </div>        
     </div> 
 
@@ -60,45 +60,11 @@
    <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="roles">Status<span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!!Form::select('status', array('1'=>'Active','0'=>'Inactive'), isset($user->status)?$user->status:null, ["class"=>"form-control", 'required','placeholder'=>'Select Status'])!!}
+          {!!Form::select('status', array('1'=>'Active','0'=>'Inactive'), isset($user->status)?$user->status:null, ["class"=>"form-control", 'required'=>'required','placeholder'=>'Select Status'])!!}
         </div>        
     </div> 
 
-<!--
-<div class="form-group row">
-@if($user->profile_picture!='')
-<label class="col-lg-4 col-form-label" for="roles">Existing Image</label>
-  <div class="col-lg-6">
-{{Html::image('images/userProfiles/'.$user->profile_picture, 'a picture', array('width' => '100','height'=>'100'))}}
-</div>
-@else
-<label class="col-lg-4 col-form-label" for="roles">Existing Image</label>
-  <div class="col-lg-6" id="noimage">
-{{Html::image('images/photo/noimage.png', 'a picture', array('width' => '100','height'=>'100'))}}
-</div>
-@endif
-</div>
 
-<div class="form-group row" style="display:none;" id="output_display">
-    {!! Form::label('image_path', Lang::get('&nbsp;'), ['class' => 'col-lg-4 col-form-label']) !!}
-     <div class="col-lg-6">
-   <img id="output" width="100" height="100"/>
-</div>
-</div>
-
- <div class="form-group row">
-
-    <label class="col-lg-4 col-form-label" for="roles">Profile Picture</label>
-     <div class="col-lg-6">
-    {!! Form::file('profile_picture',['class' => 'form-control','onchange'=>'loadFile(event)','id'=>'profile_picture']) !!}
-</div>
-</div>-->
-<!--    <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="name">Credit Limit</label>
-        <div class="col-lg-6">
-              {!! Form::text('credit_limit',null , ['class' => 'form-control']) !!}
-        </div>
-    </div>-->
 <div class="form-group row">
         <div class="col-lg-4">
         </div>

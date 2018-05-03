@@ -8,7 +8,7 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="{{route('vendors.index')}}">Vendors</a></li>
-                <li class="breadcrumb-item active">Create</li>
+                <li class="breadcrumb-item active">Update</li>
             </ol>
         </div>
     </div>

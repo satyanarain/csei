@@ -3,7 +3,7 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Verder</h3> </div>
+    <h3 class="text-primary">Team</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
@@ -21,9 +21,9 @@
           <div class="card">
               <div class="card-body">
                   <div class="form-validation">
-                      <h4 class="header2" style="border-bottom:#ccc 0px solid;">Team Detail</h4>
+                      <h4 class="header2" style="border-bottom:#ccc 0px solid;">Team Details</h4>
                       <div class="form-group row">
-                          <label class="col-lg-4 col-form-label" for="name">Name Team</label>
+                          <label class="col-lg-4 col-form-label" for="name">Name</label>
                           <div class="col-lg-6">
                               {{$teams->name}}
                           </div>

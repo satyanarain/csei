@@ -35,7 +35,7 @@
                 <tr>
                  <th width="10%">Name</th>
                  <th width="10%">Email</th>
-                 <th width="10%">Role (s)</th>
+                 <th width="10%">Designation</th>
                  <th width="10%">Verifier (s)</th>
                  <th width="20%">Approver (s)</th>
                  <th width="10%">Status</th>

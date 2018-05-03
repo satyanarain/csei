@@ -31,10 +31,6 @@
         </tr>
     </tbody>
 </table>
-
-
-
-
 <td>
               @if($request->status == '0')
                 <span class="badge badge-primary">Requested</span>
@@ -50,3 +46,17 @@
                 <span class="badge badge-danger">Rejected</span>
               @endif
               </td>
+              
+              /****************************************Date 1-5-2017******************************************************/
+              1. Remove white space from Rs from all email template.
+              2. List of all approve record(which is not showing).
+              3. Fix date in approve section.
+              4. Display All field in save requested.
+              5. Add save functionality to save(voucher) request and create email template to requester and administrator.
+              6. Display Download button after save request(voucher).
+              /****************************************Date 02-05-2017******************************************************/
+              1. Display view button.
+              2. Display voucher details.
+              3. Change approved request to pending action.
+              4. Display Submit bills
+         

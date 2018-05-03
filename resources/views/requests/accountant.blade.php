@@ -27,50 +27,47 @@
             <div class="table-responsive m-t-40">
               <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                <thead>
-                <tr>
-                 <th>Category</th>
-                 <th>Amount</th>
-                 <th>Due Date</th>
-                 <th>Requester Name</th>
-                 <th>Requester Email</th>
-                 <th>Verifier Name</th>
-                 <th>Approver Name</th>
-                 <th>Purpose</th>
-                 <th>Status</th>
-                 <th>Action</th>
-               </tr>
+                   <tr>
+                       <th>Date of Requisition</th>
+                       <th>Requisition No.</th>
+                       <th>Category</th>
+                       <th>Purpose</th>
+                       <th>Amount</th>
+                       <th>Status</th>
+                       <th>Action</th>
+                   </tr>
              </thead>
              <tbody>
+                 <?php
+//                 echo "<pre>";
+//                 print_r($requests);
+                 ?>
               @foreach($requests as $key=>$request)
               <tr>
-               <td>{{$request->name}}</td>
-               <td>{{$request->amount}}</td>
-              <td>
-                {{$request->due_date}}
-              </td>
-              <td>
-                {{$request->requester_name}}
-              </td>
-              <td>
-                {{$request->email}}
-              </td>
-              <td>
+             <td> {{dateView($request->due_date)}}</td>
+               <td>{{$request->request_no}}</td>
+              <td> {{$request->name}}</td>
+              <td>{{$request->purpose}} </td>
+     
+              <td>{{$request->amount}}</td>
+<!--               <td>
             
-                {{displayIdBaseName('users',$request->verifire_id,'name')}}
+                {{--displayIdBaseName('users',$request->verifire_id,'name')--}}
               </td>
               <td>
-               {{displayIdBaseName('users',$request->approver_id,'name')}}
-              </td>
-              <td>
-                {{$request->purpose}}
-              </td>
+               {{--displayIdBaseName('users',$request->approver_id,'name')--}}
+              </td>-->
+              
               <td>
                <div class="{{$request->b_class}}">  {{$request->c_status}}</div>
               </td>
               <td>
-                <a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-pencil"></i>Edit</a>
-                @if($request->status == '0' || $request->status == '5')
-                <a href="{{route('requests.edit', $request->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
+              
+                @if($request->status ==5)
+                <a href="{{route('requests.show', [$request->id,'downloads'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-download"></i><?php //echo $request->status; ?></a>
+                <a href="{{route('requests.show', [$request->id,'complete_view'])}}" class="btn btn-success m-b-10 m-l-5">View</a>
+                @else
+                   <a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
                 @endif
               </td>
             </tr>

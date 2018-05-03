@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Verder</h3> </div>
+    <h3 class="text-primary">Vendors</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('vendors.index')}}">Verder</a></li>
+        <li class="breadcrumb-item"><a href="{{route('vendors.index')}}">Vendors</a></li>
         <li class="breadcrumb-item active">Details</li>
       </ol>
     </div>
@@ -29,13 +29,13 @@
 </div>
 <div class="row1"  id="formpersonal1" style="display:none;">
 <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="name">Name Vendor</label>
+        <label class="col-lg-4 col-form-label" for="name">Name</label>
         <div class="col-lg-6">
               {{$vendors->name}}
         </div>
     </div>
   <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="email">Email Vendor</label>
+        <label class="col-lg-4 col-form-label" for="email">Email</label>
         <div class="col-lg-6">
        {{$vendors->email}}
         </div>
@@ -88,7 +88,7 @@
         <label class="col-lg-4 col-form-label" for="upload_document">Other Document<span class="text-danger">*</span></label>
         <div class="col-lg-6">
             <a href="{{('/images/upload_document/'.$vendors->upload_document)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i>
-</i>Download</a>
+</i></a>
         </div>
     </div>
     @endif
@@ -102,49 +102,41 @@
         <div class="col-lg-6">
          
           {{$vendors->registration_no}}
-        </div>
-    </div>
-     @if($vendors->registration_no_upload!='')
-    <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="registration_no_upload"></label>
-        <div class="col-lg-6">
+          @if($vendors->registration_no_upload!='')
+  
             <a href="{{('/images/registration_no_upload/'.$vendors->registration_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i>
-</i>Download</a>
+</i></a>
+ 
+    @endif
         </div>
     </div>
-    @endif
+     
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="pan_no">PAN No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
   
-          {{$vendors->pan_no}}
-        </div>
-    </div>
-      @if($vendors->pan_no_upload!='')
-    <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="pan_no_upload"></label>
-        <div class="col-lg-6">
+          {{$vendors->pan_no}}  @if($vendors->pan_no_upload!='')
+    
             <a href="{{('/images/pan_no_upload/'.$vendors->pan_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i>
-</i>Download</a>
+</i></a>
+   
+    @endif
         </div>
     </div>
-    @endif
+    
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="gst_no">GST No.<span class="text-danger">*</span></label>
         <div class="col-lg-6">
         
-          {{$vendors->gst_no}}
-        </div>
-    </div>
-     @if($vendors->gst_no_upload!='')
-    <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="gst_no_upload"></label>
-        <div class="col-lg-6">
+          {{$vendors->gst_no}}  @if($vendors->gst_no_upload!='')
+    
             <a href="{{('/images/gst_no_upload/'.$vendors->gst_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i>
-</i>Download</a>
+</i></a>
+    
+    @endif   
         </div>
     </div>
-    @endif        
+        
                      
                      
                      

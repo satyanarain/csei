@@ -24,7 +24,7 @@ class Voucher extends Authenticatable
    protected $table='vouchers';
 
 
-   protected $guarded = ['action','status','savevoucher','updated_at','created_at'];
+   protected $guarded = ['id','action','status','savevoucher','updated_at','created_at'];
 
     /**
      * The attributes that should be hidden for arrays.

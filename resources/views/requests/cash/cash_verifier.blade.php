@@ -2,11 +2,9 @@
 <div class="card">
                 <div class="card-body">
                  <div class="form-validation">
-                     <h4 class="header2">RequestsD etails</h4>
-                     
-
-                            <div class="form-group row">
-                                <label class="col-lg-4 col-form-label" for="val-username">Request No.</label>
+                     <h4 class="header2">Requisition Details</h4>
+                        <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="val-username">Requisition No.</label>
                                 <div class="col-lg-6">
                                     {{$requests->request_no}}  
                                 </div>
@@ -44,19 +42,19 @@
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label" for="val-username">Required By</label>
                                 <div class="col-lg-6">
-                                    {{$requests->required_by_date}}  
+                                    {{dateView($requests->required_by_date)}}  
                                 </div>
                             </div>
                             <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="due_date">Name Of Project<span class="text-danger">*</span></label>
                                         <div class="col-lg-6">
-                                            <input type="text" name="name_of_project"  class="form-control"  value="{{$requests->name_of_project}}" >
+                                            <input type="text" name="name_of_project" id="name_of_project"  class="form-control"  value="{{$requests->name_of_project}}" >
                                         </div>
                             </div>
                             <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head<span class="text-danger">*</span></label>
                                         <div class="col-lg-6">
-                                             <input type="text" name="project_expense_head" class="form-control" value="{{$requests->project_expense_head}}" onkeypress="return isNumberKey(event)">
+                                             <input type="text" name="project_expense_head" id='project_expense_head' class="form-control" value="{{$requests->project_expense_head}}" onkeypress="return isNumberKey(event)">
                                         </div>
                                     </div>
                      

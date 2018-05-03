@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Requests</h3> </div>
+    <h3 class="text-primary">Requests Pending for Verification</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Requests</li>
+        <li class="breadcrumb-item active">Pending Verification</li>
       </ol>
     </div>
   </div>
@@ -23,7 +23,7 @@
         <div class="card">
           <div class="card-body">
           <h4 class="card-title">
-              Request for Verify List
+              Requisition List
 <!--              Requested Requests List-->
           </h4>
 <!--            <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>-->
@@ -32,7 +32,7 @@
                <thead>
                 <tr>
                  <th>Date of Requisition</th>
-                 <th>Request No</th>
+                 <th>Requisition No</th>
                  <th>Category</th>
                  <th>Purpose</th>
                  <th>Amount</th>
