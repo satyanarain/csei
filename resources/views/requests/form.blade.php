@@ -11,10 +11,11 @@
 <!---------------------------tab 1--------------------------------------------------------->
 @include('requests.form_partials.cash_form')
 <!---------------------------tab 2--------------------------------------------------------->
-@include('requests.form_partials.materials_form.blade')
+@include('requests.form_partials.materials_form')
 <!---------------------------tab 3--------------------------------------------------------->
-@include('requests.form_partials.service_form.blade')
+@include('requests.form_partials.service_form')
 <!---------------------------tab 3--------------------------------------------------------->
+</div>
 </div>
 <!-------------------END 3------------------------------------------>
 

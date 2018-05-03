@@ -4,7 +4,7 @@
      {!!Form::model($request, ['route'=>['requests.update', $request->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
 										
   <?php } else{ ?>   
-          {!!Form::open(['route'=>'service.store',
+          {!!Form::open(['route'=>'requests.store',
                                     'id'=>'formValidate',
                                     'class'=>'formValidate',
                                     'autocomplete'=>'off',

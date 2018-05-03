@@ -1,20 +1,21 @@
  <div class="card"  >
    
         <div class="form-validation" id="printableArea">
-            <table  style=" border-top:none "  align="center" >
+<!--            <table  style=" border-top:none "  align="center" >
                 <tr><td height="80" style="text-align:center;" align="center"> {{Html::image('/images/logonicons/csei-60x60.png',array('style'=>''))}}</td></tr>
-            </table>
-            <table  align="center">
+            </table>-->
+            <table  align="left">
                 <tr>
-                  <th align='left'>
-<!--                    {{Html::image('/images/logonicons/csei-60x60.png',array('style'=>'','align'=>'left'))}}-->
+                  <th align='left' height='120'>
+                   {{Html::image('/images/logonicons/csei-60x60.png',array('style'=>'','align'=>'left'))}}</br>
                   </th>
-                  <th><div style=" font-size: 30px; font-weight: bold; text-align: center; margin-top: 10px; ">Centre for Social Equity & Inclusion</div></th>
+                  <th><div style=" font-size: 30px; font-weight: bold; text-align: center; margin-top: 10px;margin-left:5px; "> Centre for Social Equity & Inclusion</div></th>
                   <th>
 <!--                      <img src="{{ asset("/images/ranbow.png") }}" alt="User Image" >-->
                   </th></th>
                 </tr>
                 </table>
+               </br>
                </br>
             <table class="table"  style="width:100%;">
                 <tr>
@@ -23,6 +24,7 @@
                     <td class="text-right">Cash Voucher No.: CSEI/V-1/{{date("Y-m-d")}}</th>
                 </tr>
             </table> 
+   </br>
    </br>
   
    <table   style="width:100%;" class="table">
