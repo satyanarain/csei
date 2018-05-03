@@ -2,13 +2,7 @@
    
         <div class="form-validation" id="printableArea">
             <table  style=" border-top:none "  align="center" >
-                <tr>
-                    
-                    <td height="80" style="text-align:center;" align="center"> {{Html::image('/images/logonicons/csei-60x60.png',array('style'=>''))}}</td>
-                    
-                </tr>
-
-            </table> 
+                <tr><td height="80" style="text-align:center;" align="center"> {{Html::image('/images/logonicons/csei-60x60.png',array('style'=>''))}}</td></tr></table> 
             <table class="table" align="center">
                 <tr>
                   <th style="margin-left: 110px; width: 94px;">
@@ -25,7 +19,7 @@
                 <tr>
                     <td class="text-left">Date As : {{date("d-m-Y")}}</th>
                     <td></td>
-                    <td class="text-right">Voucher No.: CSEI/V-1/{{date("Y-m-d")}}</th>
+                    <td class="text-right">Cash Voucher No.: CSEI/V-1/{{date("Y-m-d")}}</th>
                 </tr>
             </table> 
    </br>

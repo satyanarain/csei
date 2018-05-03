@@ -84,7 +84,7 @@
 <div class="col-lg-6">
 <input  type="hidden"  name="id" value="{{$requests->id}}">
  <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
- <button class="btn btn-primary submit pull-left" type="submit" name="bill_submit"   onclick="printDiv('printableArea')">
+ <button class="btn btn-primary submit pull-left" type="submit" name="bill_submit" value="bill_submit"  onclick="printDiv('printableArea')">
  <i class="fa fa-check-circle"></i>Submit</button>
 </div>    
 </div>

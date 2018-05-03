@@ -63,12 +63,12 @@ use activityLog;
   
     public function store(Request $request)
     {
-     $user_details=Auth::user();
-     echo "<pre>";
-     print_r($_POST);
-     exit();    
+          $user_details=Auth::user();
+//           echo "<pre>";
+//           print_r($_POST);
+//           
+//       exit();    
            
-     
      if($request->verify=='Verify')
         {
          /********************************************************/
