@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\User;
 use App\Models\Voucher;
+use App\Models\Bill;
 use App\Models\Category;
 use App\Models\CSEIRequest;
 use Illuminate\Http\Request;
@@ -63,13 +64,11 @@ use activityLog;
   
     public function store(Request $request)
     {
-          $user_details=Auth::user();
-//           echo "<pre>";
-//           print_r($_POST);
-//           
-//       exit();    
-           
-     if($request->verify=='Verify')
+     $user_details=Auth::user();
+//     echo "<pre>";
+//     print_r($_POST);
+//     exit();    
+      if($request->verify=='Verify')
         {
          /********************************************************/
         /********************************************************/
@@ -273,11 +272,13 @@ use activityLog;
         {
             $status=5;
             $director_id= $user_id_login->id;
+            
             $id=$request->id;
             $result=CSEIRequest::where('id', $id)->update(['status' =>$status]);
             $input=  $request->all();
             $input['request_id']=$id;
             $input['date_of_release']=$this->insertDate($request->date_of_release);
+            $input['voucher_creater_id']=$request->user_id;
             
             Voucher::create($input);
             $request_data= CSEIRequest::whereId($id)->first();
@@ -312,7 +313,40 @@ use activityLog;
             }
              return redirect()->route('accountants.requests'); 
          }
-        else{
+           else if($request->bill_submit=='bill_submit')
+        {
+        $id=$request->id;
+        $input=  $request->all();
+        $input['request_id']=$id;
+        $directory = "document";     
+                
+        if ($request->hasFile('document')) {
+            if (!is_dir(public_path(). '/images/'. $directory)) {
+                mkdir(public_path(). '/images/'. $directory, 0777, true);
+            }
+            
+            $documents = $request->file('document');
+            
+            $file_name_csv = "";
+
+            foreach ($documents as $key => $value) {
+                $destinationPath = public_path(). '/images/'. $directory;
+                $document = str_random(8) . '_' . $value->getClientOriginalName() ;
+                $value->move($destinationPath, $document);
+
+                if($key == 0){
+                    $file_name_csv .= $document;
+                }else{
+                    $file_name_csv .= ','.$document;
+                }
+                
+            }            
+
+            $input['document'] = $file_name_csv;
+        } 
+         Bill::create($input);
+         return redirect()->route('requests.index'); 
+    }else{
           
          $this->request->create($request);
          return redirect()->route('requests.index');
@@ -382,6 +416,7 @@ use activityLog;
               ->leftjoin('categories','categories.id','requests.category_id')
               ->leftjoin('c_status','c_status.id','requests.status')
               ->leftjoin('vouchers','vouchers.request_id','requests.id')
+              ->leftjoin('bills','bills.request_id','requests.id')
                ->orderBy('requests.id','desc')
                ->where('requests.id',$id)
               ->first();

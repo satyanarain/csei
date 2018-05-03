@@ -56,6 +56,23 @@
                     {{displayView($requests->project_expense_head)}}
                 </div>
             </div>
+            
+            @if($requests->date_of_release!='')
+            <div class="form-group row">
+                <label class="col-lg-4 col-form-label" for="due_date">Date of Release</label>
+                <div class="col-lg-6">
+                    {{displayView($requests->date_of_release)}}
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-4 col-form-label" for="due_date">Release Amount (Rs)</label>
+                <div class="col-lg-6">
+                    {{displayView($requests-> release_voucher_amount)}}
+                </div>
+            </div>
+            @endif
+            
+            
  <div   class="formmain" onclick="showHide(this.id)" id="bank1">
 <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; Bill Document
 </div>
@@ -83,7 +100,7 @@
    </br>         
 <div class="col-lg-6">
 <input  type="hidden"  name="id" value="{{$requests->id}}">
- <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
+
  <button class="btn btn-primary submit pull-left" type="submit" name="bill_submit" value="bill_submit"  onclick="printDiv('printableArea')">
  <i class="fa fa-check-circle"></i>Submit</button>
 </div>    

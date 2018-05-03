@@ -2,13 +2,14 @@
    
         <div class="form-validation" id="printableArea">
             <table  style=" border-top:none "  align="center" >
-                <tr><td height="80" style="text-align:center;" align="center"> {{Html::image('/images/logonicons/csei-60x60.png',array('style'=>''))}}</td></tr></table> 
-            <table class="table" align="center">
+                <tr><td height="80" style="text-align:center;" align="center"> {{Html::image('/images/logonicons/csei-60x60.png',array('style'=>''))}}</td></tr>
+            </table>
+            <table  align="center">
                 <tr>
-                  <th style="margin-left: 110px; width: 94px;">
-<!--                      <img src="{{ asset("/images/pmpml.png") }}" alt="User Image" >-->
+                  <th align='left'>
+<!--                    {{Html::image('/images/logonicons/csei-60x60.png',array('style'=>'','align'=>'left'))}}-->
                   </th>
-                  <th><div style=" font-size: 30px; font-weight: bold; text-align: center; margin-top: 10px; ">Centre for Social Equity & Inclusion(CSEI)</div></th>
+                  <th><div style=" font-size: 30px; font-weight: bold; text-align: center; margin-top: 10px; ">Centre for Social Equity & Inclusion</div></th>
                   <th>
 <!--                      <img src="{{ asset("/images/ranbow.png") }}" alt="User Image" >-->
                   </th></th>

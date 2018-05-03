@@ -55,8 +55,12 @@
               5. Add save functionality to save(voucher) request and create email template to requester and administrator.
               6. Display Download button after save request(voucher).
               /****************************************Date 02-05-2017******************************************************/
-              1. Display view button.
+              1. Display after save voucher view button.
               2. Display voucher details.
               3. Change approved request to pending action.
-              4. Display Submit bills
+               /****************************************Date 03-05-2017******************************************************/
+              1. After complete cash request display bills button in user request list.
+              2. Display request details and Added  add more functionality for submit bills.
+              3. Added save functionality to document upload.
+              4. Display request details with download documment.
          
