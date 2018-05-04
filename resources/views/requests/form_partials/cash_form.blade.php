@@ -63,9 +63,9 @@
     <label class="col-lg-4 col-form-label" for="due_date">Required By<span class="text-danger">*</span></label>
     <div class="col-lg-6">
          @if($request->category_id==1)
-         {!!Form::text('required_by_date',null,["class"=>"form-control multiple_date_due",'required','readonly'=>'readonly'])!!}
+         {!!Form::text('required_by_date',$request->required_by_date,["class"=>"form-control multiple_date_due",'required','readonly'=>'readonly'])!!}
           @else
-          {!!Form::text('required_by_date',null,["class"=>"form-control multiple_date_due",'required','readonly'=>'readonly'])!!}
+          {!!Form::text('required_by_date',null,["class"=>"form-control multiple_date_due",'required'=>'required','readonly'=>'readonly'])!!}
           @endif
      </div>
 </div>

@@ -83,7 +83,7 @@
          <table   border="0" width="95%" style="margin:0px 20px 20px 20px;">
             <tr  style="padding:10px 0px 10px 20px"><td  colspan="" align="left" valign="top" style="text-align:left;">Document</td>
                 <td  colspan="" align="left" valign="top" style="text-align:left;">
-                     {!! Form::file('document[]',null , ['class' => 'form-control',required]) !!}
+                    <input name="document[]" required="required" type="file">
                 </td>
                 <td  colspan="" align="left" valign="top"  style="text-align:left;"  width="15%"></td>
             </tr>

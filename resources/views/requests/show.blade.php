@@ -15,7 +15,7 @@
         <h3 class="text-primary">Aproved Request Details</h3>
        
         @elseif($view=='accountants')
-        <h3 class="text-primary">Voucher Request Details</h3>
+        <h3 class="text-primary">Pending Action Details</h3>
        
         @elseif($view=='downloads')
         <h3 class="text-primary">Downloads Request Details</h3>

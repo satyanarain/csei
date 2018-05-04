@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Requests\Requests;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
 
-use App\Http\Requests\Request;
-
-class StoreRequestsRequest extends Request
+class StoreRequestsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,8 @@ class StoreRequestsRequest extends Request
     {
         
             return [
-                   'category_id' => 'required'
+                   'category_id' => 'required',
+                   'required_by_date' => 'required'
                   
              ];
         

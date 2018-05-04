@@ -47,29 +47,23 @@
                <td>
                 {{dateView($request->due_date)}}
               </td>
-                   <td>
-                {{$request->request_no}}
-              </td>
-               <td>
-                {{displayView($request->name)}}
-                
-              </td>
-               
-               <td>{{$request->purpose}}</td>
-              
-                <td>{{$request->amount}}</td>
-                
-
-              <td>
-            <div class="{{$request->b_class}}">  {{$request->c_status}}</div>
-              </td>
-              <td>
-                <a href="{{route('requests.show',[$request->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
+                <td>{{$request->request_no}}</td>
+               <td>{{displayView($request->name)}}</td>
+                <td>{{$request->purpose}}</td>
+                 <td>{{$request->amount}}</td>
+                 <td>
+                 <div class="{{$request->b_class}}">  {{$request->c_status}}</div>
+                 </td>
+                <td>
                 @if($request->status == 1)
                 <a href="{{route('requests.edit', $request->id)}}" class="btn btn-success m-b-10 m-l-5 pull-left"><i class="fa fa-pencil"></i> Edit</a>
                 @endif
+                <a href="{{route('requests.show',[$request->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
+              
+                @if($request->document=='')
                 @if($request->status == 5)
                 <a href="{{route('requests.show', [$request->id,'submit_bill'])}}" class="btn btn-success m-b-10 m-l-5 pull-left"><i class="fa fa-money"></i> Submit Bill</a>
+                @endif
                 @endif
               </td>
             </tr>

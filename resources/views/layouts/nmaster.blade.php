@@ -502,7 +502,7 @@ $(document).ready(function () {
                   if (x < max_fields) { //max input box allowed
                       x++; //text box increment
                       $("#input_doc").append('<div id="div_remove_field' + x + '" style="padding-left:0px;  margin-bottom:0px; width:100%;">\n\
-<table   border="0" width="95%" style="margin:0px 20px 20px 20px;"><tr  style="padding:10px 0px 10px 20px"><td  colspan="" align="left" valign="top" style="text-align:left;">Document</td><td  colspan="" align="left" valign="top" style="text-align:left;">{!! Form::file('document[]',null , ['class' => 'form-control',required]) !!}</td>\n\
+<table   border="0" width="95%" style="margin:0px 20px 20px 20px;"><tr  style="padding:10px 0px 10px 20px"><td  colspan="" align="left" valign="top" style="text-align:left;">Document</td><td  colspan="" align="left" valign="top" style="text-align:left;"><input name="document[]" required="required" type="file"></td>\n\
 <td  colspan="" align="left" valign="top"  style="text-align:left;"  width="15%"><a href="#" class="btn btn-danger remove remove_field"><i class="glyphicon glyphicon-remove"></i>Remove</a></td></tr></table></div>'); //add input box
                   }
               });
