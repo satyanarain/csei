@@ -24,7 +24,7 @@ class Bill extends Authenticatable
    protected $table='bills';
 
 
-   protected $guarded = ['id','action','bill_submit'];
+   protected $guarded = ['id','action','bill_submit','category_id'];
 
     /**
      * The attributes that should be hidden for arrays.

@@ -1,3 +1,15 @@
+ <?php   if($request->category_id==2)
+  { ?>
+     {!!Form::model($request, ['route'=>['requests.update', $request->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
+										
+  <?php } else{ ?>   
+          {!!Form::open(['route'=>'requests.store',
+                                    'id'=>'formValidate',
+                                    'class'=>'formValidate',
+                                    'autocomplete'=>'off',
+                                      'onsubmit'=>'return validateForm()',
+                                    'files'=>true])!!}                            
+  <?php } ?>  
 <div  id="tab2" style="display:none">
         <h3>Material</h3>
         <div class="form-group row">
@@ -174,3 +186,4 @@
     </div>
 </div>
 </div>
+{!!Form::close()!!}

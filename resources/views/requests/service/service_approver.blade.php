@@ -79,7 +79,6 @@
                                         <div class="col-lg-6">
                                              <input  type="hidden"  name="id" value="{{$requests->id}}">
                                              <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
-                                              <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
                                             <button class="btn btn-primary submit pull-left" type="submit" name="approve"  value="Approve" onclick="return loadAdd()"><i class="fa fa-check-circle"></i> Approve</button>&nbsp;&nbsp;
                                             <button class="btn btn-danger submit pull-right" type="submit" name="approverejected" value="Rejected" ><i class="fa fa-times-circle" aria-hidden="true"></i>
                                                 Reject</button>                                            

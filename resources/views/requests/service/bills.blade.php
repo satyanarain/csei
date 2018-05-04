@@ -80,7 +80,7 @@
 <div class="row1"  id="formbank1" >
  <div class="form-group row" id="input_doc">
     <div  style="padding-left:0px;  margin-bottom:0px; width:100%;" >
-         <table   border="0" width="95%" style="margin:0px 20px 20px 20px;">
+         <table   border="0" width="95%" style="margin:0px 20px 20px 20px;" class="table table-bordered">
             <tr  style="padding:10px 0px 10px 20px"><td  colspan="" align="left" valign="top" style="text-align:left;">Document</td>
                 <td  colspan="" align="left" valign="top" style="text-align:left;">
                      {!! Form::file('document[]',null , ['class' => 'form-control',required]) !!}
@@ -100,8 +100,7 @@
    </br>         
 <div class="col-lg-6">
 <input  type="hidden"  name="id" value="{{$requests->id}}">
-<input  type="hidden"  name="id" value="{{$requests->id}}">
-     <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
+
  <button class="btn btn-primary submit pull-left" type="submit" name="bill_submit" value="bill_submit"  onclick="printDiv('printableArea')">
  <i class="fa fa-check-circle"></i>Submit</button>
 </div>    

@@ -21,7 +21,7 @@
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                 <div class="form-validation">
+                    <div class="form-validation">
                                     <h4 class="header2">Create Request</h4>
                                  
                                     @include('requests.form')

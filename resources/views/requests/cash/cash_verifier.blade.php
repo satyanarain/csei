@@ -21,12 +21,15 @@
                                     {{dateView($requests->due_date)}}  
                                 </div>
                             </div>
+                     @if($requests->category_id==1)
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label" for="val-username">Amount (Rs)</label>
                                 <div class="col-lg-6">
                                     {{$requests->amount}}  
                                 </div>
                             </div>
+                     @endif
+                     
                             <div class="form-group row">
                                 <label class="col-lg-4 col-form-label" for="val-username">Purpose</label>
                                 <div class="col-lg-6">
@@ -45,6 +48,7 @@
                                     {{dateView($requests->required_by_date)}}  
                                 </div>
                             </div>
+                      @if($requests->category_id==1)
                             <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="due_date">Name Of Project<span class="text-danger">*</span></label>
                                         <div class="col-lg-6">
@@ -57,7 +61,7 @@
                                              <input type="text" name="project_expense_head" id='project_expense_head' class="form-control" value="{{$requests->project_expense_head}}" onkeypress="return isNumberKey(event)">
                                         </div>
                                     </div>
-                     
+                           @endif
                                  <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="purpose">Comments</label>
                                         <div class="col-lg-6">
@@ -76,7 +80,7 @@
                                             
                                              <input  type="hidden"  name="id" value="{{$requests->id}}">
                                              <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
-                                            
+                                            <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
                                             <button class="btn btn-primary submit" type="submit" name="verify"  value="Verify" onclick="return loadAdd()"><i class="fa fa-check-circle"></i> Verify</button>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <button class="btn btn-danger submit" type="submit" name="rejected" value="Rejected" onclick="return Validate()"><i class="fa fa-times-circle" aria-hidden="true"></i>

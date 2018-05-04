@@ -126,3 +126,15 @@ padding:10px 10px 0px 10px;
 border:0px #ccc solid; margin-right:10px;
 color:#fff;
 }
+.table_con
+{
+text-align:left; 
+font-weight:normal;color:#555;font-family: 'Open Sans', sans-serif; 
+font-size:14px;
+
+}
+.table_con_bold
+{
+text-align:left; font-weight:normal;color:#555;font-family: 'Open Sans', sans-serif; font-size:14px;
+font-weight: bold;
+}

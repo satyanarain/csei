@@ -21,7 +21,7 @@
                 <tr>
                     <td class="table_con">Date As : {{date("d-m-Y")}}</th>
                     <td></td>
-                    <td  class="table_con">Cash Voucher No.: CSEI/V-{{$total_voucher}}/{{date("Y-m-d")}}</th>
+                    <td  class="table_con">Cash Voucher No.: CSEI/V-1/{{date("Y-m-d")}}</th>
                 </tr>
             </table> 
    </br>

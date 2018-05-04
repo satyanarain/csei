@@ -29,8 +29,6 @@ class RequestRepository implements RequestRepositoryContract
 				$query->where('state_id', $stateId);
 			})->get();
 		}
-		
-
 		return $users;
 	}
 
@@ -45,15 +43,28 @@ class RequestRepository implements RequestRepositoryContract
 	{
         $requester= Auth::user();
          
-        $request_no= $this->requestNo($result);
+        
+        $request_no= $this->requestNo1($result);
+        if($request->category_id==1)
+        {
+         $request_no= $this->requestNo1($result);
+        }
+        if($request->category_id==3)
+        {
+          $request_no= $this->requestNo3($result); 
+        }
+        
         $input = $request->all();
         $input['user_id'] = Auth::id();
         $input['due_date'] = $this->insertDate($request->due_date);
         $input['required_by_date'] = $this->insertDate($request->required_by_date);
+        
+        
+        
         $input['request_no'] = $request_no;
+        
         $input['status'] = 1;
         $request_id = CSEIRequest::create($input)->id;
-        
         $s_no = $request->s_no;
         $brief_details = $request->brief_details;
         $expected_expense = $request->expected_expense;
@@ -70,28 +81,52 @@ class RequestRepository implements RequestRepositoryContract
         //exit();
          $sql_verifiers = User::where('id', $input['user_id'])->first();
         $verifier = User::whereIn('id', explode(',', $sql_verifiers->verifiers))->get();
-
+/***********************************Email for cash***********************************************************************************/
+        if($request->category_id==1)
+        {
         if ($request_id != '') {
             foreach ($verifier as $a_value) {
                 $verifire_name = $a_value->name;
                 $amount = $request->amount;
 
-                Mail::send('emails.request_to_verifier', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
+                Mail::send('emails.cash.request_to_verifier', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
                     $m->from('info@opiant.online', 'CSEI');
                     $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Verification');
                 });
             }
         }
           /************************************mail to requester******************************************/
-         //$requester = DB::table('requests')->select('*','requests.id as id')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
-        if ($request_id != '') {
+                 if ($request_id != '') {
           $verified_approved='Submitted';
-                   Mail::send('emails.mail_to_requester_for_va',['amount'=>$request->amount,'request_no'=>$request_no,'verified_approved'=>$verified_approved,'name'=>$requester->name], function ($m) use ($requester) {
+                   Mail::send('emails.cash.mail_to_requester_for_va',['amount'=>$request->amount,'request_no'=>$request_no,'verified_approved'=>$verified_approved,'name'=>$requester->name], function ($m) use ($requester) {
                    $m->from('info@opiant.online', 'CSEI');
                    $m->to($requester->email, $requester->name)->subject('CSEI | Request Submitted'); });
           }
-        
-        Session::flash('flash_message', "Request Submitted Successfully."); //Snippet in Master.blade.php
+        }
+    /***********************************Email for Service***********************************************************************************/      
+           if($request->category_id==3)
+        {
+        if ($request_id != '') {
+            foreach ($verifier as $a_value) {
+                $verifire_name = $a_value->name;
+                $amount = $request->amount;
+
+                Mail::send('emails.service.request_to_verifier', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
+                    $m->from('info@opiant.online', 'CSEI');
+                    $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Verification');
+                });
+            }
+        }
+          /************************************mail to requester******************************************/
+      if ($request_id != '') {
+          $verified_approved='Submitted';
+                   Mail::send('emails.service.mail_to_requester_for_va',['amount'=>$request->amount,'request_no'=>$request_no,'verified_approved'=>$verified_approved,'name'=>$requester->name], function ($m) use ($requester) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($requester->email, $requester->name)->subject('CSEI | Request Submitted'); });
+          }
+        } 
+         /***********************************End Email for Service***********************************************************************************/     
+         Session::flash('flash_message', "Request Submitted Successfully."); //Snippet in Master.blade.php
         return $resquests_data;
     }
 

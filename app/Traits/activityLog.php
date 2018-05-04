@@ -55,7 +55,7 @@ function displayIdBaseName($table = '', $id = '', $fieldname = '') {
         echo "N/A";
     }
 }
-function requestNo($request_no) {
+function requestNo1($request_no) {
             $date=date('Y/m/d');
            $total= CSEIRequest::count();
            if($total==0)
@@ -64,6 +64,28 @@ function requestNo($request_no) {
            } else {
            $total_all=$total+1;
          return  $request_no="CSEI"."/C-".$total_all."/".$date;
+           }
+}
+function requestNo2($request_no) {
+            $date=date('Y/m/d');
+           $total= CSEIRequest::count();
+           if($total==0)
+           {
+         return  $request_no="CSEI"."/C-1/".$date;    
+           } else {
+           $total_all=$total+1;
+         return  $request_no="CSEI"."/C-".$total_all."/".$date;
+           }
+}
+function requestNo3($request_no) {
+            $date=date('Y/m/d');
+           $total= CSEIRequest::count();
+           if($total==0)
+           {
+         return  $request_no="CSEI"."/S-1/".$date;    
+           } else {
+           $total_all=$total+1;
+         return  $request_no="CSEI"."/S-".$total_all."/".$date;
            }
 }
 

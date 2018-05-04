@@ -1,13 +1,35 @@
 <ul  class="nav-nav-pills">
-    <li class="active" onclick="openTab1(1)" id="1">
+    <li 
+         @if($request->category_id==2 || $request->category_id==3)
+         class="tabber" 
+        @else
+        class="active" 
+        @endif
+         onclick="openTab1(1)" id="1">
         <a  href="#1a" data-toggle="tab" style="padding:10px;" >Cash</a>
     </li>
-    <li class="tabber" id="2" onclick="openTab2(2)"><a href="#2a" data-toggle="tab">Material</a>
+    <li @if($request->category_id==2)
+          class="active"
+        @else
+         class="tabber"
+        @endif
+         id="2" onclick="openTab2(2)">
+        
+        <a href="#2a" data-toggle="tab">Material</a>
     </li>
-    <li class="tabber" id="3" onclick="openTab3(3)"><a href="#3a" data-toggle="tab">Service</a>
+    <li @if($request->category_id==3)
+          class="active"
+        @else
+         class="tabber"
+        @endif
+        id="3" onclick="openTab3(3)"><a href="#3a" data-toggle="tab">Service</a>
     </li>
 </ul>
 <div class="tab-content clearfix" style="border:#ccc 1px solid; border-top:none; padding:10px;">
+<?php 
+//  echo "<pre>";
+//  echo print_r($request) ; 
+?> 
 <!---------------------------tab 1--------------------------------------------------------->
 @include('requests.form_partials.cash_form')
 <!---------------------------tab 2--------------------------------------------------------->

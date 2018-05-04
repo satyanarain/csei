@@ -1,9 +1,3 @@
- {!!Form::open(['route'=>'requests.store',
-                                    'id'=>'formValidate',
-                                    'class'=>'formValidate',
-                                    'autocomplete'=>'off',
-                                    'id'=>'theForm',
-                                    'files'=>true])!!}
 <div class="card">
     <div class="card-body">
         <div class="form-validation">
@@ -56,7 +50,6 @@
                     {{displayView($requests->project_expense_head)}}
                 </div>
             </div>
-            
             @if($requests->date_of_release!='')
             <div class="form-group row">
                 <label class="col-lg-4 col-form-label" for="due_date">Date of Release</label>
@@ -72,40 +65,33 @@
             </div>
             @endif
             
-            
- <div   class="formmain" onclick="showHide(this.id)" id="bank1">
-<div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; Bill Document
+          <?php 
+          $array_bills = explode(',', $requests->document);
+          if (count($array_bills) > 0) { ?>
+            <div   class="formmain" onclick="showHide(this.id)" id="bank1">
+                <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; Bill Document
+            </div>
+
+            <div class="row1"  id="formbank1" >
+                
+                    <?php
+                    
+
+                    if (count($array_bills) > 0) {
+                        foreach ($array_bills as $key => $array_bill) {
+                            ?>
+                            <div class="form-group row">
+                                <label class="col-lg-4 col-form-label" for="due_date">Document</label>
+                                <div class="col-lg-6">
+                                    <a href="{{url('images/document/'.$array_bills[$key])}}" download="download" class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+    <?php }
+} ?>  
 </div>
-            
-<div class="row1"  id="formbank1" >
- <div class="form-group row" id="input_doc">
-    <div  style="padding-left:0px;  margin-bottom:0px; width:100%;" >
-         <table   border="0" width="95%" style="margin:0px 20px 20px 20px;">
-            <tr  style="padding:10px 0px 10px 20px"><td  colspan="" align="left" valign="top" style="text-align:left;">Document</td>
-                <td  colspan="" align="left" valign="top" style="text-align:left;">
-                     {!! Form::file('document[]',null , ['class' => 'form-control',required]) !!}
-                </td>
-                <td  colspan="" align="left" valign="top"  style="text-align:left;"  width="15%"></td>
-            </tr>
-        </table>
-      </div>
+   <?php }
+ ?>  
 </div>
-    <div class="form-group row" style="margin-top:-20px;">
-        <label class="col-lg-4 col-form-label" for="contact"><div class="btn btn-success add-more pull-left" type="button" style="margin-bottom:10px;" id="add_field_doc"><i class="fa fa-plus" ></i>Add</div></label>
-        <div class="col-lg-6">
-         </div>
     </div>
- </div>
-   </br>         
-   </br>         
-<div class="col-lg-6">
-<input  type="hidden"  name="id" value="{{$requests->id}}">
-<input  type="hidden"  name="id" value="{{$requests->id}}">
-     <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
- <button class="btn btn-primary submit pull-left" type="submit" name="bill_submit" value="bill_submit"  onclick="printDiv('printableArea')">
- <i class="fa fa-check-circle"></i>Submit</button>
-</div>    
+
 </div>
-</div>
-</div>
-{!!Form::close()!!}

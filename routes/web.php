@@ -62,8 +62,14 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::post('requests/verify_request', 'RequestsController@verifyRequestUpdateStatus');
 	Route::post('requests/verify_request', 'RequestsController@verifyRequestUpdateStatus');
         Route::get('/requests/{id}/save_voucher', 'RequestsController@saveVoucher');
+       
+        //requests.test
         Route::resource('requests', 'RequestsController');
         /************************************************************************/
+        
+        Route::resource('service', 'ServiceController');
+        /************************************************************************/
+        
         Route::resource('teams', 'TeamController');
         /************************************************************************/
         Route::resource('purchase_committees', 'PurchaseCommitteeController');

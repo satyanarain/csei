@@ -57,13 +57,15 @@
     <?php } ?>
     <?php
     /*************verification system***************************************************/
+ echo $requests->category_id; 
     
-    if($view=='requested_requests')
+    
+if($requests->category_id==1)
+    {
+  if($view=='requested_requests')
     { ?>
-    
-	@include('requests.cash.cash_verifier')
-      
-    <?php } ?>
+    @include('requests.cash.cash_verifier')
+     <?php } ?>
     <?php if($view=='verifireactive')
     { ?>
 	@include('requests.cash.cash_approver')
@@ -85,7 +87,44 @@
     { ?>
     @include('requests.cash.bills')
      <?php } ?>
-
+    <?php } ?>
+    <?php
+if($requests->category_id==3)
+    {
+  if($view=='requested_requests')
+    { ?>
+    @include('requests.service.service_verifier')
+     <?php } ?>
+    <?php if($view=='verifireactive')
+    { ?>
+	@include('requests.service.service_approver')
+      <?php } ?>
+    <?php if($view=='accountants')
+    { ?>
+@include('requests.service.service_voucher')
+    <?php } ?>
+    <?php if($view=='downloads')
+    { ?>
+@include('requests.service.print_voucher')
+     <?php } ?>
+    <?php if($view=='complete_view')
+    { ?>
+    @include('requests.service.voucher_details')
+     <?php } ?>
+    <?php if($view=='submit_bill')
+    { ?>
+    @include('requests.service.bills')
+     <?php } ?>
+    <?php } ?>
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </div>
 
 </div>
@@ -94,6 +133,7 @@
 </div>
 
 @endsection
+
 <script>
 function printDiv(divName) {
   
@@ -109,33 +149,6 @@ function printDiv(divName) {
      document.body.innerHTML = originalContents;
 }
 
-</script>  
-<script>
-//
-//    function printDiv() {
-//    var printContents = document.getElementById('DivIdToPrint').innerHTML;
-//    var originalContents = document.body.innerHTML;
-//    document.body.innerHTML = printContents;
-//    window.print();
-//    document.body.innerHTML = originalContents;
-//    }
-
-//function printDiv() 
-//{
-//
-//  var divToPrint=document.getElementById('DivIdToPrint');
-//
-//  var newWin=window.open('','Print-Window');
-//
-//  newWin.document.open();
-//
-//  newWin.document.write('<html><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
-//
-//  newWin.document.close();
-//
-//  setTimeout(function(){newWin.close();},10);
-//
-//}
 
     function loadAdd()
     {
