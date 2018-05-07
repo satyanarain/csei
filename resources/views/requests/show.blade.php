@@ -57,7 +57,7 @@
     <?php } ?>
     <?php
     /*************verification system***************************************************/
- echo $requests->category_id; 
+ //echo $requests->category_id; 
     
     
 if($requests->category_id==1)
@@ -101,7 +101,7 @@ if($requests->category_id==3)
       <?php } ?>
     <?php if($view=='accountants')
     { ?>
-@include('requests.service.service_voucher')
+@include('requests.service.service_document')
     <?php } ?>
     <?php if($view=='downloads')
     { ?>

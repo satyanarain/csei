@@ -32,11 +32,9 @@
                   <th>Date of Requisition</th>
                  <th>Requisition No.</th>
                  <th>Category</th>
-                
-                <th>Purpose</th>
-                <th>Amount</th>
-                
-                 <th>Status</th>
+                  <th>Purpose</th>
+                 <th>Amount</th>
+                  <th>Status</th>
                  <th>Action</th>
                </tr>
              </thead>

@@ -60,13 +60,17 @@
               2. Display voucher details.
               3. Change approved request to pending action.
                /****************************************Date 03-05-2017******************************************************/
-              1. After complete cash request display bills button in user request list.
+              1. After complete cash request display bills button in request list.
               2. Display request details and Added  add more functionality for submit bills.
-              3. Added save functionality to document upload.
-              4. Display request details with download documment.
+              3. Added save functionality to upload bills document.
+              4. Display request details with download bills document.
                /****************************************Date 04-05-2017******************************************************/
               1. Save service category record.
               2. Edit service category record.
-              3. Email to requester and verifier after submit.
+              3. Create service category and email to requester and verifier after submit.
+              4. After verify service category email to requester and verifier and approver.
+              5. After approve service category email to requester and approver and administrator(associate).
+              6.Create material form added add more functionality
+             
     
          
