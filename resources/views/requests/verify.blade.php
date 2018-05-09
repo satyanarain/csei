@@ -35,10 +35,9 @@
                  <th>Requisition No</th>
                  <th>Category</th>
                  <th>Purpose</th>
-                 <th>Amount</th>
-              
+<!--                 <th>Amount</th>-->
                  <th>Status</th>
-                 <th>Action</th>
+               @include('partials.action')
                </tr>
              </thead>
              <tbody>
@@ -52,7 +51,7 @@
                 <td>
                 {{$request->purpose}}
               </td>
-               <td>{{$request->amount}}</td>
+<!--               <td>{{$request->amount}}</td>-->
               
               <td>
                <span class="{{$request->b_class}}">{{$request->c_status}}</span>

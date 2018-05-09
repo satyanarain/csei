@@ -11,7 +11,7 @@ class CSEIRequest extends Model
 	
     protected $table = 'requests';
 
-    protected $guarded = ['action','request_id', 's_no', 'brief_details', 'expected_expense', 'remark'];
+    protected $guarded = ['action','request_id', 's_no', 'product_name', 'purchase_quantity', 'remark'];
  
     public function category()
     {

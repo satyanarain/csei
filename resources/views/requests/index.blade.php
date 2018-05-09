@@ -33,9 +33,8 @@
                  <th>Requisition No.</th>
                  <th>Category</th>
                   <th>Purpose</th>
-                 <th>Amount</th>
                   <th>Status</th>
-                 <th>Action</th>
+                @include('partials.action')
                </tr>
              </thead>
              <tbody>
@@ -48,7 +47,7 @@
                 <td>{{$request->request_no}}</td>
                <td>{{displayView($request->name)}}</td>
                 <td>{{$request->purpose}}</td>
-                 <td>{{$request->amount}}</td>
+<!--                 <td>{{$request->amount}}</td>-->
                  <td>
                  <div class="{{$request->b_class}}">  {{$request->c_status}}</div>
                  </td>
@@ -77,20 +76,5 @@
  
 @endsection
 @push('scripts')
-<script>
-    
-    //var table = $('#example23').DataTable();
-   // var table = $('#example23').DataTable({order:[]});
-//   $('#example23').DataTable({
-//       dom: 'Bfrtip',
-//       order:[],
-//      buttons: [
-//            'copy', 'csv', 'excel', 'pdf', 'print'
-//        ]
-//   });
-   
-   //var table = $('#example').DataTable({order:[]});
-   
-   
-   </script>
+
 @endpush

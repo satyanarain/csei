@@ -11,11 +11,7 @@
       </ol>
     </div>
   </div>
-<style>
-  .no-sort::after { display: none!important; }
 
-.no-sort { pointer-events: none!important; cursor: default!important; }  
-</style>
   <!-- End Bread crumb -->
   @endsection
 
@@ -38,7 +34,7 @@
                  <th width="10%">Contact No.</th>
                  <th width="10%">Date Created</th>
                  <th width="10%">Status</th>
-                 <th width="20%" class="no-sort">Action</th>
+                   @include('partials.action')
                </tr>
              </thead>
              <tbody>

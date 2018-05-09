@@ -79,7 +79,7 @@
                                                     <input  type="hidden"  name="id" value="{{$requests->id}}">
                                                     <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
                                                     <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
-                                                    <button class="btn btn-primary submit" type="submit" name="savevoucher"  value="savevoucher"><i class="fa fa-check-circle"></i>Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <button class="btn btn-primary submit" type="submit" name="service_document"  value="service_document"><i class="fa fa-check-circle"></i>Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 </div>
                                             </div>
                                         </div>

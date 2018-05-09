@@ -514,6 +514,35 @@ $(document).ready(function () {
               })
 
           });
+          /************************************************************************************************/
+$(document).ready(function () {
+              var max_fields = 10000; //maximum input boxes allowed
+              var wrapper = $("#add_mat_button"); //Fields wrapper
+              var add_button = $("#add_mat"); //Add button ID
+          
+              var x = 1;
+   
+              $("#add_mat_button").click(function (e) { //on add input button click
+                  e.preventDefault();
+                  if (x < max_fields) { //max input box allowed
+                      x++; //text box increment
+                      $("#add_mat").append('<div id="div_remove_field' + x + '">\n\
+<table class="table table-bordered table-striped table-hover bank_table"><tr><td width="10%"><div class="dummy"><div class="input-icon right"><span><input type="text" class="form-control product_code" size="5" name="s_no[]" onkeypress="return isNumberKey(event)" required="required" value="{{$value->s_no}}"></span>\n\
+</div></div></td>\n\
+<td idth="30%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control" size="5" name="product_name[]" required="required" value="{{$value->product_name}}"></div></div>\n\
+</td><td width="10%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}"></div>\n\
+</div></td><td width="38%"><div class="dummy"><div class="input-icon right"><textarea type="textarea" class="form-control rate" size="5" name="remark[]"  required="required">{{$value->remark}}</textarea></div></div></td>\n\
+<td  colspan="" align="left" valign="top"  style="text-align:left;"  width="12%"><span  class="rm_first"><button class="remove_bank_row remove_field">Remove</button></span></td></tr></table></div>'); //add input box
+                  }
+              });
+
+              $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                  e.preventDefault();
+                  $(this).closest('div').remove();
+                  x--;
+              })
+
+          });
           
           
           
@@ -645,18 +674,7 @@ $(document).ready(function () {
           }
 
 
-          $('#add_bank_info').click(function () {
-              $(".rm_first").show();
-
-              var ele = $('.bank_table tbody tr:last');
-              var ele_clone = ele.clone();
-
-              ele_clone.find('input, select').prop("disabled", false).val('');
-              ele_clone.find('td div.dummy').removeClass('has-error has-success');
-              ele_clone.find('td div.input-icon i').removeClass('fa-check fa-warning');
-              ele_clone.find('td:last').show();
-              ele.after(ele_clone);
-          });
+        
 
           $(document).on("click", ".remove_bank_row", function () {
               var $table = $(this).closest('table');
@@ -689,6 +707,33 @@ $(document).ready(function () {
               $('#multiple-checkboxes').multiselect();
 
           });
+$(function () { 
+    $('#lstStates').multiselect({ 
+        buttonText: function(options, select) {
+            console.log(select[0].length);
+            if (options.length === 0) {
+                return 'None selected';
+            }
+            if (options.length === select[0].length) {
+                return 'All selected ('+select[0].length+')';
+            }
+            else if (options.length >= 4) {
+                return options.length + ' selected';
+            }
+            else {
+                var labels = [];
+                console.log(options);
+                options.each(function() {
+                    labels.push($(this).val());
+                });
+                return labels.join(', ') + '';
+            }
+        }
+    
+    });
+});
+
+
 
       </script>
 

@@ -138,3 +138,5 @@ font-size:14px;
 text-align:left; font-weight:normal;color:#555;font-family: 'Open Sans', sans-serif; font-size:14px;
 font-weight: bold;
 }
+.no-sort::after { display: none!important; }
+.no-sort { pointer-events: none!important; cursor: default!important; }  

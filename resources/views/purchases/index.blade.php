@@ -34,7 +34,7 @@
                  <th>Shipt To</th>
                  <th>Created Date</th>
                  <th>Status</th>
-                 <th>Action</th>
+                @include('partials.action')
                </tr>
              </thead>
              <tbody>

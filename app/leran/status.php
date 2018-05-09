@@ -64,6 +64,7 @@
               2. Display request details and Added  add more functionality for submit bills.
               3. Added save functionality to upload bills document.
               4. Display request details with download bills document.
+              
                /****************************************Date 04-05-2017******************************************************/
               1. Save service category record.
               2. Edit service category record.
@@ -71,6 +72,22 @@
               4. After verify service category email to requester and verifier and approver.
               5. After approve service category email to requester and approver and administrator(associate).
               6.Create material form added add more functionality
+              /****************************************Date 07-05-2017******************************************************/
+              1.Save dynamic material details.
+              2.Send email to requester and verifier
+              3.List of material.
+              3.View Material details.
+              4.View Material details with verify and rejected functionality.
+              5.Send email to verifier requester and approver
+              /****************************************Date 08-05-2017******************************************************/
+            
+              1. View Material details with verify and rejected functionality.
+              2. Send email to verifier requester and admin associate.
+              3. List approved material request in pending action
+              4. Save
+              
+              
+             
              
     
          

@@ -20,22 +20,23 @@
                     {{dateView($requests->due_date)}}  
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-lg-4 col-form-label" for="val-username">Amount Requested</label>
-                <div class="col-lg-6">
-                    {{$requests->amount}}  
-                </div>
-            </div>
+           
             <div class="form-group row">
                 <label class="col-lg-4 col-form-label" for="val-username">Purpose</label>
                 <div class="col-lg-6">
                     {{$requests->purpose}}  
                 </div>
             </div>
-<!--            <div class="form-group row">
+            <div class="form-group row">
                 <label class="col-lg-4 col-form-label" for="val-username">Description of Use</label>
                 <div class="col-lg-6">
                     {{$requests->description_of_use}}  
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-lg-4 col-form-label" for="val-username">Required By</label>
+                <div class="col-lg-6">
+                    {{$requests->required_by_date}}  
                 </div>
             </div>
             <div class="form-group row">
@@ -50,48 +51,58 @@
                     {{displayView($requests->project_expense_head)}}
                 </div>
             </div>
-            @if($requests->date_of_release!='')
-            <div class="form-group row">
-                <label class="col-lg-4 col-form-label" for="due_date">Date of Release</label>
+           
+           <div class="form-group row">
+                <label class="col-lg-4 col-form-label" for="val-username">Total Expected Expense</label>
                 <div class="col-lg-6">
-                    {{displayView($requests->date_of_release)}}
+                    {{$requests->amount}}  
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-lg-4 col-form-label" for="due_date">Release Amount (Rs)</label>
-                <div class="col-lg-6">
-                    {{displayView($requests-> release_voucher_amount)}}
-                </div>
-            </div>
-            @endif-->
-            
-          <?php 
-          $array_bills = explode(',', $requests->document);
-          if (count($array_bills) > 0) { ?>
+            @if(count($material_details)>0)
             <div   class="formmain" onclick="showHide(this.id)" id="bank1">
-                <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; Bill Document
+                <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; Item Details
             </div>
-
             <div class="row1"  id="formbank1" >
-                
-                    <?php
-                    
-
-                    if (count($array_bills) > 0) {
-                        foreach ($array_bills as $key => $array_bill) {
-                            ?>
-                            <div class="form-group row">
-                                <label class="col-lg-4 col-form-label" for="due_date">Document</label>
-                                <div class="col-lg-6">
-                                    <a href="{{url('images/document/'.$array_bills[$key])}}" download="download" class="btn btn-primary"><i class="fa fa-download" aria-hidden="true"></i></a>
-                                </div>
+            @if(count($material_details)>0)
+             <table class="table table-bordered table-striped table-hover bank_table">
+                                      
+                                            <tr>
+                                                <th class="table-row-heading" width="10%">S.No.</th>
+                                                <th class="table-row-heading" width="30%">Product Name</th>
+                                                <th class="table-row-heading" width="10%">Quantity</th>
+                                                <th class="table-row-heading" width="50%">Remarks</th>
+                                               
+                                            </tr>
+                                   </table>
+            @foreach($material_details as $value)
+             <table class="table table-bordered table-striped table-hover bank_table">
+                <tr>
+                    <td width="10%">
+                        <div class="dummy">
+                            <div class="input-icon right">
+                                <span>
+                                    <input type="text" class="form-control product_code" size="5" name="s_no[]" onkeypress="return isNumberKey(event)" required="required" value="{{$value->s_no}}" readonly="readonly">
+                                  
+                                </span>
                             </div>
-    <?php }
-} ?>  
-</div>
-   <?php }
- ?>  
-</div>
+                        </div>
+                    </td>
+                    <td width="30%">
+                        <div class="dummy">
+                            <div class="input-icon right">
+                                <input type="text" class="form-control" size="5" name="product_name[]" required="required" value="{{$value->product_name}}" readonly="readonly">
+                            </div>
+                        </div>
+                    </td>
+                    <td width="10%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}" readonly="readonly"></div></div></td>
+                    <td width="50%" align="left" valign="top" style="text-align:left;">{{$value->remark}}</td>
+                  
+                </tr>
+            </table>
+            @endforeach
+            @endif
+        </div>
+        @endif 
     </div>
 
 </div>

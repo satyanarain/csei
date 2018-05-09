@@ -32,9 +32,9 @@
                        <th>Requisition No.</th>
                        <th>Category</th>
                        <th>Purpose</th>
-                       <th>Amount</th>
+<!--                       <th>Amount</th>-->
                        <th>Status</th>
-                       <th>Action</th>
+                     @include('partials.action')
                    </tr>
              </thead>
              <tbody>
@@ -48,26 +48,18 @@
                <td>{{$request->request_no}}</td>
               <td> {{$request->name}}</td>
               <td>{{$request->purpose}} </td>
-     
-              <td>{{$request->amount}}</td>
-<!--               <td>
-            
-                {{--displayIdBaseName('users',$request->verifire_id,'name')--}}
-              </td>
-              <td>
-               {{--displayIdBaseName('users',$request->approver_id,'name')--}}
-              </td>-->
-              
-              <td>
+               <td>
                <div class="{{$request->b_class}}">  {{$request->c_status}}</div>
               </td>
               <td>
               
                 @if($request->status ==5)
-                <a href="{{route('requests.show', [$request->id,'downloads'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-download"></i><?php //echo $request->status; ?></a>
+                @if($request->category_id==1)
+                <a href="{{route('requests.show', [$request->id,'downloads'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-download"></i></a>
+                @endif
                 <a href="{{route('requests.show', [$request->id,'complete_view'])}}" class="btn btn-success m-b-10 m-l-5">View</a>
                 @else
-                   <a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
+                  <a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
                 @endif
               </td>
             </tr>

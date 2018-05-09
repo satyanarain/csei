@@ -13,8 +13,7 @@
 	</div>
 	<!-- End Bread crumb -->
 	@endsection
-
-	@section('content')
+        @section('content')
 	<!-- Container fluid  -->
 	<div class="container-fluid">
 		<!-- Start Page Content -->
@@ -23,14 +22,14 @@
 				<div class="card">
 					<div class="card-body">
 						<h4 class="card-title">Permissions</h4>
-						<h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+						
 						<div class="table-responsive m-t-40">
 							<table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 					<thead>
 						<tr>
 							<th>Name</th>
 							<th>Description</th>
-							<th>Action</th>
+							 @include('partials.action')
 						</tr>
 					</thead>
 					<tbody>
