@@ -20,53 +20,30 @@
                     {{dateView($requests->due_date)}}  
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-lg-4 col-form-label" for="val-username">Amount Requested</label>
-                <div class="col-lg-6">
-                    {{$requests->amount}}  
-                </div>
-            </div>
+           
             <div class="form-group row">
                 <label class="col-lg-4 col-form-label" for="val-username">Purpose</label>
                 <div class="col-lg-6">
                     {{$requests->purpose}}  
                 </div>
             </div>
-<!--            <div class="form-group row">
-                <label class="col-lg-4 col-form-label" for="val-username">Description of Use</label>
+            <div class="form-group row">
+                <label class="col-lg-4 col-form-label" for="val-username">Service Description</label>
                 <div class="col-lg-6">
                     {{$requests->description_of_use}}  
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-lg-4 col-form-label" for="due_date">Name Of Project</label>
+                <label class="col-lg-4 col-form-label" for="val-username">Required By</label>
                 <div class="col-lg-6">
-                    {{displayView($requests->name_of_project)}}
+                    {{dateView($requests->required_by_date)}}  
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head</label>
-                <div class="col-lg-6">
-                    {{displayView($requests->project_expense_head)}}
-                </div>
-            </div>
-            @if($requests->date_of_release!='')
-            <div class="form-group row">
-                <label class="col-lg-4 col-form-label" for="due_date">Date of Release</label>
-                <div class="col-lg-6">
-                    {{displayView($requests->date_of_release)}}
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-lg-4 col-form-label" for="due_date">Release Amount (Rs)</label>
-                <div class="col-lg-6">
-                    {{displayView($requests-> release_voucher_amount)}}
-                </div>
-            </div>
-            @endif-->
+
             
           <?php 
-          $array_bills = explode(',', $requests->document);
+          
+          $array_bills = explode(',', $requests->service_document);
           if (count($array_bills) > 0) { ?>
             <div   class="formmain" onclick="showHide(this.id)" id="bank1">
                 <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; Bill Document
