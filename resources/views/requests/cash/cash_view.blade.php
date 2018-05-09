@@ -66,6 +66,8 @@
             @endif
             
           <?php 
+          if($requests->bills_document!='')
+          {
           $array_bills = explode(',', $requests->bills_document);
           if (count($array_bills) > 0) { ?>
             <div   class="formmain" onclick="showHide(this.id)" id="bank1">
@@ -89,7 +91,7 @@
     <?php }
 } ?>  
 </div>
-   <?php }
+          <?php } }
  ?>  
 </div>
     </div>

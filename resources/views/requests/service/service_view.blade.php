@@ -42,7 +42,8 @@
 
             
           <?php 
-          
+          if($requests->service_document!='')
+          {
           $array_bills = explode(',', $requests->service_document);
           if (count($array_bills) > 0) { ?>
             <div   class="formmain" onclick="showHide(this.id)" id="bank1">
@@ -66,7 +67,7 @@
     <?php }
 } ?>  
 </div>
-   <?php }
+          <?php }}
  ?>  
 </div>
     </div>
