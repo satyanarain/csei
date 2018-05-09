@@ -260,7 +260,7 @@ $segments_var = Request::segments();
 
                               </ul>
                           </li>
-                          <li class="{{$active == 'purchases' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Purchase Order</span></a>
+<!--                          <li class="{{$active == 'purchases' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Purchase Order</span></a>
                               <ul aria-expanded="false" class="collapse">
                                   <li class="{{($active2 == 'create' && $active == 'purchases') ? 'active' : ''}}"><a href="{{route('purchases.create')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                           New Purchase Order</a></li>
@@ -268,7 +268,7 @@ $segments_var = Request::segments();
                                           All Purchase Order</a></li>
 
                               </ul>
-                          </li>
+                          </li>-->
 
                           @if(Entrust::hasRole('administrator'))
                           <li class="nav-label">SETTINGS</li>
