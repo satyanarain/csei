@@ -1,7 +1,7 @@
     <div   class="formmain" onclick="showHide(this.id)" id="personal1">
-<div class="plusminusbutton" id="plusminusbuttonpersonal1">+</div>&nbsp;&nbsp; Personal Info
+<div class="plusminusbutton" id="plusminusbuttonpersonal1">-</div>&nbsp;&nbsp; Personal Info
 </div>
-<div class="row1"  id="formpersonal1" style="display:none;">
+<div class="row1"  id="formpersonal1">
 <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="name">Name <span class="text-danger">*</span></label>
         <div class="col-lg-6">
@@ -25,9 +25,9 @@
     </div>
 
 <div   class="formmain" onclick="showHide(this.id)" id="bank1">
-<div class="plusminusbutton" id="plusminusbuttonbank1">+</div>&nbsp;&nbsp; Bank Details
+<div class="plusminusbutton" id="plusminusbuttonbank1">-</div>&nbsp;&nbsp; Bank Details
 </div>
-<div class="row1"  id="formbank1" style="display:none;">
+<div class="row1"  id="formbank1">
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="contact">Bank Name <span class="text-danger">*</span></label>
         <div class="col-lg-6">
