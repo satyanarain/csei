@@ -84,7 +84,20 @@
               1. View Material details with verify and rejected functionality.
               2. Send email to verifier requester and admin associate.
               3. List approved material request in pending action
-              4. Save
+              
+                /****************************************Date 09-05-2017******************************************************/
+              1. List of approved material.
+              2. Add quotation button in pending action list section.
+              3. Viewed material category with item list.
+              4. Send material details to selected vendor.
+              5. Send Email to vendor with link.
+                /****************************************Date 10-05-2017******************************************************/
+              1. Create vendor quotation form and dynamic display material details.
+              2. Add functionality to save vendor quotation form.
+              3. Create error page if quotation date expire.
+              4. Display error message to vendor if record already exists
+              5. Display vendor comparison list.
+            
               
               
              

@@ -59,7 +59,14 @@
                 @endif
                 <a href="{{route('requests.show', [$request->id,'complete_view'])}}" class="btn btn-success m-b-10 m-l-5">View</a>
                 @else
-                  <a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
+                @if($request->category_id==2)
+                  <a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+Quotation</a>
+                   @else
+                   <a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
+                 @endif 
+                  
+                  
                 @endif
               </td>
             </tr>

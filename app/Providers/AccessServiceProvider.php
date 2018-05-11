@@ -26,6 +26,10 @@ class AccessServiceProvider extends ServiceProvider
 			'App\Repositories\Vendor\VendorRepository'
 		);
 		$this->app->bind(
+			'App\Repositories\Quotation\QuotationRepositoryContract',
+			'App\Repositories\Quotation\QuotationRepository'
+		);
+		$this->app->bind(
 			'App\Repositories\Team\TeamRepositoryContract',
 			'App\Repositories\Team\TeamRepository'
 		);

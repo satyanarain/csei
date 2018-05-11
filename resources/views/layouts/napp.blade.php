@@ -22,6 +22,16 @@
     <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+    
+     <link href="{{asset('css/lib/calendar2/semantic.ui.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/lib/calendar2/pignose.calendar.min.css')}}" rel="stylesheet">
+    <link href="{{asset('css/lib/owl.carousel.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('css/lib/owl.theme.default.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('css/helper.css')}}" rel="stylesheet">
+    <link href="{{asset('css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('css/custom.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    
 </head>
 
 <body class="fix-header fix-sidebar">
@@ -48,7 +58,99 @@
     <script src="{{asset('js/lib/sticky-kit-master/dist/sticky-kit.min.js')}}"></script>
     <!--Custom JavaScript -->
     <script src="{{asset('js/custom.min.js')}}"></script>
+<script>
+    
+          function isNumberKey(evt)
+          {
+              var charCode = (evt.which) ? evt.which : evt.keyCode;
+              if (charCode != 46 && charCode > 31
+                      && (charCode < 48 || charCode > 57))
+                  return false;
 
+              return true;
+          }
+          function isIntegerKey(evt)
+          {
+              evt = (evt) ? evt : window.event;
+              var charCode = (evt.which) ? evt.which : evt.keyCode;
+              if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                  return false;
+              }
+              return true;
+
+
+          }
+ /***********************************************************************************/
+          $(document).ready(function () {
+
+              //iterate through each textboxes and add keyup
+              //handler to trigger sum event
+              $(".txt").each(function () {
+
+                  $(this).keyup(function () {
+                      calculateSum();
+                  });
+              });
+
+          });
+
+          function calculateSum() {
+
+              var sum = 0;
+              //iterate through each textboxes and add the values
+              $(".txt").each(function () {
+
+                  //add only if the value is number
+                  if (!isNaN(this.value) && this.value.length != 0) {
+                      sum += parseFloat(this.value);
+                  }
+
+              });
+              //.toFixed() method will roundoff the final sum to 2 decimal places
+              $("#sum").html(sum.toFixed(2));
+          }
+
+
+        
+
+          $(document).on("click", ".remove_bank_row", function () {
+              var $table = $(this).closest('table');
+              $(this).closest('tr').remove();
+              $table.trigger("recalc");
+          });
+
+          $(document).on("keyup", ".bank_table input", function () {
+              $(this).trigger("recalc");
+          });
+
+          $(document).on("recalc", ".bank_table tr", function () {
+              var total = +$(this).find(".quantity2").val() * +$(this).find(".rate").val();
+              $(this).find(".tamnt").val(total.toFixed(2));
+          });
+
+          $(document).on("recalc", ".bank_table", function () {
+              var grandTotal = 0;
+              $(this).find(".tamnt").each(function () {
+                  grandTotal += +$(this).val();
+              });
+              $("#grandTotal").val(grandTotal.toFixed(2));
+          });
+
+          $(".bank_table").trigger("recalc");
+
+          /******************************************************************/
+          $(document).ready(function () {
+
+              $('#multiple-checkboxes').multiselect();
+
+          });
+$(document).ready(function(){	
+     setTimeout(function() {
+          $('#successMessage').fadeOut('fast');
+        }, 5000); // <-- time in milliseconds
+      });
+
+</script>
 </body>
 
 </html>

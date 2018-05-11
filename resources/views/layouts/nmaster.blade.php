@@ -216,14 +216,35 @@ $segments_var = Request::segments();
                           @endif
 
                           @if(Entrust::hasRole('administrator'))
-                          <li class="{{$active == 'users' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Vendors</span></a>
+                          <li class="{{$active == 'vendors' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Vendors</span></a>
                               <ul aria-expanded="false" class="collapse">
                                   <li class="{{($active2 == 'create' && $active == 'vendors') ? 'active' : ''}}"><a href="{{route('vendors.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Vendor</a></li>
                                   <li class="{{($active2 == '' && $active == 'vendors') ? 'active' : ''}}"><a href="{{route('vendors.index')}}"><i class="fa fa-users"></i> All Vendors</a></li>
 
+
                               </ul>
                           </li>
                           @endif
+                      
+                          <li class="{{$active == 'quotations' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Quotations</span></a>
+                              <ul aria-expanded="false" class="collapse">
+                                <li class="{{($active2 == '' && $active == 'quotations') ? 'active' : ''}}"><a href="{{route('quotations.index')}}"><i class="fa fa-users"></i> All Quotations</a></li>
+                             </ul>
+                          </li>
+                          
+                          
+                          <li class="{{$active == 'quotations' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Quotations</span></a>
+                              <ul aria-expanded="false" class="collapse">
+                                <li class="{{($active2 == '' && $active == 'quotations') ? 'active' : ''}}"><a href="{{route('quotations.index')}}"><i class="fa fa-users"></i> All Quotations</a></li>
+                             </ul>
+                          </li>
+                          
+                          <li class="{{$active == 'vendor_quotation_lists' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Comparison Sheet</span></a>
+                              <ul aria-expanded="false" class="collapse">
+                                <li class="{{($active2 == '' && $active == 'vendor_quotation_lists') ? 'active' : ''}}"><a href="{{route('vendor_quotation_lists.index')}}"><i class="fa fa-users"></i>All Vendor Quotations</a></li>
+                             </ul>
+                          </li>
+                        
                         
                           <li class="{{$active == 'purchase_committees' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i>
                                   <span class="hide-menu">Purchase Committee<?php //echo $active2 ?><?php //echo $active ?>
@@ -260,7 +281,7 @@ $segments_var = Request::segments();
 
                               </ul>
                           </li>
-<!--                          <li class="{{$active == 'purchases' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Purchase Order</span></a>
+                         <li class="{{$active == 'purchases' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Purchase Order</span></a>
                               <ul aria-expanded="false" class="collapse">
                                   <li class="{{($active2 == 'create' && $active == 'purchases') ? 'active' : ''}}"><a href="{{route('purchases.create')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                           New Purchase Order</a></li>
@@ -268,7 +289,7 @@ $segments_var = Request::segments();
                                           All Purchase Order</a></li>
 
                               </ul>
-                          </li>-->
+                          </li>
 
                           @if(Entrust::hasRole('administrator'))
                           <li class="nav-label">SETTINGS</li>
@@ -301,6 +322,23 @@ $segments_var = Request::segments();
           <div class="page-wrapper">
               @yield('breadcrumb')
               <!-- Flash message starts -->
+              @if ($message = Session::get('flash_message'))
+              <div id="card-alert" class="card orange">
+              <div class="alert-new-success" id="successMessage">
+                  <button type="button" class="close" data-dismiss="alert">×</button>	
+                  <strong>{{ $message }}</strong>
+              </div>
+              </div>
+              @endif
+
+              @if ($message = Session::get('flash_message_warning'))
+              <div id="card-alert" class="card orange">
+              <div class="alert alert-warning alert-block" id="successMessage">
+                  <button type="button" class="close" data-dismiss="alert">×</button>	
+                  <strong>{{ $message }}</strong>
+              </div>
+              </div>
+              @endif
               @if(Session::has('message_warning'))
               <div id="card-alert" class="card orange">
                   <div class="card-content white-text">
@@ -640,9 +678,7 @@ $(document).ready(function () {
                   return false;
               }
               return true;
-
-
-          }
+             }
           /***********************************************************************************/
           $(document).ready(function () {
 

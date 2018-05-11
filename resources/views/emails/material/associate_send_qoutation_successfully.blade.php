@@ -11,12 +11,12 @@
                 <table class="m_3012731993381030246inner-body" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;background-color:#ffffff;margin:0 auto;padding:0;width:570px" cellspacing="0" cellpadding="0" align="center" width="570">
                     <tbody><tr>
                             <td class="m_3012731993381030246content-cell" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;padding:35px"><span class="im">
-                                <h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">Dear {{$name}},</h1>
-                                <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">
-                                <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">This is a request for quotation. Please <a href="{{route('quotations.index',[$id,$vendor_id,$material_string])}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i>click here</a> to fill quotation from.</p>
+                                    <h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">Dear {{$name}},</h1>
+                                    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">Your request number {{$request_no}} has been submitted successfully.</p>
                                 </span><p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">Thanks,<br>
-                                CSEI Team</p>
-                              </td>
+                                    CSEI Team</p>
+
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -33,3 +33,6 @@
         </tr>
     </tbody>
 </table>
+
+
+

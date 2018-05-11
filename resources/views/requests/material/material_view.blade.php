@@ -58,12 +58,12 @@
                     {{$requests->amount}}  
                 </div>
             </div>
-            @if(count($material_details)>0)
+
             <div   class="formmain" onclick="showHide(this.id)" id="bank1">
                 <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; Item Details
             </div>
             <div class="row1"  id="formbank1" >
-            @if(count($material_details)>0)
+
              <table class="table table-bordered table-striped table-hover bank_table">
                                       
                                             <tr>
@@ -74,7 +74,10 @@
                                                
                                             </tr>
                                    </table>
-            @foreach($material_details as $value)
+            
+            <?php //print_r($material_details); ?>
+            
+            @foreach($material_details_view as $value)
              <table class="table table-bordered table-striped table-hover bank_table">
                 <tr>
                     <td width="10%">
@@ -100,9 +103,9 @@
                 </tr>
             </table>
             @endforeach
-            @endif
+           
         </div>
-        @endif 
+      
     </div>
 
 </div>

@@ -17,8 +17,9 @@ Route::get('/', function () {
 
 Route::get('create/password/{token}', 'UsersController@createPassword')->name('create.password');
 Route::post('set/password', 'UsersController@setPassword')->name('set.password');
-
+ Route::resource('quotations', 'QuotationController');
 Auth::routes();
+
 Route::group(['middleware'=>'auth'], function(){
 	Route::get('/home', 'HomeController@index')->name('home');
 
@@ -77,6 +78,13 @@ Route::group(['middleware'=>'auth'], function(){
         Route::get('vendors/statusupdate/{id}', 'VendorController@statusUpdate');
         Route::resource('vendors', 'VendorController');
         /************************************************************************/
+        
+        /************************************************************************/
+        //Route::get('vendor_quotation_lists/statusupdate/{id}', 'VendorController@statusUpdate');
+        Route::resource('vendor_quotation_lists', 'VendorQuotationListsController');
+        /************************************************************************/
+       
+         /************************************************************************/
         Route::resource('purchases', 'PurchasesController');
         
          /*

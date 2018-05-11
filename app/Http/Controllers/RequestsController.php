@@ -79,7 +79,6 @@ use activityLog;
      
       if($request->verify=='Verify')
         {
-        
          /********************************************************/
         /********************************************************/
            $id=  $request->id;
@@ -812,15 +811,23 @@ use activityLog;
         /************************request voucher saved*********************************************************/
         else if($request->quotation=='quotation')
         {
+            
           /*****vendor mail**************************************************************/
           $vendor_array = implode(',', $request->vendor); 
           $no_of_days=$request->no_of_days;
            
             $allvendor= Vendor::whereIn('id',$request->vendor)->get();
+            
+            
+            
+//            echo "<pre>";
+//            print_r($allvendor);
+//            exit();
            /*******************************************************************/ 
             $status=3;
             $id=$request->id;
             $result=CSEIRequest::where('id', $id)->update(['status' =>$status]);
+            
             $request_data= CSEIRequest::whereId($id)->first();
             $request_no=$request_data->request_no;
             $amount= $request_data->amount;
@@ -828,6 +835,8 @@ use activityLog;
             $sql_requester= DB::table('requests')->select('*')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
             $s_no = $request->s_no;
             $material_id = $request->material_id;
+            $material_string=implode(',',$request->material_id);
+            
             $product_name = $request->product_name;
             $purchase_quantity = $request->purchase_quantity;
             $remark = $request->remark;
@@ -835,21 +844,21 @@ use activityLog;
 
             if (strlen(implode($s_no)) > 0) {
                 foreach ($s_no as $key => $n) {
-                    $id = DB::table('quotation_details')->insertGetId(
-                            ['material_id' => $material_id[$key],'request_id' => $request_id, 's_no' => $s_no[$key], 'product_name' => $product_name[$key], 'purchase_quantity' => $purchase_quantity[$key], 'remark' => $remark[$key],'vendor_id'=>$vendor_array,'no_of_days'=>$no_of_days]
+                     DB::table('quotation_details')->insertGetId(['material_id' => $material_id[$key],'request_id' => $request_id, 's_no' => $s_no[$key], 'product_name' => $product_name[$key], 'purchase_quantity' => $purchase_quantity[$key], 'remark' => $remark[$key],'vendor_id'=>$vendor_array,'no_of_days'=>$no_of_days]
                     );
                 }
             }
        /************************************************mail to who will save voucher***********************************************************/
+            
                if($result==1)
             {
 	        
                foreach($allvendor as $ven)  
                { 
                  
-                    Mail::send( 'emails.material.mail_to_vendor', ['associate_name' => $associate_name,'request_no'=>$request_no,'name' => $ven->name,'amount' => $amount,], function ($m) use ($ven) {
+                    Mail::send( 'emails.material.mail_to_vendor', ['request_no'=>$request_no,'id'=>$request->id,'name' => $ven->name,'amount' => $amount,'vendor_id'=>$ven->id,'material_string'=>$material_string], function ($m) use ($ven) {
                         $m->from('info@opiant.online', 'CSEI');
-                        $m->to($ven->email, $ven->name)->subject('CSEI | Request Completed Successfully');
+                        $m->to($ven->email, $ven->name)->subject('CSEI | Quotation Submit');
                     });
             }
             }
@@ -859,7 +868,7 @@ use activityLog;
              if($result==1)
             {
 	            $associate_name = $associates->name;
-                    Mail::send( 'emails.material.associate_send_qoutation_successfully', ['request_no'=>$request_no,'name' => $associates->name,'amount' => $amount,], function ($m) use ($associates) {
+                    Mail::send( 'emails.material.associate_send_qoutation_successfully', ['request_no'=>$request_no,'name' => $associates->name,'amount' => $amount], function ($m) use ($associates) {
                         $m->from('info@opiant.online', 'CSEI');
                         $m->to($associates->email, $associates->name)->subject('CSEI | Request Completed Successfully');
                     });
@@ -961,11 +970,15 @@ use activityLog;
         $material_details = DB::table('material_details')->where('request_id',$id)
               ->whereNotIn('id',$material_id)  
                 ->get();
+        
+        $material_details_view = DB::table('material_details')->where('request_id',$id)->get();     
+                //print_r($material_details_view);
+                
          $vendors = Vendor::all();
          $request_details = DB::table('request_details')->select('*')->where('request_details.request_id',$id)->get();
          $total_voucher = DB::table('requests')->select('*')->where([['category_id',$requests->category_id],['status',5]])->count();
        
-        return view('requests.show', compact('requests','request_details','total_voucher','material_details','vendors'));
+        return view('requests.show', compact('requests','request_details','total_voucher','material_details','vendors','material_details_view'));
     }
 
     /**
