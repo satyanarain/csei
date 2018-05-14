@@ -58,7 +58,6 @@ Route::group(['middleware'=>'auth'], function(){
 	Route::post('verifiers/requests/{id}/verify', 'RequestsController@verifyRequest')->name('verifiers.requests.verify');
         Route::get('verifiers/requests', 'RequestsController@requestsToVerify')->name('verifiers.requests');
 	Route::get('approvers/requests', 'RequestsController@requestsToApprove')->name('approvers.requests');
-	//Route::get('accountants/requests', 'RequestsController@requestsToReconcile')->name('accountants.requests');
 	Route::get('accountants/requests', 'RequestsController@requestsApproved')->name('accountants.requests');
 	Route::post('requests/verify_request', 'RequestsController@verifyRequestUpdateStatus');
 	Route::post('requests/verify_request', 'RequestsController@verifyRequestUpdateStatus');
@@ -82,6 +81,8 @@ Route::group(['middleware'=>'auth'], function(){
         /************************************************************************/
         //Route::get('vendor_quotation_lists/statusupdate/{id}', 'VendorController@statusUpdate');
         Route::resource('vendor_quotation_lists', 'VendorQuotationListsController');
+         Route::get('pending_quotations/comments/{id}', 'PendingQuotationController@Comment');
+        Route::resource('pending_quotations', 'PendingQuotationController');
         /************************************************************************/
        
          /************************************************************************/

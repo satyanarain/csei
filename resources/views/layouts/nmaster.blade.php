@@ -31,6 +31,31 @@ $segments_var = Request::segments();
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
+      
+       <div class="comment_content">
+          <div class="comment_content_all">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Do you want to save changes you made to document before closing?</p>
+                    <p class="text-warning"><small>If you don't save, your changes will be lost.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+          </div>
+      </div>
+      
+      
+      
+      
       <div class="loder_id">
           <div class="loader_main">
               <div class="loader"></div>
@@ -244,6 +269,12 @@ $segments_var = Request::segments();
                                 <li class="{{($active2 == '' && $active == 'vendor_quotation_lists') ? 'active' : ''}}"><a href="{{route('vendor_quotation_lists.index')}}"><i class="fa fa-users"></i>All Vendor Quotations</a></li>
                              </ul>
                           </li>
+                          
+                          <li class="{{$active == 'pending_quotations' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Pending Quotation</span></a>
+                              <ul aria-expanded="false" class="collapse">
+                                <li class="{{($active2 == '' && $active == 'pending_quotations') ? 'active' : ''}}"><a href="{{route('pending_quotations.index')}}"><i class="fa fa-users"></i>All Pending Quotation</a></li>
+                             </ul>
+                          </li>
                         
                         
                           <li class="{{$active == 'purchase_committees' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i>
@@ -455,11 +486,7 @@ $segments_var = Request::segments();
       maxDate: "-0Y"
                 });
       }); 
-
-
-
-
-      $('body').on('focus',".multiple_date_due", function(){
+ $('body').on('focus',".multiple_date_due", function(){
                $(this).datepicker({
                     dateFormat: 'dd-mm-yy',
                      startView: "year",

@@ -7,7 +7,7 @@
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{route('vendor_quotation_lists.index')}}">Quotations</a></li>
+            <li class="breadcrumb-item"><a href="{{route('pending_quotations.index')}}">Quotations</a></li>
             <li class="breadcrumb-item active">Quotation Details</li>
         </ol>
     </div>
@@ -82,7 +82,7 @@
             <div   class="formmain" onclick="showHide(this.id)" id="bank1">
                 <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; Item Details
             </div>
-            {!!Form::open(['route'=>'vendor_quotation_lists.store', 'id'=>'formValidate', 
+            {!!Form::open(['route'=>'pending_quotations.store', 'id'=>'formValidate', 
             'onsubmit'=>'return validatePan()',
             'autocomplete'=>'off',
             'class'=>'formValidate', 'files'=>true])!!}
@@ -99,9 +99,10 @@
                         <th  class="table-row-heading">Total Amount</th>
                         <th  class="table-row-heading">Requester Remark</th>
                         <th  class="table-row-heading">Vendor Remark</th>
+                        <th  class="table-row-heading">Approval</th>
 
                     </tr>
-                    @foreach($vendor_quotation_lists as $vendor_value)
+                    @foreach($pending_quotations as $vendor_value)
                     <tr><th>Vendor Name</th>
                         <th>{{$vendor_value->name}}</th>
                         <th></th>
@@ -109,14 +110,15 @@
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th></th>
 
                     </tr>
-                    <tr><th>Committee Member Remark</th>
+                    <tr><th><div class="btn btn-primary" onclick="allComments({{$requests->id}},{{$vendor_value->vendor_id}})">All Comments</div></th>
                         <th>
-                            <textarea type="text" class="form-control" size="7" name="committee_member_remark[]"   value="" required="required"></textarea>
-                            <input type="hidden" class="form-control product_code" size="5" name="request_id[]" value="{{$requests->id}}" readonly="readonly">
+                             <input type="hidden" class="form-control product_code" size="5" name="request_id[]" value="{{$requests->id}}" readonly="readonly">
                             <input type="hidden" class="form-control product_code" size="5" name="vendor_id[]" value="{{$vendor_value->vendor_id}}" readonly="readonly">
                         </th>
+                        <th></th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -125,11 +127,11 @@
 
                     </tr>
                     <?php
-                    $vendor_quotation_list_all = DB::table('vendor_quotation_lists')->select('*')
-                            ->leftjoin('requests', 'requests.id', 'vendor_quotation_lists.request_id')
-                            ->leftjoin('vendors', 'vendors.id', 'vendor_quotation_lists.vendor_id')
-                            ->where('vendor_quotation_lists.request_id', $requests->id)
-                            ->where('vendor_quotation_lists.vendor_id', $vendor_value->vendor_id)
+                    $vendor_quotation_list_all = DB::table('pending_quotations')->select('*')
+                            ->leftjoin('requests', 'requests.id', 'pending_quotations.request_id')
+                            ->leftjoin('vendors', 'vendors.id', 'pending_quotations.vendor_id')
+                            ->where('pending_quotations.request_id', $requests->id)
+                            ->where('pending_quotations.vendor_id', $vendor_value->vendor_id)
                             ->get();
                     // print_r($vendor_quotation_list_all) 
                     ?>
@@ -144,6 +146,7 @@
                         <th> <input type="text" class="form-control" size="7" name="purchase_unit_amount[]" readonly="readonly" value="{{$vendor_value_all->purchase_unit_amount}}"></th>
                         <th><input type="text" class="form-control" size="7" name="remark[]"  readonly="readonly"  value="{{$vendor_value_all->remark}}"></th>
                         <th><input type="text" class="form-control" size="7" name="vendor_remark[]"  readonly="readonly"  value="{{$vendor_value_all->vendor_remark}}"></th>
+                        <th><input type="checkbox" class="form-control" size="7" name="quotation_approval_id[]"  readonly="readonly"  value="{{$vendor_value_all->quotation_approval_id}}"></th>
 
                     </tr>
                     @endforeach
@@ -163,23 +166,59 @@
 
             </div>
             {!!Form::close()!!}        
-              </div>  
+              </div>
+              
+
+
+<div class="modal fade" id="view_detail" role="dialog">
+    
+ </div>
+
      </div>
      </div>
     </div>
+    
+   
+    
+    
 </div>
 </div>
-
-
-
-
-
 
 @endsection
 
 @push('scripts')
 
-
+<script>
+    
+   function CloseModel(id)
+   {
+   
+       $('#'+id).modal().hide();
+       $('#exampleModal').hide();
+         $('#modal').modal('toggle');
+         window.location.reload();
+   }
+    
+       function allComments(request_id,vendor_id)
+   {
+     
+   
+   var urldata=   '/pending_quotations/comments/' + request_id;
+    
+    $.ajax({
+		type: "GET",
+		url: urldata,
+		cache: false,
+                data:"request_id="+request_id+"&vendor_id="+vendor_id,
+		success: function(data){
+                    alert(data);
+                  $("#loder_id_comment").show();
+                  $("#loader_main").html(data);
+		}
+	});
+  
+   }
+</script>
 
 
 @endpush
