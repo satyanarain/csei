@@ -3,12 +3,12 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-primary">Roles</h3> </div>
+        <h3 class="text-primary">Create Role</h3> </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{route('roles.index')}}">Roles</a></li>
-                <li class="breadcrumb-item active">Create</li>
+                <li class="breadcrumb-item"><a href="{{route('roles.index')}}">All Roles</a></li>
+                <li class="breadcrumb-item active">Create Role</li>
             </ol>
         </div>
     </div>
@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-validation">
-                            <h4 class="header2">Role Details</h4>
+                         
                             {!!Form::open(['route'=>'roles.store', 'id'=>'formValidate', 'class'=>'formValidate'])!!}
                             <div class="form-group row">
                                <label class="col-lg-4 col-form-label" for="name">Name <span class="text-danger">*</span></label>
