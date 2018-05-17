@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
 	<div class="col-md-5 align-self-center">
-		<h3 class="text-primary">Permissions</h3> </div>
+		<h3 class="text-primary">All Permissions</h3> </div>
 		<div class="col-md-7 align-self-center">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-				<li class="breadcrumb-item active">Permissions</li>
+				<li class="breadcrumb-item active">All Permissions</li>
 			</ol>
 		</div>
 	</div>
@@ -21,7 +21,6 @@
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Permissions</h4>
 						
 						<div class="table-responsive m-t-40">
 							<table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">

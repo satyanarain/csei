@@ -33,9 +33,9 @@
                 <tr>
                  <th width="10%">Name</th>
                  <th width="10%">Email</th>
-                 <th width="10%">Designation</th>
-                 <th width="10%">Verifier (s)</th>
-                 <th width="20%">Approver (s)</th>
+                 <th width="10%" class="no-sort">Designation</th>
+                 <th width="10%" class="no-sort">Verifier (s)</th>
+                 <th width="20%" class="no-sort">Approver (s)</th>
                  <th width="10%">Status</th>
                  <th width="30%" class="no-sort">Action</th>
                </tr>

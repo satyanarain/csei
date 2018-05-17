@@ -3,12 +3,12 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-primary">Permissions</h3> </div>
+        <h3 class="text-primary">Create Permission</h3> </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{route('permissions.index')}}">Permissions</a></li>
-                <li class="breadcrumb-item active">Create</li>
+                <li class="breadcrumb-item"><a href="{{route('permissions.index')}}">All Permissions</a></li>
+                <li class="breadcrumb-item active">Create Permission</li>
             </ol>
         </div>
     </div>
@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-validation">
-                            <h4 class="header2">Permission Details</h4>
+                           
                             {!!Form::open(['route'=>'permissions.store', 'id'=>'formValidate', 'class'=>'formValidate'])!!}
                             <div class="form-group row">
                                 
@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-lg-8 ml-auto">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Submit</button>
                             </div>
                         </div>
                         {!!Form::close()!!}
