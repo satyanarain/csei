@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">All Comparison Sheets</h3> </div>
+    <h3 class="text-primary">All Quotation for Reviews</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">All Comparison Sheets</li>
+        <li class="breadcrumb-item active">All Quotation for Reviews</li>
       </ol>
     </div>
   </div>
@@ -39,10 +39,27 @@
                  
                  
               @foreach($vendor_quotation_lists as $vendor_quotation_lists)
+               <?php $count123 = idExists('quotation_send_for_comparision', $vendor_quotation_lists->request_id);
+                    
+                     ?>
               <tr>
-                  <td style="display:none">{{$vendor_quotation_lists->id}}</td>
+                  
+                
+                  
+                  <td style="display:none">{{$vendor_quotation_lists->id}}
+                  
+                  
+                  
+                  </td>
                <td>
-                {{dateView($vendor_quotation_lists->due_date)}}
+                {{dateView($vendor_quotation_lists->due_date)}} <?php 
+                     if($count123==0)
+                     {
+                      echo "1"   ;
+                     } else {
+                      echo "2"   ;
+                     }
+                     ?> 
               </td>
                 <td>{{$vendor_quotation_lists->request_no}}</td>
               
@@ -51,20 +68,24 @@
                  <td>
                  {{displayView($vendor_quotation_lists->purpose)}}
                  </td>
-                <td>
-                
-                <a href="{{route('vendor_quotation_lists.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
-              
-              </td>
+                 <?php if($count123==0)
+                      {
+                         ?>
+                  <td>
+                     <a href="{{route('quotation_reviews.show',[$vendor_quotation_lists->id])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-paper-plane"></i> Send To Review</a>
+                        </td>
+                    <?php  } else { ?>
+                         <td>
+
+                                            <a href="{{route('quotation_reviews.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i></i> View</a>
+                         <td>
+ <?php } ?>
+               
             </tr>
             @endforeach
           </tbody>
         </table>
-                
-                
-                
-              
-      </div>
+         </div>
     </div>
   </div>
 </div>

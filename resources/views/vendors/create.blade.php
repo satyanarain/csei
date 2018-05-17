@@ -3,12 +3,12 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-primary">Vendors</h3> </div>
+        <h3 class="text-primary">Create Vendor</h3> </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{route('vendors.index')}}">Vendors</a></li>
-                <li class="breadcrumb-item active">Create</li>
+                <li class="breadcrumb-item"><a href="{{route('vendors.index')}}">All Vendors</a></li>
+                <li class="breadcrumb-item active">Create Vendor</li>
             </ol>
         </div>
     </div>
@@ -21,9 +21,7 @@
             <div class="card">
                 <div class="card-body">
                  <div class="form-validation">
-                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Create Vendor</h4>
-      
-                                    {!!Form::open(['route'=>'vendors.store', 'id'=>'formValidate', 
+                    {!!Form::open(['route'=>'vendors.store', 'id'=>'formValidate', 
                                     'onsubmit'=>'return validatePan()',
                                     'class'=>'formValidate', 'files'=>true])!!}
                                     @include('vendors.form')

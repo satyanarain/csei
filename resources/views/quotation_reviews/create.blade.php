@@ -2,39 +2,40 @@
 @section('breadcrumb')
 <!-- Bread crumb -->
 <div class="row page-titles">
-	<div class="col-md-5 align-self-center">
-		<h3 class="text-primary">Update User</h3> </div>
-		<div class="col-md-7 align-self-center">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-				<li class="breadcrumb-item"><a href="{{route('users.index')}}">All Users</a></li>
-				<li class="breadcrumb-item active">Update User</li>
-			</ol>
-		</div>
-	</div>
-	<!-- End Bread crumb -->
-	@endsection
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-primary">Vendors</h3> </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{route('vendor_quotation_lists.index')}}">Vendors</a></li>
+                <li class="breadcrumb-item active">Create</li>
+            </ol>
+        </div>
+    </div>
+    <!-- End Bread crumb -->
+    @endsection
 
-	@section('content')
-	<!-- Container fluid  -->
+    @section('content')
   <div class="row justify-content-center" id='printableArea'>
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
                  <div class="form-validation">
-                              	{!!Form::model($user, ['route'=>['users.update', $user->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
-										@include('users.form')
-										{!!Form::close()!!}
-									
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-	
-	@endsection
-
-	@push('scripts')
+                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Create Vendor</h4>
+      
+                                    {!!Form::open(['route'=>'vendor_quotation_lists.store', 'id'=>'formValidate', 
+                                    'onsubmit'=>'return validatePan()',
+                                    'class'=>'formValidate', 'files'=>true])!!}
+                                    @include('vendor_quotation_lists.form')
+                                    {!!Form::close()!!}
+                                
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    @endsection
+ @push('scripts')
 <script>
     
     var form_validation = function() {
@@ -61,14 +62,14 @@
                         required: !0,
                         email: !0
                     },
-//                    "password": {
-//                        required: !0,
-//                        password: !0
-//                    },
-//                    "confirm_password": {
-//                        required: !0,
-//                        confirm_password: !0
-//                    },
+                    "password": {
+                        required: !0,
+                        password: !0
+                    },
+                    "confirm_password": {
+                        required: !0,
+                        confirm_password: !0
+                    },
                     "roles": {
                         required: !0
                     },
@@ -90,12 +91,12 @@
                         minlength: "Your username must consist of at least 3 characters"
                     },
                     "email": "Please enter a valid email address",
-//                     "password": {
-//                        required: "Please enter a password"
-//                    },
-//                     "confirm_password": {
-//                        required: "Please enter a confirm password"
-//                    },
+                     "password": {
+                        required: "Please enter a password"
+                    },
+                     "confirm_password": {
+                        required: "Please enter a confirm password"
+                    },
                     "roles": {
                         required: "Please select atleast one role"
                     },

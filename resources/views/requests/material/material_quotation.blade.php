@@ -73,10 +73,9 @@
                                                 </div>  
                                                      
                                                 @if(count($material_details)>0)
-                                              <div   class="formmain" onclick="showHide(this.id)" id="bank1" style="margin-top:-20px;">
-                                                    <div class="plusminusbutton" id="plusminusbuttonbank1">-</div>&nbsp;&nbsp; Item Details
+                                               <div    onclick="showHide(this.id)" id="bank1" style="margin-top:-20px;">
+                                                   &nbsp;&nbsp; <h2>Item Details<h2>
                                                 </div>
-                                                <div class="row1"  id="formbank1">
                                                     @if(count($material_details)>0)
                                                     <table class="table table-bordered formmain">
                                                         <tr>
@@ -122,14 +121,14 @@
                                                     @endif
                                                      <div id="add_mat">
                                                     </div> 
-                                                 </div>
+                                             
                                                 @endif 
                                                 <br>
                                                 <br>
                                                 <div class="form-group row">
                                                     <label class="col-lg-4 col-form-label" for="val-username">Vendor List</label>
                                                     <div class="col-lg-6">
-                                                        <select id="vendor" name='vendor[]' class="form-control" multiple="multiple" required="required">
+                                                        <select id="vendor" name='vendor[]' class="form-control" multiple="multiple" required="required" style="height:100px;">
                                                        @foreach($vendors as $vendors)
                                                             <option value="{{$vendors->id}}">{{$vendors->name}}</option>
                                                           @endforeach
@@ -141,7 +140,7 @@
                                                     <div class="col-lg-6">
                                                         
                                                         <select id="" class="form-control" required="required" name="no_of_days" id='no_of_days'>
-                                                            <option value="">Please Select No. of Days for Response</option>
+                                                            <option value="">Select Days</option>
                                                             <?php for($i=1; $i<=15; $i++)
                                                             { ?>
                                                             <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
@@ -149,12 +148,47 @@
                                                           </select>
                                                     </div>
                                                 </div>
+                                                </br>
+                                                 <div   class="formmain" onclick="showHide(this.id)" id="bank2" style="margin-top:-20px;">
+                                                    <div class="plusminusbutton" id="plusminusbuttonbank2">+</div>&nbsp;&nbsp;Log
+                                                </div>
+                                                <div class="row1"  id="formbank2" style="display:none">
+                                                      @if(count($material_detail_logs)>0)
+                                                    
+                                                   <table class="table table-bordered table-striped table-hover bank_table">
+                                                        <tr>
+                                                            <th class="table-row-heading">S.No.</th>
+                                                            <th class="table-row-heading">RFQ NO.</th>
+                                                            <th class="table-row-heading">Product Name</th>
+                                                            <th class="table-row-heading">Quantity</th>
+                                                            <th class="table-row-heading">Remarks</th>
+                                                        </tr>
+                                                           @foreach($material_detail_logs as $value)
+                                                         <tr>
+                                                            <th>{{$value->s_no}}</th>
+                                                            <th>{{$value->rfq_no}}</th>
+                                                            <th>{{$value->product_name}}</th>
+                                                            <th>{{$value->purchase_quantity}}</th>
+                                                            <th>{{$value->remark}}</th>
+                                                        </tr>
+                                                    @endforeach
+                                               </table>
+                                            
+                                                    @endif
+                                                </div>
+                                                
+                                                
+                                                
+                                                
+                                                
                                                  <br>    <div class="col-lg-6">
                                                     <input  type="hidden"  name="id" value="{{$requests->id}}">
                                                     <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
                                                     <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
+                                                     @if(count($material_details)>0)
                                                     <button class="btn btn-primary submit pull-left" type="submit" name="quotation"  value="quotation" onclick="return loadAddQuotation()"><i class="fa fa-paper-plane"></i>Submit
-        </button>                             </button>&nbsp;&nbsp;                                           
+        </button>                            &nbsp;&nbsp; 
+         @endif
                                                 </div>
 
                                             </div>

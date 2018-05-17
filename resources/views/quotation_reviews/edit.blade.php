@@ -2,36 +2,37 @@
 @section('breadcrumb')
 <!-- Bread crumb -->
 <div class="row page-titles">
-	<div class="col-md-5 align-self-center">
-		<h3 class="text-primary">Update User</h3> </div>
-		<div class="col-md-7 align-self-center">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-				<li class="breadcrumb-item"><a href="{{route('users.index')}}">All Users</a></li>
-				<li class="breadcrumb-item active">Update User</li>
-			</ol>
-		</div>
-	</div>
-	<!-- End Bread crumb -->
-	@endsection
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-primary">Vendors</h3> </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{route('vendor_quotation_lists.index')}}">Vendors</a></li>
+                <li class="breadcrumb-item active">Update</li>
+            </ol>
+        </div>
+    </div>
+    <!-- End Bread crumb -->
+    @endsection
 
-	@section('content')
-	<!-- Container fluid  -->
+    @section('content')
   <div class="row justify-content-center" id='printableArea'>
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
                  <div class="form-validation">
-                              	{!!Form::model($user, ['route'=>['users.update', $user->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
-										@include('users.form')
+                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Update Vendor</h4>
+									
+										{!!Form::model($vendor_quotation_lists, ['route'=>['vendor_quotation_lists.update', $vendor_quotation_lists->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
+										@include('vendor_quotation_lists.form1')
 										{!!Form::close()!!}
 									
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-	
+		
+	</div>
 	@endsection
 
 	@push('scripts')
@@ -86,8 +87,8 @@
                 },
                 messages: {
                     "name": {
-                        required: "Please enter a username",
-                        minlength: "Your username must consist of at least 3 characters"
+                        required: "Please enter a vendorname",
+                        minlength: "Your vendorname must consist of at least 3 characters"
                     },
                     "email": "Please enter a valid email address",
 //                     "password": {

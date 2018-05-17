@@ -56,16 +56,14 @@
         <label class="col-lg-4 col-form-label" for="upload_document">Other Document</label>
         <div class="col-lg-6">
           {!! Form::file('upload_document',null , ['class' => 'form-control']) !!} 
-              @if($vendors->upload_document!='')
-               <a href="{{('/images/upload_document/'.$vendors->upload_document)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></i></a>
+              @if($vendor_quotation_lists->upload_document!='')
+               <a href="{{('/images/upload_document/'.$vendor_quotation_lists->upload_document)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></i></a>
               @endif
         </div>
     </div>
 </div>
-<div   class="formmain" onclick="showHide(this.id)" id="personal5">
-<div class="plusminusbutton" id="plusminusbuttonpersonal5">-</div>&nbsp;&nbsp; Other Details
-</div>
-<div class="row1"  id="formpersonal5" style="display:block;"> 
+
+<br>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="registration_no">Registration No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
@@ -75,8 +73,8 @@
     <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="registration_no_upload">Registration No. Upload <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::file('registration_no_upload',null , ['class' => 'form-control']) !!} @if($vendors->registration_no_upload!='')
-<a href="{{('/images/registration_no_upload/'.$vendors->registration_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i>
+          {!! Form::file('registration_no_upload',null , ['class' => 'form-control']) !!} @if($vendor_quotation_lists->registration_no_upload!='')
+<a href="{{('/images/registration_no_upload/'.$vendor_quotation_lists->registration_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i>
 </i></a>
 @endif
         </div>
@@ -91,8 +89,8 @@
         <label class="col-lg-4 col-form-label" for="pan_no_upload">PAN No. Upload <span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!! Form::file('pan_no_upload',null , ['class' => 'form-control']) !!}
-           @if($vendors->pan_no_upload!='')
-         <a href="{{('/images/pan_no_upload/'.$vendors->pan_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></i></a>
+           @if($vendor_quotation_lists->pan_no_upload!='')
+         <a href="{{('/images/pan_no_upload/'.$vendor_quotation_lists->pan_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></i></a>
         @endif
            </div>
     </div>
@@ -106,8 +104,8 @@
         <label class="col-lg-4 col-form-label" for="gst_no_upload">GST No. Upload<span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!! Form::file('gst_no_upload',null , ['class' => 'form-control']) !!}
-           @if($vendors->gst_no_upload!='')
-          <a href="{{('/images/gst_no_upload/'.$vendors->gst_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></i></a>
+           @if($vendor_quotation_lists->gst_no_upload!='')
+          <a href="{{('/images/gst_no_upload/'.$vendor_quotation_lists->gst_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></i></a>
           @endif
         </div>
     </div>
@@ -117,9 +115,8 @@
           {!! Form::select('status',array('1'=>'Active','0'=>'Inactive'),null , ['class' => 'form-control','placeholder'=>'Select Status',required]) !!}
         </div>
     </div>
-    </div>
-
 <br>
+
  <div class="form-group row">
         <div class="col-lg-4">
         </div>

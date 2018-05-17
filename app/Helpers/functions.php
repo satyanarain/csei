@@ -15,6 +15,11 @@ function displayIdBaseName($table = '', $id = '', $fieldname = '') {
         echo "N/A";
     }
 }
+function idExists($table = '', $id = '') {
+  $sql = DB::table($table)->where('request_id', $id)->count();
+  return $sql;
+  
+}
 function displayNameFoMultipleID($table = '', $idIn = '', $fieldname = '') {
 $array=explode(',', $fieldname);
 $sql = DB::table($table)->whereIn('id', $array)->get();

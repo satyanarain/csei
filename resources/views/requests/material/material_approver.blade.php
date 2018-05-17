@@ -79,9 +79,9 @@
                      </div>       
              @if(count($material_details)>0)
             <div   class="formmain" onclick="showHide(this.id)" id="bank1">
-                <div class="plusminusbutton" id="plusminusbuttonbank1">+</div>&nbsp;&nbsp; Item Details
+                <div class="plusminusbutton" id="plusminusbuttonbank1">-</div>&nbsp;&nbsp; Item Details
             </div>
-            <div class="row1"  id="formbank1" style="display:none;">
+            <div class="row1"  id="formbank1">
                 @if(count($material_details)>0)
                 <table class="table table-bordered formmain">
                         <tr>

@@ -58,7 +58,7 @@
                             <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head<span class="text-danger">*</span></label>
                                         <div class="col-lg-6">
-                                             <input type="text" name="project_expense_head" id='project_expense_head' class="form-control" value="{{$requests->project_expense_head}}" onkeypress="return isNumberKey(event)">
+                                             <input type="text" name="project_expense_head" id='project_expense_head' class="form-control" value="{{$requests->project_expense_head}}" >
                                         </div>
                                     </div>
                            @endif

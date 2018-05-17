@@ -3,12 +3,12 @@
 <!-- Bread crumb -->
     <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-primary">Request</h3> </div>
+        <h3 class="text-primary">Create Request</h3> </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{route('requests.index')}}">Requests</a></li>
-                <li class="breadcrumb-item active">Create</li>
+                <li class="breadcrumb-item"><a href="{{route('requests.index')}}">All Requests</a></li>
+                <li class="breadcrumb-item active">Create Request</li>
             </ol>
         </div>
     </div>
@@ -22,11 +22,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-validation">
-                                    <h4 class="header2">Create Request</h4>
-                                 
-                                    @include('requests.form')
-                                 
-                                </div>
+                                 @include('requests.form')
+                                 </div>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-body">
         <div class="form-validation">
-            <h4 class="header2">Requests Details</h4>
+            
              <div class="form-group row">
                 <label class="col-lg-4 col-form-label" for="val-username">Request No.</label>
                 <div class="col-lg-6">
@@ -59,10 +59,12 @@
                 </div>
             </div>
 
-            <div   class="formmain" onclick="showHide(this.id)" id="bank1">
-                <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; Item Details
+            <div class="form-group row">
+                <label class="col-lg-4 col-form-label" for="val-username">Item Details</label>
+                <div class="col-lg-6">
+                   
+                </div>
             </div>
-            <div class="row1"  id="formbank1" >
 
              <table class="table table-bordered table-striped table-hover bank_table">
                                       
@@ -104,7 +106,7 @@
             </table>
             @endforeach
            
-        </div>
+        
       
     </div>
 

@@ -174,7 +174,7 @@ use activityLog;
             /******************************************email for requester*********************************/   
             if($result==1)
           {
-                   $verified_approved='approve';
+                   $verified_approved='approved';
                    Mail::send( 'emails.cash.mail_to_requester_for_va',['apporver_name'=>$apporver_name,'request_no'=>$request_no,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verified_approved'=>$verified_approved], function ($m) use ($requester) {
                    $m->from('info@opiant.online', 'CSEI');
                    $m->to($requester->email, $requester->name)->subject('CSEI | Request Approved'); });
@@ -464,7 +464,7 @@ use activityLog;
             /******************************************email for requester*********************************/   
             if($result==1)
           {
-                   $verified_approved='approve';
+                   $verified_approved='approved';
                    Mail::send( 'emails.service.mail_to_requester_for_va',['apporver_name'=>$apporver_name,'request_no'=>$request_no,'name'=>$requester->name,'verified_approved'=>$verified_approved], function ($m) use ($requester) {
                    $m->from('info@opiant.online', 'CSEI');
                    $m->to($requester->email, $requester->name)->subject('CSEI | Request Approved'); });
@@ -715,7 +715,7 @@ use activityLog;
             /******************************************email for requester*********************************/   
             if($result==1)
           {
-                   $verified_approved='approve';
+                   $verified_approved='approved';
                    Mail::send( 'emails.cash.mail_to_requester_for_va',['apporver_name'=>$apporver_name,'request_no'=>$request_no,'name'=>$requester->name,'amount'=>$requester->amount,'due_date'=>$requester->due_date,'verified_approved'=>$verified_approved], function ($m) use ($requester) {
                    $m->from('info@opiant.online', 'CSEI');
                    $m->to($requester->email, $requester->name)->subject('CSEI | Request Approved'); });
@@ -813,21 +813,13 @@ use activityLog;
         {
             
           /*****vendor mail**************************************************************/
-          $vendor_array = implode(',', $request->vendor); 
-          $no_of_days=$request->no_of_days;
-           
+            $vendor_array = implode(',', $request->vendor); 
+            $no_of_days=$request->no_of_days;
             $allvendor= Vendor::whereIn('id',$request->vendor)->get();
-            
-            
-            
-//            echo "<pre>";
-//            print_r($allvendor);
-//            exit();
-           /*******************************************************************/ 
+            /*******************************************************************/ 
             $status=3;
             $id=$request->id;
             $result=CSEIRequest::where('id', $id)->update(['status' =>$status]);
-            
             $request_data= CSEIRequest::whereId($id)->first();
             $request_no=$request_data->request_no;
             $amount= $request_data->amount;
@@ -836,15 +828,16 @@ use activityLog;
             $s_no = $request->s_no;
             $material_id = $request->material_id;
             $material_string=implode(',',$request->material_id);
-            
             $product_name = $request->product_name;
             $purchase_quantity = $request->purchase_quantity;
             $remark = $request->remark;
             $request_id = $id;
-
+            
             if (strlen(implode($s_no)) > 0) {
                 foreach ($s_no as $key => $n) {
-                     DB::table('quotation_details')->insertGetId(['material_id' => $material_id[$key],'request_id' => $request_id, 's_no' => $s_no[$key], 'product_name' => $product_name[$key], 'purchase_quantity' => $purchase_quantity[$key], 'remark' => $remark[$key],'vendor_id'=>$vendor_array,'no_of_days'=>$no_of_days]
+                     $rfq_no="RFQ-".$request_id."-".$material_id[$key];
+                    
+                     DB::table('quotation_details')->insertGetId(['material_id' => $material_id[$key],'request_id' => $request_id, 's_no' => $s_no[$key], 'product_name' => $product_name[$key], 'purchase_quantity' => $purchase_quantity[$key], 'remark' => $remark[$key],'vendor_id'=>$vendor_array,'no_of_days'=>$no_of_days,'rfq_no'=>$rfq_no]
                     );
                 }
             }
@@ -917,29 +910,29 @@ use activityLog;
        return redirect()->route('requests.index');
        
       }
-     public function requestReject($id,Request $request)
-        {
-         $user_id= Auth::user();
-         $verifire_name= $user_id->name;
-         $verifire_id= $user_id->id;
-        
-         $user_id=$request->user_id;
-         $request_data= CSEIRequest::whereId($id)->first();
-         $request_no=$request_data->request_no;
-         $amount= $request_data->amount;
-         $due_date  =$request_data->due_date;
-         $sql_appover= User::whereId($user_id)->first();
-         $approvers = User::whereIn('id', explode(',', $sql_appover->approvers))->get();
-         $status = 2; //we assume status is true (1) at the begining;
-        CSEIRequest::where('id', $id)->update(['status' =>$status,'verifire_id'=>$verifire_id]); 
-		foreach ($approvers as $a_value) 
-		{
-                   $name= $a_value->name;
-                   Mail::send( 'emails.cash.approvers',['verifire_name'=>$verifire_name,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date], function ($m) use ($a_value) {
-                   $m->from('info@opiant.online', 'CSEI');
-                   $m->to($a_value->email, $a_value->name)->subject('Request!'); });
-		}
-          }
+      public function requestReject($id, Request $request) {
+        $user_id = Auth::user();
+        $verifire_name = $user_id->name;
+        $verifire_id = $user_id->id;
+
+        $user_id = $request->user_id;
+        $request_data = CSEIRequest::whereId($id)->first();
+        $request_no = $request_data->request_no;
+        $amount = $request_data->amount;
+        $due_date = $request_data->due_date;
+        $sql_appover = User::whereId($user_id)->first();
+        $approvers = User::whereIn('id', explode(',', $sql_appover->approvers))->get();
+        $status = 2; //we assume status is true (1) at the begining;
+        CSEIRequest::where('id', $id)->update(['status' => $status, 'verifire_id' => $verifire_id]);
+        foreach ($approvers as $a_value) {
+            $name = $a_value->name;
+            Mail::send('emails.cash.approvers', ['verifire_name' => $verifire_name, 'name' => $name, 'amount' => $amount, 'due_date' => $due_date], function ($m) use ($a_value) {
+                $m->from('info@opiant.online', 'CSEI');
+                $m->to($a_value->email, $a_value->name)->subject('Request!');
+            });
+        }
+    }
+
     /**
      * Display the specified resource.
      *
@@ -970,15 +963,20 @@ use activityLog;
         $material_details = DB::table('material_details')->where('request_id',$id)
               ->whereNotIn('id',$material_id)  
                 ->get();
+        $material_detail_logs = DB::table('material_details','material_details.id as id')
+                ->leftjoin('quotation_details','material_details.id','quotation_details.material_id')
+                ->where('material_details.request_id',$id)
+              ->whereIn('material_details.id',$material_id)  
+                ->get();
         
         $material_details_view = DB::table('material_details')->where('request_id',$id)->get();     
-                //print_r($material_details_view);
+               
                 
          $vendors = Vendor::all();
          $request_details = DB::table('request_details')->select('*')->where('request_details.request_id',$id)->get();
          $total_voucher = DB::table('requests')->select('*')->where([['category_id',$requests->category_id],['status',5]])->count();
        
-        return view('requests.show', compact('requests','request_details','total_voucher','material_details','vendors','material_details_view'));
+        return view('requests.show', compact('requests','request_details','total_voucher','material_details','vendors','material_details_view','material_detail_logs'));
     }
 
     /**

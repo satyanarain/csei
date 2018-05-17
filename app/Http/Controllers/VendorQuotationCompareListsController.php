@@ -15,15 +15,15 @@ use App\Http\Requests\Vendor\SetPasswordRequest;
 use App\Repositories\Vendor\VendorRepositoryContract;
 use Session;
 use DB;
-class VendorQuotationListsController extends Controller
+class VendorQuotationCompareListsController extends Controller
 {
     protected $vendor_quotation_lists;
 
-    public function __construct(VendorRepositoryContract $vendor_quotation_lists)
-    {
-        $this->vendor_quotation_lists = $vendor_quotation_lists;
-        $this->middleware('eitherAdminOrStateAdmin')->except(['createPassword', 'setPassword']);
-    }
+//    public function __construct(VendorRepositoryContract $vendor_quotation_lists)
+//    {
+//        $this->vendor_quotation_lists = $vendor_quotation_lists;
+//        $this->middleware('eitherAdminOrStateAdmin')->except(['createPassword', 'setPassword']);
+//    }
     /**
      * Display a listing of the resource.
      *
@@ -32,10 +32,17 @@ class VendorQuotationListsController extends Controller
     public function index()
     {
      $id= Auth::id();
+      $send_to_comparision = DB::table('quotation_send_for_comparision')->select('*')->get();
+      
+      foreach($send_to_comparision as $send_to_comparision_value)
+      {
+     $send_to_comparision_array[]=  $send_to_comparision_value->request_id;   
+      }
      $vendor_quotation_lists = DB::table('vendor_quotation_lists')->select('*')
-              ->leftjoin('vendors','vendors.id','vendor_quotation_lists.vendor_id')
-              ->leftjoin('requests','requests.id','vendor_quotation_lists.request_id')
+             ->leftjoin('vendors','vendors.id','vendor_quotation_lists.vendor_id')
+             ->leftjoin('requests','requests.id','vendor_quotation_lists.request_id')
              ->groupBy('requests.id')
+             ->whereIn('vendor_quotation_lists.request_id',$send_to_comparision_array)
              ->orderBy('requests.id','desc')
               ->get();
 
@@ -61,44 +68,25 @@ class VendorQuotationListsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-    
-     $associate_id= Auth::id();
-      
-       
-      $vendor_id    = $request->vendor_id;
-        
-        
-        $request_id   = $request->request_id;
-        $committee_member_remark   = $request->committee_member_remark;
-//        echo "<pre>";
-//        print_r($_POST);
-//          exit();
-//        
-      
-       $already=DB::table('committee_member_comments')->select('*')->where([['vendor_id',$vendor_id[0]],['request_id',$request_id[0]],['associate_id',$associate_id]])->count();
-        if($already>0)
-        {
-           //echo "You have already submitted this quotation";
-           Session::flash('flash_message', "You have already comments this quotation!.");
-           return redirect()->route('vendor_quotation_lists.index');
-          exit();
-        }else{
-            
-            
-        foreach ($vendor_id as $key => $n) {
-            
-     
-            DB::table('committee_member_comments')->insertGetId(
-                    ['associate_id' => $associate_id,'request_id' => $request_id[$key], 'vendor_id' => $vendor_id[$key], 'committee_member_remark' => $committee_member_remark[$key]]
-            );
-        }
+    public function store(Request $request) {
+ $committee_member_id = Auth::id();
+        $vendor_id = $request->vendor_id;
+        $request_id = $request->request_id;
+        $committee_member_remark = $request->committee_member_remark;
+//    $already=DB::table('committee_member_comments')->select('*')->where([['vendor_id',$vendor_id[0]],['request_id',$request_id[0]],['committee_member_id',$committee_member_id]])->count();
+        if ($already > 0) {
+            Session::flash('flash_message', "You have already comments this quotation!.");
+            return redirect()->route('vendor_quotation_lists.index');
+            exit();
+        } else {
+            foreach ($vendor_id as $key => $n) {
+                DB::table('committee_member_comments')->insertGetId(
+                        ['committee_member_id' => $committee_member_id, 'request_id' => $request_id[$key], 'vendor_id' => $vendor_id[$key], 'committee_member_remark' => $committee_member_remark[$key]]
+                );
+            }
             Session::flash('flash_message', "Comment submitted successfully!.");
-           return redirect()->route('vendor_quotation_lists.index');
-           }
-        
-
+            return redirect()->route('vendor_quotation_lists.index');
+        }
         return redirect()->route('vendor_quotation_lists.index');
     }
 

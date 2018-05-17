@@ -30,8 +30,24 @@ $segments_var = Request::segments();
     <link href="{{asset('css/custom.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
   </head>
+    <div class="loder_id">
+          <div class="loader_main">
+              <div class="loader"></div>
+          </div>
+      </div>
+      <div id="map1">
+          <div id="map">
+              <div class="loading_bar">
+
+              </div>
+
+          </div>
+      </div>
+    <div class="vendorpopup"  id="comment" style="display:none">
+        <div class="vendorpopup_sub" id="vendorpopup_sub" style=" background-color:#fff;">
+         </div>
+ </div>
   <body class="hold-transition skin-blue sidebar-mini">
-      
        <div class="comment_content">
           <div class="comment_content_all">
             <div class="modal-dialog">
@@ -53,22 +69,6 @@ $segments_var = Request::segments();
           </div>
       </div>
       
-      
-      
-      
-      <div class="loder_id">
-          <div class="loader_main">
-              <div class="loader"></div>
-          </div>
-      </div>
-      <div id="map1">
-          <div id="map">
-              <div class="loading_bar">
-
-              </div>
-
-          </div>
-      </div>
       <!-- Preloader - style you can find in spinners.css -->
       <div class="preloader">
           <svg class="circular" viewBox="25 25 50 50">
@@ -231,7 +231,7 @@ $segments_var = Request::segments();
                            <li class="{{$active == 'home' ? 'active' : ''}}"><a href="{{route('home')}}"><i class="fa fa-home"></i> Dashboard </a></li>
                           <!--                        <li class="nav-label">Apps</li>-->
                           @if(Entrust::hasRole('administrator'))
-                          <li class="{{$active == 'users' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Users</span></a>
+                          <li class="{{$active == 'users' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Manage User</span></a>
                               <ul aria-expanded="false" class="collapse">
                                   <li class="{{($active2 == 'create' && $active == 'users') ? 'active' : ''}}"><a href="{{route('users.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New User</a></li>
                                   <li class="{{($active2 == '' && $active == 'users') ? 'active' : ''}}"><a href="{{route('users.index')}}"><i class="fa fa-users"></i> All Users</a></li>
@@ -250,52 +250,24 @@ $segments_var = Request::segments();
                               </ul>
                           </li>
                           @endif
-                      
-                          <li class="{{$active == 'quotations' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Quotations</span></a>
-                              <ul aria-expanded="false" class="collapse">
-                                <li class="{{($active2 == '' && $active == 'quotations') ? 'active' : ''}}"><a href="{{route('quotations.index')}}"><i class="fa fa-users"></i> All Quotations</a></li>
-                             </ul>
-                          </li>
-                          
-                          
-                          <li class="{{$active == 'quotations' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Quotations</span></a>
-                              <ul aria-expanded="false" class="collapse">
-                                <li class="{{($active2 == '' && $active == 'quotations') ? 'active' : ''}}"><a href="{{route('quotations.index')}}"><i class="fa fa-users"></i> All Quotations</a></li>
-                             </ul>
-                          </li>
-                          
-                          <li class="{{$active == 'vendor_quotation_lists' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Comparison Sheet</span></a>
-                              <ul aria-expanded="false" class="collapse">
-                                <li class="{{($active2 == '' && $active == 'vendor_quotation_lists') ? 'active' : ''}}"><a href="{{route('vendor_quotation_lists.index')}}"><i class="fa fa-users"></i>All Vendor Quotations</a></li>
-                             </ul>
-                          </li>
-                          
-                          <li class="{{$active == 'pending_quotations' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Pending Quotation</span></a>
-                              <ul aria-expanded="false" class="collapse">
-                                <li class="{{($active2 == '' && $active == 'pending_quotations') ? 'active' : ''}}"><a href="{{route('pending_quotations.index')}}"><i class="fa fa-users"></i>All Pending Quotation</a></li>
-                             </ul>
-                          </li>
-                        
-                        
-                          <li class="{{$active == 'purchase_committees' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i>
-                                  <span class="hide-menu">Purchase Committee<?php //echo $active2 ?><?php //echo $active ?>
-                                  </span>
-                              </a>
-                              <ul aria-expanded="false" class="collapse">
-                                  <li class="{{(($active2 == 'create' || $active2 == 'edit') && $active == 'purchase_committees') ? 'active' : ''}}"><a href="{{route('purchase_committees.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Purchase Committee</a></li>
-                                  <li class="{{($active2 == '' && $active == 'purchase_committees') ? 'active' : ''}}"><a href="{{route('purchase_committees.index')}}"><i class="fa fa-users"></i> All Purchase Committee</a></li>
-                               </ul>
-                          </li>
-                          
                           <li class="{{$active == 'teams' ? 'teams' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Team</span></a>
                               <ul aria-expanded="false" class="collapse">
                                   <li class="{{($active2 == 'create' && $active == 'teams') ? 'active' : ''}}"><a href="{{route('teams.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Team</a></li>
                                   <li class="{{($active2 == '' && $active == 'teams') ? 'active' : ''}}"><a href="{{route('teams.index')}}"><i class="fa fa-users"></i> All Team</a></li>
                                </ul>
                           </li>
-                          
-                          
-                               <li class="{{$active == 'requests' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Requests</span></a>
+                           <li class="{{$active == 'purchase_committees' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i>
+                                  <span class="hide-menu">Purchase Committee<?php //echo $active2 ?><?php //echo $active ?>
+                                  </span>
+                              </a>
+                                <ul aria-expanded="false" class="collapse">
+                                  <li class="{{(($active2 == 'create' || $active2 == 'edit') && $active == 'purchase_committees') ? 'active' : ''}}"><a href="{{route('purchase_committees.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Purchase Committee</a></li>
+                                  <li class="{{($active2 == '' && $active == 'purchase_committees') ? 'active' : ''}}"><a href="{{route('purchase_committees.index')}}"><i class="fa fa-users"></i> All Purchase Committee</a></li>
+                               </ul>
+                          </li>
+                           <li class="{{$active == 'requests' ? 'active' : ''}}">
+                               <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Requests</span>
+                               </a>
                               <ul aria-expanded="false" class="collapse">
                                   <li class="{{($active2 == 'create' && $active == 'requests') ? 'active' : ''}}"><a href="{{route('requests.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Request</a></li>
                                   <li class="{{($active2 == '' && $active == 'requests') ? 'active' : ''}}"><a href="{{route('requests.index')}}"><i class="ti-menu"></i> My Requests</a></li>
@@ -306,21 +278,34 @@ $segments_var = Request::segments();
                                   <li class="{{($active2 == 'requests' && $active == 'verifiers') ? 'active' : ''}}"><a href="{{route('verifiers.requests')}}" class="{{($request_only_verifire == 'requested_requests') ? 'active' : ''}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i> Pending Verification</a></li>
                                   <li class="{{($active2 == 'requests' && $active == 'approvers') ? 'active' : ''}}"><a href="{{route('approvers.requests')}}" class="{{($request_only_verifire == 'verifireactive') ? 'active' : ''}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i> Pending Approval</a></li>
                                   @if(Entrust::hasRole('administrator'))
-                                  <li class="{{($active2 == 'requests' && $active == 'accountants') ? 'active' : ''}}"><a href="{{route('accountants.requests')}}"  class="{{($request_only_verifire == 'accountants') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Pending Action</a></li>
+                                  <li class="{{($active2 == 'requests' && $active == 'accountants') ? 'active' : ''}}"><a href="{{route('accountants.requests')}}"  class="{{($request_only_verifire == 'accountants') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Pending Action</a>
+                                  </li>
                                   @endif
-
-
-                              </ul>
+                                  </ul>
                           </li>
-                         <li class="{{$active == 'purchases' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Purchase Order</span></a>
+                           
+                           @if(Entrust::hasRole('administrator'))
+                           <li class="{{$active == 'quotation_reviews' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Quotation for Review</span></a>
                               <ul aria-expanded="false" class="collapse">
-                                  <li class="{{($active2 == 'create' && $active == 'purchases') ? 'active' : ''}}"><a href="{{route('purchases.create')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                          New Purchase Order</a></li>
-                                  <li class="{{($active2 == 'create' && $active == 'purchases') ? 'active' : ''}}"><a href="{{route('purchases.index')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                          All Purchase Order</a></li>
-
-                              </ul>
+                                <li class="{{($active2 == '' && $active == 'quotation_reviews') ? 'active' : ''}}"><a href="{{route('quotation_reviews.index')}}"><i class="fa fa-users"></i> All Quotation for Review</a></li>
+                             </ul>
                           </li>
+                          @endif
+                          
+                            <li class="{{$active == 'vendor_quotation_lists' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Comparison Sheet</span></a>
+                              <ul aria-expanded="false" class="collapse">
+                                <li class="{{($active2 == '' && $active == 'vendor_quotation_lists') ? 'active' : ''}}"><a href="{{route('vendor_quotation_lists.index')}}"><i class="fa fa-users"></i> All Vendor Quotations</a></li>
+                             </ul>
+                            </li>
+                          
+                           
+                          
+                          <li class="{{$active == 'pending_quotations' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Pending Quotation</span></a>
+                              <ul aria-expanded="false" class="collapse">
+                                <li class="{{($active2 == '' && $active == 'pending_quotations') ? 'active' : ''}}"><a href="{{route('pending_quotations.index')}}"><i class="fa fa-users"></i> All Pending Quotation</a></li>
+                             </ul>
+                          </li>
+                          
 
                           @if(Entrust::hasRole('administrator'))
                           <li class="nav-label">SETTINGS</li>

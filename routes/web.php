@@ -51,10 +51,7 @@ Route::group(['middleware'=>'auth'], function(){
 	*/
         
         Route::resource('requests', 'RequestsController');
-        
-        
-	
-	Route::post('verifiers/requests/{id}/reject', 'RequestsController@rejectRequest')->name('verifiers.requests.reject');
+        Route::post('verifiers/requests/{id}/reject', 'RequestsController@rejectRequest')->name('verifiers.requests.reject');
 	Route::post('verifiers/requests/{id}/verify', 'RequestsController@verifyRequest')->name('verifiers.requests.verify');
         Route::get('verifiers/requests', 'RequestsController@requestsToVerify')->name('verifiers.requests');
 	Route::get('approvers/requests', 'RequestsController@requestsToApprove')->name('approvers.requests');
@@ -80,9 +77,12 @@ Route::group(['middleware'=>'auth'], function(){
         
         /************************************************************************/
         //Route::get('vendor_quotation_lists/statusupdate/{id}', 'VendorController@statusUpdate');
-        Route::resource('vendor_quotation_lists', 'VendorQuotationListsController');
+        Route::resource('vendor_quotation_lists', 'VendorQuotationCompareListsController');
          Route::get('pending_quotations/comments/{id}', 'PendingQuotationController@Comment');
         Route::resource('pending_quotations', 'PendingQuotationController');
+        
+        /*************************Create by satya date 15-05-2018*******************************************************/
+        Route::resource('quotation_reviews', 'QuotationReviewsController');
         /************************************************************************/
        
          /************************************************************************/

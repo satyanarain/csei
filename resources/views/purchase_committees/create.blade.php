@@ -3,12 +3,12 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-primary">Purchase Committee</h3> </div>
+        <h3 class="text-primary">Create Purchase Committee</h3> </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="{{route('purchase_committees.index')}}">Purchase Committee</a></li>
-                <li class="breadcrumb-item active">Create</li>
+                <li class="breadcrumb-item active">Create Purchase Committee</li>
             </ol>
         </div>
     </div>
@@ -22,7 +22,6 @@
             <div class="card">
                 <div class="card-body">
                  <div class="form-validation">
-                                    <h4 class="header2">Create Purchase Committee</h4>
                                     {!!Form::open(['route'=>'purchase_committees.store',
                                     'id'=>'formValidate',
                                     'class'=>'formValidate',

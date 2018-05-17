@@ -3,12 +3,12 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-primary">Team</h3> </div>
+        <h3 class="text-primary">Create Team</h3> </div>
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{route('teams.index')}}">Teams</a></li>
-                <li class="breadcrumb-item active">Create</li>
+                <li class="breadcrumb-item"><a href="{{route('teams.index')}}">All Teams</a></li>
+                <li class="breadcrumb-item active">Create Team</li>
             </ol>
         </div>
     </div>
@@ -22,8 +22,7 @@
             <div class="card">
                 <div class="card-body">
                  <div class="form-validation">
-                                    <h4 class="header2">Create Team</h4>
-                                    {!!Form::open(['route'=>'teams.store',
+                                 {!!Form::open(['route'=>'teams.store',
                                     'id'=>'formValidate',
                                     'class'=>'formValidate',
                                     'autocomplete'=>'off',
@@ -35,8 +34,7 @@
                             </div>
                         </div>
                     </div>
-              
-        </div>
+          </div>
     
     @endsection
 

@@ -18,11 +18,11 @@ class PurchaseCommitteeController extends Controller
 {
     protected $purchase_committees;
 
-    public function __construct(PurchaseCommitteeRepositoryContract $purchase_committees)
-    {
-        $this->purchase_committees = $purchase_committees;
-        $this->middleware('eitherAdminOrStateAdmin')->except(['createPassword', 'setPassword']);
-    }
+//    public function __construct(PurchaseCommitteeRepositoryContract $purchase_committees)
+//    {
+//        $this->purchase_committees = $purchase_committees;
+//        $this->middleware('eitherAdminOrStateAdmin')->except(['createPassword', 'setPassword']);
+//    }
     /**
      * Display a listing of the resource.
      *

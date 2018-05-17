@@ -70,14 +70,9 @@ function findDuty(id)
         return false;
     }
     return true;
-       
-       
+   
  }  
-       
-       
-       
-       
-       
+    
   function AddNewShow(table_name,field_name,placeholder)
 {
  $("#table_name").val(table_name); 
@@ -94,11 +89,7 @@ $("#"+depots).modal('show');
 $("#name").val('');
   
 }
- 
- 
- 
- 
- 
+
    function AddNew()
 {
 var table_name = $("#table_name").val();

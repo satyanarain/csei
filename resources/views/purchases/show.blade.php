@@ -4,11 +4,11 @@
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
         @if($requests->status==1)
-        <h3 class="text-primary">Requested Request Details</h3>
+        <h3 class="text-primary">Request For Request Details</h3>
         @elseif($requests->status==2)
-        <h3 class="text-primary">Verified Request Details</h3>
+        <h3 class="text-primary">Request For Verification Details</h3>
         @elseif($requests->status==3)
-        <h3 class="text-primary">Aproved Request Details</h3>
+        <h3 class="text-primary">Request For Approval Details</h3>
         @else
         <h3 class="text-primary">Request Details</h3> 
         @endif
@@ -146,7 +146,7 @@
                         <div class="col s12 m6 l6">	
                             <div class="col s12 m12 l12">
                                 <div class="card-panel">
-                                    <h4 class="header2">Requests Details</h4>
+                                    <h4 class="header2">Requisition Details</h4>
                                     {!!Form::open(['route'=>'requests.store',
                                     'id'=>'formValidate',
                                     'class'=>'formValidate',

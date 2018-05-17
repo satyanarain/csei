@@ -1,13 +1,17 @@
 @extends('layouts.nmaster')
 @section('breadcrumb')
+<?php
+$request_only_view = Request::fullUrl();
+ $view = end(explode('?', $request_only_view));
+ ?>
 <!-- Bread crumb -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-primary">Quotation Details</h3> </div>
+        <h3 class="text-primary">Quotation for Review Details</h3> </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{route('vendor_quotation_lists.index')}}">All Comparison Sheets</a></li>
+            <li class="breadcrumb-item"><a href="{{route('quotation_reviews.index')}}">All Quotation for Review</a></li>
             <li class="breadcrumb-item active">Quotation Details</li>
         </ol>
     </div>
@@ -77,38 +81,24 @@
                     {{$requests->amount}}  
                 </div>
             </div>
-
-            <div   class="formmain" onclick="showHide(this.id)" id="bank1">
-                <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; Item Details
-            </div>
-            {!!Form::open(['route'=>'vendor_quotation_lists.store', 'id'=>'formValidate', 
+            {!!Form::open(['route'=>'quotation_reviews.store', 'id'=>'formValidate', 
             'onsubmit'=>'return validatePan()',
             'autocomplete'=>'off',
             'class'=>'formValidate', 'files'=>true])!!}
-            
-            
-   <table class="table table-bordered table-striped table-hover bank_table">
-                     @foreach($vendor_quotation_lists as $vendor_value)
-                    <tr style="background-color:#f2f4f7"><th>Vendor Name</th>
-                        <th>{{$vendor_value->name}}</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                     </tr>
-                    <tr><th>Committee Member Remark</th>
-                        <th>
-                            <textarea type="text" class="form-control" size="7" name="committee_member_remark[]"   value="" required="required"></textarea>
-                            <input type="hidden" class="form-control product_code" size="5" name="request_id[]" value="{{$requests->id}}" readonly="readonly">
-                            <input type="hidden" class="form-control product_code" size="5" name="vendor_id[]" value="{{$vendor_value->vendor_id}}" readonly="readonly">
-                        </th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
+            <table class="table table-bordered table-striped table-hover bank_table">
+                      @foreach($vendor_quotation_lists as $vendor_value)
+                      <tr><th>Vendor Name</th>
+                          <th>{{$vendor_value->name}}
+
+                              <input type="hidden" class="form-control product_code" size="5" name="request_id" value="{{$requests->id}}" readonly="readonly">
+                             
+                          </th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                      </tr>
                       <tr>
                         <th  class="table-row-heading">S No</th>
                         <th  class="table-row-heading">Product Name</th>
@@ -117,7 +107,9 @@
                         <th  class="table-row-heading">Total Amount</th>
                         <th  class="table-row-heading">Requester Remark</th>
                         <th  class="table-row-heading">Vendor Remark</th>
-                    </tr>  
+                    </tr>
+                        
+                        
                     <?php
                     $vendor_quotation_list_all = DB::table('vendor_quotation_lists')->select('*')
                             ->leftjoin('requests', 'requests.id', 'vendor_quotation_lists.request_id')
@@ -125,7 +117,7 @@
                             ->where('vendor_quotation_lists.request_id', $requests->id)
                             ->where('vendor_quotation_lists.vendor_id', $vendor_value->vendor_id)
                             ->get();
-                    // print_r($vendor_quotation_list_all) 
+                    
                     ?>
                     @foreach($vendor_quotation_list_all as $vendor_value_all)
                     <tr>
@@ -148,16 +140,16 @@
                     </tr>
                     <tr>
                         <td align="left" valign="top" colspan="6" style="text-align:left;">
-                           
-                         
-                            <button type="reset" value="Reset" class="btn btn-primary submit">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Send For Approval</button></td>
+                            @if($view!='view')
+                             <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Send For Review</button></td>
+                        @endif
                     </tr>
                 </table> 
 
+            </div>
             {!!Form::close()!!}        
               </div>  
-     </div>
+
      </div>
     </div>
 </div>

@@ -19,11 +19,11 @@ class PendingQuotationController extends Controller
 {
     protected $pending_quotations;
 
-    public function __construct(VendorRepositoryContract $pending_quotations)
-    {
-        $this->pending_quotations = $pending_quotations;
-        $this->middleware('eitherAdminOrStateAdmin')->except(['createPassword', 'setPassword']);
-    }
+//    public function __construct(VendorRepositoryContract $pending_quotations)
+//    {
+//        $this->pending_quotations = $pending_quotations;
+//        $this->middleware('eitherAdminOrStateAdmin')->except(['createPassword', 'setPassword']);
+//    }
     /**
      * Display a listing of the resource.
      *
@@ -31,13 +31,23 @@ class PendingQuotationController extends Controller
      */
     public function index()
     {
+   
      $id= Auth::id();
-     $pending_quotations = DB::table('vendor_quotation_lists')->select('*')
+     $send_to_comparision = DB::table('quotation_send_for_comparision')->select('*')
+                ->groupBy('quotation_send_for_comparision.request_id')
+               ->get();
+      
+      foreach($send_to_comparision as $send_to_comparision_value)
+      {
+     $send_to_comparision_array[]=  $send_to_comparision_value->request_id;   
+      }
+     
+       $pending_quotations = DB::table('vendor_quotation_lists')->select('*')
               ->leftjoin('vendors','vendors.id','vendor_quotation_lists.vendor_id')
               ->leftjoin('requests','requests.id','vendor_quotation_lists.request_id')
-             
-             ->groupBy('requests.id')
-             ->orderBy('requests.id','desc')
+              ->groupBy('requests.id')
+                ->whereIn('vendor_quotation_lists.request_id',$send_to_comparision_array)
+              ->orderBy('requests.id','desc')
               ->get();
 
     return view('pending_quotations.index', compact('pending_quotations'));
@@ -66,41 +76,57 @@ class PendingQuotationController extends Controller
     {
     
      $associate_id= Auth::id();
-      
-       
-      $vendor_id    = $request->vendor_id;
-        
-        
-        $request_id   = $request->request_id;
-        $committee_member_remark   = $request->committee_member_remark;
-//        echo "<pre>";
-//        print_r($_POST);
-//          exit();
-//        
-      
-       $already=DB::table('committee_member_comments')->select('*')->where([['vendor_id',$vendor_id[0]],['request_id',$request_id[0]],['associate_id',$associate_id]])->count();
-        if($already>0)
-        {
-           //echo "You have already submitted this quotation";
-           Session::flash('flash_message', "You have already comments this quotation!.");
-           return redirect()->route('pending_quotations.index');
-          exit();
-        }else{
-            
-            
-        foreach ($vendor_id as $key => $n) {
-            
      
-            DB::table('committee_member_comments')->insertGetId(
-                    ['associate_id' => $associate_id,'request_id' => $request_id[$key], 'vendor_id' => $vendor_id[$key], 'committee_member_remark' => $committee_member_remark[$key]]
-            );
-        }
-            Session::flash('flash_message', "Comment submitted successfully!.");
-           return redirect()->route('pending_quotations.index');
-           }
+      $vendor_id    = $request->vendor_id;
+        $request_id   = $request->request_id;
+        $material_id   = $request->material_id;
+        $committee_member_remark   = $request->committee_member_remark;
+        PRINT_R($_POST['quotation_approval_id']);
         
 
-        return redirect()->route('pending_quotations.index');
+        
+      print_r($foo);  
+        
+        echo "<pre>";
+        print_r($_POST);
+        exit();
+        
+//        $already=DB::table('pendding_approval_details')->select('*')->where([['vendor_id',$vendor_id[0]],['request_id',$request_id[0]],['associate_id',$associate_id]])->count();
+//        if($already>0)
+//        {
+//           Session::flash('flash_message', "You have already comments this quotation!.");
+//           return redirect()->route('pending_quotations.index');
+//          exit();
+//        }else{
+         foreach ($vendor_id as $key => $n) {
+             DB::table('pendding_approval_details')->insertGetId(
+                    ['associate_id' => $associate_id,'request_id' => $request_id[$key], 'vendor_id' => $vendor_id[$key], 'committee_member_remark' => $committee_member_remark[$key]]
+            );
+      //  }
+           
+           }
+          
+            $committee_menber_user= DB::table('users')->select('*')->whereIn('id',$array_member_id)->get();
+          
+          /************************************mail to purchase committee member******************************************/
+    
+             foreach ($committee_menber_user as $a_value) 
+		{
+                   $name= $a_value->name;
+                   Mail::send( 'emails.committee_member.mail_to commitee_member_for_comment',['name'=>$name,'request_no'=>$request_no], function ($m) use ($a_value) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Comment'); });
+	
+                }
+           
+           
+           
+           
+           
+           
+           
+       Session::flash('flash_message', "Comment approved successfully!.");
+       return redirect()->route('pending_quotations.index');
     }
 
     /**
@@ -142,16 +168,42 @@ class PendingQuotationController extends Controller
     }
     public function Comment($id)
     {
-     
-     echo "=======================" ;
-  exit();
-    
+  $request_id=$_REQUEST['request_id'];
+  $vendor_id=$_REQUEST['vendor_id'];
+ $sql=DB::table('committee_member_comments')->select('*')
+    ->leftjoin('users','committee_member_comments.committee_member_id','users.id')
+    ->where([['committee_member_comments.request_id',$request_id],['committee_member_comments.vendor_id',$vendor_id]])     
+    ->get();
+
+   ?>
+<table align="center" width="100%" style=" background-color:#fff;">
+             <tr>
+               <td>
+                    <table class="table table-bordered table-striped table-hover bank_table">
+                        <tr>
+                            <th colspan="2" heigh="20px;"><span type="button" class="close" data-dismiss="modal" onclick="closePop()">&times;</span></th>
+                        </tr>
+                        <tr>
+                            <th  class="table-row-heading" width="15%">Commentator</th>
+                            <th  class="table-row-heading" width="85%">Comment</th>
+                        </tr>
+                        <?php foreach ($sql as $value) {
+                            ?>
+
+                            <tr>
+                                <th style="text-align:left;"><?php echo $value->name; ?></th>
+                                <th style="text-align:left;"><?php echo $value->committee_member_remark; ?></th>
+                            </tr>
+                        <?php } ?>
+                    </table>
+
+                </td>
+              </tr>
+        </table>
+   <?php
+   
     }
 
-    
-    
-    
-    
     
     /**
      * Update the specified resource in storage.

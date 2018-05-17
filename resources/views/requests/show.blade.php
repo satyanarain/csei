@@ -8,7 +8,7 @@
 <div class="row page-titles">
     <div class="col-md-5 align-self-center" >
         @if($view=='view')
-        <h3 class="text-primary">View Requisition Details</h3>
+        <h3 class="text-primary">Requisition Details</h3>
         @elseif($view=='requested_requests')
         <h3 class="text-primary">Verified Request Details</h3>
         @elseif($view=='verifireactive')
@@ -17,9 +17,9 @@
         @elseif($view=='accountants')
         <h3 class="text-primary">
             @if($request==1 || $request==2)
-            Pending Action Details
+           Request for Action Details
             @else
-            Request For Quotation
+           Request for Action Details
             @endif
         </h3>
         @elseif($view=='downloads')

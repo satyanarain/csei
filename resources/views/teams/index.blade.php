@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Teams</h3> </div>
+    <h3 class="text-primary">All Teams</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Team</li>
+        <li class="breadcrumb-item active">All Teams</li>
       </ol>
     </div>
   </div>
@@ -27,9 +27,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-          <h4 class="card-title">Team List</h4>
-<!--            <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>-->
-            <div class="table-responsive m-t-40">
+           <div class="table-responsive m-t-40">
               <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                <thead>
                 <tr>

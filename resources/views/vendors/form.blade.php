@@ -1,4 +1,4 @@
-    <div   class="formmain" onclick="showHide(this.id)" id="personal1">
+<div   class="formmain" onclick="showHide(this.id)" id="personal1">
 <div class="plusminusbutton" id="plusminusbuttonpersonal1">-</div>&nbsp;&nbsp; Personal Info
 </div>
 <div class="row1"  id="formpersonal1">
@@ -61,7 +61,10 @@
     </div>
 </div>
 
-<br>
+<div   class="formmain" onclick="showHide(this.id)" id="personal5">
+<div class="plusminusbutton" id="plusminusbuttonpersonal5">-</div>&nbsp;&nbsp; Other Details
+</div>
+<div class="row1"  id="formpersonal5" style="display:block;"> 
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="registration_no">Registration No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
@@ -107,16 +110,14 @@
           {!! Form::select('status',array('1'=>'Active','0'=>'Inactive'),null , ['class' => 'form-control',required]) !!}
         </div>
     </div>
-<br>
+    </div>
 
+<br>
  <div class="form-group row">
         <div class="col-lg-4">
         </div>
         <div class="col-lg-6">
-            <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> 
-               
-                Submit
-        </button>
+<button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Submit</button>
         </div>
     </div>
 @push('scripts')

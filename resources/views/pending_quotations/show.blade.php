@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body">
               <div class="form-validation">
-            <h4 class="header2">Requests Details</h4>
+            <h4 class="header2">Requisition Details</h4>
              <div class="form-group row">
                 <label class="col-lg-4 col-form-label" for="val-username">Request No.</label>
                 <div class="col-lg-6">
@@ -89,21 +89,10 @@
 
 
             <div class="row1"  id="formbank1" >
-
-                <table class="table table-bordered table-striped table-hover bank_table">
-                    <tr>
-                        <th  class="table-row-heading">S No</th>
-                        <th  class="table-row-heading">Product Name</th>
-                        <th  class="table-row-heading">Quantity</th>
-                        <th class="table-row-heading">Cost / PC</th>
-                        <th  class="table-row-heading">Total Amount</th>
-                        <th  class="table-row-heading">Requester Remark</th>
-                        <th  class="table-row-heading">Vendor Remark</th>
-                        <th  class="table-row-heading">Approval</th>
-
-                    </tr>
+              <table class="table table-bordered table-striped table-hover bank_table">
+                   
                     @foreach($pending_quotations as $vendor_value)
-                    <tr><th>Vendor Name</th>
+                    <tr class="vendor_bg" style=" background-color:#f2f4f7"><th>Vendor Name</th>
                         <th>{{$vendor_value->name}}</th>
                         <th></th>
                         <th></th>
@@ -115,8 +104,8 @@
                     </tr>
                     <tr><th><div class="btn btn-primary" onclick="allComments({{$requests->id}},{{$vendor_value->vendor_id}})">All Comments</div></th>
                         <th>
-                             <input type="hidden" class="form-control product_code" size="5" name="request_id[]" value="{{$requests->id}}" readonly="readonly">
-                            <input type="hidden" class="form-control product_code" size="5" name="vendor_id[]" value="{{$vendor_value->vendor_id}}" readonly="readonly">
+                       <input type="hidden" class="form-control product_code" size="5" name="request_id[]" value="{{$requests->id}}" readonly="readonly">
+                       <input type="hidden" class="form-control product_code" size="5" name="vendor_id[]" value="{{$vendor_value->vendor_id}}" readonly="readonly">
                         </th>
                         <th></th>
                         <th></th>
@@ -124,6 +113,16 @@
                         <th></th>
                         <th></th>
                         <th></th>
+                      </tr>
+                     <tr>
+                        <th  class="table-row-heading">S No</th>
+                        <th  class="table-row-heading">Product Name</th>
+                        <th  class="table-row-heading">Quantity</th>
+                        <th class="table-row-heading">Cost / PC</th>
+                        <th  class="table-row-heading">Total Amount</th>
+                        <th  class="table-row-heading">Requester Remark</th>
+                        <th  class="table-row-heading">Vendor Remark</th>
+                        <th  class="table-row-heading">Approval</th>
 
                     </tr>
                     <?php
@@ -138,7 +137,7 @@
                     @foreach($vendor_quotation_list_all as $vendor_value_all)
                     <tr>
                         <th><input type="text" class="form-control product_code" size="5" name="s_no[]" value="{{$vendor_value_all->s_no}}" readonly="readonly">
-                            <input type="hidden" class="form-control product_code" size="5" name="material_id[]" value="{{$vendor_value->material_id}}" readonly="readonly">
+                            <input type="hidden" class="form-control product_code" size="5" name="material_id[]" value="{{$vendor_value_all->material_id}}" readonly="readonly">
                         </th>
                         <th><input type="text" class="form-control" size="5" name="product_name[]" required="required" value="{{$vendor_value_all->product_name}}" readonly="readonly"></th>
                         <th> <input type="text" class="form-control" size="5" name="purchase_quantity[]"  required="required" value="{{$vendor_value_all->purchase_quantity}}" readonly="readonly"></th>
@@ -146,7 +145,10 @@
                         <th> <input type="text" class="form-control" size="7" name="purchase_unit_amount[]" readonly="readonly" value="{{$vendor_value_all->purchase_unit_amount}}"></th>
                         <th><input type="text" class="form-control" size="7" name="remark[]"  readonly="readonly"  value="{{$vendor_value_all->remark}}"></th>
                         <th><input type="text" class="form-control" size="7" name="vendor_remark[]"  readonly="readonly"  value="{{$vendor_value_all->vendor_remark}}"></th>
-                        <th><input type="checkbox" class="form-control" size="7" name="quotation_approval_id[]"  readonly="readonly"  value="{{$vendor_value_all->quotation_approval_id}}"></th>
+                        <th><input type="checkbox" class="form-control change_value_click" size="7" name="no_value[]"  readonly="readonly"  value="1" onclick="changeVlude(this.value)">
+                           <input type="hidden" class="form-control changevalue" size="7" name="quotation_approval_id[]"  readonly="readonly"  value="0"> 
+                            
+                        </th>
 
                     </tr>
                     @endforeach
@@ -157,31 +159,20 @@
                     </tr>
                     <tr>
                         <td align="left" valign="top" colspan="6" style="text-align:left;">
-                           
-                         
-                            <button type="reset" value="Reset" class="btn btn-primary submit">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Send For Review</button></td>
+                             <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Approve</button></td>
                     </tr>
                 </table> 
 
             </div>
             {!!Form::close()!!}        
               </div>
-              
-
-
-<div class="modal fade" id="view_detail" role="dialog">
-    
- </div>
+  <div class="modal fade" id="view_detail" role="dialog">
+  </div>
 
      </div>
      </div>
     </div>
-    
-   
-    
-    
-</div>
+  </div>
 </div>
 
 @endsection
@@ -189,14 +180,27 @@
 @push('scripts')
 
 <script>
+  $(document).ready(function()
+  {
+    $(".change_value_click").on('click',function()
+    {
+       // id= $(this).val();
+       // alert(id)
+      $(this).closest('.change_value').val(id)
+      
+  });
+  });
     
-   function CloseModel(id)
+    
+    
+    
+    
+    
+   function closePop(id)
    {
    
-       $('#'+id).modal().hide();
-       $('#exampleModal').hide();
-         $('#modal').modal('toggle');
-         window.location.reload();
+       $('#comment').hide();
+        
    }
     
        function allComments(request_id,vendor_id)
@@ -211,9 +215,9 @@
 		cache: false,
                 data:"request_id="+request_id+"&vendor_id="+vendor_id,
 		success: function(data){
-                    alert(data);
-                  $("#loder_id_comment").show();
-                  $("#loader_main").html(data);
+                 //   alert(data);
+                  $("#comment").show();
+                  $("#vendorpopup_sub").html(data);
 		}
 	});
   

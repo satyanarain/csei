@@ -4,12 +4,12 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
 	<div class="col-md-5 align-self-center">
-		<h3 class="text-primary">Team</h3> </div>
+		<h3 class="text-primary">Update Team</h3> </div>
 		<div class="col-md-7 align-self-center">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-				<li class="breadcrumb-item"><a href="{{route('teams.index')}}">Requests</a></li>
-				<li class="breadcrumb-item active">Edit</li>
+				<li class="breadcrumb-item"><a href="{{route('teams.index')}}">All Teams</a></li>
+				<li class="breadcrumb-item active">Update Team</li>
 			</ol>
 		</div>
 	</div>
@@ -27,9 +27,7 @@
 						<div class="row">
 							<div class="col s12 m12 l12">
 								<div class="card-panel">
-									<h4 class="header2">Update Team</h4>
-									
-										{!!Form::model($teams, ['route'=>['teams.update', $teams->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
+									{!!Form::model($teams, ['route'=>['teams.update', $teams->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
 										@include('teams.form')
 										{!!Form::close()!!}
 									

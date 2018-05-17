@@ -74,7 +74,7 @@
     <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head</label>
     <div class="col-lg-6">
  @if($request->category_id==2)
-        <input  name="project_expense_head" id="project_expense_head"   class="form-control"  onkeypress='return isNumberKey(event)'  value="{{$request->project_expense_head}}">
+        <input  name="project_expense_head" id="project_expense_head"   class="form-control"  value="{{$request->project_expense_head}}">
         @else
         <input  name="project_expense_head" id="project_expense_head"   class="form-control"  onkeypress='return isNumberKey(event)'>
          @endif

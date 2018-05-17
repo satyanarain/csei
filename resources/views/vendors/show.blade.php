@@ -3,12 +3,12 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Vendors</h3> </div>
+    <h3 class="text-primary">Vendor Details</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{route('vendors.index')}}">Vendors</a></li>
-        <li class="breadcrumb-item active">Details</li>
+        <li class="breadcrumb-item"><a href="{{route('vendors.index')}}">All Venders</a></li>
+        <li class="breadcrumb-item active">Vendor Details</li>
       </ol>
     </div>
   </div>
@@ -22,12 +22,10 @@
             <div class="card">
                 <div class="card-body">
                  <div class="form-validation">
-                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Vendor Details</h4>
-      
-                       <div   class="formmain" onclick="showHide(this.id)" id="personal1">
-<div class="plusminusbutton" id="plusminusbuttonpersonal1">+</div>&nbsp;&nbsp; Personal Info
+                     <div   class="formmain" onclick="showHide(this.id)" id="personal1">
+<div class="plusminusbutton" id="plusminusbuttonpersonal1">-</div>&nbsp;&nbsp; Personal Info
 </div>
-<div class="row1"  id="formpersonal1" style="display:none;">
+<div class="row1"  id="formpersonal1" style="display:block;">
 <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="name">Name</label>
         <div class="col-lg-6">
@@ -51,9 +49,9 @@
     </div> 
         
 <div   class="formmain" onclick="showHide(this.id)" id="bank1">
-<div class="plusminusbutton" id="plusminusbuttonbank1">+</div>&nbsp;&nbsp; Bank Details
+<div class="plusminusbutton" id="plusminusbuttonbank1">-</div>&nbsp;&nbsp; Bank Details
 </div>
-<div class="row1"  id="formbank1" style="display:none;">
+<div class="row1"  id="formbank1" style="display:block;">
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="contact">Bank Name <span class="text-danger">*</span></label>
         <div class="col-lg-6">
@@ -96,7 +94,11 @@
     
     
     
-</div><br>
+</div>
+<div   class="formmain" onclick="showHide(this.id)" id="personal5">
+<div class="plusminusbutton" id="plusminusbuttonpersonal5">-</div>&nbsp;&nbsp; Other Details
+</div>
+<div class="row1"  id="formpersonal5" style="display:block;">                  
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="registration_no">Registration No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
@@ -141,6 +143,7 @@
                      
                      
                      
+    </div>
     </div>
     </div>
     </div>

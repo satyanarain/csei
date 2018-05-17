@@ -2,7 +2,7 @@
 <div class="card">
     <div class="card-body">
         <div class="form-validation">
-            <h4 class="header2">Requests Details</h4>
+            <h4 class="header2">Requisition Details</h4>
             <div class="form-group row">
                 <label class="col-lg-4 col-form-label" for="val-username">Request No.</label>
                 <div class="col-lg-6">
@@ -50,7 +50,7 @@
             <div class="form-group row">
                 <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head<span class="text-danger">*</span></label>
                 <div class="col-lg-6">
-                    <input type="text" name="project_expense_head" id='project_expense_head' class="form-control" value="{{$requests->project_expense_head}}" onkeypress="return isNumberKey(event)">
+                    <input type="text" name="project_expense_head" id='project_expense_head' class="form-control" value="{{$requests->project_expense_head}}">
                 </div>
             </div>
 
@@ -76,9 +76,9 @@
             </div>
             @if(count($material_details)>0)
             <div   class="formmain" onclick="showHide(this.id)" id="bank1">
-                <div class="plusminusbutton" id="plusminusbuttonbank1">+</div>&nbsp;&nbsp; Item Details
+                <div class="plusminusbutton" id="plusminusbuttonbank1">-</div>&nbsp;&nbsp; Item Details
             </div>
-            <div class="row1"  id="formbank1" style="display:none;">
+            <div class="row1"  id="formbank1">
                 @if(count($material_details)>0)
                 <table class="table table-bordered formmain">
 
