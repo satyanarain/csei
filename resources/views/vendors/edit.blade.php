@@ -61,14 +61,7 @@
                         required: !0,
                         email: !0
                     },
-//                    "password": {
-//                        required: !0,
-//                        password: !0
-//                    },
-//                    "confirm_password": {
-//                        required: !0,
-//                        confirm_password: !0
-//                    },
+
                     "roles": {
                         required: !0
                     },

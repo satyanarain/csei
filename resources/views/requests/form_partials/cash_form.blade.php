@@ -85,7 +85,7 @@
  @if($request->category_id==1)
         <input  name="project_expense_head" id="project_expense_head"   class="form-control" >
         @else
-        <input  name="project_expense_head" id="project_expense_head"   class="form-control"  onkeypress='return isNumberKey(event)'>
+        <input  name="project_expense_head" id="project_expense_head"   class="form-control">
          @endif
   </div>
 </div>
