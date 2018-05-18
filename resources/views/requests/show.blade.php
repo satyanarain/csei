@@ -214,7 +214,7 @@ function printDiv(divName) {
     {
         
       var  no_of_days    =   $("#no_of_day_all").val();
-      alert(no_of_days);
+   //   alert(no_of_days);
       var  vendor  =  $("#vendor").val();
       
       
