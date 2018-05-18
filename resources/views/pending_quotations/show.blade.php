@@ -104,8 +104,7 @@
                     </tr>
                     <tr><th><div class="btn btn-primary" onclick="allComments({{$requests->id}},{{$vendor_value->vendor_id}})">All Comments</div></th>
                         <th>
-                       <input type="hidden" class="form-control product_code" size="5" name="request_id[]" value="{{$requests->id}}" readonly="readonly">
-                       <input type="hidden" class="form-control product_code" size="5" name="vendor_id[]" value="{{$vendor_value->vendor_id}}" readonly="readonly">
+                      
                         </th>
                         <th></th>
                         <th></th>
@@ -126,11 +125,11 @@
 
                     </tr>
                     <?php
-                    $vendor_quotation_list_all = DB::table('pending_quotations')->select('*')
-                            ->leftjoin('requests', 'requests.id', 'pending_quotations.request_id')
-                            ->leftjoin('vendors', 'vendors.id', 'pending_quotations.vendor_id')
-                            ->where('pending_quotations.request_id', $requests->id)
-                            ->where('pending_quotations.vendor_id', $vendor_value->vendor_id)
+                    $vendor_quotation_list_all = DB::table('vendor_quotation_lists')->select('*')
+                            ->leftjoin('requests', 'requests.id', 'vendor_quotation_lists.request_id')
+                            ->leftjoin('vendors', 'vendors.id', 'vendor_quotation_lists.vendor_id')
+                            ->where('vendor_quotation_lists.request_id', $requests->id)
+                            ->where('vendor_quotation_lists.vendor_id', $vendor_value->vendor_id)
                             ->get();
                     // print_r($vendor_quotation_list_all) 
                     ?>
@@ -145,11 +144,12 @@
                         <th> <input type="text" class="form-control" size="7" name="purchase_unit_amount[]" readonly="readonly" value="{{$vendor_value_all->purchase_unit_amount}}"></th>
                         <th><input type="text" class="form-control" size="7" name="remark[]"  readonly="readonly"  value="{{$vendor_value_all->remark}}"></th>
                         <th><input type="text" class="form-control" size="7" name="vendor_remark[]"  readonly="readonly"  value="{{$vendor_value_all->vendor_remark}}"></th>
-                        <th><input type="checkbox" class="form-control change_value_click" size="7" name="no_value[]"  readonly="readonly"  value="1" onclick="changeVlude(this.value)">
-                           <input type="hidden" class="form-control changevalue" size="7" name="quotation_approval_id[]"  readonly="readonly"  value="0"> 
-                            
+                        <th ><span class="test"><input type="checkbox" class="form-control change_value_click" size="7" name="no_value[]"  readonly="readonly"  value="1" onclick="changeVlude(this.value)">
+                              <input type="hidden" class="form-control change_value" size="7" name="quotation_approval_id[]"  readonly="readonly"  value="0"> 
+                            </span>
                         </th>
-
+                          <input type="hidden" class="form-control product_code" size="5" name="request_id[]" value="{{$requests->id}}" readonly="readonly">
+                       <input type="hidden" class="form-control product_code" size="5" name="vendor_id[]" value="{{$vendor_value->vendor_id}}" readonly="readonly">
                     </tr>
                     @endforeach
                     @endforeach
@@ -159,7 +159,7 @@
                     </tr>
                     <tr>
                         <td align="left" valign="top" colspan="6" style="text-align:left;">
-                             <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Approve</button></td>
+                             <button class="btn btn-primary submit" type="submit" name="action" onclick="ChechOne()"><i class="fa fa-paper-plane"></i> Approve</button></td>
                     </tr>
                 </table> 
 
@@ -182,18 +182,15 @@
 <script>
   $(document).ready(function()
   {
-    $(".change_value_click").on('click',function()
+    $(".test").on('click',function()
     {
-       // id= $(this).val();
-       // alert(id)
-      $(this).closest('.change_value').val(id)
-      
+        id=1;
+  var v1= $(this).closest("th").find(".change_value").val(id);
+    v2= $(this).closest('.inputGroup').find('input[name=quotation_approval_id]').val(id);
+  
+     
   });
   });
-    
-    
-    
-    
     
     
    function closePop(id)
@@ -202,20 +199,25 @@
        $('#comment').hide();
         
    }
+   
+$(document).ready(function(){
+$("form").submit(function(){
+		if ($('input:checkbox').filter(':checked').length < 1){
+        alert("Please check atleast one");
+		return false;
+		}
+    });
+});
     
        function allComments(request_id,vendor_id)
    {
-     
-   
-   var urldata=   '/pending_quotations/comments/' + request_id;
-    
+    var urldata=   '/pending_quotations/comments/' + request_id;
     $.ajax({
 		type: "GET",
 		url: urldata,
 		cache: false,
                 data:"request_id="+request_id+"&vendor_id="+vendor_id,
 		success: function(data){
-                 //   alert(data);
                   $("#comment").show();
                   $("#vendorpopup_sub").html(data);
 		}

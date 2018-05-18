@@ -34,11 +34,11 @@ class QuotationReviewsController extends Controller
     {
      $id= Auth::id();
      $vendor_quotation_lists = DB::table('vendor_quotation_lists')->select('*')
-              ->leftjoin('vendors','vendors.id','vendor_quotation_lists.vendor_id')
-              ->leftjoin('requests','requests.id','vendor_quotation_lists.request_id')
-             ->groupBy('requests.id')
-             ->orderBy('requests.id','desc')
-              ->get();
+    ->leftjoin('vendors','vendors.id','vendor_quotation_lists.vendor_id')
+    ->leftjoin('requests','requests.id','vendor_quotation_lists.request_id')
+   ->groupBy('requests.id')
+   ->orderBy('requests.id','desc')
+    ->get();
 
     return view('quotation_reviews.index', compact('vendor_quotation_lists'));
         
@@ -105,8 +105,6 @@ class QuotationReviewsController extends Controller
      */
     public function show($id)
     {
-        
-    
       $requests = DB::table('requests')->select('*', 'requests.id as id', 'c_status.name as c_status', 'categories.name as name', 'requests.created_at as created_at')
                 ->leftjoin('users', 'users.id', 'requests.user_id')
                 ->leftjoin('categories', 'categories.id', 'requests.category_id')

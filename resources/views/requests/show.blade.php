@@ -213,17 +213,21 @@ function printDiv(divName) {
     function loadAddQuotation()
     {
         
-      var  no_of_days    =   $("#no_of_days").val();
+      var  no_of_days    =   $("#no_of_day_all").val();
+      alert(no_of_days);
       var  vendor  =  $("#vendor").val();
-       
+      
+      
+      
+  
     if(vendor=='')
     {
        alert("please select at least one vendor")     
         return false;
    
     }else if(no_of_days=='')
-    {
-   alert("please enter select no of days")     
+    { 
+  alert("please enter select no of days")     
         return false;
     }else {
        $(".loder_id").show();  

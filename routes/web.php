@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('create/password/{token}', 'UsersController@createPassword')->name('create.password');
 Route::post('set/password', 'UsersController@setPassword')->name('set.password');
- Route::resource('quotations', 'QuotationController');
+ Route::resource('quotations', 'VendorSaveQuotationController');
 Auth::routes();
 
 Route::group(['middleware'=>'auth'], function(){

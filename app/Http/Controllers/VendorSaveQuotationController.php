@@ -16,7 +16,7 @@ use App\Http\Requests\Quotation\SetPasswordRequest;
 use Illuminate\Support\Facades\Session;
 use DB;
 use DateTime;
-class QuotationController extends Controller
+class VendorSaveQuotationController extends Controller
 {
     //protected $quotations;
 

@@ -47,9 +47,9 @@
   {
     
    $("#tab"+id).show();
-    $("#tab"+2).hide(); 
-      $("#tab"+3).hide();
-    $("#"+id).removeClass('tabber');
+   $("#tab"+2).hide(); 
+   $("#tab"+3).hide();
+   $("#"+id).removeClass('tabber');
    $("#"+id).addClass('active');
     /*******************1****************/
    $("#"+2).removeClass('active');
@@ -57,18 +57,13 @@
    /*******************3****************/
    $("#"+3).removeClass('active');
    $("#"+3).addClass('tabber');
-   
-   
-   
-  }
+   }
  function openTab2(id) 
   {
-       $("#tab"+id).show();
-      $("#tab"+1).hide(); 
-      $("#tab"+3).hide(); 
-     
-     
-   $("#"+id).removeClass('tabber');
+    $("#tab"+id).show();
+    $("#tab"+1).hide(); 
+    $("#tab"+3).hide(); 
+    $("#"+id).removeClass('tabber');
    $("#"+id).addClass('active');
    /*******************1****************/
    $("#"+1).removeClass('active');
@@ -80,8 +75,8 @@
   function openTab3(id) 
   {
  $("#tab"+id).show();
-      $("#tab"+1).hide(); 
-      $("#tab"+2).hide(); 
+ $("#tab"+1).hide(); 
+ $("#tab"+2).hide(); 
    $("#"+id).removeClass('tabber');
    $("#"+id).addClass('active');
    /*******************1****************/

@@ -75,57 +75,32 @@ class PendingQuotationController extends Controller
     public function store(Request $request)
     {
     
-     $associate_id= Auth::id();
-     
-      $vendor_id    = $request->vendor_id;
+        $committee_officer_id= Auth::id();
+        $vendor_id    = $request->vendor_id;
         $request_id   = $request->request_id;
         $material_id   = $request->material_id;
-        $committee_member_remark   = $request->committee_member_remark;
-        PRINT_R($_POST['quotation_approval_id']);
-        
+        $quotation_approval_id   = $request->quotation_approval_id;
 
-        
-      print_r($foo);  
-        
-        echo "<pre>";
-        print_r($_POST);
-        exit();
-        
-//        $already=DB::table('pendding_approval_details')->select('*')->where([['vendor_id',$vendor_id[0]],['request_id',$request_id[0]],['associate_id',$associate_id]])->count();
-//        if($already>0)
-//        {
-//           Session::flash('flash_message', "You have already comments this quotation!.");
-//           return redirect()->route('pending_quotations.index');
-//          exit();
-//        }else{
-         foreach ($vendor_id as $key => $n) {
-             DB::table('pendding_approval_details')->insertGetId(
-                    ['associate_id' => $associate_id,'request_id' => $request_id[$key], 'vendor_id' => $vendor_id[$key], 'committee_member_remark' => $committee_member_remark[$key]]
+         foreach ($material_id as $key => $n) {
+             DB::table('material_pendding_approval_details')->insertGetId(
+                    ['committee_officer_id' => $committee_officer_id,'quotation_approval_id'=>$quotation_approval_id[$key],'request_id' => $request_id[$key], 'vendor_id' => $vendor_id[$key], 'material_id' => $material_id[$key],'material_id' => $material_id[$key]]
             );
-      //  }
-           
-           }
+         }
           
-            $committee_menber_user= DB::table('users')->select('*')->whereIn('id',$array_member_id)->get();
-          
-          /************************************mail to purchase committee member******************************************/
-    
-             foreach ($committee_menber_user as $a_value) 
-		{
-                   $name= $a_value->name;
-                   Mail::send( 'emails.committee_member.mail_to commitee_member_for_comment',['name'=>$name,'request_no'=>$request_no], function ($m) use ($a_value) {
-                   $m->from('info@opiant.online', 'CSEI');
-                   $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Comment'); });
-	
-                }
+//            $committee_menber_user= DB::table('users')->select('*')->whereIn('id',$array_member_id)->get();
+//          
+//          /************************************mail to purchase committee member******************************************/
+//    
+//             foreach ($committee_menber_user as $a_value) 
+//		{
+//                   $name= $a_value->name;
+//                   Mail::send( 'emails.committee_member.mail_to commitee_member_for_comment',['name'=>$name,'request_no'=>$request_no], function ($m) use ($a_value) {
+//                   $m->from('info@opiant.online', 'CSEI');
+//                   $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Comment'); });
+//	
+//                }
            
-           
-           
-           
-           
-           
-           
-       Session::flash('flash_message', "Comment approved successfully!.");
+       Session::flash('flash_message', "Quotation approved successfully!.");
        return redirect()->route('pending_quotations.index');
     }
 
@@ -138,7 +113,7 @@ class PendingQuotationController extends Controller
     public function show($id)
     {
         
-    
+   // echo $id;
       $requests = DB::table('requests')->select('*', 'requests.id as id', 'c_status.name as c_status', 'categories.name as name', 'requests.created_at as created_at')
                 ->leftjoin('users', 'users.id', 'requests.user_id')
                 ->leftjoin('categories', 'categories.id', 'requests.category_id')
@@ -146,13 +121,17 @@ class PendingQuotationController extends Controller
                 ->orderBy('requests.id', 'desc')
                 ->where('requests.id', $id)
                 ->first();
-        $pending_quotations = DB::table('pending_quotations')->select('*')
-                ->leftjoin('requests', 'requests.id', 'pending_quotations.request_id')
-                ->leftjoin('vendors', 'vendors.id', 'pending_quotations.vendor_id')
-                ->where('pending_quotations.request_id', $id)
-                ->groupBy('pending_quotations.vendor_id')
+          $pending_quotations = DB::table('vendor_quotation_lists')->select('*','requests.id as id')
+                ->leftjoin('requests', 'requests.id', 'vendor_quotation_lists.request_id')
+                ->leftjoin('vendors', 'vendors.id', 'vendor_quotation_lists.vendor_id')
+                ->where('vendor_quotation_lists.request_id', $id)
+                ->groupBy('vendor_quotation_lists.vendor_id')
                 ->get();
-        return view('pending_quotations.show', compact('pending_quotations','requests'));
+//          echo "</pre>";
+//          print_r($pending_quotations);
+//          
+//          exit();
+            return view('pending_quotations.show', compact('pending_quotations','requests'));
     }
 
     /**

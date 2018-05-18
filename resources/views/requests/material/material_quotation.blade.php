@@ -126,7 +126,7 @@
                                                 <br>
                                                 <br>
                                                 <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label" for="val-username">Vendor List</label>
+                                                    <label class="col-lg-4 col-form-label" for="val-username">Vendor List<span class="text-danger">*</span></label>
                                                     <div class="col-lg-6">
                                                         <select id="vendor" name='vendor[]' class="form-control" multiple="multiple" required="required" style="height:100px;">
                                                        @foreach($vendors as $vendors)
@@ -136,10 +136,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label" for="val-username">No. of Days for Response</label>
+                                                    <label class="col-lg-4 col-form-label" for="val-username">No. of Days for Response<span class="text-danger">*</span></label>
                                                     <div class="col-lg-6">
                                                         
-                                                        <select id="" class="form-control" required="required" name="no_of_days" id='no_of_days'>
+                                                        <select  class="form-control" required="required" name="no_of_days" id='no_of_day_all'>
                                                             <option value="">Select Days</option>
                                                             <?php for($i=1; $i<=15; $i++)
                                                             { ?>
@@ -177,16 +177,12 @@
                                                     @endif
                                                 </div>
                                                 
-                                                
-                                                
-                                                
-                                                
                                                  <br>    <div class="col-lg-6">
                                                     <input  type="hidden"  name="id" value="{{$requests->id}}">
                                                     <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
                                                     <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
                                                      @if(count($material_details)>0)
-                                                    <button class="btn btn-primary submit pull-left" type="submit" name="quotation"  value="quotation" onclick="return loadAddQuotation()"><i class="fa fa-paper-plane"></i>Submit
+                                                    <button class="btn btn-primary submit pull-left" type="submit" name="quotation"  value="quotation" onclick="return loadAddQuotation()"><i class="fa fa-paper-plane"></i> Submit
         </button>                            &nbsp;&nbsp; 
          @endif
                                                 </div>

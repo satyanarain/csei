@@ -34,38 +34,18 @@
                </tr>
              </thead>
              <tbody>
-                 
-               <?php //print_r($vendor_quotation_lists) ; ?>  
-                 
-                 
-              @foreach($vendor_quotation_lists as $vendor_quotation_lists)
+                 @foreach($vendor_quotation_lists as $vendor_quotation_lists)
                <?php $count123 = idExists('quotation_send_for_comparision', $vendor_quotation_lists->request_id);
                     
                      ?>
               <tr>
-                  
-                
-                  
-                  <td style="display:none">{{$vendor_quotation_lists->id}}
-                  
-                  
-                  
-                  </td>
+               <td style="display:none">{{$vendor_quotation_lists->id}}
+               </td>
                <td>
-                {{dateView($vendor_quotation_lists->due_date)}} <?php 
-                     if($count123==0)
-                     {
-                      echo "1"   ;
-                     } else {
-                      echo "2"   ;
-                     }
-                     ?> 
+                {{dateView($vendor_quotation_lists->due_date)}} 
               </td>
                 <td>{{$vendor_quotation_lists->request_no}}</td>
-              
-<!--                <td>{{$vendor_quotation_lists->purpose}}</td>-->
-<!--                 <td>{{$vendor_quotation_lists->amount}}</td>-->
-                 <td>
+                  <td>
                  {{displayView($vendor_quotation_lists->purpose)}}
                  </td>
                  <?php if($count123==0)
@@ -78,7 +58,7 @@
                          <td>
 
                                             <a href="{{route('quotation_reviews.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i></i> View</a>
-                         <td>
+                         </td>
  <?php } ?>
                
             </tr>
@@ -92,6 +72,7 @@
 </div>
 </div>
 @endsection
+@push('scripts')
 <script type="text/javascript">
  function statusUpdate(id)
 {
@@ -115,6 +96,5 @@
     }
 });
 }  
-    
-    
 </script>
+@endpush

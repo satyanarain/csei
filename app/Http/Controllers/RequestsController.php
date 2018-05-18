@@ -836,7 +836,6 @@ use activityLog;
             if (strlen(implode($s_no)) > 0) {
                 foreach ($s_no as $key => $n) {
                      $rfq_no="RFQ-".$request_id."-".$material_id[$key];
-                    
                      DB::table('quotation_details')->insertGetId(['material_id' => $material_id[$key],'request_id' => $request_id, 's_no' => $s_no[$key], 'product_name' => $product_name[$key], 'purchase_quantity' => $purchase_quantity[$key], 'remark' => $remark[$key],'vendor_id'=>$vendor_array,'no_of_days'=>$no_of_days,'rfq_no'=>$rfq_no]
                     );
                 }
@@ -965,6 +964,7 @@ use activityLog;
                 ->get();
         $material_detail_logs = DB::table('material_details','material_details.id as id')
                 ->leftjoin('quotation_details','material_details.id','quotation_details.material_id')
+                
                 ->where('material_details.request_id',$id)
               ->whereIn('material_details.id',$material_id)  
                 ->get();
@@ -1053,6 +1053,7 @@ $login_user_id=Auth::id();
               ->leftjoin('users','users.id','requests.user_id')
               ->leftjoin('categories','categories.id','requests.category_id')
               ->leftjoin('c_status','c_status.id','requests.status')
+               ->orderBy('requests.id','desc')
               ->where('requests.status',2) 
               ->get();
           return view('requests.approve', compact('requests'));
@@ -1070,19 +1071,19 @@ $login_user_id=Auth::id();
               ->leftjoin('users','users.id','requests.user_id')
               ->leftjoin('categories','categories.id','requests.category_id')
               ->leftjoin('c_status','c_status.id','requests.status')
+             ->orderBy('requests.id','desc')
               ->where('requests.status',3) 
               ->orwhere('requests.status',5) 
-              ->get();
- 
-   return view('requests.accountant', compact('requests'));
+               ->get();
+  return view('requests.accountant', compact('requests'));
     }
 
-    public function verifyRequest(Request $request, $id)
-    {
-        $request = CSEIRequest::whereId($id)->firstOrFail();
-
-    }
-
+//    public function verifyRequest(Request $request, $id)
+//    {
+//        $request = CSEIRequest::whereId($id)->firstOrFail();
+//
+//    }
+/*
     public function approveRequest(Request $request, $id)
     {
 
@@ -1098,7 +1099,7 @@ $login_user_id=Auth::id();
     {
         
     }
-    
+    */
     
      public function saveVoucher($id ,Request $request)
     {
