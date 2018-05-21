@@ -189,9 +189,7 @@ function printDiv(divName) {
       printButton.style.visibility = 'visible';
      document.body.innerHTML = originalContents;
 }
-
-
-    function loadAdd()
+ function loadAdd()
     {
         
       var  name_of_project    =   $("#name_of_project").val();

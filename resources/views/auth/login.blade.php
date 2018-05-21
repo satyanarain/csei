@@ -4,9 +4,10 @@
 <div class="unix-login">
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="login-content card">
-                    <div class="login-form">
+                   
+                        <div class="login-form">
                         <h4><img src="{{URL::to('images/logonicons/csei-200x200.png')}}"></h4>
                         <form method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}

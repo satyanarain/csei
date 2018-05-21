@@ -87,8 +87,9 @@ class RequestRepository implements RequestRepositoryContract
     
          $sql_verifiers = User::where('id', $input['user_id'])->first();
         $verifier = User::whereIn('id', explode(',', $sql_verifiers->verifiers))->get();
+     
 /***********************************Email for cash***********************************************************************************/
-        if($request->category_id==1 || $request->category_id==2)
+        if($request->category_id==1)
         {
         if ($request_id != '') {
             foreach ($verifier as $a_value) {
@@ -102,7 +103,7 @@ class RequestRepository implements RequestRepositoryContract
             }
         }
           /************************************mail to requester******************************************/
-       if($request->category_id==1 || $request->category_id==2)
+       if($request->category_id==1)
         {      
        if ($request_id != '') {
           $verified_approved='Submitted';
@@ -112,7 +113,36 @@ class RequestRepository implements RequestRepositoryContract
           }
         }
         }
-    /***********************************Email for Service***********************************************************************************/      
+    /***********************************Email for material***********************************************************************************/   
+        /***********************************Email for material***********************************************************************************/
+        if($request->category_id==2)
+        {
+        if ($request_id != '') {
+            foreach ($verifier as $a_value) {
+                $verifire_name = $a_value->name;
+                $amount = $request->amount;
+
+                Mail::send('emails.material.request_to_verifier', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
+                    $m->from('info@opiant.online', 'CSEI');
+                    $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Verification');
+                });
+            }
+        }
+          /************************************mail to requester******************************************/
+       if($request->category_id==2)
+        {      
+       if ($request_id != '') {
+          $verified_approved='Submitted';
+                   Mail::send('emails.material.mail_to_requester_for_va',['amount'=>$request->amount,'request_no'=>$request_no,'verified_approved'=>$verified_approved,'name'=>$requester->name], function ($m) use ($requester) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($requester->email, $requester->name)->subject('CSEI | Request Submitted'); });
+          }
+        }
+        }
+    /***********************************Email for Service***********************************************************************************/ 
+        
+        
+        
            if($request->category_id==3)
         {
         if ($request_id != '') {
