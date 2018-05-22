@@ -86,20 +86,6 @@ class PendingQuotationController extends Controller
                     ['committee_officer_id' => $committee_officer_id,'quotation_approval_id'=>$quotation_approval_id[$key],'request_id' => $request_id[$key], 'vendor_id' => $vendor_id[$key], 'material_id' => $material_id[$key],'material_id' => $material_id[$key]]
             );
          }
-          
-//            $committee_menber_user= DB::table('users')->select('*')->whereIn('id',$array_member_id)->get();
-//          
-//          /************************************mail to purchase committee member******************************************/
-//    
-//             foreach ($committee_menber_user as $a_value) 
-//		{
-//                   $name= $a_value->name;
-//                   Mail::send( 'emails.committee_member.mail_to commitee_member_for_comment',['name'=>$name,'request_no'=>$request_no], function ($m) use ($a_value) {
-//                   $m->from('info@opiant.online', 'CSEI');
-//                   $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Comment'); });
-//	
-//                }
-           
        Session::flash('flash_message', "Quotation approved successfully!.");
        return redirect()->route('pending_quotations.index');
     }
@@ -112,7 +98,7 @@ class PendingQuotationController extends Controller
      */
     public function show($id)
     {
-        
+       $committee_officer_id= Auth::id(); 
    // echo $id;
       $requests = DB::table('requests')->select('*', 'requests.id as id', 'c_status.name as c_status', 'categories.name as name', 'requests.created_at as created_at')
                 ->leftjoin('users', 'users.id', 'requests.user_id')
@@ -127,11 +113,10 @@ class PendingQuotationController extends Controller
                 ->where('vendor_quotation_lists.request_id', $id)
                 ->groupBy('vendor_quotation_lists.vendor_id')
                 ->get();
-//          echo "</pre>";
-//          print_r($pending_quotations);
-//          
-//          exit();
-            return view('pending_quotations.show', compact('pending_quotations','requests'));
+          
+          $already_approverd=DB::table('material_pendding_approval_details')->where([['request_id',$id],['committee_officer_id',$committee_officer_id]])->first();
+         
+            return view('pending_quotations.show', compact('pending_quotations','requests','committee_officer_id','already_approverd'));
     }
 
     /**

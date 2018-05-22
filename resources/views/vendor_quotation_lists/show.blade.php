@@ -77,10 +77,13 @@
                     {{$requests->amount}}  
                 </div>
             </div>
-
-            <div   class="formmain" onclick="showHide(this.id)" id="bank1">
-                <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; Item Details
+           <div class="form-group row">
+                <label class="col-lg-4 col-form-label" for="val-username"><b>Item Details</b></label>
+                <div class="col-lg-6">
+                
+                </div>
             </div>
+
             {!!Form::open(['route'=>'vendor_quotation_lists.store', 'id'=>'formValidate', 
             'onsubmit'=>'return validatePan()',
             'autocomplete'=>'off',
@@ -97,18 +100,7 @@
                         <th></th>
                         <th></th>
                      </tr>
-                    <tr><th>Committee Member Remark</th>
-                        <th>
-                            <textarea type="text" class="form-control" size="7" name="committee_member_remark[]"   value="" required="required"></textarea>
-                            <input type="hidden" class="form-control product_code" size="5" name="request_id[]" value="{{$requests->id}}" readonly="readonly">
-                            <input type="hidden" class="form-control product_code" size="5" name="vendor_id[]" value="{{$vendor_value->vendor_id}}" readonly="readonly">
-                        </th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
+                    
                       <tr>
                         <th  class="table-row-heading">S No</th>
                         <th  class="table-row-heading">Product Name</th>
@@ -141,6 +133,26 @@
 
                     </tr>
                     @endforeach
+                    <tr><th colspan="7" align="left" valign="top">
+                            <table border="1" width="100%" style=" background-color:#fff;">
+                                <tr><td width="20%" style=" background-color:#fff;">Committee Member Remark :</td>
+                                    <td width="80%" style=" background-color:#fff;">
+                                       <div class="dialogbox">
+                                            <div class="body">
+                                                <span class="tip tip-left"></span>
+                                                <div class="message">
+                                                    <span><textarea type="text" size="7" name="committee_member_remark[]"   value="" required="required" style="width:100%; border:none;color:#495057; padding:0px 3px 0px 3px"></textarea></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <input type="hidden" class="form-control product_code" size="5" name="request_id[]" value="{{$requests->id}}" readonly="readonly">
+                                        <input type="hidden" class="form-control product_code" size="5" name="vendor_id[]" value="{{$vendor_value->vendor_id}}" readonly="readonly"> 
+                                    </td>
+                                </tr>
+                            </table>
+                        </th>
+                    </tr>
+                      
                     @endforeach
                 </table>
                 <table width="100%" cellspacing="4" cellpadding="4" border="0">

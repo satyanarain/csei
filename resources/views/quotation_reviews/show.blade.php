@@ -85,6 +85,16 @@ $request_only_view = Request::fullUrl();
             'onsubmit'=>'return validatePan()',
             'autocomplete'=>'off',
             'class'=>'formValidate', 'files'=>true])!!}
+            
+            <div class="form-group row">
+                <label class="col-lg-4 col-form-label" for="val-username"><b>Item Details</b></label>
+                <div class="col-lg-6">
+                
+                </div>
+            </div>
+            
+            
+            
             <table class="table table-bordered table-striped table-hover bank_table">
                       @foreach($vendor_quotation_lists as $vendor_value)
                       <tr><th>Vendor Name</th>

@@ -57,11 +57,28 @@
                 @if($request->category_id==1)
                 <a href="{{route('requests.show', [$request->id,'downloads'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-download"></i></a>
                 @endif
-                <a href="{{route('requests.show', [$request->id,'complete_view'])}}" class="btn btn-success m-b-10 m-l-5">View</a>
+                <a href="{{route('requests.show', [$request->id,'complete_view'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-search" aria-hidden="true"></i> View</a>
                 @else
                 @if($request->category_id==2)
-                  <a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-Quotation</a>
+<?php
+             $quotation_details = DB::table('quotation_details')->where('request_id', $request->id)->get();
+                foreach ($quotation_details as $quotation_value) {
+                    $material_id[] = $quotation_value->material_id;
+                }
+                $material_details = DB::table('material_details')->where('request_id', $request->id)
+                        ->whereNotIn('id', $material_id)
+                        ->get();
+             
+            $material_details=   count($material_details);  
+                
+  if($material_details==0) 
+  {
+?>
+<a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-search" aria-hidden="true"></i> View</a>
+  <?php } else { ?>
+<a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Quotation</a>
+ <?php } ?>
+
                    @else
                    <a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
                  @endif 

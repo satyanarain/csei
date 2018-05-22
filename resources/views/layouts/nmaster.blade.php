@@ -725,10 +725,30 @@ $(document).ready(function () {
         
 
           $(document).on("click", ".remove_bank_row", function () {
+//              var $table = $(this).closest('table');
+//              $(this).closest('tr').remove();
+//              $table.trigger("recalc");
+var s_no_legth=   $('input[name="s_no[]"]').length;
+    if(s_no_legth==1)
+    {
+    alert("At-least one item required")
+    return false;
+     }else{ 
+            
               var $table = $(this).closest('table');
               $(this).closest('tr').remove();
               $table.trigger("recalc");
+              
+        }  
+
+
           });
+
+ 
+
+
+
+
 
           $(document).on("keyup", ".bank_table input", function () {
               $(this).trigger("recalc");

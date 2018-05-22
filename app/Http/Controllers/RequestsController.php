@@ -839,6 +839,9 @@ use activityLog;
                      DB::table('quotation_details')->insertGetId(['material_id' => $material_id[$key],'request_id' => $request_id, 's_no' => $s_no[$key], 'product_name' => $product_name[$key], 'purchase_quantity' => $purchase_quantity[$key], 'remark' => $remark[$key],'vendor_id'=>$vendor_array,'no_of_days'=>$no_of_days,'rfq_no'=>$rfq_no]
                     );
                 }
+            } else {
+             Session()->flash('flash_message_warning', 'Please add at-least one item to send');
+            return redirect()->route('accountants.requests');
             }
        /************************************************mail to who will save voucher***********************************************************/
             
@@ -940,6 +943,7 @@ use activityLog;
      */
     public function show($id)
     {
+       
        $user_id= Auth::id();
        $requests = DB::table('requests')->select('*','requests.id as id','c_status.name as c_status','categories.name as name','requests.created_at as created_at','service_documents.document  as service_document','bills.document  as bills_document')
               ->leftjoin('users','users.id','requests.user_id')
@@ -955,18 +959,16 @@ use activityLog;
         $quotation_details = DB::table('quotation_details')->where('request_id',$id)->get();
         foreach($quotation_details as $quotation_value)
         {
-       $material_id[]= $quotation_value->material_id;
-        
+          $material_id[]= $quotation_value->material_id;
         }
-      
-        $material_details = DB::table('material_details')->where('request_id',$id)
+               $material_details = DB::table('material_details')->where('request_id',$id)
               ->whereNotIn('id',$material_id)  
                 ->get();
-        $material_detail_logs = DB::table('material_details','material_details.id as id')
+       
+         $material_detail_logs = DB::table('material_details','material_details.id as id')
                 ->leftjoin('quotation_details','material_details.id','quotation_details.material_id')
-                
                 ->where('material_details.request_id',$id)
-              ->whereIn('material_details.id',$material_id)  
+                ->whereIn('material_details.id',$material_id)  
                 ->get();
         
         $material_details_view = DB::table('material_details')->where('request_id',$id)->get();     
@@ -1078,29 +1080,6 @@ $login_user_id=Auth::id();
   return view('requests.accountant', compact('requests'));
     }
 
-//    public function verifyRequest(Request $request, $id)
-//    {
-//        $request = CSEIRequest::whereId($id)->firstOrFail();
-//
-//    }
-/*
-    public function approveRequest(Request $request, $id)
-    {
-
-    }
-   
-
-    public function rejectRequestVerifier(Request $request, $id)
-    {
-
-    }
-
-    public function rejectRequestApprover(Request $request, $id)
-    {
-        
-    }
-    */
-    
      public function saveVoucher($id ,Request $request)
     {
 

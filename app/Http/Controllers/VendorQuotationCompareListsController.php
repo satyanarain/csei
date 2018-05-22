@@ -69,11 +69,11 @@ class VendorQuotationCompareListsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
- $committee_member_id = Auth::id();
+        $committee_member_id = Auth::id();
         $vendor_id = $request->vendor_id;
         $request_id = $request->request_id;
         $committee_member_remark = $request->committee_member_remark;
-//    $already=DB::table('committee_member_comments')->select('*')->where([['vendor_id',$vendor_id[0]],['request_id',$request_id[0]],['committee_member_id',$committee_member_id]])->count();
+        $already=DB::table('committee_member_comments')->select('*')->where([['vendor_id',$vendor_id[0]],['request_id',$request_id[0]],['committee_member_id',$committee_member_id]])->count();
         if ($already > 0) {
             Session::flash('flash_message', "You have already comments this quotation!.");
             return redirect()->route('vendor_quotation_lists.index');

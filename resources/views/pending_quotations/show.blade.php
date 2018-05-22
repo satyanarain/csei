@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body">
               <div class="form-validation">
-            <h4 class="header2">Requisition Details</h4>
+<!--            <h4 class="header2">Requisition Details</h4>-->
              <div class="form-group row">
                 <label class="col-lg-4 col-form-label" for="val-username">Request No.</label>
                 <div class="col-lg-6">
@@ -79,16 +79,21 @@
                 </div>
             </div>
 
-            <div   class="formmain" onclick="showHide(this.id)" id="bank1">
+<!--            <div   class="formmain" onclick="showHide(this.id)" id="bank1">
                 <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; Item Details
-            </div>
+            </div>-->
             {!!Form::open(['route'=>'pending_quotations.store', 'id'=>'formValidate', 
             'onsubmit'=>'return validatePan()',
             'autocomplete'=>'off',
             'class'=>'formValidate', 'files'=>true])!!}
 
-
-            <div class="row1"  id="formbank1" >
+             <div class="form-group row">
+                <label class="col-lg-4 col-form-label" for="val-username"><b>Item Details</b></label>
+                <div class="col-lg-6">
+                
+                </div>
+            </div>
+<!--            <div class="row1"  id="formbank1" >-->
               <table class="table table-bordered table-striped table-hover bank_table">
                    
                     @foreach($pending_quotations as $vendor_value)
@@ -99,21 +104,11 @@
                         <th></th>
                         <th></th>
                         <th></th>
+                          @if($already_approverd==0) 
                         <th></th>
-
+ @endif
                     </tr>
-                    <tr><th><div class="btn btn-primary" onclick="allComments({{$requests->id}},{{$vendor_value->vendor_id}})">All Comments</div></th>
-                        <th>
-                      
-                        </th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                     <tr>
+                   <tr>
                         <th  class="table-row-heading">S No</th>
                         <th  class="table-row-heading">Product Name</th>
                         <th  class="table-row-heading">Quantity</th>
@@ -121,8 +116,9 @@
                         <th  class="table-row-heading">Total Amount</th>
                         <th  class="table-row-heading">Requester Remark</th>
                         <th  class="table-row-heading">Vendor Remark</th>
+                         @if($already_approverd==0) 
                         <th  class="table-row-heading">Approval</th>
-
+ @endif
                     </tr>
                     <?php
                     $vendor_quotation_list_all = DB::table('vendor_quotation_lists')->select('*')
@@ -143,27 +139,37 @@
                         <th><input type="text" class="form-control" size="5" name="purchase_unit_rate[]"  required="required" readonly="readonly" value="{{$vendor_value_all->purchase_unit_rate}}"></th>
                         <th> <input type="text" class="form-control" size="7" name="purchase_unit_amount[]" readonly="readonly" value="{{$vendor_value_all->purchase_unit_amount}}"></th>
                         <th><input type="text" class="form-control" size="7" name="remark[]"  readonly="readonly"  value="{{$vendor_value_all->remark}}"></th>
-                        <th><input type="text" class="form-control" size="7" name="vendor_remark[]"  readonly="readonly"  value="{{$vendor_value_all->vendor_remark}}"></th>
-                        <th ><span class="test"><input type="checkbox" class="form-control change_value_click" size="7" name="no_value[]"  readonly="readonly"  value="1" onclick="changeVlude(this.value)">
-                              <input type="hidden" class="form-control change_value" size="7" name="quotation_approval_id[]"  readonly="readonly"  value="0"> 
-                            </span>
-                        </th>
+                        <th><input type="text" class="form-control" size="7" name="vendor_remark[]"  readonly="readonly"  value="{{$vendor_value_all->vendor_remark}}">
                           <input type="hidden" class="form-control product_code" size="5" name="request_id[]" value="{{$requests->id}}" readonly="readonly">
                        <input type="hidden" class="form-control product_code" size="5" name="vendor_id[]" value="{{$vendor_value->vendor_id}}" readonly="readonly">
+                        
+                        
+                        </th>
+                         @if($already_approverd==0) 
+                        <th><span class="test"><input type="checkbox" class="form-control change_value_click" size="7" name="no_value[]"  readonly="readonly"  value="1" onclick="changeVlude(this.value)">
+                              <input type="hidden" class="form-control change_value" size="7" name="quotation_approval_id[]"  readonly="readonly"  value="0"> 
+                            </span>
+                            
+                        </th>
+                        
+                        @endif
                     </tr>
                     @endforeach
-                    @endforeach
+                    <tr><th colspan="8"><div class="btn btn-primary" onclick="allComments({{$requests->id}},{{$vendor_value->vendor_id}})">All Comments</div></th></tr>
+                     @endforeach
                 </table>
                 <table width="100%" cellspacing="4" cellpadding="4" border="0">
                     <tr><td align="right" valign="top" colspan="6" height="10"></td>
                     </tr>
                     <tr>
                         <td align="left" valign="top" colspan="6" style="text-align:left;">
+                            @if($already_approverd==0) 
                              <button class="btn btn-primary submit" type="submit" name="action" onclick="ChechOne()"><i class="fa fa-paper-plane"></i> Approve</button></td>
+                       @endif
                     </tr>
                 </table> 
 
-            </div>
+<!--            </div>-->
             {!!Form::close()!!}        
               </div>
   <div class="modal fade" id="view_detail" role="dialog">
@@ -203,7 +209,7 @@
 $(document).ready(function(){
 $("form").submit(function(){
 		if ($('input:checkbox').filter(':checked').length < 1){
-        alert("Please check atleast one");
+        alert("Please check at least one");
 		return false;
 		}
     });
