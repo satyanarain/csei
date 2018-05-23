@@ -22,7 +22,7 @@
                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Quotation Form</h4>
                     @include('partials.message')
                     <div class="table-scrollable form-body">
-                        <table class="table table-bordered table-striped table-hover bank_table">
+                      <table class="table table-bordered table-striped table-hover bank_table">
                             <thead>
                                 <tr>
                                     <th class="table-row-heading">S No</th>
@@ -80,7 +80,7 @@
                                     <td>
                                         <div class="dummy">
                                             <div class="input-icon right">
-                                                <input type="text" class="form-control" size="7" name="remark[]"  readonly="readonly"  value="{{$quotation_value->remark}}">
+                                          {{$quotation_value->remark}}
                                             </div>
                                         </div>
                                     </td>

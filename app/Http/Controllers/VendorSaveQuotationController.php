@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\CSEIRequest;
 //use App\Models\Quotation;
 use App\Models\Quotation;
 //use App\Models\Quotation;
@@ -41,6 +42,9 @@ class VendorSaveQuotationController extends Controller
         $material_id_string = $array[2];
         $material_id_array = explode(',', $material_id_string);
         $material_id = $material_id_array[0];
+        
+         $requests= CSEIRequest::whereId($request_id)->first();
+        
         $sql = DB::table('quotation_details')->select('*')->where([['material_id', $material_id], ['request_id', $request_id]])->first();
         $qoutation_created_date = $sql->created_at;
         $no_of_days = $sql->no_of_days;
@@ -69,7 +73,7 @@ class VendorSaveQuotationController extends Controller
                 ->whereIn('quotation_details.material_id', $material_id_array)->get();
                 }
 
-            return view('quotations.index', compact('quotations','vendor_id','request_id'));
+            return view('quotations.index', compact('quotations','vendor_id','request_id','requests'));
   
     }
 

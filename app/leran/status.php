@@ -98,7 +98,15 @@
               4. Display error message to vendor if record already exists
               5. Display vendor comparison list.
             
-              
+             /****************************************Date 21-05-2018******************************************************/
+             1. Work with subhash 
+             2. Change css of login page.
+             3. Add Material details in each email verifier, approver,rejector 
+             /****************************************Date 22-05-2018******************************************************/
+             1. Added css for comment box
+             2. Add height in loader.
+             3. Remove approval button after approve material request.
+             4. Replace quotation button to view button after send quotation.
               
              
              

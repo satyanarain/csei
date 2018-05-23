@@ -15,6 +15,7 @@ use App\Http\Requests\Vendor\SetPasswordRequest;
 use App\Repositories\Vendor\VendorRepositoryContract;
 use Session;
 use DB;
+use Mail;
 class VendorQuotationCompareListsController extends Controller
 {
     protected $vendor_quotation_lists;
@@ -31,7 +32,7 @@ class VendorQuotationCompareListsController extends Controller
      */
     public function index()
     {
-     $id= Auth::id();
+     $user_id= Auth::id();
       $send_to_comparision = DB::table('quotation_send_for_comparision')->select('*')->get();
       
       foreach($send_to_comparision as $send_to_comparision_value)
@@ -46,7 +47,7 @@ class VendorQuotationCompareListsController extends Controller
              ->orderBy('requests.id','desc')
               ->get();
 
-    return view('vendor_quotation_lists.index', compact('vendor_quotation_lists'));
+    return view('vendor_quotation_lists.index', compact('vendor_quotation_lists','user_id'));
         
     }
 
@@ -70,6 +71,8 @@ class VendorQuotationCompareListsController extends Controller
      */
     public function store(Request $request) {
         $committee_member_id = Auth::id();
+         $user_id_login= Auth::user();
+         $commentator_name=$user_id_login->name;
         $vendor_id = $request->vendor_id;
         $request_id = $request->request_id;
         $committee_member_remark = $request->committee_member_remark;
@@ -84,9 +87,40 @@ class VendorQuotationCompareListsController extends Controller
                         ['committee_member_id' => $committee_member_id, 'request_id' => $request_id[$key], 'vendor_id' => $vendor_id[$key], 'committee_member_remark' => $committee_member_remark[$key]]
                 );
             }
+            
+           
+            
+              $sql = DB::table('role_user')->select('*')->where('role_user.role_id',7)->get();
+              foreach($sql as $val)
+              {
+                  
+              $user_id[]=$val->user_id;
+              
+              }
+             
+            $finance_head = DB::table('users')->select('*')->whereIn('id',$user_id)->get();
+            
+            
+          /****************************************************************************************/
+          $request_data= CSEIRequest::whereId($request_id)->first();
+         $request_no=$request_data->request_no;
+         $amount= $request_data->amount;
+        /******************************************email for associates*********************************/
+         if(count($user_id)>0)
+         {
+         foreach($finance_head as $finance_head)
+         {
+         
+                     $name = $finance_head->name;
+                    Mail::send( 'emails.material.finance_head', ['request_no'=>$request_no,'name' => $name, 'amount' => $amount,'commentator_name'=>$commentator_name], function ($m) use ($finance_head) {
+                        $m->from('info@opiant.online', 'CSEI');
+                        $m->to($finance_head->email, $finance_head->name)->subject('CSEI | Request for vendor quotation approve');
+                    });
+         }
+         }
             Session::flash('flash_message', "Comment submitted successfully!.");
             return redirect()->route('vendor_quotation_lists.index');
-        }
+       }
         return redirect()->route('vendor_quotation_lists.index');
     }
 
@@ -113,6 +147,8 @@ class VendorQuotationCompareListsController extends Controller
                 ->where('vendor_quotation_lists.request_id', $id)
                 ->groupBy('vendor_quotation_lists.vendor_id')
                 ->get();
+      
+     
         return view('vendor_quotation_lists.show', compact('vendor_quotation_lists','requests'));
     }
 
