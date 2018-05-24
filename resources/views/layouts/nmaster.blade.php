@@ -223,7 +223,7 @@ $segments_var = Request::segments();
           <!-- Left Sidebar  -->
           <div class="left-sidebar">
               <!-- Sidebar scroll-->
-              <div class="scroll-sidebar" style="min-height:100%">
+              <div class="scroll-sidebar" style="min-height:120%">
                   <!-- Sidebar navigation-->
                   <nav class="sidebar-nav">
                       <ul id="sidebarnav">
