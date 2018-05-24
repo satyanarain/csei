@@ -223,7 +223,7 @@ $segments_var = Request::segments();
           <!-- Left Sidebar  -->
           <div class="left-sidebar">
               <!-- Sidebar scroll-->
-              <div class="scroll-sidebar">
+              <div class="scroll-sidebar" style="min-height:100%">
                   <!-- Sidebar navigation-->
                   <nav class="sidebar-nav">
                       <ul id="sidebarnav">
@@ -720,14 +720,8 @@ $(document).ready(function () {
               //.toFixed() method will roundoff the final sum to 2 decimal places
               $("#sum").html(sum.toFixed(2));
           }
+ $(document).on("click", ".remove_bank_row", function () {
 
-
-        
-
-          $(document).on("click", ".remove_bank_row", function () {
-//              var $table = $(this).closest('table');
-//              $(this).closest('tr').remove();
-//              $table.trigger("recalc");
 var s_no_legth=   $('input[name="s_no[]"]').length;
     if(s_no_legth==1)
     {
@@ -740,17 +734,8 @@ var s_no_legth=   $('input[name="s_no[]"]').length;
               $table.trigger("recalc");
               
         }  
-
-
-          });
-
- 
-
-
-
-
-
-          $(document).on("keyup", ".bank_table input", function () {
+       });
+    $(document).on("keyup", ".bank_table input", function () {
               $(this).trigger("recalc");
           });
 
