@@ -107,6 +107,15 @@
              2. Add height in loader.
              3. Remove approval button after approve material request.
              4. Replace quotation button to view button after send quotation.
+             /****************************************Date 23-05-2018******************************************************/
+             1. Remove repeating heading from each view page
+             2. Change send to review button after quotation send to review.
+             /****************************************Date 23-05-2018******************************************************/
+             1. After purchase committee member comment change view button to commented 
+             2. Hide comment box and button after comment.
+             3. Add validation for release amount is less than requested amount.
+             4.Increase height of side menu bar.
+          
               
              
              

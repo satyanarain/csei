@@ -15,7 +15,6 @@
                                 <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">
                                 <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">This is a request {{$request_no}} for quotation. Please <a href="{{route('quotations.index',[$id,$vendor_id,$material_string])}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i>click here</a> to fill quotation from.</p>
                                 </span>
-                                @include('emails.material.partial_item')
                                 <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">Thanks,<br>
                                 CSEI Team</p>
                               </td>

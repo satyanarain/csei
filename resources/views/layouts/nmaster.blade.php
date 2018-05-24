@@ -37,10 +37,7 @@ $segments_var = Request::segments();
       </div>
       <div id="map1">
           <div id="map">
-              <div class="loading_bar">
-
-              </div>
-
+              <div class="loading_bar"></div>
           </div>
       </div>
     <div class="vendorpopup"  id="comment" style="display:none">
