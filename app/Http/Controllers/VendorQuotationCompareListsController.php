@@ -132,7 +132,7 @@ class VendorQuotationCompareListsController extends Controller
      */
     public function show($id)
     {
-        
+         $user_id= Auth::id(); 
     
       $requests = DB::table('requests')->select('*', 'requests.id as id', 'c_status.name as c_status', 'categories.name as name', 'requests.created_at as created_at')
                 ->leftjoin('users', 'users.id', 'requests.user_id')
@@ -149,7 +149,7 @@ class VendorQuotationCompareListsController extends Controller
                 ->get();
       
      
-        return view('vendor_quotation_lists.show', compact('vendor_quotation_lists','requests'));
+        return view('vendor_quotation_lists.show', compact('vendor_quotation_lists','requests','user_id'));
     }
 
     /**

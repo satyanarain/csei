@@ -18,11 +18,11 @@ class PurchaseCommitteeController extends Controller
 {
     protected $purchase_committees;
 
-//    public function __construct(PurchaseCommitteeRepositoryContract $purchase_committees)
-//    {
-//        $this->purchase_committees = $purchase_committees;
-//        $this->middleware('eitherAdminOrStateAdmin')->except(['createPassword', 'setPassword']);
-//    }
+    public function __construct(PurchaseCommitteeRepositoryContract $purchase_committees)
+    {
+        $this->purchase_committees = $purchase_committees;
+       // $this->middleware('eitherAdminOrStateAdmin')->except(['createPassword', 'setPassword']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -80,7 +80,10 @@ class PurchaseCommitteeController extends Controller
      */
     public function edit($id)
     {
+      
      $purchase_committees = $this->purchase_committees->find($id);
+   
+   
        return view('purchase_committees.edit', compact('purchase_committees'));
     }
 

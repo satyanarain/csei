@@ -2,7 +2,7 @@
 <div class="card">
                 <div class="card-body">
                  <div class="form-validation">
-                     <h4 class="header2">Requisition Details</h4>
+                    
                         <div class="form-group row">
                                 <label class="col-lg-4 col-form-label" for="val-username">Requisition No.</label>
                                 <div class="col-lg-6">
@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                             
-                                        <div class="col-lg-6">
+                           <div class="col-lg-6" style="padding:0px 0px 0px 0px;">
                                             
                                              <input  type="hidden"  name="id" value="{{$requests->id}}">
                                              <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">

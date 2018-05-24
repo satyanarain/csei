@@ -7,7 +7,7 @@
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Pending Approval</li>
+        <li class="breadcrumb-item active">All Pending for Approval</li>
       </ol>
     </div>
   </div>

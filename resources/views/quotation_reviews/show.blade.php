@@ -92,22 +92,13 @@ $request_only_view = Request::fullUrl();
                 
                 </div>
             </div>
-            
-            
-            
-            <table class="table table-bordered table-striped table-hover bank_table">
+             <table class="table table-bordered table-striped table-hover bank_table">
                       @foreach($vendor_quotation_lists as $vendor_value)
-                      <tr><th>Vendor Name</th>
+                      <tr><th colspan="2" width="10%">Vendor Name</th>
                           <th>{{$vendor_value->name}}
 
                               <input type="hidden" class="form-control product_code" size="5" name="request_id" value="{{$requests->id}}" readonly="readonly">
-                             
                           </th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
-                          <th></th>
                       </tr>
                       <tr>
                         <th  class="table-row-heading">S No</th>

@@ -7,7 +7,7 @@
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{route('users.index')}}">Users</a></li>
+                <li class="breadcrumb-item"><a href="{{route('users.index')}}">All Users</a></li>
                 <li class="breadcrumb-item active">User Create</li>
             </ol>
         </div>

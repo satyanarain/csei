@@ -78,10 +78,10 @@
                          </div>
                      </div>       
              @if(count($material_details)>0)
-            <div   class="formmain" onclick="showHide(this.id)" id="bank1">
-                <div class="plusminusbutton" id="plusminusbuttonbank1">-</div>&nbsp;&nbsp; Item Details
+            <div   class="formmain1" onclick="showHide(this.id)" id="bank1">
+                <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; <h2>Item Details</h2>
             </div>
-            <div class="row1"  id="formbank1">
+<!--            <div class="row1"  id="formbank1">-->
                 @if(count($material_details)>0)
                 <table class="table table-bordered formmain">
                         <tr>
@@ -115,7 +115,7 @@
                 </table>
                 @endforeach
                 @endif
-            </div>
+<!--            </div>-->
             @endif 
 <br>    <div class="col-lg-6">
                                              <input  type="hidden"  name="id" value="{{$requests->id}}">

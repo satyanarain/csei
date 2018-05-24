@@ -16,23 +16,22 @@
     @endsection
 
     @section('content')
-  <div class="row justify-content-center" id='printableArea'>
+    <div class="row justify-content-center" id='printableArea'>
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
-                 <div class="form-validation">
-                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Create Vendor</h4>
-      
-                                    {!!Form::open(['route'=>'vendor_quotation_lists.store', 'id'=>'formValidate', 
-                                    'onsubmit'=>'return validatePan()',
-                                    'class'=>'formValidate', 'files'=>true])!!}
-                                    @include('vendor_quotation_lists.form')
-                                    {!!Form::close()!!}
-                                
-    </div>
-    </div>
-    </div>
-    </div>
+                    <div class="form-validation">
+                        <h4 class="header2" style="border-bottom:#ccc 0px solid;">Create Vendor</h4>
+                          {!!Form::open(['route'=>'vendor_quotation_lists.store', 'id'=>'formValidate', 
+                        'onsubmit'=>'return validatePan()',
+                        'class'=>'formValidate', 'files'=>true])!!}
+                        @include('vendor_quotation_lists.form')
+                        {!!Form::close()!!}
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     @endsection
  @push('scripts')

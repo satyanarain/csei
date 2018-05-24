@@ -32,7 +32,7 @@ class PendingQuotationController extends Controller
     public function index()
     {
    
-     $id= Auth::id();
+     $committee_officer_id= Auth::id();
      $send_to_comparision = DB::table('quotation_send_for_comparision')->select('*')
                 ->groupBy('quotation_send_for_comparision.request_id')
                ->get();
@@ -50,7 +50,7 @@ class PendingQuotationController extends Controller
               ->orderBy('requests.id','desc')
               ->get();
 
-    return view('pending_quotations.index', compact('pending_quotations'));
+    return view('pending_quotations.index', compact('pending_quotations','committee_officer_id'));
         
     }
 

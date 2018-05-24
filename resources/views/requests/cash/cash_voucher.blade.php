@@ -3,6 +3,8 @@
                                     'class'=>'formValidate',
                                     'autocomplete'=>'off',
                                     'id'=>'theForm',
+                                    'id'=>'theForm',
+                                    'onsubmit'=>'return checkValue()',
                                     'files'=>true])!!}
                 <div class="card">
                 <div class="card-body">
@@ -26,8 +28,8 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-4 col-form-label" for="val-username">Amount (Rs)</label>
-                                <div class="col-lg-6">
+                                <label class="col-lg-4 col-form-label" for="val-username">Requested Amount (Rs)</label>
+                                <div class="col-lg-6" id='expected_amont'>
                                     {{$requests->amount}}  
                                 </div>
                             </div>
@@ -81,9 +83,9 @@
                                     </div>
                            
                             <div class="form-group row">
-                                <label class="col-lg-4 col-form-label" for="val-username">Amount (Rs)<span class="text-danger">*</span></label>
+                                <label class="col-lg-4 col-form-label" for="val-username">Release Amount (Rs)<span class="text-danger">*</span></label>
                                 <div class="col-lg-6">
-                                     {!! Form::text('release_voucher_amount',null,['class'=>'form-control',required,'onkeypress'=>'return isNumberKey(event)'])!!}
+                                     {!! Form::text('release_voucher_amount',null,['class'=>'form-control',required,'onkeypress'=>'return isNumberKey(event)','id'=>'release_voucher_amount'])!!}
                                     
                                 </div>
                             </div>
@@ -98,7 +100,7 @@
                                              <input  type="hidden"  name="id" value="{{$requests->id}}">
                                               <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
                                              <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
-                                            <button class="btn btn-primary submit" type="submit" name="savevoucher"  value="savevoucher"><i class="fa fa-check-circle"></i>Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button class="btn btn-primary submit" type="submit" name="savevoucher"  value="savevoucher" ><i class="fa fa-check-circle"></i> Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                        </div>
                            </div>
                 </div>

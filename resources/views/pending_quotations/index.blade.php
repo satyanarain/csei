@@ -43,17 +43,20 @@
                 {{dateView($pending_quotations->due_date)}}
               </td>
                 <td>{{$pending_quotations->request_no}}</td>
-              
-<!--                <td>{{$pending_quotations->purpose}}</td>-->
-<!--                 <td>{{$pending_quotations->amount}}</td>-->
+
                  <td>
                  {{displayView($pending_quotations->purpose)}}
                  </td>
-                <td>
-                
-                <a href="{{route('pending_quotations.show',[$pending_quotations->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
-              
-              </td>
+                 <td>
+                     <?php
+                     $aready_approve_by_committee = alreadyComment('material_pendding_approval_details', $pending_quotations->request_id, $committee_officer_id, 'request_id', 'committee_officer_id');
+                     ?>
+                     @if($aready_approve_by_committee > 0) 
+                     <a href="{{route('pending_quotations.show',[$pending_quotations->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
+                     @else
+                     <a href="{{route('pending_quotations.show',[$pending_quotations->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle" aria-hidden="true" style="color:white"></i> Approve</a>
+                     @endif
+                 </td>
             </tr>
             @endforeach
           </tbody>

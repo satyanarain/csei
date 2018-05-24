@@ -78,36 +78,20 @@
                     {{$requests->amount}}  
                 </div>
             </div>
-
-<!--            <div   class="formmain" onclick="showHide(this.id)" id="bank1">
-                <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; Item Details
-            </div>-->
-            {!!Form::open(['route'=>'pending_quotations.store', 'id'=>'formValidate', 
+             {!!Form::open(['route'=>'pending_quotations.store', 'id'=>'formValidate', 
             'onsubmit'=>'return validatePan()',
             'autocomplete'=>'off',
             'class'=>'formValidate', 'files'=>true])!!}
-
-             <div class="form-group row">
+          <div class="form-group row">
                 <label class="col-lg-4 col-form-label" for="val-username"><b>Item Details</b></label>
                 <div class="col-lg-6">
-                
                 </div>
             </div>
-<!--            <div class="row1"  id="formbank1" >-->
-              <table class="table table-bordered table-striped table-hover bank_table">
-                   
-                    @foreach($pending_quotations as $vendor_value)
-                    <tr class="vendor_bg" style=" background-color:#f2f4f7"><th>Vendor Name</th>
-                        <th>{{$vendor_value->name}}</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                          @if($already_approverd==0) 
-                        <th></th>
- @endif
-                    </tr>
+     <table class="table table-bordered table-striped table-hover bank_table">
+                     @foreach($pending_quotations as $vendor_value)
+                    <tr class="vendor_bg" style=" background-color:#f2f4f7"><th class="8"  @if($already_approverd==0) 
+                       @endif>Vendor Name  {{$vendor_value->name}}</th>
+                      </tr>
                    <tr>
                         <th  class="table-row-heading">S No</th>
                         <th  class="table-row-heading">Product Name</th>
@@ -118,7 +102,7 @@
                         <th  class="table-row-heading">Vendor Remark</th>
                          @if($already_approverd==0) 
                         <th  class="table-row-heading">Approval</th>
- @endif
+                        @endif
                     </tr>
                     <?php
                     $vendor_quotation_list_all = DB::table('vendor_quotation_lists')->select('*')
@@ -146,13 +130,12 @@
                         
                         </th>
                          @if($already_approverd==0) 
-                        <th><span class="test"><input type="checkbox" class="form-control change_value_click" size="7" name="no_value[]"  readonly="readonly"  value="1" onclick="changeVlude(this.value)">
+                        <th><span class="test">
+                                <input type="checkbox" class="form-control change_value_click" size="7" name="no_value[]"  readonly="readonly"  value="1" onclick="changeVlude(this.value)">
                               <input type="hidden" class="form-control change_value" size="7" name="quotation_approval_id[]"  readonly="readonly"  value="0"> 
                             </span>
-                            
-                        </th>
-                        
-                        @endif
+                         </th>
+                         @endif
                     </tr>
                     @endforeach
                     <tr><th colspan="8"><div class="btn btn-primary" onclick="allComments({{$requests->id}},{{$vendor_value->vendor_id}})">All Comments</div></th></tr>
@@ -163,13 +146,11 @@
                     </tr>
                     <tr>
                         <td align="left" valign="top" colspan="6" style="text-align:left;">
-                            @if($already_approverd==0) 
-                             <button class="btn btn-primary submit" type="submit" name="action" onclick="ChechOne()"><i class="fa fa-paper-plane"></i> Approve</button></td>
+                              @if($already_approverd==0) 
+                             <button class="btn btn-primary submit" type="submit" name="action" onclick="ChechOne()"><i class="fa fa-check-circle" aria-hidden="true" style="color:white"></i> Approve</button></td>
                        @endif
                     </tr>
                 </table> 
-
-<!--            </div>-->
             {!!Form::close()!!}        
               </div>
   <div class="modal fade" id="view_detail" role="dialog">
@@ -198,8 +179,7 @@
   });
   });
     
-    
-   function closePop(id)
+  function closePop(id)
    {
    
        $('#comment').hide();
@@ -215,7 +195,7 @@ $("form").submit(function(){
     });
 });
     
-       function allComments(request_id,vendor_id)
+ function allComments(request_id,vendor_id)
    {
     var urldata=   '/pending_quotations/comments/' + request_id;
     $.ajax({

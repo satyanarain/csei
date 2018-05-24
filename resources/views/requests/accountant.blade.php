@@ -7,7 +7,7 @@
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Approved Request List</li>
+        <li class="breadcrumb-item active">All Approved Request</li>
       </ol>
     </div>
   </div>
@@ -74,7 +74,7 @@
   if($material_details==0) 
   {
 ?>
-<a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-search" aria-hidden="true"></i> View</a>
+<a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search" aria-hidden="true"></i> View</a>
   <?php } else { ?>
 <a href="{{route('requests.show', [$request->id,'accountants'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Quotation</a>
  <?php } ?>

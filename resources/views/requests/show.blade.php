@@ -250,7 +250,21 @@ function printDiv(divName) {
 </script>
 
 <script>
-    function verifyRequest(id, user_id)
+function checkValue()
+{
+ var expected_amont=$("#expected_amont").html(); 
+ alert(expected_amont);
+ var release_voucher_amount=$("#release_voucher_amount").val(); 
+
+ 
+  if(release_voucher_amount > expected_amont)
+  {
+     alert("Please fill release amount is less than requested amount");
+     return false;
+      
+  }
+}
+ function verifyRequest(id, user_id)
             {
             var amount_issued = $("#amount_issued").val();
             var date_issued = $("#date_issued").val();

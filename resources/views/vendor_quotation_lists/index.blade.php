@@ -52,14 +52,14 @@
                  {{displayView($vendor_quotation_lists->purpose)}}
                  </td>
                 <td>
-                <?php //function alreadyComment($table = '', $request_id = '', $user_id = '',$f1='',$f2='') 
+                <?php 
                 $allready = alreadyComment('committee_member_comments', $vendor_quotation_lists->request_id, $user_id,'request_id','committee_member_id');
-                //echo $allready;
+                
                 ?>
                     @if($allready==0)
                     <a href="{{route('vendor_quotation_lists.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i>View</a>
                    @else
-                    <a href="{{route('vendor_quotation_lists.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i>Commented</a>
+                    <a href="{{route('vendor_quotation_lists.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-comment"></i> Commented</a>
                    @endif
               </td>
             </tr>

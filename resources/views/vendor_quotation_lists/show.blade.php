@@ -92,13 +92,9 @@
             
    <table class="table table-bordered table-striped table-hover bank_table">
                      @foreach($vendor_quotation_lists as $vendor_value)
-                    <tr style="background-color:#f2f4f7"><th>Vendor Name</th>
+                     <tr><th colspan="2" width="10%">Vendor Name</th>
                         <th>{{$vendor_value->name}}</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        
                      </tr>
                     
                       <tr>
@@ -133,6 +129,11 @@
 
                     </tr>
                     @endforeach
+                    
+                   <?php 
+                  $allready = alreadyComment('committee_member_comments', $requests->id,$user_id,'request_id','committee_member_id');
+                   ?>
+                     @if($allready==0)
                     <tr><th colspan="7" align="left" valign="top">
                             <table border="1" width="100%" style=" background-color:#fff;">
                                 <tr><td width="20%" style=" background-color:#fff;">Committee Member Remark :</td>
@@ -152,21 +153,20 @@
                             </table>
                         </th>
                     </tr>
-                      
+                     @endif 
                     @endforeach
                 </table>
+            @if($allready==0)
                 <table width="100%" cellspacing="4" cellpadding="4" border="0">
                     <tr><td align="right" valign="top" colspan="6" height="10"></td>
                     </tr>
                     <tr>
                         <td align="left" valign="top" colspan="6" style="text-align:left;">
-                           
-                         
                             <button type="reset" value="Reset" class="btn btn-primary submit">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Send For Approval</button></td>
                     </tr>
                 </table> 
-
+@endif
             {!!Form::close()!!}        
               </div>  
      </div>
