@@ -281,7 +281,7 @@ $segments_var = Request::segments();
                                   <li class="{{($active2 == 'requests' && $active == 'mainadmin_approval') ? 'active' : ''}}"><a href="{{route('mainadmin_approval.requests')}}"  class="{{($request_only_verifire == 'mainadmin_approval') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Main Admin Approval</a>
                                   </li>
                                   @endif
-                                  @if(Entrust::hasRole('administrator'))
+                                  @if(Entrust::hasRole('coordinator'))
                                   <li class="{{($active2 == 'requests' && $active == 'coordinator') ? 'active' : ''}}"><a href="{{route('coordinator.requests')}}"  class="{{($request_only_verifire == 'coordinator') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Coordinator Action</a>
                                   </li>
                                   @endif
