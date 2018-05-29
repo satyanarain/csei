@@ -174,15 +174,6 @@ use activityLog;
     
           /*******************************mail to verifier***********************************************************************/
          
-            $verifier_id_user= $request_data->verifire_id;
-            $verifier_user= User::whereId($verifier_id_user)->first();
-            $name= $verifier_user->name;
-              if($result==1)
-          {
-                   Mail::send( 'emails.cash.reject_mail_to_verifier',['rejector_name'=>$rejector_name,'request_no'=>$request_no,'name'=>$name,'amount'=>$amount,'comments'=>$comments], function ($m) use ($verifier_user) {
-                   $m->from('info@opiant.online', 'CSEI');
-                   $m->to($verifier_user->email, $verifier_user->name)->subject('CSEI | Request Rejection Mail'); });
-	  }
           
           return redirect()->route('approvers.requests'); 
         }
@@ -469,43 +460,7 @@ use activityLog;
           }
              return redirect()->route('approvers.requests'); 
          }
-          else if($request->rejected=='Rejected'){
-             /****************Reject section start here*******************************************************************************/
-         $id=  $request->id;
-         $comments=  $request->comments;
-         $user_id_login= Auth::user();
-         $rejector_name= $user_id_login->name;
-         $rejectore_id= $user_id_login->id;
-        
-         $requester_user_id=$request->user_id;
-         $request_data= CSEIRequest::whereId($id)->first();
-         $request_no=$request_data->request_no;
-         $amount= $request_data->amount;
-         $due_date  =$request_data->due_date;
-        
-        /************************************requester details**************************************************************/
-          $sql_requester_name= User::whereId($requester_user_id)->first();
-          $status = 7; //we assume status is true (1) at the begining;
-          $result= CSEIRequest::where('id', $id)->update(['status' =>$status,'rejectore_id'=>$rejectore_id,'comments'=>$comments]); 
-          /*******************************mail to requester when request reject at verification time***********************************************************************/
-            $name= $sql_requester_name->name;
-                      if($result==1)
-          {
-                   Mail::send( 'emails.service.request_reject_verification_time',['rejector_name'=>$rejector_name,'request_no'=>$request_no,'name'=>$name,'amount'=>$amount,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($sql_requester_name) {
-                   $m->from('info@opiant.online', 'CSEI');
-                   $m->to($sql_requester_name->email, $sql_requester_name->name)->subject('CSEI | Request Rejection Mail'); });
-          }
-	/*******************************mail to requester verifier***********************************************************************/
          
-           if($result==1)
-          {
-               Mail::send( 'emails.service.reject_mail_to_verifier',['name'=>$user_details->name,'amount'=>$amount,'request_no'=>$request_no], function ($m) use ($user_details) {
-                   $m->from('info@opiant.online', 'CSEI');
-                   $m->to($user_details->email, $user_details->name)->subject('CSEI | Request Rejection Mail'); });
-             }
-          
-                  return redirect()->route('verifiers.requests'); 
-           }
           else if($request->approverejected=='Rejected'){
              /****************Veri Fy Reject section start here*******************************************************************************/
          $id=  $request->id;
