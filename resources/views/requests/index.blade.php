@@ -55,11 +55,6 @@
                 @endif
                 <a href="{{route('requests.show',[$request->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
               
-                @if($request->document=='')
-                @if($request->status == 5)
-                <a href="{{route('requests.show', [$request->id,'submit_bill'])}}" class="btn btn-success m-b-10 m-l-5 pull-left"><i class="fa fa-money"></i> Submit Bill</a>
-                @endif
-                @endif
               </td>
             </tr>
             @endforeach

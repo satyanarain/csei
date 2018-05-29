@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-lg-4 col-form-label" for="val-username">Description of Use</label>
+                <label class="col-lg-4 col-form-label" for="val-username">TOR</label>
                 <div class="col-lg-6">
                     {{$requests->description_of_use}}  
                 </div>

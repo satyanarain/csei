@@ -14,10 +14,26 @@
         @elseif($view=='verifireactive')
         <h3 class="text-primary">Aproved Request Details</h3>
        
-        @elseif($view=='accountants')
-        <h3 class="text-primary">
-            @if($request==1 || $request==2)
+        @elseif($view=='finance_approval')
+           <h3 class="text-primary">
+            @if($requests->category_id==1 || $requests->category_id==2)
+           Request for Finance Approval
+            @else
            Request for Action Details
+            @endif
+        </h3>
+        @elseif($view=='mainadmin_approval')
+           <h3 class="text-primary">
+            @if($requests->category_id==1 || $requests->category_id==2)
+           Request for Main Admin Approval
+            @else
+           Request for Action Details
+            @endif
+        </h3>
+        @elseif($view=='coordinator')
+           <h3 class="text-primary">
+            @if($requests->category_id==1 || $requests->category_id==2)
+           Request for coordinator Action
             @else
            Request for Action Details
             @endif
@@ -75,7 +91,8 @@ if($requests->category_id==1)
     @include('requests.cash.cash_verifier')
      <?php } ?>
     <?php if($view=='verifireactive')
-    { ?>
+    { 
+      ?>
 	@include('requests.cash.cash_approver')
                                     
     <?php } ?>
@@ -83,7 +100,19 @@ if($requests->category_id==1)
     { ?>
 @include('requests.cash.cash_voucher')
     <?php } ?>
-    <?php if($view=='downloads')
+    <?php if($view=='finance_approval')
+    { ?>
+@include('requests.cash.cash_finance_approval')
+    <?php } ?>
+    <?php if($view=='mainadmin_approval')
+    { ?>
+@include('requests.cash.cash_mainadmin_approval')
+    <?php } ?>
+    <?php if($view=='coordinator')
+    { ?>
+@include('requests.cash.cash_coordinator_submission')
+    <?php } ?>
+<?php if($view=='downloads')
     { ?>
 @include('requests.cash.print_voucher')
      <?php } ?>
@@ -177,12 +206,9 @@ if($requests->category_id==3)
 
 <script>
 function printDiv(divName) {
-  
-    var printButton = document.getElementById("printableArea");
-    
+   var printButton = document.getElementById("printableArea");
      var printContents = document.getElementById(divName).innerHTML;
      var originalContents = document.body.innerHTML;
-
      document.body.innerHTML = printContents;
       printButton.style.visibility = 'hidden';
      window.print();
@@ -252,12 +278,9 @@ function printDiv(divName) {
 <script>
 function checkValue()
 {
- var expected_amont=$("#expected_amont").html(); 
- alert(expected_amont);
- var release_voucher_amount=$("#release_voucher_amount").val(); 
-
- 
-  if(release_voucher_amount > expected_amont)
+var expected_amont=$("#expected_amont").val(); 
+var release_voucher_amount=$("#release_voucher_amount").val(); 
+if(parseInt(release_voucher_amount) > parseInt(expected_amont))
   {
      alert("Please fill release amount is less than requested amount");
      return false;

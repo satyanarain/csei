@@ -45,14 +45,8 @@
         </div>        
     </div> 
 
-    <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="roles">Verifier (s) <span class="text-danger">*</span></label>
-        <div class="col-lg-6">
-          {!!Form::select('verifiers[]', $users, isset($user->verifiers)?$user->verifiers:null, ["class"=>"form-control", 'multiple'=>'multiple', 'id'=>'verifiers', 'required','style'=>'min-height:100px;'])!!}
-        </div>        
-    </div> 
    <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="roles">Approver (s) <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="roles">Verifier / Approver (s) <span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!!Form::select('approvers[]', $users, isset($user->approvers)?$user->approvers:null, ["class"=>"form-control", 'multiple'=>'multiple', 'required','style'=>'min-height:100px;'])!!}
         </div>        

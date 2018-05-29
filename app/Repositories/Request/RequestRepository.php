@@ -96,9 +96,9 @@ class RequestRepository implements RequestRepositoryContract
                 $verifire_name = $a_value->name;
                 $amount = $request->amount;
 
-                Mail::send('emails.cash.request_to_verifier', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
+                Mail::send('emails.cash.ve_r_to_approver', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
                     $m->from('info@opiant.online', 'CSEI');
-                    $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Verification');
+                    $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Approval');
                 });
             }
         }
@@ -122,9 +122,9 @@ class RequestRepository implements RequestRepositoryContract
                 $verifire_name = $a_value->name;
                 $amount = $request->amount;
 
-                Mail::send('emails.material.request_to_verifier', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
+                Mail::send('emails.material.ve_r_to_approver', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
                     $m->from('info@opiant.online', 'CSEI');
-                    $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Verification');
+                    $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Approval');
                 });
             }
         }
@@ -150,9 +150,9 @@ class RequestRepository implements RequestRepositoryContract
                 $verifire_name = $a_value->name;
                 $amount = $request->amount;
 
-                Mail::send('emails.service.request_to_verifier', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
+                Mail::send('emails.service.ve_r_to_approver', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
                     $m->from('info@opiant.online', 'CSEI');
-                    $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Verification');
+                    $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Approval');
                 });
             }
         }

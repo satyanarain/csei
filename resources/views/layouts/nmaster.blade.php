@@ -235,9 +235,7 @@ $segments_var = Request::segments();
 
                               </ul>
                           </li>
-                          @endif
-
-                          @if(Entrust::hasRole('administrator'))
+                         
                           <li class="{{$active == 'vendors' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Vendors</span></a>
                               <ul aria-expanded="false" class="collapse">
                                   <li class="{{($active2 == 'create' && $active == 'vendors') ? 'active' : ''}}"><a href="{{route('vendors.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Vendor</a></li>
@@ -246,7 +244,7 @@ $segments_var = Request::segments();
 
                               </ul>
                           </li>
-                          @endif
+                   
                           <li class="{{$active == 'teams' ? 'teams' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Team</span></a>
                               <ul aria-expanded="false" class="collapse">
                                   <li class="{{($active2 == 'create' && $active == 'teams') ? 'active' : ''}}"><a href="{{route('teams.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Team</a></li>
@@ -262,6 +260,7 @@ $segments_var = Request::segments();
                                   <li class="{{($active2 == '' && $active == 'purchase_committees') ? 'active' : ''}}"><a href="{{route('purchase_committees.index')}}"><i class="fa fa-users"></i> All Purchase Committee</a></li>
                                </ul>
                           </li>
+                                 @endif
                            <li class="{{$active == 'requests' ? 'active' : ''}}">
                                <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Requests</span>
                                </a>
@@ -272,10 +271,18 @@ $segments_var = Request::segments();
                                   $request_only_verifire = Request::fullUrl();
                                   $request_only_verifire = end(explode('?', $request_only_verifire));
                                   ?> 
-                                  <li class="{{($active2 == 'requests' && $active == 'verifiers') ? 'active' : ''}}"><a href="{{route('verifiers.requests')}}" class="{{($request_only_verifire == 'requested_requests') ? 'active' : ''}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i> Pending Verification</a></li>
-                                  <li class="{{($active2 == 'requests' && $active == 'approvers') ? 'active' : ''}}"><a href="{{route('approvers.requests')}}" class="{{($request_only_verifire == 'verifireactive') ? 'active' : ''}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i> Pending Approval</a></li>
+                                   <li class="{{($active2 == 'requests' && $active == 'approvers') ? 'active' : ''}}"><a href="{{route('approvers.requests')}}" class="{{($request_only_verifire == 'verifireactive') ? 'active' : ''}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i> Pending Approval</a></li>
+                                  @if(Entrust::hasRole('Finance Head'))
+                                  <li class="{{($active2 == 'requests' && $active == 'finance_approval') ? 'active' : ''}}"><a href="{{route('finance_approval.requests')}}"  class="{{($request_only_verifire == 'finance_approval') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Finance Clearance</a>
+                                  </li>
+                                  @endif
+                                  
                                   @if(Entrust::hasRole('administrator'))
-                                  <li class="{{($active2 == 'requests' && $active == 'accountants') ? 'active' : ''}}"><a href="{{route('accountants.requests')}}"  class="{{($request_only_verifire == 'accountants') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Pending Action</a>
+                                  <li class="{{($active2 == 'requests' && $active == 'mainadmin_approval') ? 'active' : ''}}"><a href="{{route('mainadmin_approval.requests')}}"  class="{{($request_only_verifire == 'mainadmin_approval') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Main Admin Approval</a>
+                                  </li>
+                                  @endif
+                                  @if(Entrust::hasRole('administrator'))
+                                  <li class="{{($active2 == 'requests' && $active == 'coordinator') ? 'active' : ''}}"><a href="{{route('coordinator.requests')}}"  class="{{($request_only_verifire == 'coordinator') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Coordinator Action</a>
                                   </li>
                                   @endif
                                   </ul>

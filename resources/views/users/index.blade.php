@@ -34,8 +34,8 @@
                  <th width="10%">Name</th>
                  <th width="10%">Email</th>
                  <th width="10%" class="no-sort">Designation</th>
-                 <th width="10%" class="no-sort">Verifier (s)</th>
-                 <th width="20%" class="no-sort">Approver (s)</th>
+              
+                 <th width="30%" class="no-sort">Verifier/Approver (s)</th>
                  <th width="10%">Status</th>
                  <th width="30%" class="no-sort">Action</th>
                </tr>
@@ -54,16 +54,7 @@
                 @endif
                 @endforeach
               </td>
-              <td>
-                @foreach($user->verifiers as $index=>$verifier)
-                @if($index == 0)
-                {{$verifier->name}}
-                @else                
-                {{', '.$verifier->name}}
-                @endif
-                @endforeach
-              </td>
-              <td>
+             <td>
                 @foreach($user->approvers as $index=>$approver)
                 @if($index == 0)
                 {{$approver->name}}

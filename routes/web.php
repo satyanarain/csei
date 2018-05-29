@@ -51,13 +51,16 @@ Route::group(['middleware'=>'auth'], function(){
 	*/
         
         Route::resource('requests', 'RequestsController');
-        Route::post('verifiers/requests/{id}/reject', 'RequestsController@rejectRequest')->name('verifiers.requests.reject');
-	Route::post('verifiers/requests/{id}/verify', 'RequestsController@verifyRequest')->name('verifiers.requests.verify');
+//        Route::post('verifiers/requests/{id}/reject', 'RequestsController@rejectRequest')->name('verifiers.requests.reject');
+//	Route::post('verifiers/requests/{id}/verify', 'RequestsController@verifyRequest')->name('verifiers.requests.verify');
         Route::get('verifiers/requests', 'RequestsController@requestsToVerify')->name('verifiers.requests');
 	Route::get('approvers/requests', 'RequestsController@requestsToApprove')->name('approvers.requests');
-	Route::get('accountants/requests', 'RequestsController@requestsApproved')->name('accountants.requests');
-	Route::post('requests/verify_request', 'RequestsController@verifyRequestUpdateStatus');
-	Route::post('requests/verify_request', 'RequestsController@verifyRequestUpdateStatus');
+	Route::get('finance_approval/requests', 'RequestsController@financeApproval')->name('finance_approval.requests');
+	Route::get('mainadmin_approval/requests', 'RequestsController@mainadminApproval')->name('mainadmin_approval.requests');
+	Route::get('coordinator/requests', 'RequestsController@coordinatorSubmission')->name('coordinator.requests');
+        
+//	Route::post('requests/verify_request', 'RequestsController@verifyRequestUpdateStatus');
+//	Route::post('requests/verify_request', 'RequestsController@verifyRequestUpdateStatus');
         Route::get('/requests/{id}/save_voucher', 'RequestsController@saveVoucher');
        
         //requests.test
@@ -84,11 +87,9 @@ Route::group(['middleware'=>'auth'], function(){
         /*************************Create by satya date 15-05-2018*******************************************************/
         Route::resource('quotation_reviews', 'QuotationReviewsController');
         /************************************************************************/
-       
-         /************************************************************************/
+        /************************************************************************/
         Route::resource('purchases', 'PurchasesController');
-        
-         /*
+        /*
 	|--------------------------------------------------------------------
 	|Requests Verifier
 	|--------------------------------------------------------------------

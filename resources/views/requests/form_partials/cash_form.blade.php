@@ -50,7 +50,7 @@
      </div>
 </div>
  <div class="form-group row">
-    <label class="col-lg-4 col-form-label" for="amount">Description of Use<span class="text-danger">*</span></label>
+    <label class="col-lg-4 col-form-label" for="amount" class="text-danger">TOR <span class="text-danger">*</span></label>
     <div class="col-lg-6">
           @if($request->category_id==1)
          {!!Form::textarea('description_of_use',$request->description_of_use,["class"=>"form-control",'required','rows'=>'4'])!!}
