@@ -217,22 +217,19 @@ function printDiv(divName) {
 }
  function loadAdd()
     {
-        
-      var  name_of_project    =   $("#name_of_project").val();
-      var  project_expense_head  =  $("#project_expense_head").val();
-       
-    if(name_of_project=='')
+  var  comments    =   $("#comments").val();
+     if(comments=='')
     {
-       alert("please enter name of project")     
-        return false;
-   
-    }else if(project_expense_head=='')
-    {
-   alert("please enter project expense head")     
+   alert("please enter comments")     
         return false;
     }else {
        $(".loder_id").show();  
     }
+}
+ function loadAddApprove()
+    {
+ $(".loder_id").show();  
+ 
 }
     function loadAddQuotation()
     {

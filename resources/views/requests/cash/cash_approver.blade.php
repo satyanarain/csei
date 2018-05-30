@@ -51,13 +51,13 @@
                               </div>
                                    @if($requests->category_id==1)
                             <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="due_date">Name Of Project<span class="text-danger">*</span></label>
+                                        <label class="col-lg-4 col-form-label" for="due_date">Name Of Project</label>
                                         <div class="col-lg-6">
                                             <input type="text" name="name_of_project" id="name_of_project"  class="form-control"  value="{{$requests->name_of_project}}" >
                                         </div>
                             </div>
                             <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head<span class="text-danger">*</span></label>
+                                        <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head</label>
                                         <div class="col-lg-6">
                                              <input type="text" name="project_expense_head" id='project_expense_head' class="form-control" value="{{$requests->project_expense_head}}" >
                                         </div>
@@ -80,7 +80,7 @@
                                              <input  type="hidden"  name="id" value="{{$requests->id}}">
                                              <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
                                               <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
-                                            <button class="btn btn-primary submit pull-left" type="submit" name="approve"  value="Approve"  onclick="return loadAdd()"><i class="fa fa-check-circle"></i> Approve</button>&nbsp;&nbsp;
+                                            <button class="btn btn-primary submit pull-left" type="submit" name="approve"  value="Approve"  onclick="return loadAddApprove()"><i class="fa fa-check-circle"></i> Approve</button>&nbsp;&nbsp;
                                             <button class="btn btn-danger submit pull-right" type="submit" name="approverejected" value="Rejected" onclick="return loadAdd()"><i class="fa fa-times-circle" aria-hidden="true"></i>
                                                 Constraints</button>                                            
                                         </div>

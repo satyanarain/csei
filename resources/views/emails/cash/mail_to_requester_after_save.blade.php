@@ -28,11 +28,11 @@
                                                     Payment Type
                                                  </td>
                                                  <td style="padding:0px 0px 0px 10px; text-align:left;color:#2f3133;" align="left" valign="top" width="85%">
-                                                 <?php if($sql_vou==1)
+                                                 <?php if($sql_vou->payment_type==1)
                                                  {
-                                                  echo "Bank";
+                                                  echo "Cash";
                                                  }else {
-                                                  echo "Cash"; 
+                                                  echo "Bank"; 
                                                  } ?>
                                                 </td>
                                                 </tr>

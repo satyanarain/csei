@@ -241,12 +241,17 @@ use activityLog;
 
                 $input = $request->all();
                 $input['request_id'] = $id;
+                $input['date_of_release'] = $this->insertDate($request_data->request_no);
+                // $date_issued=$this->insertDate($request->date_issued);
                 $input['voucher_creater_id'] = Auth::id();
                 Voucher::create($input);
                 $request_data = CSEIRequest::whereId($id)->first();
                 $request_no = $request_data->request_no;
                 $amount = $request_data->amount;
                 $due_date = $request_data->due_date;
+              //  
+                
+                
                 $sql_requester = DB::table('requests')->select('*')->leftjoin('users', 'users.id', 'requests.user_id')->where('requests.id', $id)->first();
                 /*                 * **********************************************mail to who will save voucher********************************************************** */
                 $associates = DB::table('users')->select('*')->where('id', 1)->first();
