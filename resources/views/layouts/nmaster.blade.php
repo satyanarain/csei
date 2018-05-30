@@ -289,14 +289,14 @@ $segments_var = Request::segments();
                           </li>
                            
                            @if(Entrust::hasRole('administrator'))
-                           <li class="{{$active == 'quotation_reviews' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Quotation for Review</span></a>
+<!--                           <li class="{{$active == 'quotation_reviews' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Quotation for Review</span></a>
                               <ul aria-expanded="false" class="collapse">
                                 <li class="{{($active2 == '' && $active == 'quotation_reviews') ? 'active' : ''}}"><a href="{{route('quotation_reviews.index')}}"><i class="fa fa-users"></i> All Quotation for Review</a></li>
                              </ul>
-                          </li>
+                          </li>-->
                           @endif
                           
-                            <li class="{{$active == 'vendor_quotation_lists' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Comparison Sheet</span></a>
+<!--                            <li class="{{$active == 'vendor_quotation_lists' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Comparison Sheet</span></a>
                               <ul aria-expanded="false" class="collapse">
                                 <li class="{{($active2 == '' && $active == 'vendor_quotation_lists') ? 'active' : ''}}"><a href="{{route('vendor_quotation_lists.index')}}"><i class="fa fa-users"></i> All Vendor Quotations</a></li>
                              </ul>
@@ -308,7 +308,7 @@ $segments_var = Request::segments();
                               <ul aria-expanded="false" class="collapse">
                                 <li class="{{($active2 == '' && $active == 'pending_quotations') ? 'active' : ''}}"><a href="{{route('pending_quotations.index')}}"><i class="fa fa-users"></i> All Pending Quotation</a></li>
                              </ul>
-                          </li>
+                          </li>-->
                           
 
                           @if(Entrust::hasRole('administrator'))
