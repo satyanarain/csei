@@ -12,11 +12,11 @@
                     <tbody><tr>
                             <td class="m_3012731993381030246content-cell" style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;padding:35px"><span class="im">
                                     <h1 style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#2f3133;font-size:19px;font-weight:bold;margin-top:0;text-align:left">Dear {{$name}},</h1>
-                                    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">A request number {{$request_no}} for Rs. {{$amount}} has been approved by {{$financer_name}}. Please <a href="{{route('mainadmin_approval.requests')}}">click here</a> to take appropriate action.</p>
+                                    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">Your request number {{$request_no}} for Rs. {{$amount}} has been {{$verified_approved}} successfully.</p>
                                 </span><p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">Thanks,<br>
-                                  CSEI Team
-                                </p>
-                             </td>
+                                    CSEI Team</p>
+
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -33,3 +33,6 @@
         </tr>
     </tbody>
 </table>
+
+
+

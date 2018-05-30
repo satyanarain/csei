@@ -85,18 +85,20 @@ class RequestRepository implements RequestRepositoryContract
         }
         }
     
-         $sql_verifiers = User::where('id', $input['user_id'])->first();
-        $verifier = User::whereIn('id', explode(',', $sql_verifiers->verifiers))->get();
+        $sql_approver = User::where('id', $input['user_id'])->first();
+        $approver = User::whereIn('id', explode(',', $sql_approver->approvers))->get();
+        
+        
+        
      
 /***********************************Email for cash***********************************************************************************/
         if($request->category_id==1)
         {
         if ($request_id != '') {
-            foreach ($verifier as $a_value) {
+            foreach ($approver as $a_value) {
                 $verifire_name = $a_value->name;
                 $amount = $request->amount;
-
-                Mail::send('emails.cash.ve_r_to_approver', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
+                  Mail::send('emails.cash.ve_r_to_approver', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
                     $m->from('info@opiant.online', 'CSEI');
                     $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Approval');
                 });

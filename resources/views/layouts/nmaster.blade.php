@@ -271,9 +271,9 @@ $segments_var = Request::segments();
                                   $request_only_verifire = Request::fullUrl();
                                   $request_only_verifire = end(explode('?', $request_only_verifire));
                                   ?> 
+                                   @if(Entrust::hasRole('Finance Head'))
                                    <li class="{{($active2 == 'requests' && $active == 'approvers') ? 'active' : ''}}"><a href="{{route('approvers.requests')}}" class="{{($request_only_verifire == 'verifireactive') ? 'active' : ''}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i> Pending Approval</a></li>
-                                  @if(Entrust::hasRole('Finance Head'))
-                                  <li class="{{($active2 == 'requests' && $active == 'finance_approval') ? 'active' : ''}}"><a href="{{route('finance_approval.requests')}}"  class="{{($request_only_verifire == 'finance_approval') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Finance Clearance</a>
+                                   <li class="{{($active2 == 'requests' && $active == 'finance_approval') ? 'active' : ''}}"><a href="{{route('finance_approval.requests')}}"  class="{{($request_only_verifire == 'finance_approval') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Finance Clearance</a>
                                   </li>
                                   @endif
                                   
