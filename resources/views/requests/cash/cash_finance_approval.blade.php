@@ -51,15 +51,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="due_date">Name Of Project<span class="text-danger">*</span></label>
+                                        <label class="col-lg-4 col-form-label" for="due_date">Name Of Project</label>
                                         <div class="col-lg-6">
-                                  {{$requests->name_of_project}}
+                                  {{displayView($requests->name_of_project)}}
                                         </div>
                             </div>
                             <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head<span class="text-danger">*</span></label>
+                                        <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head</label>
                                         <div class="col-lg-6">
-                                           {{$requests->project_expense_head}}
+                                           {{displayView($requests->project_expense_head)}}
                                         </div>
                                     </div>
                           <div class="form-group row">
@@ -72,7 +72,11 @@
                                              <input  type="hidden"  name="id" value="{{$requests->id}}">
                                               <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
                                              <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
-                                            <button class="btn btn-primary submit" type="submit" name="finance"  value="finance" ><i class="fa fa-check-circle"></i> Approve</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button class="btn btn-primary submit" type="submit" name="finance"  value="finance" ><i class="fa fa-check-circle"></i> Approve</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                             <button class="btn btn-danger submit pull-right" type="submit" name="approverejected" value="Rejected" onclick="return loadAdd()"><i class="fa fa-times-circle" aria-hidden="true"></i>
+                                                Constraints
+                                             </button> 
+                                            
                                        </div>
                            </div>
                 </div>

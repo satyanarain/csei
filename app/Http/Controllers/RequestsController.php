@@ -157,13 +157,12 @@ use activityLog;
                    $m->from('info@opiant.online', 'CSEI');
                    $m->to($sql_requester_name->email, $sql_requester_name->name)->subject('CSEI | Request Rejection Mail'); });
           }
-          /*******************************mail to approver***********************************************************************/
-          $name= $sql_requester_name->name;
-                                if($result==1)
+          /*******************************mail to approver/financer***********************************************************************/
+         if($result==1)
           {
-                   Mail::send( 'emails.cash.reject_mail_to_approver',['rejector_name'=>$rejector_name,'name'=>$name,'amount'=>$amount,'request_no'=>$request_no,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($sql_requester_name) {
+                   Mail::send( 'emails.cash.reject_mail_to_approver',['name'=>$user_details->name,'amount'=>$amount,'request_no'=>$request_no,'comments'=>$comments], function ($m) use ($user_details) {
                    $m->from('info@opiant.online', 'CSEI');
-                   $m->to($sql_requester_name->email, $sql_requester_name->name)->subject('CSEI | Request Rejection Mail'); });
+                   $m->to($user_details->email, $user_details->name)->subject('CSEI | Request Rejection Mail'); });
 	  }
          /*******************************mail to verifier***********************************************************************/
            return redirect()->route('approvers.requests'); 
