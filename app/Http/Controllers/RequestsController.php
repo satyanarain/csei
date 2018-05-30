@@ -171,7 +171,7 @@ use activityLog;
         /************************request voucher saved*********************************************************/
         else if($request->finance=='finance')
         {
-            $status = 3;
+                $status = 3;
                 $financer_id = Auth::id();
                 $id = $request->id;
                 $result = CSEIRequest::where('id', $id)->update(['status' => $status]);
@@ -185,7 +185,7 @@ use activityLog;
 
                     Mail::send('emails.cash.main_admin_for_approval', ['name' => $admin->name, 'request_no' => $request_no, 'logged_user' => $logged_user, 'amount' => $amount,], function ($m) use ($admin) {
                         $m->from('info@opiant.online', 'CSEI');
-                        $m->to($admin->email, $admin->name)->subject('CSEI | Request for Approval');
+                        $m->to($admin->email, $admin->name)->subject('CSEI | Request for Admin Approval');
                     });
                 }
                 return redirect()->route('finance_approval.requests'); 

@@ -1,5 +1,6 @@
-Name :Apurv
+
 Desidnation : coordinator
+Name :Apurv
 email : apurv_sharma@opiant.in 
 password : 123123
     
@@ -9,7 +10,8 @@ password : 123123
  password : 123123  
  
 
- Designation : Main Admin  
+ Designation : Main Admin 
+Name : Administrator (CSEI) 
  email : satyamcavns@gmail.com 
  password : 123  
  

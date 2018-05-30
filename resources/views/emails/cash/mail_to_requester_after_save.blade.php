@@ -15,6 +15,57 @@
 <!--                                    <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">A request for Rs. {{$amount}} has been created. Please review and Verify.</p>-->
                                 <p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">
                                    You have been issued Rs. {{$amount}} against your request number {{$request_no}} has been completed .</p>
+                                 <p>DETAILS</p>
+                                    <p>
+                                     <table align="left" valign="top" border="0" style="border:1px solid #dee2e6;">
+                                     <?php  
+                                     
+                                     $sql = DB::table('requests')->select('*')->where('request_no',$request_no)->first();
+                                     
+                                    $id=$sql->id;
+                                     
+                                     $sql_vou = DB::table('vouchers')->select('*')->where('request_id',$id)->first();
+                                     
+                                     
+                                     ?>
+                                                       
+                                           <tr style="border-bottom-width: 1px; padding-top: 3px;padding-bottom: 3px;  height:40px;border: 1px solid #dee2e6; background-color:#e9ecef;">
+                                                <td style="padding:0px 0px 0px 10px;" align="left" valign="top">
+                                                    Payment Type
+                                                 </td>
+                                                 <td style="padding:0px 0px 0px 10px;" align="left" valign="top">
+                                                 <?php if($sql_vou==1)
+                                                 {
+                                                  echo "Bank";
+                                                 }else {
+                                                  echo "Cash"; 
+                                                 } ?>
+                                                </td>
+                                                </tr>
+                                           <tr style="border-bottom-width: 1px; padding-top: 3px;padding-bottom: 3px;  height:40px;border: 1px solid #dee2e6; background-color:#e9ecef;">
+                                                <td style="padding:0px 0px 0px 10px;" align="left" valign="top">
+                                                   Amount Requested
+                                                 </td>
+                                                 <td style="padding:0px 0px 0px 10px;" align="left" valign="top">
+                                                 {{$sql->amount}}
+                                                </td>
+                                                </tr>
+                                           <tr style="border-bottom-width: 1px; padding-top: 3px;padding-bottom: 3px;  height:40px;border: 1px solid #dee2e6; background-color:#e9ecef;">
+                                                <td style="padding:0px 0px 0px 10px;" align="left" valign="top">
+                                                   Release Amount
+                                                 </td>
+                                                 <td style="padding:0px 0px 0px 10px;" align="left" valign="top">
+                                                 {{$sql_vou->release_voucher_amount}}
+                                                </td>
+                                                </tr>
+                                            
+                                               </table>
+                                    </p>
+                                    <br> 
+                                    <br> 
+                                
+                                
+                                
                                 </span><p style="font-family:Avenir,Helvetica,sans-serif;box-sizing:border-box;color:#74787e;font-size:16px;line-height:1.5em;margin-top:0;text-align:left">Thanks,<br>
                                     CSEI Team</p>
                               </td>
