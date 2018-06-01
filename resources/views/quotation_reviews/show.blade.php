@@ -11,7 +11,7 @@ $request_only_view = Request::fullUrl();
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{route('quotation_reviews.index')}}">All Quotation for Review</a></li>
+            <li class="breadcrumb-item"><a href="{{route('call_for_tender.index')}}">All Quotation for Review</a></li>
             <li class="breadcrumb-item active">Quotation Details</li>
         </ol>
     </div>
@@ -81,7 +81,7 @@ $request_only_view = Request::fullUrl();
                     {{$requests->amount}}  
                 </div>
             </div>
-            {!!Form::open(['route'=>'quotation_reviews.store', 'id'=>'formValidate', 
+            {!!Form::open(['route'=>'call_for_tender.store', 'id'=>'formValidate', 
             'onsubmit'=>'return validatePan()',
             'autocomplete'=>'off',
             'class'=>'formValidate', 'files'=>true])!!}

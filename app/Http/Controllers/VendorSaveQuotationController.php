@@ -47,14 +47,15 @@ class VendorSaveQuotationController extends Controller
         
         $sql = DB::table('quotation_details')->select('*')->where([['material_id', $material_id], ['request_id', $request_id]])->first();
         $qoutation_created_date = $sql->created_at;
-        $no_of_days = $sql->no_of_days;
+        $vendor_response_date = $sql->vendor_response_date;
 
         $curdate = date('Y-m-d H:i:s');
-        $date1 = new DateTime(date('Y-m-d', strtotime($sql->created_at)));
+        
+        $date1 = new DateTime(date('Y-m-d', strtotime($vendor_response_date)));
+        
         $date2 = new DateTime(date('Y-m-d', strtotime($curdate)));
         $expecteddate = $date1->diff($date2)->days; // 0
-        
-                if($no_of_days != '')
+           if($no_of_days != '')
                 {
                 if ($expecteddate > $no_of_days) {
                 return view('quotations.expire', compact('quotations', 'vendor_id', 'request_id'));

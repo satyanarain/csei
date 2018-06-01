@@ -7,7 +7,7 @@
 <div class="card">
     <div class="card-body">
         <div class="form-validation">
-            <h4 class="header2">Requisition Details</h4>
+    
              <div class="form-group row">
                 <label class="col-lg-4 col-form-label" for="val-username">Request No.</label>
                 <div class="col-lg-6">

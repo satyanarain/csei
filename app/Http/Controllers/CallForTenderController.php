@@ -16,7 +16,7 @@ use App\Repositories\Vendor\VendorRepositoryContract;
 use Session;
 use DB;
 use Mail;
-class QuotationReviewsController extends Controller
+class CallForTenderController extends Controller
 {
     protected $vendor_quotation_lists;
 

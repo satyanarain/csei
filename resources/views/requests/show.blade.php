@@ -112,24 +112,17 @@ if($requests->category_id==1)
     { ?>
 @include('requests.cash.cash_coordinator_submission')
     <?php } ?>
-<?php if($view=='downloads')
-    { ?>
-@include('requests.cash.print_voucher')
-     <?php } ?>
+
     <?php if($view=='complete_view')
     { ?>
     @include('requests.cash.voucher_details')
      <?php } ?>
-    <?php if($view=='submit_bill')
-    { ?>
-    @include('requests.cash.bills')
-     <?php } ?>
+ 
     <?php } ?>
     <?php
 if($requests->category_id==2)
     {
-    
-    if($view=='view')
+     if($view=='view')
     { ?>
 	@include('requests.material.material_view')
     <?php } ?> 
@@ -143,22 +136,28 @@ if($requests->category_id==2)
     { ?>
 	@include('requests.material.material_approver')
       <?php } ?>
-    <?php if($view=='accountants')
+         <?php if($view=='finance_approval')
     { ?>
-@include('requests.material.material_quotation')
+       @include('requests.material.material_finance_approval')
     <?php } ?>
-    <?php if($view=='downloads')
+        <?php if($view=='mainadmin_approval')
     { ?>
-@include('requests.material.print_voucher')
-     <?php } ?>
+@include('requests.material.material_mainadmin_approval')
+    <?php } ?>
+    <?php if($view=='coordinator')
+    { ?>
+@include('requests.material.material_coordinator_submission')
+    <?php } ?>
+    <?php if($view=='call_for_tender_list')
+    { ?>
+@include('requests.material.call_for_tender_form')
+    <?php } ?>
+  
     <?php if($view=='complete_view')
     { ?>
     @include('requests.material.material_view_details')
      <?php } ?>
-    <?php if($view=='submit_bill')
-    { ?>
-    @include('requests.material.bills')
-     <?php } ?>
+  
     <?php } ?>
     <?php
 if($requests->category_id==3)
@@ -220,7 +219,7 @@ function printDiv(divName) {
   var  comments    =   $("#comments").val();
      if(comments=='')
     {
-   alert("please enter comments")     
+   alert("Please enter comment.")     
         return false;
     }else {
        $(".loder_id").show();  
@@ -235,20 +234,15 @@ function printDiv(divName) {
     {
         
       var  no_of_days    =   $("#no_of_day_all").val();
-   //   alert(no_of_days);
       var  vendor  =  $("#vendor").val();
-      
-      
-      
-  
-    if(vendor=='')
+      if(vendor=='')
     {
-       alert("please select at least one vendor")     
+       alert("Please select at least one vendor.")     
         return false;
    
     }else if(no_of_days=='')
     { 
-  alert("please enter select no of days")     
+  alert("Please enter select no of days.")     
         return false;
     }else {
        $(".loder_id").show();  

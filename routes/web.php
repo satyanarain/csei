@@ -83,9 +83,10 @@ Route::group(['middleware'=>'auth'], function(){
         Route::resource('vendor_quotation_lists', 'VendorQuotationCompareListsController');
          Route::get('pending_quotations/comments/{id}', 'PendingQuotationController@Comment');
         Route::resource('pending_quotations', 'PendingQuotationController');
+        Route::get('call_for_tender/requests', 'RequestsController@callForTender')->name('call_for_tender_list.requests');
         
         /*************************Create by satya date 15-05-2018*******************************************************/
-        Route::resource('quotation_reviews', 'QuotationReviewsController');
+        Route::resource('call_for_tender', 'CallForTenderController');
         /************************************************************************/
         /************************************************************************/
         Route::resource('purchases', 'PurchasesController');

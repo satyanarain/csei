@@ -48,6 +48,7 @@ class RequestRepository implements RequestRepositoryContract
 //       exit();
 
         $requester= Auth::user();
+        $logged_user= $requester->name;
         $request_no= $this->requestNo1($result);
         if($request->category_id==1)
         {
@@ -96,9 +97,9 @@ class RequestRepository implements RequestRepositoryContract
         {
         if ($request_id != '') {
             foreach ($approver as $a_value) {
-                $verifire_name = $a_value->name;
+                $name = $a_value->name;
                 $amount = $request->amount;
-                  Mail::send('emails.cash.ve_r_to_approver', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
+                  Mail::send('emails.cash.ve_r_to_approver', ['name' => $name,'amount' => $amount,'request_no'=>$request_no,'logged_user'=>$logged_user], function ($m) use ($a_value) {
                     $m->from('info@opiant.online', 'CSEI');
                     $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Approval');
                 });
@@ -117,14 +118,13 @@ class RequestRepository implements RequestRepositoryContract
         }
     /***********************************Email for material***********************************************************************************/   
         /***********************************Email for material***********************************************************************************/
-        if($request->category_id==2)
+         if($request->category_id==2)
         {
         if ($request_id != '') {
-            foreach ($verifier as $a_value) {
-                $verifire_name = $a_value->name;
+            foreach ($approver as $a_value) {
+                $name = $a_value->name;
                 $amount = $request->amount;
-
-                Mail::send('emails.material.ve_r_to_approver', ['verifire_name' => $verifire_name, 'amount' => $amount,'request_no'=>$request_no,'requester_name'=>$requester->name], function ($m) use ($a_value) {
+                  Mail::send('emails.material.ve_r_to_approver', ['name' => $name,'amount' => $amount,'request_no'=>$request_no,'logged_user'=>$logged_user], function ($m) use ($a_value) {
                     $m->from('info@opiant.online', 'CSEI');
                     $m->to($a_value->email, $a_value->name)->subject('CSEI | Request for Approval');
                 });
@@ -158,7 +158,7 @@ class RequestRepository implements RequestRepositoryContract
                 });
             }
         }
-          /************************************mail to requester******************************************/
+        
       if ($request_id != '') {
           $verified_approved='Submitted';
                    Mail::send('emails.service.mail_to_requester_for_va',['amount'=>$request->amount,'request_no'=>$request_no,'verified_approved'=>$verified_approved,'name'=>$requester->name], function ($m) use ($requester) {

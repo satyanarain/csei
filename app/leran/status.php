@@ -110,11 +110,25 @@
              /****************************************Date 23-05-2018******************************************************/
              1. Remove repeating heading from each view page
              2. Change send to review button after quotation send to review.
-             /****************************************Date 23-05-2018******************************************************/
-             1. After purchase committee member comment change view button to commented 
-             2. Hide comment box and button after comment.
-             3. Add validation for release amount is less than requested amount.
-             4.Increase height of side menu bar.
+             /****************************************Date 28-05-2018******************************************************/
+             1. Change Description of use to TOR.
+             2. Created functionality to send email to requester and approver/verifier(Project Lead).
+             3. Change rejection to constraints.
+             4. Add project name and project expense head field in request approver view.
+             
+             /****************************************Date 29-05-2018******************************************************/
+            
+             1. Created functionality for cash request approve by project lead email send to requester and finance clearance
+             2. Created functionality for finance head approved cash request and constraints.
+             3. Created functionality for send email to main admin to approve cash request.
+      
+             /****************************************Date 30-05-2018******************************************************/
+            
+             1. Created functionality to send email to coordinator
+             2. Display cash request details.
+             3. Add payment type field to select cash or bank.
+             4. Add functionality to  send email to requester with payment type, requested amount, release  amount .
+      
           
               
              

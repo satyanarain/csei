@@ -63,9 +63,8 @@
                 @endif
                 @endforeach
               </td>
-              
-              <td>
-                  <div 
+               <td>
+                 <div 
                  <?php if($user->status==1)
                  { ?>
                  class="btn btn-small btn-success" 

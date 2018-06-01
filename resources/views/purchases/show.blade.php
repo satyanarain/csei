@@ -146,7 +146,7 @@
                         <div class="col s12 m6 l6">	
                             <div class="col s12 m12 l12">
                                 <div class="card-panel">
-                                    <h4 class="header2">Requisition Details</h4>
+                                   
                                     {!!Form::open(['route'=>'requests.store',
                                     'id'=>'formValidate',
                                     'class'=>'formValidate',

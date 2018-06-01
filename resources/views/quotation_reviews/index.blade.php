@@ -52,12 +52,12 @@
                       {
                          ?>
                   <td>
-                     <a href="{{route('quotation_reviews.show',[$vendor_quotation_lists->id])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-paper-plane"></i> Send To Review</a>
+                     <a href="{{route('call_for_tender.show',[$vendor_quotation_lists->id])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-paper-plane"></i> Send To Review</a>
                         </td>
                     <?php  } else { ?>
                          <td>
 
-                                            <a href="{{route('quotation_reviews.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i></i> View</a>
+                                            <a href="{{route('call_for_tender.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i></i> View</a>
                          </td>
  <?php } ?>
                

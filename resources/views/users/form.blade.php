@@ -46,7 +46,7 @@
     </div> 
 
    <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="roles">Verifier / Approver (s) <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="roles">Verifier / Approver (s)(Project Lead) <span class="text-danger">*</span></label>
         <div class="col-lg-6">
           {!!Form::select('approvers[]', $users, isset($user->approvers)?$user->approvers:null, ["class"=>"form-control", 'multiple'=>'multiple', 'required','style'=>'min-height:100px;'])!!}
         </div>        
@@ -57,8 +57,6 @@
           {!!Form::select('status', array('1'=>'Active','0'=>'Inactive'), isset($user->status)?$user->status:null, ["class"=>"form-control", 'required'=>'required','placeholder'=>'Select Status'])!!}
         </div>        
     </div> 
-
-
 <div class="form-group row">
         <div class="col-lg-4">
         </div>

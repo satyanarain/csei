@@ -15,14 +15,14 @@
         @endif
          id="2" onclick="openTab2(2)">
         
-        <a href="#2a" data-toggle="tab">Material</a>
+        <a href="#2a" data-toggle="tab">Material/Service</a>
     </li>
     <li @if($request->category_id==3)
           class="active"
         @else
          class="tabber"
         @endif
-        id="3" onclick="openTab3(3)"><a href="#3a" data-toggle="tab">Service</a>
+        id="3" onclick="openTab3(3)"><a href="#3a" data-toggle="tab">Single Vendor</a>
     </li>
 </ul>
 <div class="tab-content clearfix" style="border:#ccc 1px solid; border-top:none; padding:10px;">
@@ -89,17 +89,11 @@
 
    function validateForm()
    {
-       multiple_checkboxes = $('#multiple-checkboxes11').val();
-       if(multiple_checkboxes=='')
-       {
-         alert("Please select category")  ;
-         return false;
-       }
-       
+       $(".loder_id").show();
        
    }
     
-    
+
 //$('#multiple-checkboxes11').multiselect({
     /*
  onChange: function() {

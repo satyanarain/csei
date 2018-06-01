@@ -86,7 +86,6 @@
                                 <label class="col-lg-4 col-form-label" for="val-username">Release Amount (Rs)<span class="text-danger">*</span></label>
                                 <div class="col-lg-6">
                                      {!! Form::text('release_voucher_amount',null,['class'=>'form-control',required,'onkeypress'=>'return isNumberKey(event)','id'=>'release_voucher_amount'])!!}
-                                    
                                 </div>
                             </div>
                               <div class="form-group row">
@@ -100,8 +99,7 @@
                                              <input  type="hidden"  name="id" value="{{$requests->id}}">
                                               <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
                                              <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
-                                            <button class="btn btn-primary submit" type="submit" name="finance"  value="finance" ><i class="fa fa-check-circle"></i> Approve</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                       </div>
+                                            <button class="btn btn-primary submit" type="submit" name="finance"  value="finance" onclick="return loadAddApprove()"><i class="fa fa-check-circle"></i> Approve</button></div>
                            </div>
                 </div>
                </div>

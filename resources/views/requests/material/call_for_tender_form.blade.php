@@ -7,8 +7,6 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="form-validation">
-                                                <h4 class="header2">Requisition Details</h4>
-
                                                 <div class="form-group row">
                                                     <label class="col-lg-4 col-form-label" for="val-username">Request No.</label>
                                                     <div class="col-lg-6">
@@ -47,15 +45,15 @@
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label" for="due_date">Name Of Project<span class="text-danger">*</span></label>
+                                                    <label class="col-lg-4 col-form-label" for="due_date">Name Of Project</label>
                                                     <div class="col-lg-6">
-                                                        {{$requests->name_of_project}}
+                                                        {{displayView($requests->name_of_project)}}
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head<span class="text-danger">*</span></label>
+                                                    <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head</label>
                                                     <div class="col-lg-6">
-                                                        {{$requests->project_expense_head}}
+                                                        {{displayView($requests->project_expense_head) }}
                                                     </div>
                                                 </div>
 
@@ -126,7 +124,7 @@
                                                 <br>
                                                 <br>
                                                 <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label" for="val-username">Vendor List<span class="text-danger">*</span></label>
+                                                    <label class="col-lg-4 col-form-label" for="val-username">Identify Vendor List<span class="text-danger">*</span></label>
                                                     <div class="col-lg-6">
                                                         <select id="vendor" name='vendor[]' class="form-control" multiple="multiple" required="required" style="height:100px;">
                                                        @foreach($vendors as $vendors)
@@ -136,19 +134,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label" for="val-username">No. of Days for Response<span class="text-danger">*</span></label>
+                                                    <label class="col-lg-4 col-form-label" for="val-username">Vendor Response Date<span class="text-danger">*</span></label>
                                                     <div class="col-lg-6">
-                                                        
-                                                        <select  class="form-control" required="required" name="no_of_days" id='no_of_day_all'>
-                                                            <option value="">Select Days</option>
-                                                            <?php for($i=1; $i<=15; $i++)
-                                                            { ?>
-                                                            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-                                                            <?php } ?>
-                                                          </select>
+                                                        {!! Form::text('vendor_response_date',null,['class'=>'form-control multiple_date_due'])   !!}
+                                                               
                                                     </div>
                                                 </div>
                                                 </br>
+                                                 @if(count($material_detail_logs)>0)
                                                  <div   class="formmain" onclick="showHide(this.id)" id="bank2" style="margin-top:-20px;">
                                                     <div class="plusminusbutton" id="plusminusbuttonbank2">+</div>&nbsp;&nbsp;Log
                                                 </div>
@@ -176,14 +169,14 @@
                                             
                                                     @endif
                                                 </div>
-                                                
-                                                 <br>    <div class="col-lg-6">
+                                                @endif
+                                                <br>    <div class="col-lg-6" style="padding:0px;">
                                                     <input  type="hidden"  name="id" value="{{$requests->id}}">
                                                     <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
                                                     <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
                                                      @if(count($material_details)>0)
                                                     <button class="btn btn-primary submit pull-left" type="submit" name="quotation"  value="quotation" onclick="return loadAddQuotation()"><i class="fa fa-paper-plane"></i> Submit
-        </button>                            &nbsp;&nbsp; 
+                                                    </button>                            &nbsp;&nbsp; 
          @endif
                                                 </div>
 

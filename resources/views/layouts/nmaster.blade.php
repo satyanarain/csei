@@ -289,48 +289,46 @@ $segments_var = Request::segments();
                           </li>
                            
                            @if(Entrust::hasRole('administrator'))
-<!--                           <li class="{{$active == 'quotation_reviews' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Quotation for Review</span></a>
+                          <li class="{{$active == 'call_for_tender' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Purchaser Action</span></a>
                               <ul aria-expanded="false" class="collapse">
-                                <li class="{{($active2 == '' && $active == 'quotation_reviews') ? 'active' : ''}}"><a href="{{route('quotation_reviews.index')}}"><i class="fa fa-users"></i> All Quotation for Review</a></li>
+<!--                                <li class="{{($active2 == '' && $active == 'call_for_tender') ? 'active' : ''}}"><a href="{{route('call_for_tender.index')}}"><i class="fa fa-users"></i> Call for Tender</a></li>-->
+                                 <li class="{{($active2 == 'requests' && $active == 'call_for_tender') ? 'active' : ''}}"><a href="{{route('call_for_tender_list.requests')}}"  class="{{($request_only_verifire == 'call_for_tender') ? 'active' : ''}}"><i class="fa fa-gavel" aria-hidden="true" style="color:green"></i> Call for Tender</a>
                              </ul>
-                          </li>-->
-                          @endif
-                          
-<!--                            <li class="{{$active == 'vendor_quotation_lists' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Comparison Sheet</span></a>
+                          </li>
+                         <li class="{{$active == 'vendor_quotation_lists' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Comparison Analysis</span></a>
                               <ul aria-expanded="false" class="collapse">
                                 <li class="{{($active2 == '' && $active == 'vendor_quotation_lists') ? 'active' : ''}}"><a href="{{route('vendor_quotation_lists.index')}}"><i class="fa fa-users"></i> All Vendor Quotations</a></li>
                              </ul>
                             </li>
-                          
-                           
-                          
                           <li class="{{$active == 'pending_quotations' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Pending Quotation</span></a>
                               <ul aria-expanded="false" class="collapse">
                                 <li class="{{($active2 == '' && $active == 'pending_quotations') ? 'active' : ''}}"><a href="{{route('pending_quotations.index')}}"><i class="fa fa-users"></i> All Pending Quotation</a></li>
                              </ul>
-                          </li>-->
-                          
-
-                          @if(Entrust::hasRole('administrator'))
-                          <li class="nav-label">SETTINGS</li>
-
-                          <li class="{{$active == 'roles' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-key"></i><span class="hide-menu"><i class="fas fa-role"></i>Roles</span></a>
+                          </li>
+                           @endif
+                       @if(Entrust::hasRole('administrator'))
+                            <li class="{{$active == 'requests' ? 'active' : ''}}">
+                               <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Setting</span>
+                               </a>
+                              <ul aria-expanded="false" class="collapse">
+                                  <li class="{{$active == 'roles' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-key"></i><span class="hide-menu"><i class="fas fa-role"></i>Roles</span></a>
                               <ul aria-expanded="false" class="collapse">
                                   <li class="{{($active2 == 'create' && $active == 'roles') ? 'active' : ''}}"><a href="{{route('roles.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Role</a></li>
                                   <li class="{{($active2 == '' && $active == 'roles') ? 'active' : ''}}"><a href="{{route('roles.index')}}"><i class="fa fa-bars"></i> All Roles</a></li>
 
                               </ul>
                           </li>
-
-                          <li class="{{$active == 'permissions' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-lock"></i><span class="hide-menu"><i class="fas fa-permission"></i>Permissions</span></a>
+                           <li class="{{$active == 'permissions' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-lock"></i><span class="hide-menu"><i class="fas fa-permission"></i>Permissions</span></a>
                               <ul aria-expanded="false" class="collapse">
                                   <li class="{{($active2 == 'create' && $active == 'permissions') ? 'active' : ''}}"><a href="{{route('permissions.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Permission</a></li>
                                   <li class="{{($active2 == '' && $active == 'permissions') ? 'active' : ''}}"><a href="{{route('permissions.index')}}"><i class="fa fa-bars"></i> All Permissions</a></li>
 
                               </ul>
                           </li>
-  <!--                        <li><a href="page-invoice.html"><i class="fa fa-cog"></i> Miscellenious</a></li>-->
+                          </ul>
+                          </li>
                           @endif
+                          
                       </ul>
                   </nav>
                   <!-- End Sidebar navigation -->
@@ -482,8 +480,8 @@ $segments_var = Request::segments();
                       minDate:new Date(),
                       changeYear: true,
                     yearRange: "-80Y:+20Y"
-                                                      });
-                                                  });
+});
+});
 
                                                   $('#map1').append('<div style="" id="map"><div class="loader"></div></div>');
                                                   $(window).on('load', function () {

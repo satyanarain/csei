@@ -63,15 +63,48 @@
                                                         {{displayView($requests->project_expense_head)}}
                                                     </div>
                                                 </div>
-                                                  
+                                                   @if(count($material_details)>0)
+            <div   class="formmain1" onclick="showHide(this.id)" id="bank1">
+                <div class="plusminusbutton" id="plusminusbuttonbank1"></div>&nbsp;&nbsp; <h2>Item Details</h2>
+            </div>
+<!--            <div class="row1"  id="formbank1">-->
+                @if(count($material_details)>0)
+                <table class="table table-bordered formmain">
+                        <tr>
+                        <th class="table-row-heading" width="10%">S.No.</th>
+                        <th class="table-row-heading" width="30%">Product Name</th>
+                        <th class="table-row-heading" width="10%">Quantity</th>
+                        <th class="table-row-heading" width="50%">Remarks</th>
+                   </tr>
+                </table>
+                @foreach($material_details as $value)
+                <table class="table table-bordered table-striped table-hover bank_table">
+                    <tr>
+                        <td width="10%">
+                            <div class="dummy">
+                                <div class="input-icon right">
+                                    <span><input type="text" class="form-control product_code" size="5" name="s_no[]" onkeypress="return isNumberKey(event)" required="required" value="{{$value->s_no}}" readonly="readonly"></span>
+                                </div>
+                            </div>
+                        </td>
+                        <td width="30%">
+                            <div class="dummy">
+                                <div class="input-icon right">
+                                    <input type="text" class="form-control" size="5" name="product_name[]" required="required" value="{{$value->product_name}}" readonly="readonly">
+                                </div>
+                            </div>
+                        </td>
+                        <td width="10%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}" readonly="readonly"></div></div></td>
+                         <td width="50%" align="left" valign="top" style="text-align:left;">{{$value->remark}}</td>
 
-                                                <div class="form-group row">
-                                                    <label class="col-lg-4 col-form-label" for="due_date">Status</label>
-                                                    <div class="col-lg-6">
-                                                        {{$requests->c_status}}
-                                                    </div>
-                                                </div> 
-                                             <div class="col-lg-6" style="padding:0px;">
+                    </tr>
+                </table>
+                @endforeach
+                @endif
+<!--            </div>-->
+            @endif 
+<br>                   
+  <div class="col-lg-6" style="padding:0px;">
                                                     <input  type="hidden"  name="id" value="{{$requests->id}}">
                                                     <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
                                                     <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">

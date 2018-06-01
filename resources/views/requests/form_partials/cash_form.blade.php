@@ -94,7 +94,7 @@
     <div class="col-lg-4">
     </div>
     <div class="col-lg-6">
-        <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Submit
+        <button class="btn btn-primary submit" type="submit" name="action" onclick="return loadAdd()"><i class="fa fa-paper-plane"></i> Submit
         </button>
     </div>
 </div>
