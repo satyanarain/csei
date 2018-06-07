@@ -12,6 +12,10 @@ team status
 commitee status
 Request No.
 trait ny category.
+    @include('partials.item_list')
+    @include('partials.item_list_sub')
+
+
 
 
     

@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">All Comparison Sheets</h3> </div>
+    <h3 class="text-primary">All Comparison Analysis</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">All Comparison Sheets</li>
+        <li class="breadcrumb-item active">All Comparison Analysis</li>
       </ol>
     </div>
   </div>
@@ -53,13 +53,13 @@
                  </td>
                 <td>
                 <?php 
-                $allready = alreadyComment('committee_member_comments', $vendor_quotation_lists->request_id, $user_id,'request_id','committee_member_id');
+               $allready = alreadyComment('committee_member_like_dislikes', $vendor_quotation_lists->request_id, $user_id,'request_id','committee_member_id');
                 
                 ?>
                     @if($allready==0)
-                    <a href="{{route('vendor_quotation_lists.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i>View</a>
+                    <a href="{{route('vendor_quotation_lists.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle"></i> Send for Approval</a>
                    @else
-                    <a href="{{route('vendor_quotation_lists.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-comment"></i> Commented</a>
+                    <a href="{{route('vendor_quotation_lists.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i>View</a>
                    @endif
               </td>
             </tr>

@@ -1,4 +1,4 @@
-<div   class="formmain" onclick="showHide(this.id)" id="personal1">
+    <div   class="formmain" onclick="showHide(this.id)" id="personal1">
 <div class="plusminusbutton" id="plusminusbuttonpersonal1">-</div>&nbsp;&nbsp; Personal Info
 </div>
 <div class="row1"  id="formpersonal1">
@@ -12,12 +12,6 @@
         <label class="col-lg-4 col-form-label" for="email">Email <span class="text-danger">*</span></label>
         <div class="col-lg-6">
        {!! Form::text('email',null , ['class' => 'form-control']) !!}
-        </div>
-    </div>
-  <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="email">Address <span class="text-danger">*</span></label>
-        <div class="col-lg-6">
-       {!! Form::textarea('address',null , ['class' => 'form-control']) !!}
         </div>
     </div>
 
@@ -43,7 +37,7 @@
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="contact">Account No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::text('account_no',null , ['class' => 'form-control','onkeypress'=>'return isIntegerKey(event)',required]) !!}
+          {!! Form::text('account_no',null , ['class' => 'form-control','onkeypress'=>'return isIntegerKey(event)']) !!}
         </div>
     </div>
      <div class="form-group row">
@@ -62,15 +56,14 @@
         <label class="col-lg-4 col-form-label" for="upload_document">Other Document</label>
         <div class="col-lg-6">
           {!! Form::file('upload_document',null , ['class' => 'form-control']) !!} 
-             
+              @if($vendor_quotation_lists->upload_document!='')
+               <a href="{{('/images/upload_document/'.$vendor_quotation_lists->upload_document)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></i></a>
+              @endif
         </div>
     </div>
 </div>
 
-<div   class="formmain" onclick="showHide(this.id)" id="personal5">
-<div class="plusminusbutton" id="plusminusbuttonpersonal5">-</div>&nbsp;&nbsp; Other Details
-</div>
-<div class="row1"  id="formpersonal5" style="display:block;"> 
+<br>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="registration_no">Registration No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
@@ -78,10 +71,12 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="registration_no_upload">Registration No. Copy <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="registration_no_upload">Registration No. Upload <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::file('registration_no_upload',null , ['class' => 'form-control',required]) !!} 
-        
+          {!! Form::file('registration_no_upload',null , ['class' => 'form-control']) !!} @if($vendor_quotation_lists->registration_no_upload!='')
+<a href="{{('/images/registration_no_upload/'.$vendor_quotation_lists->registration_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i>
+</i></a>
+@endif
         </div>
     </div>
      <div class="form-group row">
@@ -91,10 +86,12 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="pan_no_upload">PAN No. Copy <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="pan_no_upload">PAN No. Upload <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::file('pan_no_upload',null , ['class' => 'form-control',required]) !!}
-           
+          {!! Form::file('pan_no_upload',null , ['class' => 'form-control']) !!}
+           @if($vendor_quotation_lists->pan_no_upload!='')
+         <a href="{{('/images/pan_no_upload/'.$vendor_quotation_lists->pan_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></i></a>
+        @endif
            </div>
     </div>
     <div class="form-group row">
@@ -104,26 +101,30 @@
         </div>
     </div>
      <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="gst_no_upload">GST No. Copy<span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="gst_no_upload">GST No. Upload<span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::file('gst_no_upload',null , ['class' => 'form-control',required]) !!}
-          
+          {!! Form::file('gst_no_upload',null , ['class' => 'form-control']) !!}
+           @if($vendor_quotation_lists->gst_no_upload!='')
+          <a href="{{('/images/gst_no_upload/'.$vendor_quotation_lists->gst_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></i></a>
+          @endif
         </div>
     </div>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="gst_no_upload">Status<span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::select('status',array('1'=>'Active','0'=>'Inactive'),null , ['class' => 'form-control',required]) !!}
+          {!! Form::select('status',array('1'=>'Active','0'=>'Inactive'),null , ['class' => 'form-control','placeholder'=>'Select Status',required]) !!}
         </div>
     </div>
-    </div>
-
 <br>
+
  <div class="form-group row">
         <div class="col-lg-4">
         </div>
         <div class="col-lg-6">
-<button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Submit</button>
+            <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> 
+               
+                Submit
+        </button>
         </div>
     </div>
 @push('scripts')

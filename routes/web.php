@@ -11,16 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('/');
+Route::get('/', function () { return view('welcome'); })->name('/');
 
-Route::get('create/password/{token}', 'UsersController@createPassword')->name('create.password');
-Route::post('set/password', 'UsersController@setPassword')->name('set.password');
- Route::resource('quotations', 'VendorSaveQuotationController');
-Auth::routes();
+        Route::get('create/password/{token}', 'UsersController@createPassword')->name('create.password');
+        Route::post('set/password', 'UsersController@setPassword')->name('set.password');
+        Route::resource('quotations', 'VendorSaveQuotationController');
+        Auth::routes();
 
-Route::group(['middleware'=>'auth'], function(){
+        Route::group(['middleware'=>'auth'], function(){
 	Route::get('/home', 'HomeController@index')->name('home');
 
 	/*
@@ -49,18 +47,12 @@ Route::group(['middleware'=>'auth'], function(){
 	|Requests Routes
 	|--------------------------------------------------------------------
 	*/
-        
         Route::resource('requests', 'RequestsController');
-//        Route::post('verifiers/requests/{id}/reject', 'RequestsController@rejectRequest')->name('verifiers.requests.reject');
-//	Route::post('verifiers/requests/{id}/verify', 'RequestsController@verifyRequest')->name('verifiers.requests.verify');
         Route::get('verifiers/requests', 'RequestsController@requestsToVerify')->name('verifiers.requests');
 	Route::get('approvers/requests', 'RequestsController@requestsToApprove')->name('approvers.requests');
 	Route::get('finance_approval/requests', 'RequestsController@financeApproval')->name('finance_approval.requests');
 	Route::get('mainadmin_approval/requests', 'RequestsController@mainadminApproval')->name('mainadmin_approval.requests');
 	Route::get('coordinator/requests', 'RequestsController@coordinatorSubmission')->name('coordinator.requests');
-        
-//	Route::post('requests/verify_request', 'RequestsController@verifyRequestUpdateStatus');
-//	Route::post('requests/verify_request', 'RequestsController@verifyRequestUpdateStatus');
         Route::get('/requests/{id}/save_voucher', 'RequestsController@saveVoucher');
        
         //requests.test
@@ -77,16 +69,19 @@ Route::group(['middleware'=>'auth'], function(){
         Route::get('vendors/statusupdate/{id}', 'VendorController@statusUpdate');
         Route::resource('vendors', 'VendorController');
         /************************************************************************/
-        
         /************************************************************************/
         //Route::get('vendor_quotation_lists/statusupdate/{id}', 'VendorController@statusUpdate');
         Route::resource('vendor_quotation_lists', 'VendorQuotationCompareListsController');
-         Route::get('pending_quotations/comments/{id}', 'PendingQuotationController@Comment');
+        Route::get('pending_quotations/comments/{id}', 'PendingQuotationController@Comment');
         Route::resource('pending_quotations', 'PendingQuotationController');
-        Route::get('call_for_tender/requests', 'RequestsController@callForTender')->name('call_for_tender_list.requests');
+        /************************************************************************/
         
+        Route::resource('mainadmin_likes_approval', 'MainAdminLikesApprovalController');
         /*************************Create by satya date 15-05-2018*******************************************************/
+         Route::get('receipt_of_quotation/call_for_tender', 'CallForTenderController@receiptOfQuotation')->name('receipt_of_quotation.call_for_tender');
+      
         Route::resource('call_for_tender', 'CallForTenderController');
+        
         /************************************************************************/
         /************************************************************************/
         Route::resource('purchases', 'PurchasesController');
@@ -98,9 +93,5 @@ Route::group(['middleware'=>'auth'], function(){
         
         Route::resource('verifiers', 'VerifierController');
         
-        
-        
-        
-
-});
+  });
 

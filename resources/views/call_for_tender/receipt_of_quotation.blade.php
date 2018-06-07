@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">Comparison Sheet</h3> </div>
+    <h3 class="text-primary">All Receipt of Quotation</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Comparison Sheet</li>
+        <li class="breadcrumb-item active"> </li>
       </ol>
     </div>
   </div>
@@ -21,9 +21,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-body">
-          <h4 class="card-title">Comparison List</h4>
-<!--            <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>-->
-            <div class="table-responsive m-t-40">
+          <div class="table-responsive m-t-40">
                 
                 <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                <thead>
@@ -36,32 +34,40 @@
                </tr>
              </thead>
              <tbody>
-              @foreach($pending_quotations as $pending_quotations)
+                 
+               <?php //print_r($vendor_quotation_lists) ; ?>  
+                 
+                 
+              @foreach($vendor_quotation_lists as $vendor_quotation_lists)
               <tr>
-                  <td style="display:none">{{$pending_quotations->id}}</td>
+                  <td style="display:none">{{$vendor_quotation_lists->id}}</td>
                <td>
-                {{dateView($pending_quotations->due_date)}}
+                {{dateView($vendor_quotation_lists->due_date)}}
               </td>
-                <td>{{$pending_quotations->request_no}}</td>
-
+                <td>{{$vendor_quotation_lists->request_no}}</td>
+              
+<!--                <td>{{$vendor_quotation_lists->purpose}}</td>-->
+<!--                 <td>{{$vendor_quotation_lists->amount}}</td>-->
                  <td>
-                 {{displayView($pending_quotations->purpose)}}
+                 {{displayView($vendor_quotation_lists->purpose)}}
                  </td>
-                 <td>
-                     <?php
-                     $aready_approve_by_committee = alreadyComment('material_pendding_approval_details', $pending_quotations->request_id, $committee_officer_id, 'request_id', 'committee_officer_id');
-                     ?>
-                     @if($aready_approve_by_committee > 0) 
-                     <a href="{{route('pending_quotations.show',[$pending_quotations->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
-                     @else
-                     <a href="{{route('pending_quotations.show',[$pending_quotations->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle" aria-hidden="true" style="color:white"></i> Approve</a>
-                     @endif
-                 </td>
+                <td>
+                <?php 
+                  $allready = alreadyComment('quotation_send_for_comparision', $vendor_quotation_lists->request_id, $vendor_quotation_lists->vendor_id,'request_id','vendor_id');
+                
+                ?>
+                    @if($allready==0)
+                    <a href="{{route('call_for_tender.show',[$vendor_quotation_lists->id,'receipt_of_quotation'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle"></i> Send for Comparision</a>
+                   @else
+                    <a href="{{route('call_for_tender.show',[$vendor_quotation_lists->id,'receipt_of_quotation'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
+                   @endif
+              </td>
             </tr>
             @endforeach
           </tbody>
         </table>
-       </div>
+         
+      </div>
     </div>
   </div>
 </div>
@@ -73,7 +79,7 @@
 {
  $.ajax({
     type:'get',
-    url:'/pending_quotations/statusupdate/'+id,
+    url:'/vendor_quotation_lists/statusupdate/'+id,
    success:function(data)
     {
    

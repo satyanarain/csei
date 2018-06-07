@@ -144,10 +144,19 @@ if($requests->category_id==2)
     { ?>
 @include('requests.material.material_mainadmin_approval')
     <?php } ?>
+
+
     <?php if($view=='coordinator')
     { ?>
 @include('requests.material.material_coordinator_submission')
     <?php } ?>
+    <?php if($view=='receipt_of_quotation')
+    { ?>
+@include('requests.material.receipt_of_quotation')
+    <?php } ?>
+
+
+
     <?php if($view=='call_for_tender_list')
     { ?>
 @include('requests.material.call_for_tender_form')

@@ -18,7 +18,7 @@ function displayIdBaseName($table = '', $id = '', $fieldname = '') {
 
 function alreadyComment($table = '', $request_id = '', $user_id = '',$f1='',$f2='') 
         {
-     $sql = DB::table($table)->where([[$f1,$request_id],[$f2,$user_id]])->count();
+    $sql = DB::table($table)->where([[$f1,$request_id],[$f2,$user_id]])->count();
    return $sql;
 }
 function idExists($table = '', $id = '') {

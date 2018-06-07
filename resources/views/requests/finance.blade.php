@@ -76,7 +76,7 @@
 ?>
 <a href="{{route('requests.show', [$request->id,'finance_approval'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search" aria-hidden="true"></i> View</a>
   <?php } else { ?>
-<a href="{{route('requests.show', [$request->id,'finance_approval'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Finance Clearance</a>
+<a href="{{route('requests.show', [$request->id,'finance_approval'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-rupee" aria-hidden="true"></i> Finance Clearance</a>
  <?php } ?>
  @else
  <a href="{{route('requests.show', [$request->id,'finance_approval'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>

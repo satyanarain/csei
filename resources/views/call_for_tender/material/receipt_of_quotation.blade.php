@@ -3,12 +3,12 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-primary">Comparison Analysis Details</h3> </div>
+        <h3 class="text-primary">Quotation Details</h3> </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{route('vendor_quotation_lists.index')}}">All Comparison Analysis</a></li>
-            <li class="breadcrumb-item active">Comparison Analysis Details</li>
+            <li class="breadcrumb-item"><a href="{{route('vendor_quotation_lists.index')}}">All Comparison Sheets</a></li>
+            <li class="breadcrumb-item active">Quotation Details</li>
         </ol>
     </div>
 </div>
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            {!!Form::open(['route'=>'vendor_quotation_lists.store', 'id'=>'formValidate', 
+            {!!Form::open(['route'=>'call_for_tender.store', 'id'=>'formValidate', 
             'onsubmit'=>'return validatePan()',
             'autocomplete'=>'off',
             'class'=>'formValidate', 'files'=>true])!!}
@@ -92,21 +92,36 @@
             
    <table class="table table-bordered table-striped table-hover bank_table">
                      @foreach($vendor_quotation_lists as $vendor_value)
-                     <tr><th colspan="9">
+                     <tr><th colspan="7">
                              <table class="table table-bordered table-striped table-hover bank_table" style="border: none;">
                                  <tr>
-                                     <th width="20%">Vendor Name</th>
-                                     <th  width="80%">{{$vendor_value->name}}
-                                      <input type="hidden"  size="7" name="request_id"  readonly="readonly"  value="{{$vendor_value->request_id}}"> 
-                                      <input type="hidden" name="vendor_id[]" id="send_for_omparision_analysis" value="{{$vendor_value->vendor_id}}">
-                                      </th>
+                                     <th width="20%">Send For Comparision Analysis</th>
+                                     <th  width="80%">Vendor Name</th>
                                  </tr>
-                                 
+                                 <tr>
+                                     <th align="left" valign="top"><input type="hidden" name="vendor_id[]" id="send_for_omparision_analysis" value="{{$vendor_value->vendor_id}}">
+                                     <span class="test">
+                               <input type="checkbox" class="change_value_click" size="7" name="no_value[]"  readonly="readonly"  value="1" onclick="changeVlude(this.value)">
+                              <input type="hidden" class="change_value" size="7" name="approved_vendor_id[]"   value="0"> 
+                              <input type="hidden"  size="7" name="request_id"  readonly="readonly"  value="{{$vendor_value->request_id}}"> 
+                            </span>
+                                     </th>
+                                     <th>{{$vendor_value->name}}
+                                       </th>
+                                 </tr>
                              </table>
                            </th>
                        </tr>
-                     
-                      @include('partials.item_list')
+                    
+                      <tr>
+                        <th  class="table-row-heading">S No</th>
+                        <th  class="table-row-heading">Product Name</th>
+                        <th  class="table-row-heading">Quantity</th>
+                        <th class="table-row-heading">Cost / PC</th>
+                        <th  class="table-row-heading">Total Amount</th>
+                        <th  class="table-row-heading">Requester Remark</th>
+                        <th  class="table-row-heading">Vendor Remark</th>
+                    </tr>  
                     <?php
                     $vendor_quotation_list_all = DB::table('vendor_quotation_lists')->select('*')
                             ->leftjoin('requests', 'requests.id', 'vendor_quotation_lists.request_id')
@@ -114,48 +129,29 @@
                             ->where('vendor_quotation_lists.request_id', $requests->id)
                             ->where('vendor_quotation_lists.vendor_id', $vendor_value->vendor_id)
                             ->get();
-                   
+                    // print_r($vendor_quotation_list_all) 
                     ?>
-                    <?php 
-                    $i=1;
-                    foreach($vendor_quotation_list_all as $vendor_value_all)
-                    {
-                    
-                    ?>
+                    @foreach($vendor_quotation_list_all as $vendor_value_all)
                     <tr>
-                    @include('partials.item_list_sub')
-                   <?php 
-                     $allready = alreadyComment('committee_member_like_dislikes', $requests->id,Auth::id(),'request_id','committee_member_id');
-                   ?>
-                    </tr>
-                    @if($allready==0)
-                     <tr>
-                         <th colspan="9">
-                             <table>
-                                 <tr>
-                                      <td align="left" valign="top" class="likeclick" width="1%" style="border:none;">
-                                      <input type="radio" class="change_value_like" size="7" name="no_value{{$i}}" required="required" style="margin:7px 0px 0px 0px;">
-                                      <input type="hidden" class="like" size="7" name="userlike[]"   value="0"> 
-                                      </td>
-                                      <td align="left" valign="top" width="5%" style="border:none;">Like
-                                      </td>
-                                      <td align="left" valign="top" class="dislikeclick" width="1%" style="border:none;">
-                                      <input type="radio" class="change_value_dislike" size="7" name="no_value{{$i}}" required="required" style="margin:7px 0px 0px 0px;">
-                                      <input type="hidden" class="dislike" size="7" name="userdislike[]"   value="0"> 
-                                     </td>
-                                     <td align="left" valign="top" style="text-align:left;border:none;">Dislike</td>
-                                  </tr>
+                        <th><input type="text" class="form-control product_code" size="5" name="s_no[]" value="{{$vendor_value_all->s_no}}" readonly="readonly">
+                            <input type="hidden" class="form-control product_code" size="5" name="material_id[]" value="{{$vendor_value->material_id}}" readonly="readonly">
+                        </th>
+                        <th><input type="text" class="form-control" size="5" name="product_name[]" required="required" value="{{$vendor_value_all->product_name}}" readonly="readonly"></th>
+                        <th> <input type="text" class="form-control" size="5" name="purchase_quantity[]"  required="required" value="{{$vendor_value_all->purchase_quantity}}" readonly="readonly"></th>
+                        <th><input type="text" class="form-control" size="5" name="purchase_unit_rate[]"  required="required" readonly="readonly" value="{{$vendor_value_all->purchase_unit_rate}}"></th>
+                        <th> <input type="text" class="form-control" size="7" name="purchase_unit_amount[]" readonly="readonly" value="{{$vendor_value_all->purchase_unit_amount}}"></th>
+                        <th><input type="text" class="form-control" size="7" name="remark[]"  readonly="readonly"  value="{{$vendor_value_all->remark}}"></th>
+                        <th><input type="text" class="form-control" size="7" name="vendor_remark[]"  readonly="readonly"  value="{{$vendor_value_all->vendor_remark}}"></th>
 
-                             </table>
-                         </th>
-                       </tr>
-                       @endif
-                    <?php 
-                    $i++;
-                    
-                    } ?>
-                      
+                    </tr>
                     @endforeach
+                 
+                    @endforeach
+                     <?php 
+                
+                      $allready = DB::table('quotation_send_for_comparision')->where('request_id',$requests->id)->count();
+                
+                   ?>
                 </table>
             @if($allready==0)
                 <table width="100%" cellspacing="4" cellpadding="4" border="0">
@@ -163,11 +159,12 @@
                     </tr>
                     <tr>
                         <td align="left" valign="top" colspan="6" style="text-align:left;">
-                            <button type="reset" value="Reset" class="btn btn-primary submit">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Send For Approval</button></td>
+                           
+                            <button class="btn btn-primary submit" type="submit" name="send_for_comparision" value="send_for_comparision" onclick="return validateChecked()"><i class="fa fa-paper-plane"></i> Send For Comparision</button></td>
+                           
                     </tr>
                 </table> 
-@endif
+             @endif
             {!!Form::close()!!}        
               </div>  
      </div>
@@ -176,26 +173,20 @@
 </div>
 </div>
 @endsection
+
 @push('scripts')
 <script>
 $(document).ready(function()
   {
-    $(".likeclick").on('click',function()
+    $(".test").on('click',function()
     {
-     id=1;
-    var v1= $(this).closest("td").find(".like").val(id);
-      var v1= $(this).closest("td").next('td').next('td').find(".dislike").val(0);
-     // $(this).closest('td').next('td').find('input:text').show();
-    });
-    $(".dislikeclick").on('click',function()
-    {
-     id=1;
-       var v1= $(this).closest("td").prev('td').prev('td').find(".like").val(0);
-    var v1= $(this).closest("td").find(".dislike").val(id);
-    });
     
-    
-    
+        id=1;
+      var v1= $(this).closest("th").find(".change_value").val(id);
+    v2= $(this).closest('.inputGroup').find('input[name=quotation_approval_id]').val(id);
+  
+     
+  });
   });
 function validateChecked()
 {
@@ -206,8 +197,9 @@ function validateChecked()
     alert("Please select at-least one vendor") ;
     return false;
  }
- 
- 
-}
+ }
 </script>
+
+
+
 @endpush

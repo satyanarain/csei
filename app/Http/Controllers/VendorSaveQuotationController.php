@@ -17,9 +17,12 @@ use App\Http\Requests\Quotation\SetPasswordRequest;
 use Illuminate\Support\Facades\Session;
 use DB;
 use DateTime;
+use App\Traits\activityLog;
 class VendorSaveQuotationController extends Controller
 {
-    //protected $quotations;
+  
+    use activityLog;
+//protected $quotations;
 
 //    public function __construct(QuotationRepositoryContract $quotations)
 //    {
@@ -33,8 +36,7 @@ class VendorSaveQuotationController extends Controller
      */
     public function index()
     {
-    
-        $url = $_SERVER[REQUEST_URI];
+       $url = $_SERVER[REQUEST_URI];
         $array = explode('&', $url);
         $vendor_id = $array[1];
         $url_array = explode('?', $array[0]);
@@ -42,9 +44,7 @@ class VendorSaveQuotationController extends Controller
         $material_id_string = $array[2];
         $material_id_array = explode(',', $material_id_string);
         $material_id = $material_id_array[0];
-        
-         $requests= CSEIRequest::whereId($request_id)->first();
-        
+        $requests= CSEIRequest::whereId($request_id)->first();
         $sql = DB::table('quotation_details')->select('*')->where([['material_id', $material_id], ['request_id', $request_id]])->first();
         $qoutation_created_date = $sql->created_at;
         $vendor_response_date = $sql->vendor_response_date;
@@ -55,7 +55,7 @@ class VendorSaveQuotationController extends Controller
         
         $date2 = new DateTime(date('Y-m-d', strtotime($curdate)));
         $expecteddate = $date1->diff($date2)->days; // 0
-           if($no_of_days != '')
+           if($expecteddate == 0)
                 {
                 if ($expecteddate > $no_of_days) {
                 return view('quotations.expire', compact('quotations', 'vendor_id', 'request_id'));
@@ -109,20 +109,27 @@ class VendorSaveQuotationController extends Controller
         $purchase_quantity = $requestData->purchase_quantity;
         $purchase_unit_rate = $requestData->purchase_unit_rate;
         $purchase_unit_amount = $requestData->purchase_unit_amount;
+        $timeline = $requestData->timeline;
+        $gst = $requestData->gst;
+     
+        
         $remark = $requestData->remark;
         $vendor_remark = $requestData->vendor_remark;
         
        $already=DB::table('vendor_quotation_lists')->select('*')->where([['vendor_id',$vendor_id],['request_id',$request_id]])->whereIn('material_id',$material_id)->count();
         if($already>0)
         {
-           //echo "You have already submitted this quotation";
+
            Session::flash('flash_message', "You have already submitted this quotation!.");
            return redirect()->route('quotations.index', [$request_id,$vendor_id,$material_id_url]);
           exit();
         }else{
         foreach ($s_no as $key => $n) {
+            
+          $timeline1= $this->insertDate($timeline[$key]);
+       
             DB::table('vendor_quotation_lists')->insertGetId(
-                    ['request_id' => $request_id, 'vendor_id' => $vendor_id, 'material_id' => $material_id[$key], 's_no' => $s_no[$key], 'product_name' => $product_name[$key], 'purchase_quantity' => $purchase_quantity[$key], 'purchase_unit_rate' => $purchase_unit_rate[$key], 'purchase_unit_amount' => $purchase_unit_amount[$key],'remark' => $remark[$key],'vendor_remark' => $vendor_remark[$key]]
+                    ['request_id' => $request_id, 'vendor_id' => $vendor_id, 'material_id' => $material_id[$key], 's_no' => $s_no[$key], 'product_name' => $product_name[$key], 'purchase_quantity' => $purchase_quantity[$key], 'purchase_unit_rate' => $purchase_unit_rate[$key], 'purchase_unit_amount' => $purchase_unit_amount[$key],'remark' => $remark[$key],'vendor_remark' => $vendor_remark[$key],'gst' => $gst[$key],'timeline' => $timeline1]
             );
         }
             Session::flash('flash_message', "Quotation submitted successfully!.");

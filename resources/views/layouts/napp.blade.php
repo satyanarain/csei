@@ -22,7 +22,9 @@
     <script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-    
+    <link rel="stylesheet" href="{{ asset(elixir('plugins/datepicker/datepicker3.css')) }}">
+        <!-- Daterange picker -->
+    <link rel="stylesheet" href="{{ asset(elixir('plugins/daterangepicker/daterangepicker.css')) }}">
      <link href="{{asset('css/lib/calendar2/semantic.ui.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/lib/calendar2/pignose.calendar.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/lib/owl.carousel.min.css')}}" rel="stylesheet" />
@@ -50,6 +52,7 @@
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset('js/lib/bootstrap/js/popper.min.js')}}"></script>
     <script src="{{asset('js/lib/bootstrap/js/bootstrap.min.js')}}"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="{{asset('js/jquery.slimscroll.js')}}"></script>
     <!--Menu sidebar -->
@@ -59,6 +62,29 @@
     <!--Custom JavaScript -->
     <script src="{{asset('js/custom.min.js')}}"></script>
 <script>
+    
+       $('body').on('focus',".multiple_date", function(){
+               $(this).datepicker({
+                    dateFormat: 'dd-mm-yy',
+                     startView: "year", 
+                      changeYear: true,
+                    yearRange: "-80Y:-0Y",
+      minDate: "-80Y",
+      maxDate: "-0Y"
+                });
+      }); 
+    $('body').on('focus',".multiple_date_due", function(){
+                  $(this).datepicker({
+                       dateFormat: 'dd-mm-yy',
+                        startView: "year",
+                         minDate:new Date(),
+                         changeYear: true,
+                       yearRange: "-80Y:+20Y"
+   });
+   });
+    
+    
+    
     
           function isNumberKey(evt)
           {
@@ -124,8 +150,13 @@
           });
 
           $(document).on("recalc", ".bank_table tr", function () {
-              var total = +$(this).find(".quantity2").val() * +$(this).find(".rate").val();
-              $(this).find(".tamnt").val(total.toFixed(2));
+              
+              rate=$(this).find(".rate").val();
+              var price = +$(this).find(".quantity2").val() * +rate;
+               gst=  $(this).find(".gst").val()
+              gstPrice =  price * gst / 100
+             total=price+gstPrice;
+             $(this).find(".tamnt").val(total.toFixed(2));
           });
 
           $(document).on("recalc", ".bank_table", function () {

@@ -42,7 +42,26 @@ $segments_var = Request::segments();
       </div>
     <div class="vendorpopup"  id="comment" style="display:none">
         <div class="vendorpopup_sub" id="vendorpopup_sub" style=" background-color:#fff;">
+            <table width="100%">
+                <tr><td style="text-align:right"><span style="cursor:pointer;" onclick="closeTermandCondition()"><b>x</b></span></td></tr> 
+            </table>
+            <h2>Term & Conditions</h2>
+            On investigation, the "terms and conditions" may include "Offer only applies to residents of Alaska", and so a listener in New York can't actually get a half-price widget at all.
+
+This approach has been abused so much that in some places, the terms and conditions must be explicitly listed, and you will often hear this: in this instance, the narrator would say "Offer only applies to residents of Alaska" in their fastest possible voice, at the end of the advert.
+
+Advertising standards agencies might allow the use of a general disclaimer like "Terms and conditions apply" as long as the terms and conditions do not strongly affect the meaning of the advert - for example if it only applied to people over the age of 12, which doesn't really change the advert much for most listeners (on the assumption that an 11 year old isn't interested in spending their pocket money on a widget anyway).On investigation, the "terms and conditions" may include "Offer only applies to residents of Alaska", and so a listener in New York can't actually get a half-price widget at all.
+
+This approach has been abused so much that in some places, the terms and conditions must be explicitly listed, and you will often hear this: in this instance, the narrator would say "Offer only applies to residents of Alaska" in their fastest possible voice, at the end of the advert.
+
+Advertising standards agencies might allow the use of a general disclaimer like "Terms and conditions apply" as long as the terms and conditions do not strongly affect the meaning of the advert - for example if it only applied to people over the age of 12, which doesn't really change the advert much for most listeners (on the assumption that an 11 year old isn't interested in spending their pocket money on a widget anyway).
+            
          </div>
+ </div>
+    <div class="vendorpopup"  id="comment" style="display:none">
+        <div class="vendorpopup_sub" id="vendorpopup_sub" style=" background-color:#fff;">
+            
+       </div>
  </div>
   <body class="hold-transition skin-blue sidebar-mini">
        <div class="comment_content">
@@ -280,7 +299,8 @@ $segments_var = Request::segments();
                                   @if(Entrust::hasRole('administrator'))
                                   <li class="{{($active2 == 'requests' && $active == 'mainadmin_approval') ? 'active' : ''}}"><a href="{{route('mainadmin_approval.requests')}}"  class="{{($request_only_verifire == 'mainadmin_approval') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Main Admin Approval</a>
                                   </li>
-                                  @endif
+                                  
+                                   @endif
                                   @if(Entrust::hasRole('coordinator'))
                                   <li class="{{($active2 == 'requests' && $active == 'coordinator') ? 'active' : ''}}"><a href="{{route('coordinator.requests')}}"  class="{{($request_only_verifire == 'coordinator') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Admin Coordinator Action</a>
                                   </li>
@@ -288,24 +308,44 @@ $segments_var = Request::segments();
                                   </ul>
                           </li>
                            
-                           @if(Entrust::hasRole('administrator'))
+                          @if(Entrust::hasRole('administrator'))
+                          <li class="{{$active == 'mainadmin_likes_approval' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Main Admin Like / Dislike</span></a>
+                              <ul aria-expanded="false" class="collapse">
+                                  <li class="{{($active2 == 'mainadmin_likes_approval' && $active == 'index') ? 'active' : ''}}"><a href="{{route('mainadmin_likes_approval.index')}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Like / Dislike Approval</a></li>
+                                 
+                              </ul>
+                          </li>
+                         @endif
+                          
+                          
+                           @if(Entrust::hasRole('purchaser'))
                           <li class="{{$active == 'call_for_tender' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Purchaser Action</span></a>
                               <ul aria-expanded="false" class="collapse">
-<!--                                <li class="{{($active2 == '' && $active == 'call_for_tender') ? 'active' : ''}}"><a href="{{route('call_for_tender.index')}}"><i class="fa fa-users"></i> Call for Tender</a></li>-->
-                                 <li class="{{($active2 == 'requests' && $active == 'call_for_tender') ? 'active' : ''}}"><a href="{{route('call_for_tender_list.requests')}}"  class="{{($request_only_verifire == 'call_for_tender') ? 'active' : ''}}"><i class="fa fa-gavel" aria-hidden="true" style="color:green"></i> Call for Tender</a>
-                             </ul>
+                                  <li class="{{($active2 == 'call_for_tender' && $active == 'index') ? 'active' : ''}}"><a href="{{route('call_for_tender.index')}}"><i class="fa fa-gavel" aria-hidden="true" style="color:green"></i> Call for Tender</a></li>
+                                  <li class="{{($active2 == 'call_for_tender' && $active == 'receipt_of_quotation') ? 'active' : ''}}"><a href="{{route('receipt_of_quotation.call_for_tender')}}"><i class="fa fa-gavel" aria-hidden="true" style="color:green"></i> Receipt Quotation</a></li>
+                              </ul>
                           </li>
-                         <li class="{{$active == 'vendor_quotation_lists' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Comparison Analysis</span></a>
+                          <li class="{{$active == 'purchaser' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Purchase Order</span></a>
                               <ul aria-expanded="false" class="collapse">
-                                <li class="{{($active2 == '' && $active == 'vendor_quotation_lists') ? 'active' : ''}}"><a href="{{route('vendor_quotation_lists.index')}}"><i class="fa fa-users"></i> All Vendor Quotations</a></li>
-                             </ul>
-                            </li>
-                          <li class="{{$active == 'pending_quotations' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Pending Quotation</span></a>
-                              <ul aria-expanded="false" class="collapse">
-                                <li class="{{($active2 == '' && $active == 'pending_quotations') ? 'active' : ''}}"><a href="{{route('pending_quotations.index')}}"><i class="fa fa-users"></i> All Pending Quotation</a></li>
-                             </ul>
+                                  <li class="{{($active2 == 'purchaser' && $active == 'index') ? 'active' : ''}}"><a href="{{route('purchases.index')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> All Purchase Order</a></li>
+                                  
+                              </ul>
                           </li>
-                           @endif
+                         @endif
+                             
+                         <?php 
+                         $id=Auth::id(); 
+                         $query = DB::table('purchase_committees') ->whereRaw('FIND_IN_SET(?,member_id)', [$id])->get();
+                     
+                         ?>
+                           @if(count($query)>0)
+                          <li class="{{$active == 'vendor_quotation_lists' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Comparision Analysis</span></a>
+                              <ul aria-expanded="false" class="collapse">
+                                  <li class="{{($active2 == 'vendor_quotation_lists' && $active == 'index') ? 'active' : ''}}"><a href="{{route('vendor_quotation_lists.index')}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Comparision Analysis</a></li>
+                              </ul>
+                          </li>
+                         @endif
+                          
                        @if(Entrust::hasRole('administrator'))
                             <li class="{{$active == 'requests' ? 'active' : ''}}">
                                <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Setting</span>
@@ -473,15 +513,15 @@ $segments_var = Request::segments();
       maxDate: "-0Y"
                 });
       }); 
- $('body').on('focus',".multiple_date_due", function(){
-               $(this).datepicker({
-                    dateFormat: 'dd-mm-yy',
-                     startView: "year",
-                      minDate:new Date(),
-                      changeYear: true,
-                    yearRange: "-80Y:+20Y"
-});
-});
+    $('body').on('focus',".multiple_date_due", function(){
+                  $(this).datepicker({
+                       dateFormat: 'dd-mm-yy',
+                        startView: "year",
+                         minDate:new Date(),
+                         changeYear: true,
+                       yearRange: "-80Y:+20Y"
+   });
+   });
 
                                                   $('#map1').append('<div style="" id="map"><div class="loader"></div></div>');
                                                   $(window).on('load', function () {
@@ -723,8 +763,7 @@ $(document).ready(function () {
               $("#sum").html(sum.toFixed(2));
           }
  $(document).on("click", ".remove_bank_row", function () {
-
-var s_no_legth=   $('input[name="s_no[]"]').length;
+    var s_no_legth=   $('input[name="s_no[]"]').length;
     if(s_no_legth==1)
     {
     alert("At-least one item required")
@@ -736,26 +775,9 @@ var s_no_legth=   $('input[name="s_no[]"]').length;
               $table.trigger("recalc");
               
         }  
-       });
-    $(document).on("keyup", ".bank_table input", function () {
-              $(this).trigger("recalc");
-          });
-
-          $(document).on("recalc", ".bank_table tr", function () {
-              var total = +$(this).find(".quantity2").val() * +$(this).find(".rate").val();
-              $(this).find(".tamnt").val(total.toFixed(2));
-          });
-
-          $(document).on("recalc", ".bank_table", function () {
-              var grandTotal = 0;
-              $(this).find(".tamnt").each(function () {
-                  grandTotal += +$(this).val();
-              });
-              $("#grandTotal").val(grandTotal.toFixed(2));
-          });
-
-          $(".bank_table").trigger("recalc");
-
+   });
+       
+   
           /******************************************************************/
           $(document).ready(function () {
 
@@ -788,6 +810,18 @@ $(function () {
     });
 });
 
+
+    function valudateTerm()
+    {
+       
+          if ($('#chkterms').is(':checked')) {
+                    alert('you agreed conditions')
+                }
+                else {
+                    alert('please check terms & conditions')
+                }
+    }
+        
 
 
       </script>

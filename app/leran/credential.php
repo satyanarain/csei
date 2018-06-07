@@ -25,8 +25,11 @@ Designation : Finance Head
 email : satya2000chauhan@gmail.com 
 password : 123123 
  
+Name :  Ravi Kumar(purchaser) 
+email : satya2000chauhan@yahoo.com 
+password : 123123 
+Designation : Purchaser 	
 
-Biittoo sharma  
  
 Dear Bittoo Sharma(Office Assis.),
 

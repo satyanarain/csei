@@ -7,7 +7,7 @@
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{route('pending_quotations.index')}}">Vendors</a></li>
+                <li class="breadcrumb-item"><a href="{{route('vendor_quotation_lists.index')}}">Vendors</a></li>
                 <li class="breadcrumb-item active">Update</li>
             </ol>
         </div>
@@ -23,8 +23,8 @@
                  <div class="form-validation">
                      <h4 class="header2" style="border-bottom:#ccc 0px solid;">Update Vendor</h4>
 									
-										{!!Form::model($pending_quotations, ['route'=>['pending_quotations.update', $pending_quotations->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
-										@include('pending_quotations.form1')
+										{!!Form::model($vendor_quotation_lists, ['route'=>['vendor_quotation_lists.update', $vendor_quotation_lists->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
+										@include('vendor_quotation_lists.form1')
 										{!!Form::close()!!}
 									
 								</div>

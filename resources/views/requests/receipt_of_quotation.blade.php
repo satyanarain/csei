@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">All Comparison Analysis</h3> </div>
+    <h3 class="text-primary">All Comparison Sheets</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">All Comparison Analysis</li>
+        <li class="breadcrumb-item active">All Comparison Sheets</li>
       </ol>
     </div>
   </div>
@@ -45,27 +45,28 @@
                 {{dateView($vendor_quotation_lists->due_date)}}
               </td>
                 <td>{{$vendor_quotation_lists->request_no}}</td>
-                <td>
+              
+<!--                <td>{{$vendor_quotation_lists->purpose}}</td>-->
+<!--                 <td>{{$vendor_quotation_lists->amount}}</td>-->
+                 <td>
                  {{displayView($vendor_quotation_lists->purpose)}}
                  </td>
                 <td>
                 <?php 
-                 $allready = alreadyComment('vendor_finalise_for_purchase_orders', $vendor_quotation_lists->request_id, $vendor_quotation_lists->vendor_id,'request_id','vendor_id');
-                 ?>
+                $allready = alreadyComment('committee_member_like_dislikes', $vendor_quotation_lists->request_id, $user_id,'request_id','committee_member_id');
+                
+                ?>
                     @if($allready==0)
-                    <a href="{{route('purchases.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle"></i> Send for Approval</a>
+                    <a href="{{route('requests.show',[$vendor_quotation_lists->id,'receipt_of_quotation'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i>View</a>
                    @else
-                    <a href="{{route('purchases.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i>View</a>
+                    <a href="{{route('requests.show',[$vendor_quotation_lists->id,'receipt_of_quotation'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-comment"></i> Commented</a>
                    @endif
               </td>
             </tr>
             @endforeach
           </tbody>
         </table>
-                
-                
-                
-              
+         
       </div>
     </div>
   </div>

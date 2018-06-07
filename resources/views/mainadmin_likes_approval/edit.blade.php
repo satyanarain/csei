@@ -7,8 +7,8 @@
         <div class="col-md-7 align-self-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{route('pending_quotations.index')}}">Vendors</a></li>
-                <li class="breadcrumb-item active">Create</li>
+                <li class="breadcrumb-item"><a href="{{route('vendor_quotation_lists.index')}}">Vendors</a></li>
+                <li class="breadcrumb-item active">Update</li>
             </ol>
         </div>
     </div>
@@ -21,21 +21,21 @@
             <div class="card">
                 <div class="card-body">
                  <div class="form-validation">
-                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Create Vendor</h4>
-      
-                                    {!!Form::open(['route'=>'pending_quotations.store', 'id'=>'formValidate', 
-                                    'onsubmit'=>'return validatePan()',
-                                    'class'=>'formValidate', 'files'=>true])!!}
-                                    @include('pending_quotations.form')
-                                    {!!Form::close()!!}
-                                
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    @endsection
- @push('scripts')
+                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Update Vendor</h4>
+									
+										{!!Form::model($vendor_quotation_lists, ['route'=>['vendor_quotation_lists.update', $vendor_quotation_lists->id], 'method'=>'PATCH', 'id'=>'formValidate', 'class'=>'formValidate', 'files'=>true])!!}
+										@include('vendor_quotation_lists.form1')
+										{!!Form::close()!!}
+									
+								</div>
+							</div>
+						</div>
+					</div>
+		
+	</div>
+	@endsection
+
+	@push('scripts')
 <script>
     
     var form_validation = function() {
@@ -62,14 +62,14 @@
                         required: !0,
                         email: !0
                     },
-                    "password": {
-                        required: !0,
-                        password: !0
-                    },
-                    "confirm_password": {
-                        required: !0,
-                        confirm_password: !0
-                    },
+//                    "password": {
+//                        required: !0,
+//                        password: !0
+//                    },
+//                    "confirm_password": {
+//                        required: !0,
+//                        confirm_password: !0
+//                    },
                     "roles": {
                         required: !0
                     },
@@ -87,16 +87,16 @@
                 },
                 messages: {
                     "name": {
-                        required: "Please enter a username",
-                        minlength: "Your username must consist of at least 3 characters"
+                        required: "Please enter a vendorname",
+                        minlength: "Your vendorname must consist of at least 3 characters"
                     },
                     "email": "Please enter a valid email address",
-                     "password": {
-                        required: "Please enter a password"
-                    },
-                     "confirm_password": {
-                        required: "Please enter a confirm password"
-                    },
+//                     "password": {
+//                        required: "Please enter a password"
+//                    },
+//                     "confirm_password": {
+//                        required: "Please enter a confirm password"
+//                    },
                     "roles": {
                         required: "Please select atleast one role"
                     },

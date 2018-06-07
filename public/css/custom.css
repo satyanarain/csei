@@ -26,7 +26,7 @@ display:none;
 .vendorpopup
 {
 position:fixed; top:0; left:0; 
-
+padding-top: 200px;
 z-index:1000000;
 background-color:#fff;
 width: 100%;
@@ -37,12 +37,17 @@ background:rgba(0,0,0,0.6);
 {
 background-color: #000;
 
-height:480px; 
-width:440px;
+height:auto; 
+width:50%;
 margin:0 auto;
 position:relative;
   border:2px solid #cccccc; 
- border-radius:2px;   
+ border-radius:2px;  
+padding: 20px;
+text-align: justify;
+text-justify: inter-word;
+overflow-y: scroll;
+  
 }
 
 

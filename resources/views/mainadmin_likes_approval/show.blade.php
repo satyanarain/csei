@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            {!!Form::open(['route'=>'vendor_quotation_lists.store', 'id'=>'formValidate', 
+            {!!Form::open(['route'=>'mainadmin_likes_approval.store', 'id'=>'formValidate', 
             'onsubmit'=>'return validatePan()',
             'autocomplete'=>'off',
             'class'=>'formValidate', 'files'=>true])!!}
@@ -101,12 +101,62 @@
                                       <input type="hidden" name="vendor_id[]" id="send_for_omparision_analysis" value="{{$vendor_value->vendor_id}}">
                                       </th>
                                  </tr>
+                                 <tr>
+                                     <th width="20%">Like</th>
+                                     <th  width="80%">
+                                    <?php 
+                                 //  echo "user". 
+                                           $user = DB::table('committee_member_like_dislikes')->select('*')
+                            ->where('committee_member_like_dislikes.request_id', $requests->id)
+                            ->where('committee_member_like_dislikes.vendor_id', $vendor_value->vendor_id)
+                            // ->groupBy('committee_member_id')
+                            ->count();
+                             // echo "like". 
+                                      $like = DB::table('committee_member_like_dislikes')->select('*')
+                            ->where('committee_member_like_dislikes.request_id', $requests->id)
+                            ->where('committee_member_like_dislikes.vendor_id', $vendor_value->vendor_id)
+                            ->where('committee_member_like_dislikes.userlike', 1)
+                            // ->groupBy('committee_member_id')
+                            ->count();
+                              //echo "dislike".
+                                      $dislike = DB::table('committee_member_like_dislikes')->select('*')
+                            ->where('committee_member_like_dislikes.request_id', $requests->id)
+                            ->where('committee_member_like_dislikes.vendor_id', $vendor_value->vendor_id)
+                            ->where('committee_member_like_dislikes.userdislike', 1)
+                            // ->groupBy('committee_member_id')
+                            ->count();
+                    
+                                       $likepercentage= round(100*($like/$user));
+                                       $dislikepercentage= round(100*($dislike/$user));
+                              
+                                     ?>
+
+                                         <div class="progress" style="height:30px; background-color:#fff; border:#ccc 1px solid;">
+                                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:{{$likepercentage}}%; height:20; background-color:#009900">
+                                                 {{$likepercentage}}%
+                                             </div>
+                                         </div>       
+
+                                     </th>
+                                 </tr>
+                                 <tr>
+                                     <th width="20%">Dislike</th>
+                                     <th  width="80%">
+
+
+                                         <div class="progress" style="height:30px; background-color:#fff; border:#ccc 1px solid;">
+                                             <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:{{$dislikepercentage}}%; height:20; background-color:#ff0000">
+                                              {{$dislikepercentage}}%
+                                         </div>       
+
+                                     </th>
+                                 </tr>
                                  
                              </table>
                            </th>
                        </tr>
                      
-                      @include('partials.item_list')
+                    @include('partials.item_list')
                     <?php
                     $vendor_quotation_list_all = DB::table('vendor_quotation_lists')->select('*')
                             ->leftjoin('requests', 'requests.id', 'vendor_quotation_lists.request_id')
@@ -114,46 +164,34 @@
                             ->where('vendor_quotation_lists.request_id', $requests->id)
                             ->where('vendor_quotation_lists.vendor_id', $vendor_value->vendor_id)
                             ->get();
-                   
-                    ?>
-                    <?php 
-                    $i=1;
-                    foreach($vendor_quotation_list_all as $vendor_value_all)
-                    {
                     
                     ?>
+                    @foreach($vendor_quotation_list_all as $vendor_value_all)
+                    
+                    
                     <tr>
                     @include('partials.item_list_sub')
-                   <?php 
-                     $allready = alreadyComment('committee_member_like_dislikes', $requests->id,Auth::id(),'request_id','committee_member_id');
+<?php               $allready = alreadyComment('vendor_finalise_for_purchase_orders', $requests->id,$vendor_value->vendor_id,'request_id','vendor_id');
                    ?>
                     </tr>
                     @if($allready==0)
                      <tr>
                          <th colspan="9">
                              <table>
-                                 <tr>
-                                      <td align="left" valign="top" class="likeclick" width="1%" style="border:none;">
-                                      <input type="radio" class="change_value_like" size="7" name="no_value{{$i}}" required="required" style="margin:7px 0px 0px 0px;">
-                                      <input type="hidden" class="like" size="7" name="userlike[]"   value="0"> 
+                                <tr>
+                                     <td align="left" valign="top" class="likeclick" width="1%" style="border:none;">
+                                      <input type="checkbox" class="change_value_like" size="7" name="no_value{{$vendor_value->vendor_id}}"  readonly="readonly" required="required" style="margin:7px 0px 0px 0px;"> 
+                                      <input type="hidden" class="like" size="7" name="approved_vendor_id[]"   value="0">
                                       </td>
-                                      <td align="left" valign="top" width="5%" style="border:none;">Like
+                                     <td align="left" valign="top" class="likeclick"  style="border:none; text-align:left;">
+                                     Approve Vendor
                                       </td>
-                                      <td align="left" valign="top" class="dislikeclick" width="1%" style="border:none;">
-                                      <input type="radio" class="change_value_dislike" size="7" name="no_value{{$i}}" required="required" style="margin:7px 0px 0px 0px;">
-                                      <input type="hidden" class="dislike" size="7" name="userdislike[]"   value="0"> 
-                                     </td>
-                                     <td align="left" valign="top" style="text-align:left;border:none;">Dislike</td>
-                                  </tr>
-
-                             </table>
+                                    </tr>
+                               </table>
                          </th>
                        </tr>
                        @endif
-                    <?php 
-                    $i++;
-                    
-                    } ?>
+                       @endforeach
                       
                     @endforeach
                 </table>

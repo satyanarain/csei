@@ -77,7 +77,7 @@ class RequestRepository implements RequestRepositoryContract
         if($request->category_id==2)
         {
          if (strlen(implode($s_no))> 0)
-     {
+       {
          foreach ($s_no as $key => $n) {
             $id = DB::table('material_details')->insertGetId(
                     ['request_id' => $request_id, 's_no' => $s_no[$key],'product_name'=>$product_name[$key], 'purchase_quantity' => $purchase_quantity[$key], 'remark' => $remark[$key]]
@@ -89,10 +89,7 @@ class RequestRepository implements RequestRepositoryContract
         $sql_approver = User::where('id', $input['user_id'])->first();
         $approver = User::whereIn('id', explode(',', $sql_approver->approvers))->get();
         
-        
-        
-     
-/***********************************Email for cash***********************************************************************************/
+  /***********************************Email for cash***********************************************************************************/
         if($request->category_id==1)
         {
         if ($request_id != '') {
@@ -105,7 +102,7 @@ class RequestRepository implements RequestRepositoryContract
                 });
             }
         }
-          /************************************mail to requester******************************************/
+    /************************************mail to requester******************************************/
        if($request->category_id==1)
         {      
        if ($request_id != '') {
@@ -116,8 +113,8 @@ class RequestRepository implements RequestRepositoryContract
           }
         }
         }
-    /***********************************Email for material***********************************************************************************/   
-        /***********************************Email for material***********************************************************************************/
+/***********************************Email for material***********************************************************************************/   
+/***********************************Email for material***********************************************************************************/
          if($request->category_id==2)
         {
         if ($request_id != '') {

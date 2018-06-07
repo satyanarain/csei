@@ -130,7 +130,18 @@
              4. Add functionality to  send email to requester with payment type, requested amount, release  amount .
       
           
-              
+               /****************************************Date 05-06-2018******************************************************/
+            
+             1. Added functionality to send mail to purchaser after admin approval in material/service category.
+             2. Added functionality to list admin approved material service request.
+             3. Added functionality to send item quotation to vender.
+             4. Save vendor quotation form with gst and time line.
+               /****************************************Date 05-06-2018******************************************************/
+            
+             1. Added functionality to list  receipt vender quotation.
+             2. Added functionality to save selected vendor.
+             3. Added functionality to send mail to purchase committee member.
+             4. List selected vendor for like dislike
              
              
     

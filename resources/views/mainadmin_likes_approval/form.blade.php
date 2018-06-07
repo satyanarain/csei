@@ -37,7 +37,7 @@
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="contact">Account No. <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::text('account_no',null , ['class' => 'form-control','onkeypress'=>'return isIntegerKey(event)']) !!}
+          {!! Form::text('account_no',null , ['class' => 'form-control','onkeypress'=>'return isIntegerKey(event)',required]) !!}
         </div>
     </div>
      <div class="form-group row">
@@ -56,9 +56,7 @@
         <label class="col-lg-4 col-form-label" for="upload_document">Other Document</label>
         <div class="col-lg-6">
           {!! Form::file('upload_document',null , ['class' => 'form-control']) !!} 
-              @if($pending_quotations->upload_document!='')
-               <a href="{{('/images/upload_document/'.$pending_quotations->upload_document)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></i></a>
-              @endif
+             
         </div>
     </div>
 </div>
@@ -71,12 +69,10 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="registration_no_upload">Registration No. Upload <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="registration_no_upload">Registration No. Copy <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::file('registration_no_upload',null , ['class' => 'form-control']) !!} @if($pending_quotations->registration_no_upload!='')
-<a href="{{('/images/registration_no_upload/'.$pending_quotations->registration_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i>
-</i></a>
-@endif
+          {!! Form::file('registration_no_upload',null , ['class' => 'form-control',required]) !!} 
+        
         </div>
     </div>
      <div class="form-group row">
@@ -86,12 +82,10 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="pan_no_upload">PAN No. Upload <span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="pan_no_upload">PAN No. Copy <span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::file('pan_no_upload',null , ['class' => 'form-control']) !!}
-           @if($pending_quotations->pan_no_upload!='')
-         <a href="{{('/images/pan_no_upload/'.$pending_quotations->pan_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></i></a>
-        @endif
+          {!! Form::file('pan_no_upload',null , ['class' => 'form-control',required]) !!}
+           
            </div>
     </div>
     <div class="form-group row">
@@ -101,18 +95,16 @@
         </div>
     </div>
      <div class="form-group row">
-        <label class="col-lg-4 col-form-label" for="gst_no_upload">GST No. Upload<span class="text-danger">*</span></label>
+        <label class="col-lg-4 col-form-label" for="gst_no_upload">GST No. Copy<span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::file('gst_no_upload',null , ['class' => 'form-control']) !!}
-           @if($pending_quotations->gst_no_upload!='')
-          <a href="{{('/images/gst_no_upload/'.$pending_quotations->gst_no_upload)}}" class="btn btn-primary" download><i class="fa fa-download" aria-hidden="true"></i></i></a>
-          @endif
+          {!! Form::file('gst_no_upload',null , ['class' => 'form-control',required]) !!}
+          
         </div>
     </div>
      <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="gst_no_upload">Status<span class="text-danger">*</span></label>
         <div class="col-lg-6">
-          {!! Form::select('status',array('1'=>'Active','0'=>'Inactive'),null , ['class' => 'form-control','placeholder'=>'Select Status',required]) !!}
+          {!! Form::select('status',array('1'=>'Active','0'=>'Inactive'),null , ['class' => 'form-control',required]) !!}
         </div>
     </div>
 <br>

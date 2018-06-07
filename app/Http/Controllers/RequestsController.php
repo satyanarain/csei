@@ -80,7 +80,6 @@ use activityLog;
         
          $id=  $request->id;
          $comments=  $request->comments;
-       
          $approver_id= $user_details->id;
          $user_id=$request->user_id;
          $name_of_project=  $request->name_of_project;
@@ -93,8 +92,7 @@ use activityLog;
           /****************************************************************************************/
           $requester = DB::table('requests')->select('*','requests.id as id')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
           $status = 2; 
-          
-            $result=CSEIRequest::where('id', $id)->update(['name_of_project'=>$name_of_project,'project_expense_head'=>$project_expense_head,'status' =>$status,'verifire_id'=>$verifire_id]); 
+          $result=CSEIRequest::where('id', $id)->update(['name_of_project'=>$name_of_project,'project_expense_head'=>$project_expense_head,'status' =>$status,'verifire_id'=>$verifire_id]); 
          
           // $result=  CSEIRequest::where('id', $id)->update(['status' =>$status,'approver_id'=>$approver_id]); 
         /******************************************email finance department*********************************/
@@ -102,7 +100,6 @@ use activityLog;
            foreach($role_user as $role_user) 
            {
            $all_finance_user_array[]= $role_user->user_id;  
-               
            }
              $role_user=DB::table('users')->whereIn('id',$all_finance_user_array)->get();  
          /******************************************email to all financer  *********************************/ 
@@ -149,8 +146,8 @@ use activityLog;
          $status = 6; //we assume status is true (1) at the begining;
          $result = CSEIRequest::where('id', $id)->update(['status' =>$status,'rejectore_id'=>$rejectore_id,'comments'=>$comments]); 
          
-           /*******************************mail to requester when request reject at verification time***********************************************************************/
-       $name= $sql_requester_name->name;
+        /*******************************mail to requester when request reject at verification time***********************************************************************/
+         $name= $sql_requester_name->name;
                       if($result==1)
           {
                    Mail::send( 'emails.cash.request_reject_approver_time',['rejector_name'=>$rejector_name,'name'=>$name,'request_no'=>$request_no,'amount'=>$amount,'due_date'=>$due_date,'comments'=>$comments], function ($m) use ($sql_requester_name) {
@@ -427,7 +424,7 @@ use activityLog;
             $request_no=$request_data->request_no;
             $amount= $request_data->amount;
             $sql_requester= DB::table('requests')->select('*')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
-            /************************************************11 id for coordinator***********************************************************/
+            /************************************************11 id for prchase***********************************************************/
            $role_user=DB::table('role_user')->where('role_id',11)->get();
            foreach($role_user as $role_user) 
            {
@@ -441,7 +438,7 @@ use activityLog;
           {
              foreach($role_user as $role_user_value)
              {
-                    Mail::send( 'emails.material.coordinator',['name'=>$role_user_value->name,'request_no'=>$request_no,'amount'=>$amount,'logged_user'=>$logged_user], function ($m) use ($role_user_value) {
+                    Mail::send( 'emails.material.purchaser',['name'=>$role_user_value->name,'request_no'=>$request_no,'amount'=>$amount,'logged_user'=>$logged_user], function ($m) use ($role_user_value) {
                    $m->from('info@opiant.online', 'CSEI');
                    $m->to($role_user_value->email, $role_user_value->name)->subject('CSEI |  Request Approved'); });
              }
@@ -449,74 +446,8 @@ use activityLog;
              return redirect()->route('mainadmin_approval.requests'); 
          }
         
-        
-        
-        
-        
-        /************************request voucher saved*********************************************************/
-        else if($request->quotation=='quotation')
-        {
-            
-          /*****vendor mail**************************************************************/
-            $vendor_array = implode(',', $request->vendor); 
-            $no_of_days=$request->no_of_days;
-            $allvendor= Vendor::whereIn('id',$request->vendor)->get();
-            /*******************************************************************/ 
-            $status=4;
-            $id=$request->id;
-            $result=CSEIRequest::where('id', $id)->update(['status' =>$status]);
-            $request_data= CSEIRequest::whereId($id)->first();
-            $request_no=$request_data->request_no;
-            $amount= $request_data->amount;
-            $due_date  =$request_data->due_date;
-            $sql_requester= DB::table('requests')->select('*')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
-            $s_no = $request->s_no;
-            $material_id = $request->material_id;
-            $material_string=implode(',',$request->material_id);
-            $product_name = $request->product_name;
-            $purchase_quantity = $request->purchase_quantity;
-            $vendor_response_date = $this->insertDate($request->vendor_response_date);
-            $remark = $request->remark;
-            $request_id = $id;
-            
-            if (strlen(implode($s_no)) > 0) {
-                foreach ($s_no as $key => $n) {
-                     $rfq_no="RFQ-".$request_id."-".$material_id[$key];
-                     DB::table('quotation_details')->insertGetId(['material_id' => $material_id[$key],'request_id' => $request_id, 's_no' => $s_no[$key], 'product_name' => $product_name[$key], 'purchase_quantity' => $purchase_quantity[$key], 'remark' => $remark[$key],'vendor_id'=>$vendor_array,'vendor_response_date'=>$vendor_response_date,'rfq_no'=>$rfq_no]
-                    );
-                }
-            } else {
-             Session()->flash('flash_message_warning', 'Please add at-least one item to send');
-            return redirect()->route('call_for_tender_list.requests');
-            }
-       /************************************************mail to who will save voucher***********************************************************/
-            
-               if($result==1)
-            {
-	        
-               foreach($allvendor as $ven)  
-               { 
-                 
-                    Mail::send( 'emails.material.mail_to_vendor', ['request_no'=>$request_no,'vendor_response_date'=>$vendor_response_date,'id'=>$request->id,'name' => $ven->name,'amount' => $amount,'vendor_id'=>$ven->id,'material_string'=>$material_string], function ($m) use ($ven) {
-                        $m->from('info@opiant.online', 'CSEI');
-                        $m->to($ven->email, $ven->name)->subject('CSEI | Quotation Submit');
-                    });
-            }
-            }
+         /************************request voucher saved*********************************************************/
       
-              $associates = DB::table('users')->select('*')->where('id',1)->first();
-             // $sql_requester= DB::table('requests')->select('*')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
-             if($result==1)
-            {
-	            $associate_name = $associates->name;
-                    Mail::send( 'emails.material.purchaser_send_qoutation_successfully', ['request_no'=>$request_no,'name' => $associates->name,'amount' => $amount], function ($m) use ($associates) {
-                        $m->from('info@opiant.online', 'CSEI');
-                        $m->to($associates->email, $associates->name)->subject('CSEI | Request Completed Successfully');
-                    });
-            
-            }
-          return redirect()->route('call_for_tender_list.requests'); 
-         }
           $this->request->create($request);
          return redirect()->route('requests.index');
            
@@ -617,8 +548,17 @@ use activityLog;
          $vendors = Vendor::all();
          $request_details = DB::table('request_details')->select('*')->where('request_details.request_id',$id)->get();
          $total_voucher = DB::table('requests')->select('*')->where([['category_id',$requests->category_id],['status',5]])->count();
+         
+         
+           $vendor_quotation_lists = DB::table('vendor_quotation_lists')->select('*')
+                ->leftjoin('requests', 'requests.id', 'vendor_quotation_lists.request_id')
+                ->leftjoin('vendors', 'vendors.id', 'vendor_quotation_lists.vendor_id')
+                ->where('vendor_quotation_lists.request_id', $id)
+                ->groupBy('vendor_quotation_lists.vendor_id')
+                ->get();
+      
        
-        return view('requests.show', compact('requests','request_details','total_voucher','material_details','vendors','material_details_view','material_detail_logs'));
+        return view('requests.show', compact('requests','request_details','total_voucher','material_details','vendors','material_details_view','material_detail_logs','vendor_quotation_lists'));
     }
 
     /**
@@ -730,6 +670,7 @@ use activityLog;
               ->leftjoin('users','users.id','requests.user_id')
               ->leftjoin('categories','categories.id','requests.category_id')
               ->leftjoin('c_status','c_status.id','requests.status')
+               ->where('requests.category_id',1)
                ->orderBy('requests.id','desc')
               ->where('requests.status',4) 
               ->get();
@@ -747,8 +688,24 @@ use activityLog;
                 ->get();
         return view('requests.call_for_tender_list', compact('requests'));
     }
+    
+    
+    public function receiptOfQuotation() {
+       $user_id= Auth::id();
+        $vendor_quotation_lists = DB::table('vendor_quotation_lists')->select('*')
+        ->leftjoin('vendors','vendors.id','vendor_quotation_lists.vendor_id')
+        ->leftjoin('requests','requests.id','vendor_quotation_lists.request_id')
+        ->groupBy('requests.id')
+        //->whereIn('vendor_quotation_lists.request_id',$send_to_comparision_array)
+        ->orderBy('requests.id','desc')
+        ->get();
+exit();
 
-    public function saveVoucher($id, Request $request) {
+    return view('cal_for_tender.receipt_of_quotation', compact('vendor_quotation_lists','user_id'));
+        
+    }
+    
+public function saveVoucher($id, Request $request) {
 
         $amount_issued = $request->amount_issued;
         $date_issued = $this->insertDate($request->date_issued);

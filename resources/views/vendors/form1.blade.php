@@ -14,7 +14,12 @@
        {!! Form::text('email',null , ['class' => 'form-control']) !!}
         </div>
     </div>
-
+<div class="form-group row">
+        <label class="col-lg-4 col-form-label" for="email">Address <span class="text-danger">*</span></label>
+        <div class="col-lg-6">
+       {!! Form::textarea('address',null , ['class' => 'form-control']) !!}
+        </div>
+    </div>
 
    <div class="form-group row">
         <label class="col-lg-4 col-form-label" for="contact">Mobile <span class="text-danger">*</span></label>

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row justify-content-center" id='printableArea'>
-    <div class="col-lg-6">
+    <div class="col-lg-9">
         <div class="card">
             <div class="card-body">
 
@@ -29,7 +29,9 @@
                                     <th class="table-row-heading">Product Name</th>
                                     <th class="table-row-heading">Quantity</th>
                                     <th class="table-row-heading">Cost / PC</th>
+                                    <th class="table-row-heading">GST(%)</th>
                                     <th class="table-row-heading">Total Amount</th>
+                                    <th class="table-row-heading">Time Line</th>
                                     <th class="table-row-heading">Requester Remark</th>
                                     <th class="table-row-heading" style="text-align:left;">Vendor Remark</th>
 
@@ -66,7 +68,14 @@
                                     <td>
                                         <div class="dummy">
                                             <div class="input-icon right">
-                                                <input type="text" class="form-control rate" size="5" name="purchase_unit_rate[]" onkeypress="return isNumberKey(event)" required="required">
+                                                <input type="text" class="form-control rate" size="5" name="purchase_unit_rate[]" onkeypress="return isIntegerKey(event)" required="required">
+                                            </div>
+                                        </div>
+                                    </td>
+                                     <td>
+                                        <div class="dummy">
+                                            <div class="input-icon right">
+                                                <input type="text" class="form-control gst" size="5" name="gst[]" onkeypress="return isNumberKey(event)" required="required">
                                             </div>
                                         </div>
                                     </td>
@@ -77,13 +86,24 @@
                                             </div>
                                         </div>
                                     </td>
+                                    
+                                    <td>
+                                        <div class="dummy">
+                                            <div class="input-icon right">
+                                         
+                                                <input type="text" class="form-control multiple_date_due" size="7" name="timeline[]" required="required">
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>
                                         <div class="dummy">
                                             <div class="input-icon right">
                                           {{$quotation_value->remark}}
+                                          <input type="hidden" class="form-control tamnt" size="7" name="remark[]" readonly="readonly" value="{{$quotation_value->remark}}">
                                             </div>
                                         </div>
                                     </td>
+                                    
                                     <td>
                                         <div class="dummy">
                                             <div class="input-icon right">

@@ -33,17 +33,17 @@ class VendorQuotationCompareListsController extends Controller
     public function index()
     {
      $user_id= Auth::id();
-      $send_to_comparision = DB::table('quotation_send_for_comparision')->select('*')->get();
+      $send_to_comparision = DB::table('quotation_send_for_comparision')->select('*')->where('quotation_send_for_comparision.approved_vendor_id',1)->get();
       
       foreach($send_to_comparision as $send_to_comparision_value)
       {
      $send_to_comparision_array[]=  $send_to_comparision_value->request_id;   
       }
-     $vendor_quotation_lists = DB::table('vendor_quotation_lists')->select('*')
+      $vendor_quotation_lists = DB::table('vendor_quotation_lists')->select('*')
              ->leftjoin('vendors','vendors.id','vendor_quotation_lists.vendor_id')
              ->leftjoin('requests','requests.id','vendor_quotation_lists.request_id')
              ->groupBy('requests.id')
-             ->whereIn('vendor_quotation_lists.request_id',$send_to_comparision_array)
+              ->whereIn('vendor_quotation_lists.request_id',$send_to_comparision_array)
              ->orderBy('requests.id','desc')
               ->get();
 
@@ -70,58 +70,41 @@ class VendorQuotationCompareListsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        $committee_member_id = Auth::id();
+  
+         $committee_member_id = Auth::id();
          $user_id_login= Auth::user();
-         $commentator_name=$user_id_login->name;
-        $vendor_id = $request->vendor_id;
-        $request_id = $request->request_id;
-        $committee_member_remark = $request->committee_member_remark;
-        $already=DB::table('committee_member_comments')->select('*')->where([['vendor_id',$vendor_id[0]],['request_id',$request_id[0]],['committee_member_id',$committee_member_id]])->count();
-        if ($already > 0) {
-            Session::flash('flash_message', "You have already comments this quotation!.");
-            return redirect()->route('vendor_quotation_lists.index');
-            exit();
-        } else {
-            foreach ($vendor_id as $key => $n) {
-                DB::table('committee_member_comments')->insertGetId(
-                        ['committee_member_id' => $committee_member_id, 'request_id' => $request_id[$key], 'vendor_id' => $vendor_id[$key], 'committee_member_remark' => $committee_member_remark[$key]]
-                );
-            }
-            
-           
-            
-              $sql = DB::table('role_user')->select('*')->where('role_user.role_id',7)->get();
-              foreach($sql as $val)
-              {
-                  
-              $user_id[]=$val->user_id;
-              
-              }
+         $logged_user=$user_id_login->name;
+         $vendor_id   = $request->vendor_id;
+         $request_id  = $request->request_id;
+         $userlike    = $request->userlike;
+         $userdislike = $request->userdislike;
+         foreach ($vendor_id as $key => $n) {
              
-            $finance_head = DB::table('users')->select('*')->whereIn('id',$user_id)->get();
-            
-            
-          /****************************************************************************************/
+             //echo "uiuiuiu";
+                  DB::table('committee_member_like_dislikes')->insertGetId(
+                        ['committee_member_id' => $committee_member_id, 'request_id' => $request_id, 'vendor_id' => $vendor_id[$key],'userdislike' => $userdislike[$key],'userlike' => $userlike[$key]]
+                      );
+            }
+     //  exit();  
+        // $finance_head = DB::table('users')->select('*')->whereIn('id',$user_id)->get();
+         /****************************************************************************************/
           $request_data= CSEIRequest::whereId($request_id)->first();
          $request_no=$request_data->request_no;
          $amount= $request_data->amount;
-        /******************************************email for associates*********************************/
-         if(count($user_id)>0)
-         {
-         foreach($finance_head as $finance_head)
-         {
          
-                     $name = $finance_head->name;
-                    Mail::send( 'emails.material.finance_head', ['request_no'=>$request_no,'name' => $name, 'amount' => $amount,'commentator_name'=>$commentator_name], function ($m) use ($finance_head) {
-                        $m->from('info@opiant.online', 'CSEI');
-                        $m->to($finance_head->email, $finance_head->name)->subject('CSEI | Request for vendor quotation approve');
-                    });
-         }
-         }
-            Session::flash('flash_message', "Comment submitted successfully!.");
+        /******************************************email for associates*********************************/
+         $mainadmin = DB::table('users')->select('*')->where('id',1)->first();
+           $name = $mainadmin->name;
+          //exit();
+          Mail::send( 'emails.material.main_admin_for_commemt', ['request_no'=>$request_no,'name' => $name, 'amount' => $amount,'logged_user'=>$logged_user], function ($m) use ($mainadmin) {
+           $m->from('info@opiant.online', 'CSEI');
+           $m->to($mainadmin->email, $mainadmin->name)->subject('CSEI | Request for vendor quotation approve');
+          });
+        
+            Session::flash('flash_message', "Approved successfully!.");
             return redirect()->route('vendor_quotation_lists.index');
-       }
-        return redirect()->route('vendor_quotation_lists.index');
+    //   }
+       // return redirect()->route('vendor_quotation_lists.index');
     }
 
     /**
@@ -132,22 +115,34 @@ class VendorQuotationCompareListsController extends Controller
      */
     public function show($id)
     {
-         $user_id= Auth::id(); 
-    
-      $requests = DB::table('requests')->select('*', 'requests.id as id', 'c_status.name as c_status', 'categories.name as name', 'requests.created_at as created_at')
+    $user_id= Auth::id(); 
+    $requests = DB::table('requests')->select('*', 'requests.id as id', 'c_status.name as c_status', 'categories.name as name', 'requests.created_at as created_at')
                 ->leftjoin('users', 'users.id', 'requests.user_id')
                 ->leftjoin('categories', 'categories.id', 'requests.category_id')
                 ->leftjoin('c_status', 'c_status.id', 'requests.status')
                 ->orderBy('requests.id', 'desc')
                 ->where('requests.id', $id)
                 ->first();
+      
+      
+       $send_to_comparision = DB::table('quotation_send_for_comparision')->select('*')->where([['quotation_send_for_comparision.approved_vendor_id',1],['quotation_send_for_comparision.request_id',$id]])->get();
+      
+      foreach($send_to_comparision as $send_to_comparision_value)
+      {
+      $vendor_id[]=  $send_to_comparision_value->vendor_id;   
+      }
+      
+ 
+      
         $vendor_quotation_lists = DB::table('vendor_quotation_lists')->select('*')
                 ->leftjoin('requests', 'requests.id', 'vendor_quotation_lists.request_id')
                 ->leftjoin('vendors', 'vendors.id', 'vendor_quotation_lists.vendor_id')
                 ->where('vendor_quotation_lists.request_id', $id)
+                ->whereIn('vendor_quotation_lists.vendor_id',$vendor_id)
                 ->groupBy('vendor_quotation_lists.vendor_id')
                 ->get();
-      
+        
+       
      
         return view('vendor_quotation_lists.show', compact('vendor_quotation_lists','requests','user_id'));
     }
@@ -186,40 +181,5 @@ class VendorQuotationCompareListsController extends Controller
      */
  
   
-     public function statusUpdate($id)
-    {
-    $sql=DB::table('vendor_quotation_lists')->where('id',$id)->first(); 
-     if($sql->status==0)
-       {
-       $status=  $sql->status;
-       $vendor = Vendor::findorFail($id);
-       $vendor->status=1;
-       $vendor->save();
-       echo 1;
-      }else
-       {
-       $status=  $sql->status;
-       $vendor = Vendor::findorFail($id);
-       $vendor->status=0;
-       $vendor->save();
-       echo 0;
-       }
-    }
-    public function createPassword($token)
-    {
-        return view('vendor_quotation_lists.reset')
-            ->withToken($token);
-    }
 
-    public function setPassword(SetPasswordRequest $request)
-    {
-        $vendor_quotation_lists = $this->vendor_quotation_lists->setPassword($request);
-
-        if($vendor_quotation_lists)
-        {
-            Auth::loginUsingId($vendor_quotation_lists->id);
-
-            return redirect()->route('home');
-        }        
-    }
 }

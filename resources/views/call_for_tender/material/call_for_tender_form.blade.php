@@ -1,4 +1,4 @@
- {!!Form::open(['route'=>'requests.store',
+ {!!Form::open(['route'=>'call_for_tender.store',
                                     'id'=>'formValidate',
                                     'class'=>'formValidate',
                                     'autocomplete'=>'off',
@@ -136,8 +136,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-lg-4 col-form-label" for="val-username">Vendor Response Date<span class="text-danger">*</span></label>
                                                     <div class="col-lg-6">
-                                                        {!! Form::text('vendor_response_date',null,['class'=>'form-control multiple_date_due','required'=>'required'])   !!}
-                                                               
+                                                        <input type="text"  name="vendor_response_date" id="vendor_response_date" class="form-control multiple_date_due" required="" value="">    
                                                     </div>
                                                 </div>
                                                 </br>
