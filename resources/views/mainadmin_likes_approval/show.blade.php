@@ -192,7 +192,12 @@
                        </tr>
                        @endif
                        @endforeach
+                      <?php       
+                     echo  $requests->id;
+                    echo  $vendor_value->vendor_id;
+                      echo  $allready = alreadyComment('vendor_finalise_for_purchase_orders', $requests->id,$vendor_value->vendor_id,'request_id','vendor_id');
                       
+                   ?>
                     @endforeach
                 </table>
             @if($allready==0)

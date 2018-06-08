@@ -33,9 +33,11 @@ class MainAdminLikesApprovalController extends Controller
     public function index()
     {
      $user_id= Auth::id();
-      $vendor_finalise_for_purchase_orders = DB::table('committee_member_like_dislikes')->select('id','request_id')->groupBy('committee_member_like_dislikes.request_id')->get();
+     
+     /********************After somparision like dislike save in committee_member_like_dislikes**********************************************************************************/
+      $committee_member_like_dislikes = DB::table('committee_member_like_dislikes')->select('id','request_id')->groupBy('committee_member_like_dislikes.request_id')->get();
          
-      foreach($vendor_finalise_for_purchase_orders as $committee_member_nalue)
+      foreach($committee_member_like_dislikes as $committee_member_nalue)
       {
      $committee_member_nalue_array[]=  $committee_member_nalue->request_id;   
       }
@@ -160,6 +162,7 @@ class MainAdminLikesApprovalController extends Controller
                 ->leftjoin('vendors', 'vendors.id', 'vendor_quotation_lists.vendor_id')
                 ->where('vendor_quotation_lists.request_id', $id)
                 ->whereIn('vendor_quotation_lists.vendor_id',$vendor_id)
+                ->groupBy('vendor_quotation_lists.vendor_id')
                 ->get();
         
        

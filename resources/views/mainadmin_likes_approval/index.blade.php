@@ -50,8 +50,8 @@
                  </td>
                 <td>
                 <?php 
-                $allready = alreadyComment('vendor_finalise_for_purchase_orders', $vendor_quotation_lists->request_id, $vendor_quotation_lists->vendor_id,'request_id','vendor_id');
-                 ?>
+           
+                $allready = DB::table('vendor_finalise_for_purchase_orders')->select('id','request_id')->where('request_id',$vendor_quotation_lists->request_id);             ?>
                     @if($allready==0)
                     <a href="{{route('mainadmin_likes_approval.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle"></i> Send for Approval</a>
                    @else
