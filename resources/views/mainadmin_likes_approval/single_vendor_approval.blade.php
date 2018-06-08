@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">All Receipt of Quotation</h3> </div>
+    <h3 class="text-primary">All Comparison Analysis</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active"> </li>
+        <li class="breadcrumb-item active">All Comparison Analysis</li>
       </ol>
     </div>
   </div>
@@ -45,35 +45,27 @@
                 {{dateView($vendor_quotation_lists->due_date)}}
               </td>
                 <td>{{$vendor_quotation_lists->request_no}}</td>
-              
-<!--                <td>{{$vendor_quotation_lists->purpose}}</td>-->
-<!--                 <td>{{$vendor_quotation_lists->amount}}</td>-->
-                 <td>
+                <td>
                  {{displayView($vendor_quotation_lists->purpose)}}
                  </td>
                 <td>
                 <?php 
-                  $allready = alreadyComment('quotation_send_for_comparision', $vendor_quotation_lists->request_id, $vendor_quotation_lists->vendor_id,'request_id','vendor_id');
-                $sql=DB::table('requests')->where('id',$vendor_quotation_lists->request_id)->first();
-              $sql->category_id;
-                ?>
+          // echo $vendor_quotation_lists->request_id;
+                 $allready = DB::table('vendor_finalise_for_purchase_orders')->select('*')->where('request_id',$vendor_quotation_lists->request_id)->count();             ?>
                     @if($allready==0)
-                    @if($sql->category_id==2)
-                    <a href="{{route('call_for_tender.show',[$vendor_quotation_lists->id,'receipt_of_quotation'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle"></i> Send for Comparision</a>
-                    @else
-                    <a href="{{route('call_for_tender.show',[$vendor_quotation_lists->id,'receipt_of_quotation'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle"></i> Send for Admin Approval</a>
-                    @endif
-                    
-                    
-                    @else
-                    <a href="{{route('call_for_tender.show',[$vendor_quotation_lists->id,'receipt_of_quotation'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
+                    <a href="{{route('mainadmin_likes_approval.show',[$vendor_quotation_lists->id,'single_vendor_approval'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle"></i>Approve</a>
+                   @else
+                    <a href="{{route('mainadmin_likes_approval.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i>View</a>
                    @endif
               </td>
             </tr>
             @endforeach
           </tbody>
         </table>
-         
+                
+                
+                
+              
       </div>
     </div>
   </div>

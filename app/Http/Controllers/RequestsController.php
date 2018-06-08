@@ -282,14 +282,14 @@ use activityLog;
     /***************end cat id1********************************************************************/
     /***************end cat id 1 line number 74-343********************************************************************/
     /***************start material section*/
-   if($request->category_id==2)
+   if($request->category_id==2 || $request->category_id==3)
    {
       if($request->approve=='Approve')
         {
         
          $id=  $request->id;
          $comments=  $request->comments;
-          $name_of_project=  $request->name_of_project;
+         $name_of_project=  $request->name_of_project;
          $project_expense_head=  $request->project_expense_head;
          $apporver_name= $user_details->name;
          $approver_id= $user_details->id;

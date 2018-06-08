@@ -42,6 +42,7 @@ use activityLog;
                 ->leftjoin('c_status', 'c_status.id', 'requests.status')
                 ->orderBy('requests.id', 'desc')
                 ->where([['requests.status', 4], ['requests.category_id', 2]])
+                ->orWhere([['requests.status', 4], ['requests.category_id', 3]])
                 ->get();
         return view('call_for_tender.index', compact('requests'));
 
@@ -90,11 +91,6 @@ use activityLog;
     
     
     
-    
-    
-    
-    
-    
     public function create()
     {
         $roles = Role::pluck('display_name', 'id');
@@ -116,10 +112,7 @@ use activityLog;
           $logged_user= $user_details->name;
             
           /*****vendor mail**************************************************************/
-          
-          
-          
-          if($request->quotation=='quotation')
+           if($request->quotation=='quotation')
           {
             $vendor_array = implode(',', $request->vendor); 
            
@@ -189,7 +182,7 @@ use activityLog;
           /********************************************send_for_comparision*******************************************************/
           else if($request->send_for_comparision=='send_for_comparision')
           {
-          
+            $category_id = $request->category_id;
             $vendor_id = $request->vendor_id;
             $approved_vendor_id = $request->approved_vendor_id;
             $request_id = $request->request_id;
@@ -199,28 +192,70 @@ use activityLog;
             $amount= $request_data->amount;
             $due_date  =$request_data->due_date;
                 foreach ($vendor_id as $key => $n) {
-                     DB::table('quotation_send_for_comparision')->insertGetId(['vendor_id' => $vendor_id[$key],'request_id' => $request_id,'approved_vendor_id' => $approved_vendor_id[$key],'purchaser_id'=>$purchaser_id]
+                     DB::table('quotation_send_for_comparision')->insertGetId(['vendor_id' => $vendor_id[$key],'request_id' => $request_id,'approved_vendor_id' => $approved_vendor_id[$key],'purchaser_id'=>$purchaser_id,'category_id'=>$category_id]
                     );
                 }
-            
-                
-               $purchase_committees = DB::table('purchase_committees')->select('*')->first();
+            $purchase_committees = DB::table('purchase_committees')->select('*')->first();
             $purchase_committees_array  =  explode(',',$purchase_committees->member_id);
-            print_r($purchase_committees_array);
+            //print_r($purchase_committees_array);
             
             $users=DB::table('users')->select('*')->whereIn('id',$purchase_committees_array)->get();
-                
-            
-           
+              
                 foreach($users as $user_value)
             {
                  
-                    Mail::send( 'emails.committee_member.mail_to commitee_member_for_comment', ['request_no'=>$request_no,'name' => $user_value->name,'amount' => $amount,'logged_user'=>$logged_user], function ($m) use ($user_value) {
+                    Mail::send( 'emails.committee_member.mail_to_commitee_member_for_comment', ['request_no'=>$request_no,'name' => $user_value->name,'amount' => $amount,'logged_user'=>$logged_user], function ($m) use ($user_value) {
                         $m->from('info@opiant.online', 'CSEI');
                         $m->to($user_value->email, $user_value->name)->subject('CSEI | Request Completed Successfully');
                     });
              }
                 
+       /************************************************mail to who will save voucher***********************************************************/
+              Session::flash('flash_message', "Call for tender send Successfully.");
+          return redirect()->route('receipt_of_quotation.call_for_tender');
+              
+          }
+          /**********************************************send_for_comparision*****************************************************/
+          /*********************************************send_for_comparision******************************************************/
+          /********************************************send_for_comparision*******************************************************/
+          else if($request->send_for_admin_approval=='send_for_admin_approval')
+          {
+          
+            $vendor_id = $request->vendor_id;
+            $category_id = $request->category_id;
+            
+            $approved_vendor_id = $request->approved_vendor_id;
+            $request_id = $request->request_id;
+            $purchaser_id  = $user_details->id;
+            $request_data= CSEIRequest::whereId($request_id)->first();
+            $request_no=$request_data->request_no;
+            $amount= $request_data->amount;
+            $due_date  =$request_data->due_date;
+                foreach ($vendor_id as $key => $n) {
+                     DB::table('quotation_send_for_comparision')->insertGetId(['vendor_id' => $vendor_id[$key],'request_id' => $request_id,'approved_vendor_id' => $approved_vendor_id[$key],'purchaser_id'=>$purchaser_id,'category_id'=>$category_id]
+                    );
+                }
+            
+                
+              $role_user=DB::table('role_user')->where('role_id',11)->get();
+           foreach($role_user as $role_user) 
+           {
+           $all_coordinator_array[]= $role_user->user_id;  
+               
+           }
+             $role_user=DB::table('users')->whereIn('id',$all_coordinator_array)->get();  
+
+    /******************************************email to all financer  *********************************/ 
+               if($result==1)
+          {
+             foreach($role_user as $role_user_value)
+             {
+                    Mail::send( 'emails.material.email_to_purchaser_to_create_po',['name'=>$role_user_value->name,'request_no'=>$request_no,'amount'=>$amount,'logged_user'=>$logged_user], function ($m) use ($role_user_value) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($role_user_value->email, $role_user_value->name)->subject('CSEI |  Request Create PO.'); });
+             }
+          }
+          /******************************************email for admin to apprved vender successfully*********************************/
        /************************************************mail to who will save voucher***********************************************************/
               Session::flash('flash_message', "Call for tender send Successfully.");
           return redirect()->route('receipt_of_quotation.call_for_tender');

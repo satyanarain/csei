@@ -159,9 +159,13 @@
                     </tr>
                     <tr>
                         <td align="left" valign="top" colspan="6" style="text-align:left;">
-                           
-                            <button class="btn btn-primary submit" type="submit" name="send_for_comparision" value="send_for_comparision" onclick="return validateChecked()"><i class="fa fa-paper-plane"></i> Send For Comparision</button></td>
-                           
+                           @if($requests->category_id==2)
+                            <input type="hidden" name="category_id" value="{{$requests->category_id}}" >
+                            <button class="btn btn-primary submit" type="submit" name="send_for_admin_approval" value="send_for_admin_approval" onclick="return validateChecked()"><i class="fa fa-paper-plane"></i> Send For Comparision</button></td>
+                           @else
+                           <input type="hidden" name="category_id" value="{{$requests->category_id}}" >
+                           <button class="btn btn-primary submit" type="submit" name="send_for_comparision" value="send_for_comparision" onclick="return validateChecked()"><i class="fa fa-paper-plane"></i> Send For Admin Approval</button></td>
+                           @endif
                     </tr>
                 </table> 
              @endif

@@ -16,7 +16,7 @@
        
         @elseif($view=='finance_approval')
            <h3 class="text-primary">
-            @if($requests->category_id==1 || $requests->category_id==2)
+            @if($requests->category_id==1 || $requests->category_id==2 ||  $requests->category_id==3)
            Request for Finance Approval
             @else
            Request for Action Details
@@ -24,7 +24,7 @@
         </h3>
         @elseif($view=='mainadmin_approval')
            <h3 class="text-primary">
-            @if($requests->category_id==1 || $requests->category_id==2)
+            @if($requests->category_id==1 || $requests->category_id==2 ||  $requests->category_id==3)
            Request for Main Admin Approval
             @else
            Request for Action Details
@@ -32,7 +32,7 @@
         </h3>
         @elseif($view=='coordinator')
            <h3 class="text-primary">
-            @if($requests->category_id==1 || $requests->category_id==2)
+            @if($requests->category_id==1 || $requests->category_id==2 ||  $requests->category_id==3)
            Request for coordinator Action
             @else
            Request for Action Details
@@ -120,8 +120,12 @@ if($requests->category_id==1)
  
     <?php } ?>
     <?php
-if($requests->category_id==2)
+if($requests->category_id==2 || $requests->category_id==3)
     {
+    
+    
+    
+    
      if($view=='view')
     { ?>
 	@include('requests.material.material_view')
@@ -133,7 +137,10 @@ if($requests->category_id==2)
     @include('requests.material.material_verifier')
      <?php } ?>
     <?php if($view=='verifireactive')
-    { ?>
+    { 
+      
+        
+        ?>
 	@include('requests.material.material_approver')
       <?php } ?>
          <?php if($view=='finance_approval')
@@ -168,40 +175,8 @@ if($requests->category_id==2)
      <?php } ?>
   
     <?php } ?>
-    <?php
-if($requests->category_id==3)
-    {
-  if($view=='view')
-    { ?>
-	@include('requests.service.service_view')
-    <?php } ?>   
-    <?php
-    
-  if($view=='requested_requests')
-    { ?>
-    @include('requests.service.service_verifier')
-     <?php } ?>
-    <?php if($view=='verifireactive')
-    { ?>
-	@include('requests.service.service_approver')
-      <?php } ?>
-    <?php if($view=='accountants')
-    { ?>
-@include('requests.service.service_document')
-    <?php } ?>
-    <?php if($view=='downloads')
-    { ?>
-@include('requests.service.print_voucher')
-     <?php } ?>
-    <?php if($view=='complete_view')
-    { ?>
-    @include('requests.service.service_view_details')
-     <?php } ?>
-    <?php if($view=='submit_bill')
-    { ?>
-    @include('requests.service.bills')
-     <?php } ?>
-    <?php } ?>
+  
+
    
 </div>
 

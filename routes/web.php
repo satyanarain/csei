@@ -75,7 +75,7 @@ Route::get('/', function () { return view('welcome'); })->name('/');
         Route::get('pending_quotations/comments/{id}', 'PendingQuotationController@Comment');
         Route::resource('pending_quotations', 'PendingQuotationController');
         /************************************************************************/
-        
+        Route::get('single_vendor_approval/mainadmin_likes_approval', 'MainAdminLikesApprovalController@SingleVendor')->name('single_vendor_approval.mainadmin_likes_approval');;
         Route::resource('mainadmin_likes_approval', 'MainAdminLikesApprovalController');
         /*************************Create by satya date 15-05-2018*******************************************************/
          Route::get('receipt_of_quotation/call_for_tender', 'CallForTenderController@receiptOfQuotation')->name('receipt_of_quotation.call_for_tender');

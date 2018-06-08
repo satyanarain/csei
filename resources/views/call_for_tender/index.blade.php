@@ -54,7 +54,7 @@
                                         @endif
                                         <a href="{{route('requests.show', [$request->id,'complete_view'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-search" aria-hidden="true"></i> View</a>
                                         @else
-                                        @if($request->category_id==2)
+                                        @if($request->category_id==2 || $request->category_id==3)
                                         <?php
                                         $quotation_details = DB::table('quotation_details')->where('request_id', $request->id)->get();
                                         foreach ($quotation_details as $quotation_value) {

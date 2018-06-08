@@ -82,10 +82,10 @@ function requestNo3($request_no) {
            $total= CSEIRequest::count();
            if($total==0)
            {
-         return  $request_no="CSEI"."/S-1/".$date;    
+         return  $request_no="CSEI"."/S-V-1/".$date;    
            } else {
            $total_all=$total+1;
-         return  $request_no="CSEI"."/S-".$total_all."/".$date;
+         return  $request_no="CSEI"."/S-V-".$total_all."/".$date;
            }
 }
 

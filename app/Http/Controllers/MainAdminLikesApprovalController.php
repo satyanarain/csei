@@ -169,6 +169,26 @@ class MainAdminLikesApprovalController extends Controller
      
         return view('mainadmin_likes_approval.show', compact('vendor_quotation_lists','requests','user_id'));
     }
+   public function SingleVendor()
+    {
+     $user_id= Auth::id();
+     
+     /********************After somparision like dislike save in committee_member_like_dislikes**********************************************************************************/
+     $quotation_send_for_comparision=DB::table('quotation_send_for_comparision')->select('id','category_id','request_id')->where('category_id',3)->get();
+      foreach($quotation_send_for_comparision as $quotation_send_for_comparision_value)
+      {
+      $request_id[]=  $quotation_send_for_comparision_value->request_id;   
+      }
+      
+      $vendor_quotation_lists = DB::table('vendor_quotation_lists')->select('*')
+        ->leftjoin('vendors','vendors.id','vendor_quotation_lists.vendor_id')
+        ->leftjoin('requests','requests.id','vendor_quotation_lists.request_id')
+        ->groupBy('requests.id')
+         ->whereIn('vendor_quotation_lists.request_id',$request_id)
+        ->orderBy('requests.id','desc')
+         ->get();
+      return view('mainadmin_likes_approval.single_vendor_approval', compact('vendor_quotation_lists','user_id'));
+    }
 
     /**
      * Show the form for editing the specified resource.

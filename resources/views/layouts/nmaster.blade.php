@@ -312,6 +312,7 @@ Advertising standards agencies might allow the use of a general disclaimer like 
                           <li class="{{$active == 'mainadmin_likes_approval' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Main Admin Like / Dislike</span></a>
                               <ul aria-expanded="false" class="collapse">
                                   <li class="{{($active2 == 'mainadmin_likes_approval' && $active == 'index') ? 'active' : ''}}"><a href="{{route('mainadmin_likes_approval.index')}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Like / Dislike Approval</a></li>
+                                  <li class="{{($active2 == 'mainadmin_likes_approval' && $active == 'index') ? 'active' : ''}}"><a href="{{route('single_vendor_approval.mainadmin_likes_approval')}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Singel Vendor Approval</a></li>
                                  
                               </ul>
                           </li>

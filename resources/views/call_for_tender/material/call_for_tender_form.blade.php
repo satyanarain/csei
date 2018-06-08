@@ -126,11 +126,20 @@
                                                 <div class="form-group row">
                                                     <label class="col-lg-4 col-form-label" for="val-username">Identify Vendor List<span class="text-danger">*</span></label>
                                                     <div class="col-lg-6">
+                                                        @if($requests->category_id==2)
                                                         <select id="vendor" name='vendor[]' class="form-control" multiple="multiple" required="required" style="height:100px;">
                                                        @foreach($vendors as $vendors)
                                                             <option value="{{$vendors->id}}">{{$vendors->name}}</option>
                                                           @endforeach
                                                           </select>
+                                                         @else
+                                                        <select id="vendor" name='vendor[]' class="form-control" required="required">
+                                                          <option>Select Vendor</option>
+                                                          @foreach($vendors as $vendors)
+                                                            <option value="{{$vendors->id}}">{{$vendors->name}}</option>
+                                                          @endforeach
+                                                          </select>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">

@@ -74,7 +74,7 @@ class RequestRepository implements RequestRepositoryContract
         $product_name = $request->product_name;
         $purchase_quantity = $request->purchase_quantity;
         $remark = $request->remark;
-        if($request->category_id==2)
+        if($request->category_id==2 || $request->category_id==3)
         {
          if (strlen(implode($s_no))> 0)
        {
@@ -115,7 +115,7 @@ class RequestRepository implements RequestRepositoryContract
         }
 /***********************************Email for material***********************************************************************************/   
 /***********************************Email for material***********************************************************************************/
-         if($request->category_id==2)
+         if($request->category_id==2 || $request->category_id==3)
         {
         if ($request_id != '') {
             foreach ($approver as $a_value) {
@@ -128,7 +128,7 @@ class RequestRepository implements RequestRepositoryContract
             }
         }
           /************************************mail to requester******************************************/
-       if($request->category_id==2)
+       if($request->category_id==2 || $request->category_id==3)
         {      
        if ($request_id != '') {
           $verified_approved='Submitted';
@@ -141,7 +141,7 @@ class RequestRepository implements RequestRepositoryContract
     /***********************************Email for Service***********************************************************************************/ 
         
         
-        
+        /*
            if($request->category_id==3)
         {
         if ($request_id != '') {
@@ -163,6 +163,8 @@ class RequestRepository implements RequestRepositoryContract
                    $m->to($requester->email, $requester->name)->subject('CSEI | Request Submitted'); });
           }
         } 
+        
+         */
            /***********************************end for mail Service***********************************************************************************/   
         
          /***********************************End Email for Service***********************************************************************************/     
@@ -192,7 +194,7 @@ class RequestRepository implements RequestRepositoryContract
                 MaterialDetail::destroy($del_id);
             }
         }
-       if ($requestData->category_id == 2) {
+       if ($requestData->category_id == 2 || $requestData->category_id == 3) {
             if (strlen(implode($s_no)) > 0) {
                 foreach ($s_no as $key => $n) {
                     $id = DB::table('material_details')->insertGetId(
