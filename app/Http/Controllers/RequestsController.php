@@ -677,8 +677,7 @@ use activityLog;
           return view('requests.coordinator', compact('requests'));
  }
 
-
-    public function callForTender() {
+public function callForTender() {
         $requests = DB::table('requests')->select('*', 'requests.id as id', 'requests.status as status', 'c_status.name as c_status', 'categories.name as name', 'users.name as requester_name', 'requests.created_at as created_at', 'requests.updated_at as updated_at')
                 ->leftjoin('users', 'users.id', 'requests.user_id')
                 ->leftjoin('categories', 'categories.id', 'requests.category_id')
@@ -699,7 +698,7 @@ use activityLog;
         //->whereIn('vendor_quotation_lists.request_id',$send_to_comparision_array)
         ->orderBy('requests.id','desc')
         ->get();
-exit();
+//exit();
 
     return view('cal_for_tender.receipt_of_quotation', compact('vendor_quotation_lists','user_id'));
         

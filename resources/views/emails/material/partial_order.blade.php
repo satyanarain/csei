@@ -1,14 +1,14 @@
-<p>ITEM DETAILS</p><p><table align="left" valign="top" border="0" style="border:1px solid #dee2e6;">
+<p>ITEM DETAILS</p><p><table align="left" valign="top" border="0"  width="100%" >
                                           <tr style="border-bottom-width: 1px;padding:30px 5px 0px 0px; background-color: #c3e3b5; height:40px;">
-                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;">S.No.</th>
-                                                <th  align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;">Product Name</th>
-                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;">Quantity</th>
-                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;">Cost / PC</th>
-                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;">GST(%)</th>
-                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;">Total Amount</th>
-                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;">Time Line</th>
-                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;">Requester Remark</th>
-                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;">Vendor Remark</th>
+                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px; border-right:#fff 1px solid; ">S.No.</th>
+                                                <th  align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px; border-right:#fff 1px solid;">Product Name</th>
+                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;border-right:#fff 1px solid;">Quantity</th>
+                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;border-right:#fff 1px solid;">Cost / PC</th>
+                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;border-right:#fff 1px solid;">GST(%)</th>
+                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;border-right:#fff 1px solid;">Total Amount</th>
+                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;border-right:#fff 1px solid;">Time Line</th>
+                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;border-right:#fff 1px solid;">Requester Remark</th>
+                                                <th align="left" valign="top" style="background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;border-right:#fff 1px solid;">Vendor Remark</th>
                                                <th align="left" valign="top" style=" text-align:left;background-color:#204d74;color:#fff; font-weight: bold;padding:10px 0px 0px 10px;">Remarks</th>
                                             </tr>
    <?php 
@@ -17,7 +17,7 @@
                              $vendor_quotation_list_all = DB::table('vendor_quotation_lists')->select('*')
                             ->leftjoin('requests', 'requests.id', 'vendor_quotation_lists.request_id')
                             ->leftjoin('vendors', 'vendors.id', 'vendor_quotation_lists.vendor_id')
-                            ->where('vendor_quotation_lists.request_id', $requests->id)
+                            ->where('vendor_quotation_lists.request_id', $request_id)
                             ->get();
  ?>
                           @foreach($vendor_quotation_list_all as $value)          

@@ -34,10 +34,6 @@
                </tr>
              </thead>
              <tbody>
-                 
-               <?php //print_r($vendor_quotation_lists) ; ?>  
-                 
-                 
               @foreach($vendor_quotation_lists as $vendor_quotation_lists)
               <tr>
                   <td style="display:none">{{$vendor_quotation_lists->id}}</td>

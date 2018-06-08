@@ -29,14 +29,6 @@ use activityLog;
      */
         public function index()
     {
-            
-    $total= DB::table('purchase_orders')->select('*')->count(); 
-    if($total==0){
-       $total=1; 
-    } else {
-     $total=$total+1;   
-    }
-        
      $user_id= Auth::id();
       $vendor_finalise_for_purchase_orders = DB::table('vendor_finalise_for_purchase_orders')->select('id','approved_vendor_id','request_id','vendor_id')->where('approved_vendor_id',1)->get();
          
@@ -51,7 +43,7 @@ use activityLog;
               ->whereIn('vendor_quotation_lists.request_id',$committee_member_nalue_array)
              ->orderBy('requests.id','desc')
               ->get();
-      return view('purchases.index', compact('vendor_quotation_lists','user_id','total'));
+      return view('purchases.index', compact('vendor_quotation_lists','user_id'));
         
     }
 
@@ -84,8 +76,8 @@ use activityLog;
          $logged_user=$user_id_login->name;
          $vendor_id   = $request->vendor_id;
          $request_id  = $request->request_id;
-        $material_id= $request->material_id;
-        $po_number= $request->po_number;
+         $material_id= $request->material_id;
+         $po_number= $request->po_number;
        
         // foreach ($vendor_id as $key => $n) {
              DB::table('purchase_orders')->insertGetId(
@@ -94,10 +86,10 @@ use activityLog;
           //  }
          // $finance_head = DB::table('users')->select('*')->whereIn('id',$user_id)->get();
          /****************************************************************************************/
-          $request_data= CSEIRequest::whereId($request_id)->first();
+         $request_data= CSEIRequest::whereId($request_id)->first();
          $request_no=$request_data->request_no;
          $amount= $request_data->amount;
-          $vendor=DB::table('vendores')->where('id',$vendor_id)->first();
+         $vendor=DB::table('vendors')->where('id',$vendor_id)->first();
          /***************email to purchaser********************************************************************************************************************/
            Mail::send( 'emails.material.email_to_vendor_for_order',['name'=>$vendor->name,'phone'=>$vendor->contact,'request_no'=>$request_no,'amount'=>$amount,'logged_user'=>$logged_user], function ($m) use ($vendor) {
                    $m->from('info@opiant.online', 'CSEI');
@@ -123,6 +115,15 @@ use activityLog;
    public function show($id)
     {
     $user_id= Auth::id(); 
+            
+    $total= DB::table('purchase_orders')->count(); 
+
+    if($total==0){
+       $total=1; 
+    } else {
+     $total=$total+1;   
+    }
+       
     $requests = DB::table('requests')->select('*', 'requests.id as id', 'c_status.name as c_status', 'categories.name as name', 'requests.created_at as created_at')
                 ->leftjoin('users', 'users.id', 'requests.user_id')
                 ->leftjoin('categories', 'categories.id', 'requests.category_id')
@@ -135,7 +136,7 @@ use activityLog;
                 ->leftjoin('vendors', 'vendors.id', 'vendor_quotation_lists.vendor_id')
                 ->where('vendor_quotation_lists.request_id', $id)
               ->first();
-         return view('purchases.show', compact('vendor_quotation_lists','requests','user_id'));
+         return view('purchases.show', compact('vendor_quotation_lists','requests','user_id','total'));
     }
 
     /**
