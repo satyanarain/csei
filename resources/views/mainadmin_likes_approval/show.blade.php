@@ -171,10 +171,12 @@
                     
                     <tr>
                     @include('partials.item_list_sub')
-<?php               $allready = alreadyComment('vendor_finalise_for_purchase_orders', $requests->id,$vendor_value->vendor_id,'request_id','vendor_id');
+<?php             $allready = DB::table('vendor_finalise_for_purchase_orders')->select('id','request_id')->where('request_id',$requests->request_id)->count();  
                    ?>
                     </tr>
-                    @if($allready==0)
+                   
+                       @endforeach
+                        @if($allready==0)
                      <tr>
                          <th colspan="9">
                              <table>
@@ -191,12 +193,11 @@
                          </th>
                        </tr>
                        @endif
-                       @endforeach
                       <?php       
-                     echo  $requests->id;
-                    echo  $vendor_value->vendor_id;
-                      echo  $allready = alreadyComment('vendor_finalise_for_purchase_orders', $requests->id,$vendor_value->vendor_id,'request_id','vendor_id');
-                      
+                     //echo  $requests->id;
+                   // echo  $vendor_value->vendor_id;
+                    //  echo  $allready = alreadyComment('vendor_finalise_for_purchase_orders', $requests->id,$vendor_value->vendor_id,'request_id','vendor_id');
+                        $allready = DB::table('vendor_finalise_for_purchase_orders')->select('id','request_id')->where('request_id',$requests->request_id)->count();  
                    ?>
                     @endforeach
                 </table>
