@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">All Comparison Analysis</h3> </div>
+    <h3 class="text-primary">All Single Vendor</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">All Comparison Analysis</li>
+        <li class="breadcrumb-item active">All Single Vendor</li>
       </ol>
     </div>
   </div>
@@ -53,9 +53,9 @@
           // echo $vendor_quotation_lists->request_id;
                  $allready = DB::table('vendor_finalise_for_purchase_orders')->select('*')->where('request_id',$vendor_quotation_lists->request_id)->count();             ?>
                     @if($allready==0)
-                    <a href="{{route('mainadmin_likes_approval.show',[$vendor_quotation_lists->id,'single_vendor_approval'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle"></i>Approve</a>
+                    <a href="{{route('mainadmin_likes_approval.show',[$vendor_quotation_lists->id,'single_vendor_approval'])}}" class="btn btn-primary m-b-10 m-l-5" style=" margin-right:40px;"><i class="fa fa-check-circle"></i>Approve</a>
                    @else
-                    <a href="{{route('mainadmin_likes_approval.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i>View</a>
+                    <a href="{{route('mainadmin_likes_approval.show',[$vendor_quotation_lists->id,'single_vendor_approval'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i>View</a>
                    @endif
               </td>
             </tr>

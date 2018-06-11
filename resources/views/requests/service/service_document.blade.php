@@ -68,7 +68,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group row" style="margin-top:-20px;">
-                                                        <label class="col-lg-4 col-form-label" for="contact"><div class="btn btn-success add-more pull-left" type="button" style="margin-bottom:10px;" id="add_field_doc"><i class="fa fa-plus" ></i>Add</div></label>
+                                                        <label class="col-lg-4 col-form-label" for="contact"><div class="btn btn-success add-more" type="button" style="margin-bottom:10px;" id="add_field_doc"><i class="fa fa-plus" ></i>Add</div></label>
                                                         <div class="col-lg-6">
                                                         </div>
                                                     </div>

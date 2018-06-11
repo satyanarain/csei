@@ -74,12 +74,12 @@
   if($material_details==0) 
   {
 ?>
-<a href="{{route('requests.show', [$request->id,'coordinator'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search" aria-hidden="true"></i> View</a>
+<a href="{{route('requests.show', [$request->id,'coordinator'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search" aria-hidden="true"></i> View</a>
   <?php } else { ?>
 <a href="{{route('requests.show', [$request->id,'coordinator'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Finance Clearance</a>
  <?php } ?>
  @else
- <a href="{{route('requests.show', [$request->id,'coordinator'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
+ <a href="{{route('requests.show', [$request->id,'coordinator'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i> View</a>
 @endif 
               
                 @endif

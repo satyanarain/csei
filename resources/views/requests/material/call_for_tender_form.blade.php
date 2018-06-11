@@ -175,7 +175,7 @@
                                                     <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
                                                     <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
                                                      @if(count($material_details)>0)
-                                                    <button class="btn btn-primary submit pull-left" type="submit" name="quotation"  value="quotation" onclick="return loadAddQuotation()"><i class="fa fa-paper-plane"></i> Submit
+                                                    <button class="btn btn-primary submit" type="submit" name="quotation"  value="quotation" onclick="return loadAddQuotation()"><i class="fa fa-paper-plane"></i> Submit
                                                     </button>                            &nbsp;&nbsp; 
          @endif
                                                 </div>

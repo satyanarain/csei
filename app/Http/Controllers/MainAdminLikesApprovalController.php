@@ -172,9 +172,9 @@ class MainAdminLikesApprovalController extends Controller
    public function SingleVendor()
     {
      $user_id= Auth::id();
-     
-     /********************After somparision like dislike save in committee_member_like_dislikes**********************************************************************************/
-     $quotation_send_for_comparision=DB::table('quotation_send_for_comparision')->select('id','category_id','request_id')->where('category_id',3)->get();
+     $category_id=3;
+     /********************After somparision like dislike save in committee_member_like_dislikes**********************************************************************************/ 
+    $quotation_send_for_comparision=DB::table('quotation_send_for_comparision')->select('id','category_id','request_id')->where('category_id',$category_id)->get();
       foreach($quotation_send_for_comparision as $quotation_send_for_comparision_value)
       {
       $request_id[]=  $quotation_send_for_comparision_value->request_id;   
@@ -187,7 +187,7 @@ class MainAdminLikesApprovalController extends Controller
          ->whereIn('vendor_quotation_lists.request_id',$request_id)
         ->orderBy('requests.id','desc')
          ->get();
-      return view('mainadmin_likes_approval.single_vendor_approval', compact('vendor_quotation_lists','user_id'));
+      return view('mainadmin_likes_approval.single_vendor_approval', compact('vendor_quotation_lists','user_id','category_id'));
     }
 
     /**

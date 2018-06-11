@@ -59,14 +59,14 @@
                 ?>
                     @if($allready==0)
                     @if($sql->category_id==2)
-                    <a href="{{route('call_for_tender.show',[$vendor_quotation_lists->id,'receipt_of_quotation'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle"></i> Send for Comparision</a>
+                    <a href="{{route('call_for_tender.show',[$vendor_quotation_lists->id,'receipt_of_quotation'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-check-circle"></i> Send for Comparision</a>
                     @else
-                    <a href="{{route('call_for_tender.show',[$vendor_quotation_lists->id,'receipt_of_quotation'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle"></i> Send for Admin Approval</a>
+                    <a href="{{route('call_for_tender.show',[$vendor_quotation_lists->id,'receipt_of_quotation'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-check-circle"></i> Send for Admin Approval</a>
                     @endif
                     
                     
                     @else
-                    <a href="{{route('call_for_tender.show',[$vendor_quotation_lists->id,'receipt_of_quotation'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
+                    <a href="{{route('call_for_tender.show',[$vendor_quotation_lists->id,'receipt_of_quotation'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i> View</a>
                    @endif
               </td>
             </tr>

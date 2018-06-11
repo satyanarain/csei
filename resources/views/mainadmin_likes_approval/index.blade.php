@@ -53,9 +53,9 @@
           // echo $vendor_quotation_lists->request_id;
                  $allready = DB::table('vendor_finalise_for_purchase_orders')->select('*')->where('request_id',$vendor_quotation_lists->request_id)->count();             ?>
                     @if($allready==0)
-                    <a href="{{route('mainadmin_likes_approval.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle"></i> Send for Approval</a>
+                    <a href="{{route('mainadmin_likes_approval.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-check-circle"></i> Send for Approval</a>
                    @else
-                    <a href="{{route('mainadmin_likes_approval.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i>View</a>
+                    <a href="{{route('mainadmin_likes_approval.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i>View</a>
                    @endif
               </td>
             </tr>

@@ -126,7 +126,7 @@
                                 <div class="form-group ">
                                     <div class="col-md-9" style="padding:0px 0px 0px 0px; margin-bottom:10px;">
                                         </br>
-                                        <div class="btn btn-success add-more pull-left" type="button" id="add_bank_info" style="margin-bottom:10px;"><i class="fa fa-plus" ></i> Add</div>
+                                        <div class="btn btn-success add-more" type="button" id="add_bank_info" style="margin-bottom:10px;"><i class="fa fa-plus" ></i> Add</div>
 
                                     </div>
 
@@ -245,7 +245,7 @@
                                         </td></tr>
                                     <tr><td align="left" valign="top" colspan="6">
                                         
-                                                    <button class="btn btn-primary submit pull-left" type="submit" name="action"><i class="fa fa-paper-plane"></i> Submit
+                                                    <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Submit
                                                    
                                         </td></tr>
                                 </table> 

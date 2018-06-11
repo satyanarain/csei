@@ -57,9 +57,9 @@
                 
                 ?>
                     @if($allready==0)
-                    <a href="{{route('vendor_quotation_lists.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-check-circle"></i> Send for Approval</a>
+                    <a href="{{route('vendor_quotation_lists.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-check-circle"></i> Send for Approval</a>
                    @else
-                    <a href="{{route('vendor_quotation_lists.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i>View</a>
+                    <a href="{{route('vendor_quotation_lists.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i>View</a>
                    @endif
               </td>
             </tr>

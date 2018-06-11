@@ -52,9 +52,9 @@
                  </td>
                 <td>
                 @if($request->status == 1)
-                <a href="{{route('requests.edit', $request->id)}}" class="btn btn-success m-b-10 m-l-5 pull-left"><i class="fa fa-pencil"></i> Edit</a>
+                <a href="{{route('requests.edit', $request->id)}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-pencil"></i> Edit</a>
                 @endif
-                <a href="{{route('requests.show',[$request->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
+                <a href="{{route('requests.show',[$request->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i> View</a>
               
               </td>
             </tr>

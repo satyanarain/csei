@@ -98,7 +98,7 @@
                                 <div class="form-group ">
                                     <div class="col-md-9" style="padding:0px 0px 0px 0px; margin-bottom:10px;">
                                         </br>
-                                        <div class="btn btn-success add-more pull-left" type="button" id="add_mat_button" style="margin-bottom:10px;"><i class="fa fa-plus" ></i> Add</div>
+                                        <div class="btn btn-success add-more" type="button" id="add_mat_button" style="margin-bottom:10px;"><i class="fa fa-plus" ></i> Add</div>
 
                                     </div>
 
@@ -109,8 +109,8 @@
                                             <tr>
                                                 <th class="table-row-heading" width="10%">S.No.</th>
                                                 <th class="table-row-heading" width="30%">Product Name</th>
-                                                <th class="table-row-heading" width="10%">Quantity</th>
-                                                <th class="table-row-heading" width="38%">Remarks</th>
+                                                <th class="table-row-heading" width="20%">Quantity</th>
+                                                <th class="table-row-heading" width="28%">Remarks</th>
                                                 <th class="table-row-heading" width="12%">Action</th>
                                             </tr>
                                    </table>
@@ -133,8 +133,8 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                 <td width="10%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}"></div></div></td>
-                                                <td width="38%">
+                                                 <td width="20%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}"></div></div></td>
+                                                <td width="28%">
                                                     <div class="dummy">
                                                         <div class="input-icon right">
                                                             <textarea type="textarea" class="form-control rate" size="5" name="remark[]"  required="required">{{$value->remark}}</textarea>
@@ -164,8 +164,8 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                 <td width="10%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}"></div></div></td>
-                                                <td width="38%">
+                                                 <td width="20%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}"></div></div></td>
+                                                <td width="28%">
                                                     <div class="dummy">
                                                         <div class="input-icon right">{{$value->remark}}
                                                             <textarea  class="form-control rate" size="5" name="remark[]"  required="required">{{$value->remark}}</textarea>

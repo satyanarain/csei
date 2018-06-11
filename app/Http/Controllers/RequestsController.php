@@ -699,9 +699,7 @@ public function callForTender() {
         ->orderBy('requests.id','desc')
         ->get();
 //exit();
-
     return view('cal_for_tender.receipt_of_quotation', compact('vendor_quotation_lists','user_id'));
-        
     }
     
 public function saveVoucher($id, Request $request) {

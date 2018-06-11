@@ -290,8 +290,9 @@ Advertising standards agencies might allow the use of a general disclaimer like 
                                   $request_only_verifire = Request::fullUrl();
                                   $request_only_verifire = end(explode('?', $request_only_verifire));
                                   ?> 
-                                   @if(Entrust::hasRole('Finance Head'))
+                                  
                                    <li class="{{($active2 == 'requests' && $active == 'approvers') ? 'active' : ''}}"><a href="{{route('approvers.requests')}}" class="{{($request_only_verifire == 'verifireactive') ? 'active' : ''}}"><i class="fa fa-ban" style="color:#dd4b39;" aria-hidden="true"></i> Pending Approval</a></li>
+                                  @if(Entrust::hasRole('Finance Head'))
                                    <li class="{{($active2 == 'requests' && $active == 'finance_approval') ? 'active' : ''}}"><a href="{{route('finance_approval.requests')}}"  class="{{($request_only_verifire == 'finance_approval') ? 'active' : ''}}"><i class="fa fa-check-circle" aria-hidden="true" style="color:green"></i> Finance Clearance</a>
                                   </li>
                                   @endif
@@ -623,8 +624,8 @@ $(document).ready(function () {
 <table class="table table-bordered table-striped table-hover bank_table"><tr><td width="10%"><div class="dummy"><div class="input-icon right"><span><input type="text" class="form-control product_code" size="5" name="s_no[]" onkeypress="return isNumberKey(event)" required="required" value="{{$value->s_no}}"></span>\n\
 </div></div></td>\n\
 <td idth="30%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control" size="5" name="product_name[]" required="required" value="{{$value->product_name}}"></div></div>\n\
-</td><td width="10%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}"></div>\n\
-</div></td><td width="38%"><div class="dummy"><div class="input-icon right"><textarea type="textarea" class="form-control rate" size="5" name="remark[]"  required="required">{{$value->remark}}</textarea></div></div></td>\n\
+</td><td width="20%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}"></div>\n\
+</div></td><td width="28%"><div class="dummy"><div class="input-icon right"><textarea type="textarea" class="form-control rate" size="5" name="remark[]"  required="required">{{$value->remark}}</textarea></div></div></td>\n\
 <td  colspan="" align="left" valign="top"  style="text-align:left;"  width="12%"><span  class="rm_first"><button class="remove_bank_row remove_field">Remove</button></span></td></tr></table></div>'); //add input box
                   }
               });

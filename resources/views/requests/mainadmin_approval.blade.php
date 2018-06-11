@@ -53,7 +53,7 @@
               </td>
               <td>
 
-               <a href="{{route('requests.show', [$request->id,'mainadmin_approval'])}}" class="btn btn-primary m-b-10 m-l-5 pull-left"><i class="fa fa-search"></i> View</a>
+               <a href="{{route('requests.show', [$request->id,'mainadmin_approval'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i> View</a>
 
               </td>
             </tr>
