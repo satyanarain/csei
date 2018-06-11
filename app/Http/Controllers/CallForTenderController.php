@@ -300,6 +300,7 @@ use activityLog;
                 ->whereIn('material_details.id',$material_id)  
                 ->get();
         
+        
         $material_details_view = DB::table('material_details')->where('request_id',$id)->get();     
                
                 

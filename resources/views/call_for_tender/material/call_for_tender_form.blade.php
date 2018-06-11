@@ -126,10 +126,17 @@
                                                 <div class="form-group row">
                                                     <label class="col-lg-4 col-form-label" for="val-username">Identify Vendor List<span class="text-danger">*</span></label>
                                                     <div class="col-lg-6">
+                                                                 <?php 
+                                                                  foreach($material_detail_logs as $value1)
+                                                                  {
+                                                                 $select_vendor= explode(',',$value1->vendor_id); 
+                                                                  } 
+                                                                 
+                                                                 ?>
                                                         @if($requests->category_id==2)
                                                         <select id="vendor" name='vendor[]' class="form-control" multiple="multiple" required="required" style="height:100px;">
                                                        @foreach($vendors as $vendors)
-                                                            <option value="{{$vendors->id}}">{{$vendors->name}}</option>
+                                                            <option value="{{$vendors->id}}" <?php if(in_array($vendors->id,$select_vendor)){ echo "selected";} ?>>{{$vendors->name}}</option>
                                                           @endforeach
                                                           </select>
                                                          @else
