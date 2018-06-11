@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">All Comparison Analysis</h3> </div>
+    <h3 class="text-primary">All Purchase Orders</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">All Comparison Analysis</li>
+        <li class="breadcrumb-item active">All Purchase Orders</li>
       </ol>
     </div>
   </div>
@@ -49,7 +49,7 @@
                  $allready = alreadyComment('vendor_finalise_for_purchase_orders', $vendor_quotation_lists->request_id, $vendor_quotation_lists->vendor_id,'request_id','vendor_id');
                  ?>
                     @if($allready==0)
-                    <a href="{{route('purchases.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-check-circle"></i> Send for Approval</a>
+                    <a href="{{route('purchases.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-check-circle"></i> Purchase Order</a>
                    @else
                     <a href="{{route('purchases.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i>View</a>
                    @endif

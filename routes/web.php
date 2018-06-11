@@ -84,6 +84,7 @@ Route::get('/', function () { return view('welcome'); })->name('/');
         
         /************************************************************************/
         /************************************************************************/
+        Route::get('purchases/single_vendor_purchase_order', 'PurchasesController@singleVendorOrder')->name('purchases.single_vendor_purchase_order');
         Route::resource('purchases', 'PurchasesController');
         /*
 	|--------------------------------------------------------------------

@@ -30,12 +30,13 @@ use activityLog;
         public function index()
     {
      $user_id= Auth::id();
-      $vendor_finalise_for_purchase_orders = DB::table('vendor_finalise_for_purchase_orders')->select('id','approved_vendor_id','request_id','vendor_id')->where('approved_vendor_id',1)->get();
+      $vendor_finalise_for_purchase_orders = DB::table('vendor_finalise_for_purchase_orders')->select('id','approved_vendor_id','request_id','vendor_id')->where([['approved_vendor_id',1],['category_id',2]])->get();
          
       foreach($vendor_finalise_for_purchase_orders as $committee_member_nalue)
       {
      $committee_member_nalue_array[]=  $committee_member_nalue->request_id;   
       }
+      
       $vendor_quotation_lists = DB::table('vendor_quotation_lists')->select('*')
              ->leftjoin('vendors','vendors.id','vendor_quotation_lists.vendor_id')
              ->leftjoin('requests','requests.id','vendor_quotation_lists.request_id')
@@ -66,10 +67,10 @@ use activityLog;
      * @return 07-06-2018
      */
        public function store(Request $request) {
-   echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
- 
+//   echo "<pre>";
+//    print_r($_POST);
+//    echo "</pre>";
+// 
 
          $purchaser_id = Auth::id();
          $user_id_login= Auth::user();
@@ -78,10 +79,11 @@ use activityLog;
          $request_id  = $request->request_id;
          $material_id= $request->material_id;
          $po_number= $request->po_number;
-       
+         $sql=DB::table('requests')->select('*')->where('id',$request_id)->first();
+         $category_id= $sql->category_id;
         // foreach ($vendor_id as $key => $n) {
              DB::table('purchase_orders')->insertGetId(
-                        ['purchaser_id' => $purchaser_id, 'request_id' => $request_id,'vendor_id' => $vendor_id,'po_number' => $po_number]
+                        ['purchaser_id' => $purchaser_id, 'request_id' => $request_id,'vendor_id' => $vendor_id,'po_number' => $po_number,'category_id'=>$category_id]
                       );
           //  }
          // $finance_head = DB::table('users')->select('*')->whereIn('id',$user_id)->get();
@@ -100,12 +102,48 @@ use activityLog;
            $m->from('info@opiant.online', 'CSEI');
            $m->to($user_id_login->email, $user_id_login->name)->subject('CSEI | Approve Vendor for PO.');
           });
-        
+        if($category_id==2)
+        {
             Session::flash('flash_message', "Approved successfully!.");
             return redirect()->route('purchases.index');
+        } else {
+          Session::flash('flash_message', "Approved successfully!.");
+            return redirect()->route('purchases.single_vendor_purchase_order');
+        }
+            
+            
  
     }
 
+    /**
+     * Created by satya .
+     *Date 11-06-2018
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    
+        public function singleVendorOrder()
+    {
+     $user_id= Auth::id();
+      $vendor_finalise_for_purchase_orders = DB::table('vendor_finalise_for_purchase_orders')->select('id','approved_vendor_id','request_id','vendor_id')->where([['approved_vendor_id',1],['category_id',3]])->get();
+         
+      foreach($vendor_finalise_for_purchase_orders as $committee_member_nalue)
+      {
+     $committee_member_nalue_array[]=  $committee_member_nalue->request_id;   
+      }
+      
+      $vendor_quotation_lists = DB::table('vendor_quotation_lists')->select('*')
+             ->leftjoin('vendors','vendors.id','vendor_quotation_lists.vendor_id')
+             ->leftjoin('requests','requests.id','vendor_quotation_lists.request_id')
+             ->groupBy('requests.id')
+              ->whereIn('vendor_quotation_lists.request_id',$committee_member_nalue_array)
+             ->orderBy('requests.id','desc')
+              ->get();
+      return view('purchases.single_vendor_purchase_order', compact('vendor_quotation_lists','user_id'));
+        
+    }
+    
+    
     /**
      * Display the specified resource.
      *

@@ -71,25 +71,74 @@ class MainAdminLikesApprovalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-//   echo "<pre>";
-//     print_r($_POST);
-//    echo "</pre>";
-//    
-//    exit();
-
-         $main_admin_id = Auth::id();
+//        echo "<pre>";
+//        print_r($_POST);
+//        echo "</pre>";
+        
+        //exit();
+        
+        
+      $main_admin_id = Auth::id();
          $user_id_login= Auth::user();
          $logged_user=$user_id_login->name;
          $vendor_id   = $request->vendor_id;
          $request_id  = $request->request_id;
+         $sql=DB::table('requests')->select('*')->where('id',$request_id)->first();
+         $category_id= $sql->category_id;
          $material_id= $request->material_id;
          $userlike    = $request->appoved;
+         $userlike    = $request->appoved;
          $approved_vendor_id = $request->approved_vendor_id;
+if($request->single_vendor=='single_vendor')
+{
+  
          foreach ($vendor_id as $key => $n) {
              
              //echo "uiuiuiu";
                   DB::table('vendor_finalise_for_purchase_orders')->insertGetId(
-                        ['main_admin_id' => $main_admin_id, 'request_id' => $request_id,'material_id'=>$material_id[$key] ,'vendor_id' => $vendor_id[$key],'approved_vendor_id' => $approved_vendor_id[$key]]
+                        ['main_admin_id' => $main_admin_id, 'request_id' => $request_id,'material_id'=>$material_id[$key] ,'vendor_id' => $vendor_id[$key],'approved_vendor_id' => $approved_vendor_id[$key],'category_id'=>$category_id]
+                      );
+            }
+      // $finance_head = DB::table('users')->select('*')->whereIn('id',$user_id)->get();
+         /****************************************************************************************/
+          $request_data= CSEIRequest::whereId($request_id)->first();
+         $request_no=$request_data->request_no;
+         $amount= $request_data->amount;
+         
+         /***************email to purchaser********************************************************************************************************************/
+         $role_user=DB::table('role_user')->where('role_id',11)->get();
+           foreach($role_user as $role_user) 
+           {
+           $all_coordinator_array[]= $role_user->user_id;  
+               
+           }
+             $role_user=DB::table('users')->whereIn('id',$all_coordinator_array)->get();  
+
+    /******************************************email to all financer  *********************************/ 
+               if($result==1)
+          {
+             foreach($role_user as $role_user_value)
+             {
+                    Mail::send( 'emails.material.email_to_purchaser_to_create_po',['name'=>$role_user_value->name,'request_no'=>$request_no,'amount'=>$amount,'logged_user'=>$logged_user], function ($m) use ($role_user_value) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($role_user_value->email, $role_user_value->name)->subject('CSEI |  Request Create PO.'); });
+             }
+          }
+          /******************************************email for admin to apprved vender successfully*********************************/
+          Mail::send( 'emails.material.main_admin_send_for_po_suuccessfully', ['request_no'=>$request_no,'name' => $user_id_login->name, 'amount' => $amount,'logged_user'=>$logged_user], function ($m) use ($user_id_login) {
+           $m->from('info@opiant.online', 'CSEI');
+           $m->to($user_id_login->email, $user_id_login->name)->subject('CSEI | Approve Vendor for PO.');
+          });
+        
+            Session::flash('flash_message', "Approved successfully!.");
+            return redirect()->route('single_vendor_approval.mainadmin_likes_approval');
+} else {
+     $main_admin_id = Auth::id();
+         foreach ($vendor_id as $key => $n) {
+             
+             //echo "uiuiuiu";
+                  DB::table('vendor_finalise_for_purchase_orders')->insertGetId(
+                        ['main_admin_id' => $main_admin_id, 'request_id' => $request_id,'material_id'=>$material_id[$key] ,'vendor_id' => $vendor_id[$key],'approved_vendor_id' => $approved_vendor_id[$key],'category_id'=>$category_id]
                       );
             }
  
@@ -125,9 +174,8 @@ class MainAdminLikesApprovalController extends Controller
           });
         
             Session::flash('flash_message', "Approved successfully!.");
-            return redirect()->route('mainadmin_likes_approval.index');
-    //   }
-       // return redirect()->route('mainadmin_likes_approval.index');
+            return redirect()->route('mainadmin_likes_approval.index'); 
+}
     }
 
     /**
@@ -167,7 +215,7 @@ class MainAdminLikesApprovalController extends Controller
         
        
      
-        return view('mainadmin_likes_approval.show', compact('vendor_quotation_lists','requests','user_id'));
+        return view('mainadmin_likes_approval.show', compact('vendor_quotation_lists','requests','user_id','category_id'));
     }
    public function SingleVendor()
     {
@@ -187,7 +235,7 @@ class MainAdminLikesApprovalController extends Controller
          ->whereIn('vendor_quotation_lists.request_id',$request_id)
         ->orderBy('requests.id','desc')
          ->get();
-      return view('mainadmin_likes_approval.single_vendor_approval', compact('vendor_quotation_lists','user_id','category_id'));
+      return view('mainadmin_likes_approval.single_vendor_approval', compact('vendor_quotation_lists','user_id'));
     }
 
     /**

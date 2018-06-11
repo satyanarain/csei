@@ -330,6 +330,7 @@ Advertising standards agencies might allow the use of a general disclaimer like 
                           <li class="{{$active == 'purchaser' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Purchase Order</span></a>
                               <ul aria-expanded="false" class="collapse">
                                   <li class="{{($active2 == 'purchaser' && $active == 'index') ? 'active' : ''}}"><a href="{{route('purchases.index')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> All Purchase Order</a></li>
+                                  <li class="{{($active2 == 'purchaser' && $active == 'index') ? 'active' : ''}}"><a href="{{route('purchases.single_vendor_purchase_order')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> All Single Vendor Order</a></li>
                                   
                               </ul>
                           </li>

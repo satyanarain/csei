@@ -3,12 +3,12 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h3 class="text-primary">Purchase Order</h3> </div>
+        <h3 class="text-primary">Purchase Order Details</h3> </div>
     <div class="col-md-7 align-self-center">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{route('vendor_quotation_lists.index')}}">All Comparison Analysis</a></li>
-            <li class="breadcrumb-item active">Comparison Analysis Details</li>
+            <li class="breadcrumb-item"><a href="{{route('purchases.index')}}">All Purchase Order</a></li>
+            <li class="breadcrumb-item active">Purchase Order Details</li>
         </ol>
     </div>
 </div>

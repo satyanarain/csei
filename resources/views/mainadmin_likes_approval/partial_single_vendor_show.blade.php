@@ -83,9 +83,7 @@
                                     <input type="hidden" name="vendor_id[]" id="send_for_omparision_analysis" value="{{$vendor_value->vendor_id}}">
                                 </th>
                             </tr>
-                         
-
-                        </table>
+                           </table>
                     </th>
                 </tr>
 
@@ -103,8 +101,7 @@
 
                 <tr>
                     @include('partials.item_list_sub')
-<?php $allready = DB::table('vendor_finalise_for_purchase_orders')->select('id', 'request_id')->where('request_id', $requests->request_id)->count();
-?>
+<?php   $allready = DB::table('vendor_finalise_for_purchase_orders')->select('*')->where([['request_id',$requests->id],['category_id',$requests->category_id]])->count();             ?>
                 </tr>
 
                 @endforeach
@@ -125,12 +122,7 @@
                     </th>
                 </tr>
                 @endif
-<?php
-//echo  $requests->id;
-// echo  $vendor_value->vendor_id;
-//  echo  $allready = alreadyComment('vendor_finalise_for_purchase_orders', $requests->id,$vendor_value->vendor_id,'request_id','vendor_id');
-$allready = DB::table('vendor_finalise_for_purchase_orders')->select('id', 'request_id')->where('request_id', $requests->request_id)->count();
-?>
+
                 @endforeach
             </table>
             @if($allready==0)
@@ -139,8 +131,9 @@ $allready = DB::table('vendor_finalise_for_purchase_orders')->select('id', 'requ
                     </tr>
                     <tr>
                         <td align="left" valign="top" colspan="6" style="text-align:left;">
+                            
                             <button type="reset" value="Reset" class="btn btn-primary submit">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Approve</button></td>
+                            <button class="btn btn-primary submit" type="submit" name="single_vendor" value="single_vendor"><i class="fa fa-paper-plane"></i> Approve</button></td>
                     </tr>
                 </table> 
 @endif
