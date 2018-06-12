@@ -142,7 +142,7 @@
                                                     </div>
                                                 </td>
                                                  <td width="12%">
-                                                    <span  class="rm_first"><button class="remove_bank_row">Remove</button></span>
+                                                   
                                                 </td>
                                             </tr>
                                        </table>
