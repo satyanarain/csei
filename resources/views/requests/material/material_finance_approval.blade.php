@@ -82,26 +82,20 @@
             </div>
 <!--            <div class="row1"  id="formbank1">-->
                 @if(count($material_details)>0)
-                <table class="table table-bordered formmain">
+                  <table class="table table-bordered table-striped table-hover bank_table">
                         <tr>
                         <th class="table-row-heading">S.No.</th>
                         <th class="table-row-heading">Product Name</th>
                         <th class="table-row-heading">Quantity</th>
                         <th class="table-row-heading">Remarks</th>
                    </tr>
-                </table>
+             
                 @foreach($material_details as $value)
-                <table class="table table-bordered table-striped table-hover bank_table">
+             
                     <tr>
-                        <td>
-                             {{$value->s_no}}
-                        </td>
-                        <td>
-                         
-                                    <input type="text" class="form-control" size="5" name="product_name[]" required="required" value="{{$value->product_name}}" readonly="readonly">
-                               
-                        </td>
-                        <td><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}" readonly="readonly"></div></div></td>
+                        <td>{{$value->s_no}}</td>
+                        <td>{{$value->product_name}}</td>
+                        <td>{{$value->purchase_quantity}}</td>
                          <td  align="left" valign="top" style="text-align:left;">{{$value->remark}}</td>
 
                     </tr>

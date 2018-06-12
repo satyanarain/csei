@@ -71,16 +71,16 @@
                 @if(count($material_details)>0)
                 <table class="table table-bordered formmain">
                         <tr>
-                        <th class="table-row-heading" width="10%">S.No.</th>
-                        <th class="table-row-heading" width="30%">Product Name</th>
-                        <th class="table-row-heading" width="10%">Quantity</th>
-                        <th class="table-row-heading" width="50%">Remarks</th>
+                        <th>S.No.</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Remarks</th>
                    </tr>
                 </table>
                 @foreach($material_details as $value)
                 <table class="table table-bordered table-striped table-hover bank_table">
                     <tr>
-                        <td width="10%">
+                        <td>
                             <div class="dummy">
                                 <div class="input-icon right">
                                     <span><input type="text" class="form-control product_code" size="5" name="s_no[]" onkeypress="return isNumberKey(event)" required="required" value="{{$value->s_no}}" readonly="readonly"></span>
