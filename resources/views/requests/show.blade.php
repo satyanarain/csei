@@ -12,7 +12,7 @@
         @elseif($view=='requested_requests')
         <h3 class="text-primary">Verified Request Details</h3>
         @elseif($view=='verifireactive')
-        <h3 class="text-primary">Aproved Request Details</h3>
+        <h3 class="text-primary">Approved Request Details</h3>
        
         @elseif($view=='finance_approval')
            <h3 class="text-primary">
