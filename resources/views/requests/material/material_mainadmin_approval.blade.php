@@ -71,17 +71,17 @@
                 @if(count($material_details)>0)
                    <table class="table table-bordered table-striped table-hover bank_table">
                         <tr>
-                        <th>S.No.</th>
-                        <th>Product Name</th>
-                        <th>Quantity</th>
-                        <th>Remarks</th>
+                        <th class="table-row-heading">S.No.</th>
+                        <th class="table-row-heading">Product Name</th>
+                        <th class="table-row-heading">Quantity</th>
+                        <th class="table-row-heading">Remarks</th>
                    </tr>
                
                 @foreach($material_details as $value)
              
                     <tr>
                         <td>{{$value->s_no}}</td>
-                        <td>{{$value->product_name}}></td>
+                        <td>{{$value->product_name}}</td>
                         <td>{{$value->purchase_quantity}}</td>
                          <td align="left" valign="top" style="text-align:left;">{{$value->remark}}</td>
 
