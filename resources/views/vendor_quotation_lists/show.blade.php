@@ -91,7 +91,10 @@
             
             
    <table class="table table-bordered table-striped table-hover bank_table">
-                     @foreach($vendor_quotation_lists as $vendor_value)
+                     <?php 
+                        $i=1;
+                     foreach($vendor_quotation_lists as $vendor_value)
+                     { ?>
                      <tr><th colspan="9">
                              <table class="table table-bordered table-striped table-hover bank_table" style="border: none;">
                                  <tr>
@@ -117,7 +120,7 @@
                    
                     ?>
                     <?php 
-                    $i=1;
+                 
                     foreach($vendor_quotation_list_all as $vendor_value_all)
                     {
                     
@@ -151,11 +154,11 @@
                        </tr>
                        @endif
                     <?php 
-                    $i++;
+                   
                     
                     } ?>
                       
-                    @endforeach
+                     <?php  $i++; } ?>
                 </table>
             @if($allready==0)
                 <table width="100%" cellspacing="4" cellpadding="4" border="0">
