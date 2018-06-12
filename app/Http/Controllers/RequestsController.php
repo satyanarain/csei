@@ -607,18 +607,20 @@ use activityLog;
  public function requestsToApprove()
  {
  $login_user_id=Auth::id();
- $query = DB::table('users') ->whereRaw('FIND_IN_SET(?,approvers)', [$login_user_id])->get();
+ $query = DB::table('users')->whereRaw('FIND_IN_SET(?,approvers)', [$login_user_id])->get();
  foreach($query as $query)
  {
   $requester_appoved_by_login_user[]=$query->id;   
  }
+  //print_r($requester_appoved_by_login_user);
  $requests = DB::table('requests')->select('*','requests.id as id','c_status.name as c_status','categories.name as name','requests.created_at as created_at','requests.updated_at as updated_at')
-              ->leftjoin('users','users.id','requests.user_id')
-              ->leftjoin('categories','categories.id','requests.category_id')
-              ->leftjoin('c_status','c_status.id','requests.status')
+               ->leftjoin('users','users.id','requests.user_id')
+               ->leftjoin('categories','categories.id','requests.category_id')
+               ->leftjoin('c_status','c_status.id','requests.status')
+               ->whereIn('requests.user_id',$requester_appoved_by_login_user)
                ->orderBy('requests.id','desc')
-              ->where('requests.status',1) 
-              ->get();
+               ->where('requests.status',1) 
+               ->get();
           return view('requests.approve', compact('requests'));
  }
   /**************************request to financeApproval*******************************************************************************/
@@ -630,9 +632,8 @@ use activityLog;
               ->leftjoin('categories','categories.id','requests.category_id')
               ->leftjoin('c_status','c_status.id','requests.status')
              ->orderBy('requests.id','desc')
-              ->where('requests.status',2) 
-              //->orwhere('requests.status',5) 
-               ->get();
+              ->where('requests.status',2)
+         ->get();
   return view('requests.finance', compact('requests'));
  }
    /**************************@author satya 28-05-2018*******************************************************************************/

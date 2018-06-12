@@ -59,15 +59,15 @@
                 @endif
                 <a href="{{route('requests.show', [$request->id,'complete_view'])}}" class="btn btn-success m-b-10 m-l-5"><i class="fa fa-search" aria-hidden="true"></i> View</a>
                 @else
-                @if($request->category_id==2)
+                @if($request->category_id==2 || $request->category_id==3)
 <?php
              $quotation_details = DB::table('quotation_details')->where('request_id', $request->id)->get();
                 foreach ($quotation_details as $quotation_value) {
                     $material_id[] = $quotation_value->material_id;
                 }
                 $material_details = DB::table('material_details')->where('request_id', $request->id)
-                        ->whereNotIn('id', $material_id)
-                        ->get();
+                ->whereNotIn('id', $material_id)
+                ->get();
              
             $material_details=   count($material_details);  
                 

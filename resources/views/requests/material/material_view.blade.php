@@ -69,43 +69,42 @@
              <table class="table table-bordered table-striped table-hover bank_table">
                                       
                                             <tr>
-                                                <th class="table-row-heading" width="10%">S.No.</th>
-                                                <th class="table-row-heading" width="30%">Product Name</th>
-                                                <th class="table-row-heading" width="10%">Quantity</th>
-                                                <th class="table-row-heading" width="50%">Remarks</th>
+                                                <th class="table-row-heading">S.No.</th>
+                                                <th class="table-row-heading">Product Name</th>
+                                                <th class="table-row-heading">Quantity</th>
+                                                <th class="table-row-heading">Remarks</th>
                                                
                                             </tr>
-                                   </table>
+                             
             
             <?php //print_r($material_details); ?>
             
             @foreach($material_details_view as $value)
-             <table class="table table-bordered table-striped table-hover bank_table">
+           
                 <tr>
-                    <td width="10%">
+                    <td>
                         <div class="dummy">
                             <div class="input-icon right">
                                 <span>
-                                    <input type="text" class="form-control product_code" size="5" name="s_no[]" onkeypress="return isNumberKey(event)" required="required" value="{{$value->s_no}}" readonly="readonly">
-                                  
-                                </span>
+                                   {{$value->s_no}}
+                                   </span>
                             </div>
                         </div>
                     </td>
-                    <td width="30%">
+                    <td>
                         <div class="dummy">
                             <div class="input-icon right">
-                                <input type="text" class="form-control" size="5" name="product_name[]" required="required" value="{{$value->product_name}}" readonly="readonly">
+                                {{$value->product_name}}
                             </div>
                         </div>
                     </td>
-                    <td width="10%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}" readonly="readonly"></div></div></td>
-                    <td width="50%" align="left" valign="top" style="text-align:left;">{{$value->remark}}</td>
+                    <td><div class="dummy"><div class="input-icon right">{{$value->purchase_quantity}}</div></div></td>
+                    <td align="left" valign="top" style="text-align:left;">{{$value->remark}}</td>
                   
                 </tr>
-            </table>
+          
             @endforeach
-           
+             </table>
         
       
     </div>

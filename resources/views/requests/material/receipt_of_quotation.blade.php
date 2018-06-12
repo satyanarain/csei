@@ -146,16 +146,15 @@
                     @endforeach
                 </table>
             @if($allready==0)
-                <table width="100%" cellspacing="4" cellpadding="4" border="0">
-                    <tr><td align="right" valign="top" colspan="6" height="10"></td>
-                    </tr>
-                    <tr>
-                        <td align="left" valign="top" colspan="6" style="text-align:left;">
-                            <button type="reset" value="Reset" class="btn btn-primary submit">Cancel</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Send For Approval</button></td>
-                    </tr>
-                </table> 
-@endif
+  <table width="100%" border="0">
+    <tr>
+        <td width="20%" valign="top" align="left" style="text-align:left;"> <button type="reset" value="Reset" class="btn btn-primary submit">Cancel</button>
+         </td>
+        <td width="80%" valign="top" align="left" style="text-align:left;"><button class="btn btn-primary submit" type="submit" name="action"><i class="fa fa-paper-plane"></i> Send For Approval</button>
+        </td>
+    </tr>  
+</table>
+ @endif
             {!!Form::close()!!}        
               </div>  
      </div>

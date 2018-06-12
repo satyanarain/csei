@@ -57,7 +57,7 @@ function displayIdBaseName($table = '', $id = '', $fieldname = '') {
 }
 function requestNo1($request_no) {
             $date=date('Y/m/d');
-           $total= CSEIRequest::count();
+           $total= CSEIRequest::where('category_id',1)->count();
            if($total==0)
            {
          return  $request_no="CSEI"."/C-1/".$date;    
@@ -68,7 +68,7 @@ function requestNo1($request_no) {
 }
 function requestNo2($request_no) {
             $date=date('Y/m/d');
-           $total= CSEIRequest::count();
+            $total= CSEIRequest::where('category_id',2)->count();
            if($total==0)
            {
          return  $request_no="CSEI"."/M-1/".$date;    
@@ -79,7 +79,7 @@ function requestNo2($request_no) {
 }
 function requestNo3($request_no) {
             $date=date('Y/m/d');
-           $total= CSEIRequest::count();
+            $total= CSEIRequest::where('category_id',3)->count();
            if($total==0)
            {
          return  $request_no="CSEI"."/S-V-1/".$date;    

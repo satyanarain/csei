@@ -80,10 +80,23 @@
                                              <input  type="hidden"  name="id" value="{{$requests->id}}">
                                              <input  type="hidden"  name="user_id" value="{{$requests->user_id}}">
                                               <input  type="hidden"  name="category_id" value="{{$requests->category_id}}">
-                                              <button class="btn btn-primary submit pull-left" type="submit" name="approve"  value="Approve"  onclick="return loadAddApprove()" style="margin-right:40px;"><i class="fa fa-check-circle"></i> Approve</button>
-                                            <button class="btn btn-danger submit pull-right" type="submit" name="approverejected" value="Rejected" onclick="return loadAdd()"><i class="fa fa-times-circle" aria-hidden="true"></i>
-                                                Constraints</button>                                            
-                                        </div>
+                                              
+                                             
+                                        
+                                              
+    <table width="100%" border="0">
+    <tr>
+        <td width="20%" valign="top" align="left" style="text-align:left;">
+           <button class="btn btn-primary submit pull-left" type="submit" name="approve"  value="Approve"  onclick="return loadAddApprove()" style="margin-right:40px;"><i class="fa fa-check-circle"></i> Approve</button>
+        </td>
+        <td width="80%" valign="top" align="left" style="text-align:left;">
+               <button class="btn btn-danger submit pull-right" type="submit" name="approverejected" value="Rejected" onclick="return loadAdd()"><i class="fa fa-times-circle" aria-hidden="true"></i>
+              Constraints
+             </button> 
+        </td>
+    </tr>  
+</table>
+  </div>
 
                     </div>
                 </div>
