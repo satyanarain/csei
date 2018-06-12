@@ -125,7 +125,7 @@
             <button class="btn btn-primary submit pull-left" type="submit" name="approve"  value="Approve" onclick="return loadAdd()"><i class="fa fa-check-circle"></i> Approve</button>
         </td>
         <td width="80%" valign="top" align="left" style="text-align:left;">
-            <button class="btn btn-danger submit pull-right" type="submit" name="approverejected" value="Rejected"  onclick="return loadAdd()"><i class="fa fa-times-circle" aria-hidden="true"></i>Constraints</button> 
+            <button class="btn btn-danger submit pull-right" type="submit" name="approverejected" value="Rejected"  onclick="return loadAdd()"><i class="fa fa-times-circle" aria-hidden="true"></i> Constraints</button> 
         </td>
     </tr>  
 </table>

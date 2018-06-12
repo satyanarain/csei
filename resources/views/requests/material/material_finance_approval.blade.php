@@ -84,31 +84,25 @@
                 @if(count($material_details)>0)
                 <table class="table table-bordered formmain">
                         <tr>
-                        <th class="table-row-heading" width="10%">S.No.</th>
-                        <th class="table-row-heading" width="30%">Product Name</th>
-                        <th class="table-row-heading" width="10%">Quantity</th>
-                        <th class="table-row-heading" width="50%">Remarks</th>
+                        <th class="table-row-heading">S.No.</th>
+                        <th class="table-row-heading">Product Name</th>
+                        <th class="table-row-heading">Quantity</th>
+                        <th class="table-row-heading">Remarks</th>
                    </tr>
                 </table>
                 @foreach($material_details as $value)
                 <table class="table table-bordered table-striped table-hover bank_table">
                     <tr>
-                        <td width="10%">
-                            <div class="dummy">
-                                <div class="input-icon right">
-                                    <span><input type="text" class="form-control product_code" size="5" name="s_no[]" onkeypress="return isNumberKey(event)" required="required" value="{{$value->s_no}}" readonly="readonly"></span>
-                                </div>
-                            </div>
+                        <td>
+                             {{$value->s_no}}
                         </td>
-                        <td width="30%">
-                            <div class="dummy">
-                                <div class="input-icon right">
+                        <td>
+                         
                                     <input type="text" class="form-control" size="5" name="product_name[]" required="required" value="{{$value->product_name}}" readonly="readonly">
-                                </div>
-                            </div>
+                               
                         </td>
-                        <td width="10%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}" readonly="readonly"></div></div></td>
-                         <td width="50%" align="left" valign="top" style="text-align:left;">{{$value->remark}}</td>
+                        <td><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}" readonly="readonly"></div></div></td>
+                         <td  align="left" valign="top" style="text-align:left;">{{$value->remark}}</td>
 
                     </tr>
                 </table>
@@ -129,7 +123,7 @@
              <button class="btn btn-primary submit pull-left" type="submit" name="finance"  value="finance" onclick="return loadAddApprove()" style="margin-right:40px;"><i class="fa fa-check-circle"></i> Approve</button>
          </td>
         <td width="80%" valign="top" align="left" style="text-align:left;">
-             <button class="btn btn-danger submit pull-right" type="submit" name="approverejected" value="Rejected"  onclick="return loadAdd()"><i class="fa fa-times-circle" aria-hidden="true"></i>Constraints</button>  
+             <button class="btn btn-danger submit pull-right" type="submit" name="approverejected" value="Rejected"  onclick="return loadAdd()"><i class="fa fa-times-circle" aria-hidden="true"></i> Constraints</button>  
         </td>
     </tr>  
 </table>

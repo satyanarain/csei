@@ -81,16 +81,16 @@
             </div>
 <!--            <div class="row1"  id="formbank1">-->
                 @if(count($material_details)>0)
-                <table class="table table-bordered formmain">
+               <table class="table table-bordered table-striped table-hover bank_table">
+                
                         <tr>
                         <th class="table-row-heading">S.No.</th>
                         <th class="table-row-heading">Product Name</th>
                         <th class="table-row-heading">Quantity</th>
                         <th class="table-row-heading">Remarks</th>
                    </tr>
-                </table>
+             
                 @foreach($material_details as $value)
-                <table class="table table-bordered table-striped table-hover bank_table">
                     <tr>
                         <td>{{$value->s_no}}</td>
                         <td>{{$value->product_name}}</td>
@@ -110,7 +110,7 @@
                                               <table width="100%" border="0">
                                                   <tr>
                                                       <td width="20%" valign="top" align="left" style="text-align:left;"><button class="btn btn-primary submit" type="submit" name="approve"  value="Approve" onclick="return loadAddApprove()" style=" margin-right:10px;"><i class="fa fa-check-circle"></i> Approve</button></td>
-                                                      <td width="80%" valign="top" align="left" style="text-align:left;"><button class="btn btn-danger submit" type="submit" name="approverejected" value="Rejected"  onclick="return loadAdd()"><i class="fa fa-times-circle" aria-hidden="true"></i>Constraints</button></td>
+                                                      <td width="80%" valign="top" align="left" style="text-align:left;"><button class="btn btn-danger submit" type="submit" name="approverejected" value="Rejected"  onclick="return loadAdd()"><i class="fa fa-times-circle" aria-hidden="true"></i> Constraints</button></td>
                                                   </tr>  
                                               </table>
                                            </div>

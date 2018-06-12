@@ -95,14 +95,14 @@
                             <div class="col-lg-12">
                             
 
-                                <div class="form-group ">
+<!--                                <div class="form-group ">
                                     <div class="col-md-9" style="padding:0px 0px 0px 0px; margin-bottom:10px;">
                                         </br>
                                         <div class="btn btn-success add-more" type="button" id="add_mat_button" style="margin-bottom:10px;"><i class="fa fa-plus" ></i> Add</div>
 
                                     </div>
 
-                                </div>                             
+                                </div>                             -->
                                 <div class="table-scrollable form-body">
                                     <table class="table table-bordered table-striped table-hover bank_table">
                                       
@@ -110,8 +110,8 @@
                                                 <th class="table-row-heading" width="10%">S.No.</th>
                                                 <th class="table-row-heading" width="30%">Product Name</th>
                                                 <th class="table-row-heading" width="20%">Quantity</th>
-                                                <th class="table-row-heading" width="28%">Remarks</th>
-                                                <th class="table-row-heading" width="12%">Action</th>
+                                                <th class="table-row-heading" width="40%">Remarks</th>
+                                            
                                             </tr>
                                    </table>
                                     <div id="add_mat">
@@ -134,16 +134,12 @@
                                                     </div>
                                                 </td>
                                                  <td width="20%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}"></div></div></td>
-                                                <td width="28%">
-                                                    <div class="dummy">
-                                                        <div class="input-icon right">
+                                                <td width="40%">
+                                                  
                                                             <textarea type="textarea" class="form-control rate" size="5" name="remark[]"  required="required">{{$value->remark}}</textarea>
-                                                        </div>
-                                                    </div>
+                                                       
                                                 </td>
-                                                 <td width="12%">
-                                                   
-                                                </td>
+                                            
                                             </tr>
                                        </table>
                                        @endforeach
@@ -165,16 +161,14 @@
                                                     </div>
                                                 </td>
                                                  <td width="20%"><div class="dummy"><div class="input-icon right"><input type="text" class="form-control quantity2" size="5" name="purchase_quantity[]" onkeypress="return isIntegerKey(event)" required="required" value="{{$value->purchase_quantity}}"></div></div></td>
-                                                <td width="28%">
+                                                <td width="40">
                                                     <div class="dummy">
                                                         <div class="input-icon right">{{$value->remark}}
                                                             <textarea  class="form-control rate" size="5" name="remark[]"  required="required">{{$value->remark}}</textarea>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                 <td width="12%">
-                                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                </td>
+                                                 
                                             </tr>
                                        </table>
                                         @endif
