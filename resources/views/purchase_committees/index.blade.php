@@ -43,7 +43,7 @@
               <tr>
                <td>{{$team->name}}</td>
                <td>{{displayNameFoMultipleID('users','id',$team->member_id)}}</td>
-               <td>{{displayIdBaseName('users',$team->head_id,'name')}})</td>
+               <td>{{displayIdBaseName('users',$team->head_id,'name')}}</td>
              
                <th>{{dateView($team->created_at)}}</th>
              <td>

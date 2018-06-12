@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Session;
 use DB;
 use DateTime;
 use App\Traits\activityLog;
+use Mail;
 class VendorSaveQuotationController extends Controller
 {
   
@@ -99,10 +100,16 @@ class VendorSaveQuotationController extends Controller
      */
     public function store(Request $requestData)
     {
-
+      
         $input = $requestData->all();
         $vendor_id    = $requestData->vendor_id;
+        
+        $vendor=DB::table('vendors')->select('id','name','email')->where('id',$vendor_id)->first();
+        $logged_user = $vendor->name;
         $request_id   = $requestData->request_id;
+        $request_data= CSEIRequest::whereId($request_id)->first();
+        $request_no=$request_data->request_no;
+        $amount= $request_data->amount;
         $material_id  = $requestData->material_id;
         $material_id_url  = implode(',',$material_id);
         $s_no = $requestData->s_no;
@@ -113,7 +120,8 @@ class VendorSaveQuotationController extends Controller
         $timeline = $requestData->timeline;
         $gst = $requestData->gst;
      
-        
+        //echo "8iuuuuuuuuuuuuuuuuuuuuuuuuu";
+      
         $remark = $requestData->remark;
         $vendor_remark = $requestData->vendor_remark;
         
@@ -127,12 +135,44 @@ class VendorSaveQuotationController extends Controller
         foreach ($s_no as $key => $n) {
             
           $timeline1= $this->insertDate($timeline[$key]);
-       
-            DB::table('vendor_quotation_lists')->insertGetId(
-                    ['request_id' => $request_id, 'vendor_id' => $vendor_id, 'material_id' => $material_id[$key], 's_no' => $s_no[$key], 'product_name' => $product_name[$key], 'purchase_quantity' => $purchase_quantity[$key], 'purchase_unit_rate' => $purchase_unit_rate[$key], 'purchase_unit_amount' => $purchase_unit_amount[$key],'remark' => $remark[$key],'vendor_remark' => $vendor_remark[$key],'gst' => $gst[$key],'timeline' => $timeline1]
-            );
+           DB::table('vendor_quotation_lists')->insertGetId(['request_id' => $request_id, 'vendor_id' => $vendor_id, 'material_id' => $material_id[$key], 's_no' => $s_no[$key], 'product_name' => $product_name[$key], 'purchase_quantity' => $purchase_quantity[$key], 'purchase_unit_rate' => $purchase_unit_rate[$key], 'purchase_unit_amount' => $purchase_unit_amount[$key],'remark' => $remark[$key],'vendor_remark' => $vendor_remark[$key],'gst' => $gst[$key],'timeline' => $timeline1]);
         }
-            Session::flash('flash_message', "Quotation submitted successfully!.");
+        
+        $role_user=DB::table('role_user')->where('role_id',11)->get();
+           foreach($role_user as $role_user) 
+           {
+           $all_coordinator_array[]= $role_user->user_id;  
+               
+           }
+         $role_user=DB::table('users')->whereIn('id',$all_coordinator_array)->get();  
+//         print_r($role_user);
+//exit();
+    /******************************************email to purchaser  *********************************/ 
+        
+             foreach($role_user as $role_user_value)
+             {
+                    Mail::send( 'emails.material.emai_to_purchaser_after_save_quotation',['name'=>$role_user_value->name,'request_no'=>$request_no,'amount'=>$amount,'logged_user'=>$logged_user], function ($m) use ($role_user_value) {
+                   $m->from('info@opiant.online', 'CSEI');
+                   $m->to($role_user_value->email, $role_user_value->name)->subject('CSEI |  A Vendor Quotation Saved '); });
+             }
+         
+          
+        // exit(); 
+          
+          
+          /******************************************email for admin to apprved vender successfully*********************************/
+//          Mail::send( 'emails.material.main_admin_send_for_po_suuccessfully', ['request_no'=>$request_no,'name' => $user_id_login->name, 'amount' => $amount,'logged_user'=>$logged_user], function ($m) use ($user_id_login) {
+//           $m->from('info@opiant.online', 'CSEI');
+//           $m->to($user_id_login->email, $user_id_login->name)->subject('CSEI | Approve Vendor for PO.');
+//          });
+        
+        
+        
+        
+        
+        
+        
+            Session::flash('flash_message', "Thank You, Your Quotation Submitted Successfully!.");
            return redirect()->route('quotations.index', [$request_id,$vendor_id,$material_id_url]);
            }
         
