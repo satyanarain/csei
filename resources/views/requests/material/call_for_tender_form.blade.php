@@ -8,63 +8,63 @@
                                         <div class="card-body">
                                             <div class="form-validation">
                                                 <div class="form-group row">
-                                                    Request No.
+                                                    <label class="col-lg-4 col-form-label" for="val-username">Request No.</label>
                                                     <div class="col-lg-6">
                                                         {{$requests->request_no}}  
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    Category
+                                                    <label class="col-lg-4 col-form-label" for="val-username">Category</label>
                                                     <div class="col-lg-6">
                                                         {{$requests->name}}  
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    Date of Requisition
+                                                    <label class="col-lg-4 col-form-label" for="val-username">Date of Requisition</label>
                                                     <div class="col-lg-6">
                                                         {{dateView($requests->due_date)}}  
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    Purpose
+                                                    <label class="col-lg-4 col-form-label" for="val-username">Purpose</label>
                                                     <div class="col-lg-6">
                                                         {{$requests->purpose}}  
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    TOR
+                                                    <label class="col-lg-4 col-form-label" for="val-username">TOR</label>
                                                     <div class="col-lg-6">
                                                         {{$requests->description_of_use}}  
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    Required By
+                                                    <label class="col-lg-4 col-form-label" for="val-username">Required By</label>
                                                     <div class="col-lg-6">
                                                         {{dateView($requests->required_by_date)}}  
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    Name Of Project
+                                                    <label class="col-lg-4 col-form-label" for="due_date">Name Of Project</label>
                                                     <div class="col-lg-6">
                                                         {{displayView($requests->name_of_project)}}
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    Project Expense Head
+                                                    <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head</label>
                                                     <div class="col-lg-6">
                                                         {{displayView($requests->project_expense_head) }}
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    Total Expected Expense
+                                                    <label class="col-lg-4 col-form-label" for="val-username">Total Expected Expense</label>
                                                     <div class="col-lg-6">
                                                         {{$requests->amount}}  
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                  Status
+                                                    <label class="col-lg-4 col-form-label" for="due_date">Status</label>
                                                     <div class="col-lg-6">
                                                         {{$requests->c_status}}
                                                     </div>
@@ -88,7 +88,9 @@
                                                    <table class="table table-bordered table-striped table-hover bank_table">
                                            <tr>
                                                 <td>
-                                                    {{$value->s_no}}"></span>
+                                                    <div class="dummy">
+                                                        <div class="input-icon right">
+                                                            <span><input type="text" class="form-control product_code" size="5" name="s_no[]" onkeypress="return isNumberKey(event)" required="required" value="{{$value->s_no}}"></span>
                                                               <input type="hidden" class="form-control product_code" size="5" name="material_id[]" onkeypress="return isNumberKey(event)" value="{{$value->id}}" readonly="readonly">
                                                         </div>
                                                     </div>

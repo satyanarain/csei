@@ -8,69 +8,69 @@
                 <div class="card-body">
                  <div class="form-validation">
                      <div class="form-group row">
-                                Request No.
+                                <label class="col-lg-4 col-form-label" for="val-username">Request No.</label>
                                 <div class="col-lg-6">
                                     {{$requests->request_no}}  
                                 </div>
                             </div>
                             <div class="form-group row">
-                                Category
+                                <label class="col-lg-4 col-form-label" for="val-username">Category</label>
                                 <div class="col-lg-6">
                                     {{$requests->name}}  
                                 </div>
                             </div>
                             <div class="form-group row">
-                                Date of Requisition
+                                <label class="col-lg-4 col-form-label" for="val-username">Date of Requisition</label>
                                 <div class="col-lg-6">
                                     {{dateView($requests->due_date)}}  
                                 </div>
                             </div>
                           <div class="form-group row">
-                                Purpose
+                                <label class="col-lg-4 col-form-label" for="val-username">Purpose</label>
                                 <div class="col-lg-6">
                                     {{$requests->purpose}}  
                                 </div>
                             </div>
                             <div class="form-group row">
-                                Service Description
+                                <label class="col-lg-4 col-form-label" for="val-username">Service Description</label>
                                 <div class="col-lg-6">
                                     {{$requests->description_of_use}}  
                                 </div>
                             </div>
                      <div class="form-group row">
-                         Required By
+                         <label class="col-lg-4 col-form-label" for="val-username">Required By</label>
                          <div class="col-lg-6">
                              {{dateView($requests->required_by_date)}}  
                          </div>
                      </div>
 
                      <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="due_date">Name Of Project
+                                        <label class="col-lg-4 col-form-label" for="due_date">Name Of Project</label>
                                         <div class="col-lg-6">
                                             <input type="text" name="name_of_project" id="name_of_project"  class="form-control"  value="{{$requests->name_of_project}}" >
                                         </div>
                             </div>
                             <div class="form-group row">
-                                        <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head
+                                        <label class="col-lg-4 col-form-label" for="due_date">Project Expense Head</label>
                                         <div class="col-lg-6">
                                              <input type="text" name="project_expense_head" id='project_expense_head' class="form-control" value="{{$requests->project_expense_head}}" >
                                         </div>
                                     </div>
 
                      <div class="form-group row">
-                         Total Expected Expense
+                         <label class="col-lg-4 col-form-label" for="val-username">Total Expected Expense</label>
                          <div class="col-lg-6">
                              {{$requests->amount}}  
                          </div>
                      </div>
                      <div class="form-group row">
-                         <label class="col-lg-4 col-form-label" for="due_date">Status
+                         <label class="col-lg-4 col-form-label" for="due_date">Status</label>
                          <div class="col-lg-6">
                              {{$requests->c_status}}
                          </div>
                      </div>  
                      <div class="form-group row">
-                         <label class="col-lg-4 col-form-label" for="purpose">Comments
+                         <label class="col-lg-4 col-form-label" for="purpose">Comments</label>
                          <div class="col-lg-6">
                              <textarea  name="comments" id="comments"  class="form-control"></textarea>
                          </div>
@@ -96,7 +96,8 @@
                         <td>{{$value->product_name}}</td>
                         <td>{{$value->purchase_quantity}}</td>
                          <td align="left" valign="top" style="text-align:left;">{{$value->remark}}</td>
-                       </tr>
+
+                    </tr>
                 </table>
                 @endforeach
                 @endif
