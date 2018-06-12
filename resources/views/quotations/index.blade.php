@@ -4,6 +4,16 @@
 <div class="row justify-content-center" id='printableArea'>
     <div class="col-lg-9">
         <div class="card">
+            <?php $message = Session::get('flash_message') ;
+           if($message!='') 
+           {
+          ?>
+                  <div class="alert-new-success" id="successMessage1">
+<!--                    <button type="button" class="close" data-dismiss="alert">×</button>	-->
+                   {{ $message }}
+                   </div>
+           <?php } else { ?>
+            @if($already==0)
             <div class="card-body">
 
                 {!!Form::open(['route'=>'quotations.store', 'id'=>'formValidate', 
@@ -20,8 +30,7 @@
                         </tr>
                     </table>
                     <h4 class="header2" style="border-bottom:#ccc 0px solid;">Quotation Form</h4>
-                    @include('partials.message')
-                    <div class="table-scrollable form-body">
+                     <div class="table-scrollable form-body">
                       <table class="table table-bordered table-striped table-hover bank_table">
                             <thead>
                                 <tr>
@@ -131,8 +140,21 @@
                     </table> 
                    </div>
                 {!!Form::close()!!}        
-
-            </div>
+             </div>
+           
+            @else
+            <table>
+                <tr><td align="left" valign="top">
+                        <div class="alert-new-success" id="successMessage">
+<!--                            <button type="button" class="close" data-dismiss="alert">×</button>	-->
+                            You have already submitted this quotation!
+                        </div>
+                    </td></tr>
+            </table>
+            @endif
+           <?php } ?>
+            
+            
         </div>
     </div>
 </div>

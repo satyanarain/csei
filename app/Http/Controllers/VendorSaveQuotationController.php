@@ -48,14 +48,15 @@ class VendorSaveQuotationController extends Controller
         $sql = DB::table('quotation_details')->select('*')->where([['material_id', $material_id], ['request_id', $request_id]])->first();
         $qoutation_created_date = $sql->created_at;
         $vendor_response_date = $sql->vendor_response_date;
-
         $curdate = date('Y-m-d H:i:s');
-        
         $date1 = new DateTime(date('Y-m-d', strtotime($vendor_response_date)));
-        
         $date2 = new DateTime(date('Y-m-d', strtotime($curdate)));
         $expecteddate = $date1->diff($date2)->days; // 0
-           if($expecteddate == 0)
+        $already=DB::table('vendor_quotation_lists')->select('*')->where([['vendor_id',$vendor_id],['request_id',$request_id]])->whereIn('material_id',$material_id_array)->count();
+      
+        
+        
+        if($expecteddate == 0)
                 {
                 if ($expecteddate > $no_of_days) {
                 return view('quotations.expire', compact('quotations', 'vendor_id', 'request_id'));
@@ -74,7 +75,7 @@ class VendorSaveQuotationController extends Controller
                 ->whereIn('quotation_details.material_id', $material_id_array)->get();
                 }
 
-            return view('quotations.index', compact('quotations','vendor_id','request_id','requests'));
+            return view('quotations.index', compact('quotations','vendor_id','request_id','requests','already'));
   
     }
 
@@ -119,7 +120,6 @@ class VendorSaveQuotationController extends Controller
        $already=DB::table('vendor_quotation_lists')->select('*')->where([['vendor_id',$vendor_id],['request_id',$request_id]])->whereIn('material_id',$material_id)->count();
         if($already>0)
         {
-
            Session::flash('flash_message', "You have already submitted this quotation!.");
            return redirect()->route('quotations.index', [$request_id,$vendor_id,$material_id_url]);
           exit();
