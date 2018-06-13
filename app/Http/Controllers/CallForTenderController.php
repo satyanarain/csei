@@ -126,9 +126,7 @@ use activityLog;
             $request_no=$request_data->request_no;
             $amount= $request_data->amount;
             $due_date  =$request_data->due_date;
-            
-            
-            $sql_requester= DB::table('requests')->select('*')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
+              $sql_requester= DB::table('requests')->select('*')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
             $s_no = $request->s_no;
             $material_id = $request->material_id;
             $material_string=implode(',',$request->material_id);
@@ -164,7 +162,7 @@ use activityLog;
             }
       
               $associates = DB::table('users')->select('*')->where('id',1)->first();
-             // $sql_requester= DB::table('requests')->select('*')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
+    
              if($result==1)
             {
 	            $associate_name = $associates->name;

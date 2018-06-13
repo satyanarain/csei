@@ -45,17 +45,14 @@
                 {{dateView($vendor_quotation_lists->due_date)}}
               </td>
                 <td>{{$vendor_quotation_lists->request_no}}</td>
-              
-<!--                <td>{{$vendor_quotation_lists->purpose}}</td>-->
-<!--                 <td>{{$vendor_quotation_lists->amount}}</td>-->
                  <td>
                  {{displayView($vendor_quotation_lists->purpose)}}
                  </td>
                 <td>
                 <?php 
-                  $allready = alreadyComment('quotation_send_for_comparision', $vendor_quotation_lists->request_id, $vendor_quotation_lists->vendor_id,'request_id','vendor_id');
-                $sql=DB::table('requests')->where('id',$vendor_quotation_lists->request_id)->first();
-              $sql->category_id;
+                  $allready = DB::table('quotation_send_for_comparision')->where('request_id',$vendor_quotation_lists->request_id)->count();
+                  $sql=DB::table('requests')->where('id',$vendor_quotation_lists->request_id)->first();
+                  $sql->category_id;
                 ?>
                     @if($allready==0)
                     @if($sql->category_id==2)

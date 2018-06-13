@@ -138,14 +138,14 @@ class VendorSaveQuotationController extends Controller
            DB::table('vendor_quotation_lists')->insertGetId(['request_id' => $request_id, 'vendor_id' => $vendor_id, 'material_id' => $material_id[$key], 's_no' => $s_no[$key], 'product_name' => $product_name[$key], 'purchase_quantity' => $purchase_quantity[$key], 'purchase_unit_rate' => $purchase_unit_rate[$key], 'purchase_unit_amount' => $purchase_unit_amount[$key],'remark' => $remark[$key],'vendor_remark' => $vendor_remark[$key],'gst' => $gst[$key],'timeline' => $timeline1]);
         }
         
-        $role_user=DB::table('role_user')->where('role_id',11)->get();
+        $role_user=DB::table('role_user')->where('role_id',13)->get();
            foreach($role_user as $role_user) 
            {
            $all_coordinator_array[]= $role_user->user_id;  
                
            }
          $role_user=DB::table('users')->whereIn('id',$all_coordinator_array)->get();  
-//         print_r($role_user);
+        //print_r($role_user);
 //exit();
     /******************************************email to purchaser  *********************************/ 
         

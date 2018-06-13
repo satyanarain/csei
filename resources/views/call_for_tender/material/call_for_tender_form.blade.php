@@ -81,24 +81,23 @@
                                                             <th class="table-row-heading">Product Name</th>
                                                             <th class="table-row-heading">Quantity</th>
                                                             <th class="table-row-heading">Remarks</th>
-                                                            <th class="table-row-heading">Action</th>
+<!--                                                            <th class="table-row-heading">Action</th>-->
                                                         </tr>
                                                    
                                                     @foreach($material_details as $value)
                                                  
-<!--                                                   <table class="table table-bordered table-striped table-hover bank_table">-->
                                            <tr>
-                                                <td>
+                                                <td><input type="hidden" name="s_no[]" value="{{$value->s_no}}">
                                                    {{$value->s_no}}
-                                                              <input type="hidden" class="form-control product_code" size="5" name="material_id[]" onkeypress="return isNumberKey(event)" value="{{$value->id}}" readonly="readonly">
+                                                 <input type="hidden" class="form-control product_code" size="5" name="material_id[]" onkeypress="return isNumberKey(event)" value="{{$value->id}}" readonly="readonly">
                                                        
                                                 </td>
-                                                <td>{{$value->product_name}}</td>
-                                                 <td>{{$value->purchase_quantity}}</td>
-                                                <td>{{$value->remark}}</td>
-                                                 <td>
+                                                <td>{{$value->product_name}}<input type="hidden" name="product_name[]" value="{{$value->product_name}}"></td>
+                                                 <td>{{$value->purchase_quantity}}<input type="hidden" name="purchase_quantity[]" value="{{$value->purchase_quantity}}"></td>
+                                                 <td style="text-align:left;">{{$value->remark}}<input type="hidden" name="remark[]" value="{{$value->remark}}"></td>
+<!--                                                 <td>
                                                     <span  class="rm_first"><button class="remove_bank_row">Remove</button></span>
-                                                </td>
+                                                </td>-->
                                               </tr>
                                                </table>
                                               @endforeach
@@ -157,11 +156,11 @@
                                                         </tr>
                                                            @foreach($material_detail_logs as $value)
                                                          <tr>
-                                                            <th>{{$value->s_no}}</th>
-                                                            <th>{{$value->rfq_no}}</th>
-                                                            <th>{{$value->product_name}}</th>
-                                                            <th>{{$value->purchase_quantity}}</th>
-                                                            <th>{{$value->remark}}</th>
+                                                             <th>{{$value->s_no}}<input type="hidden" name="s_no[]" value="{{$value->s_no}}"></th>
+                                                            <th>{{$value->rfq_no}}<input type="hidden" name="rfq_no[]" value="{{$value->rfq_no}}"></th>
+                                                            <th>{{$value->product_name}}<input type="hidden" name="product_name[]" value="{{$value->product_name}}"></th>
+                                                            <th>{{$value->purchase_quantity}}<input type="hidden" name="purchase_quantity[]" value="{{$value->purchase_quantity}}"></th>
+                                                            <th>{{$value->remark}}<input type="hidden" name="remark[]" value="{{$value->remark}}"></th>
                                                         </tr>
                                                     @endforeach
                                                </table>
