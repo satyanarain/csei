@@ -43,7 +43,7 @@ $segments_var = Request::segments();
     <div class="vendorpopup"  id="comment" style="display:none">
         <div class="vendorpopup_sub" id="vendorpopup_sub" style=" background-color:#fff;">
             <table width="100%">
-                <tr><td style="text-align:right"><span style="cursor:pointer;" onclick="closeTermandCondition()"><b>x</b></span></td></tr> 
+                <tr height="12px'"><td style="text-align:right"><span style="cursor:pointer;" onclick="closeTermandCondition()"><b>x</b></span></td></tr> 
             </table>
             <h2>Term & Conditions</h2>
             On investigation, the "terms and conditions" may include "Offer only applies to residents of Alaska", and so a listener in New York can't actually get a half-price widget at all.
