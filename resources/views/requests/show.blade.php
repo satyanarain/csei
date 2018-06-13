@@ -57,6 +57,12 @@
     { ?>
             <li class="breadcrumb-item active"><a href="{{route('approvers.requests')}}">Pending Approval</a></li>
               <?php } ?>
+              <?php if($view=='view')
+    { ?>
+            <li class="breadcrumb-item active"><a href="{{route('requests.index')}}">All Requests</a></li>
+            <li class="breadcrumb-item active">Request Details</li>
+            
+              <?php } ?>
              </ol>
     </div>
 </div>

@@ -71,11 +71,11 @@ class MainAdminLikesApprovalController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-//        echo "<pre>";
+//       echo "<pre>";
 //        print_r($_POST);
 //        echo "</pre>";
-        
-        //exit();
+//        
+//      exit();
         
         
       $main_admin_id = Auth::id();
@@ -149,7 +149,7 @@ if($request->single_vendor=='single_vendor')
          $amount= $request_data->amount;
          
          /***************email to purchaser********************************************************************************************************************/
-         $role_user=DB::table('role_user')->where('role_id',11)->get();
+         $role_user=DB::table('role_user')->where('role_id',13)->get();
            foreach($role_user as $role_user) 
            {
            $all_coordinator_array[]= $role_user->user_id;  

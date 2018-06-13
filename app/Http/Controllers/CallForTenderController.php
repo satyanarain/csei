@@ -204,7 +204,7 @@ use activityLog;
                  
                     Mail::send( 'emails.committee_member.mail_to_commitee_member_for_comment', ['request_no'=>$request_no,'name' => $user_value->name,'amount' => $amount,'logged_user'=>$logged_user], function ($m) use ($user_value) {
                         $m->from('info@opiant.online', 'CSEI');
-                        $m->to($user_value->email, $user_value->name)->subject('CSEI | Request Completed Successfully');
+                        $m->to($user_value->email, $user_value->name)->subject('CSEI | Request For Comparision Analysis');
                     });
              }
                 
