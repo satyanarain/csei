@@ -136,12 +136,26 @@
              2. Added functionality to list admin approved material service request.
              3. Added functionality to send item quotation to vender.
              4. Save vendor quotation form with gst and time line.
-               /****************************************Date 05-06-2018******************************************************/
+             
+             
             
-             1. Added functionality to list  receipt vender quotation.
-             2. Added functionality to save selected vendor.
-             3. Added functionality to send mail to purchase committee member.
-             4. List selected vendor for like dislike
+             /****************************************Date 10-06-2018******************************************************/
+            
+             1. Added functionality to list single vendor quotation.
+             2. Added functionality to send mail to purchaser after save quotation by vendor.
+             3. Add functionality to send single vendor to admin after approve by purchaser.
+             
+            /****************************************Date 12-06-2018******************************************************/
+             1. Create P.O for single vendor.
+             2. Added functionality to send mail to vendor after save purchase order.
+             3. Fix item list alignment.
+            /****************************************Date 11-06-2018******************************************************/
+             1. Fix bug and testing.
+             2. Meeting with client.
+             3. List all requests for requisition reports.
+      
+          
+            
              
              
     

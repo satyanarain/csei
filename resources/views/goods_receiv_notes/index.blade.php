@@ -3,11 +3,11 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
   <div class="col-md-5 align-self-center">
-    <h3 class="text-primary">All Comparison Analysis</h3> </div>
+    <h3 class="text-primary">All GRN</h3> </div>
     <div class="col-md-7 align-self-center">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">All Comparison Analysis</li>
+        <li class="breadcrumb-item active">All GRN</li>
       </ol>
     </div>
   </div>
@@ -22,8 +22,7 @@
         <div class="card">
           <div class="card-body">
           <div class="table-responsive m-t-40">
-                
-                <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+               <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                <thead>
                 <tr>
                  <th style="display:none">id</th>
@@ -34,39 +33,31 @@
                </tr>
              </thead>
              <tbody>
-                 
-               <?php //print_r($vendor_quotation_lists) ; ?>  
-                 
-                 
-              @foreach($vendor_quotation_lists as $vendor_quotation_lists)
+              @foreach($reports as $reports)
               <tr>
-                  <td style="display:none">{{$vendor_quotation_lists->id}}</td>
+                  <td style="display:none">{{$reports->id}}</td>
                <td>
-                {{dateView($vendor_quotation_lists->due_date)}}
+                {{dateView($reports->due_date)}}
               </td>
-                <td>{{$vendor_quotation_lists->request_no}}</td>
+                <td>{{$reports->request_no}}</td>
                 <td>
-                 {{displayView($vendor_quotation_lists->purpose)}}
+                 {{displayView($reports->purpose)}}
                  </td>
                 <td>
-                <?php 
-          // echo $vendor_quotation_lists->request_id;
-                 $allready = DB::table('vendor_finalise_for_purchase_orders')->select('*')->where('request_id',$vendor_quotation_lists->request_id)->count();             ?>
-                    @if($allready==0)
-                    <a href="{{route('mainadmin_likes_approval.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-check-circle"></i>Approve</a>
-                   @else
-                    <a href="{{route('mainadmin_likes_approval.show',[$vendor_quotation_lists->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-search"></i>View</a>
-                   @endif
+             <?php $sql=DB::table('goods_receiv_notes')->select('id','request_id')->where('request_id',$reports->request_id)->count(); 
+             
+             ?>
+               @if($sql==0)
+               <a href="{{route('goods_receiv_notes.show',[$reports->id,'view'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-check-circle"></i> Create GRN</a>
+                  @else 
+                   <a href="{{route('goods_receiv_notes.show',[$reports->id,'view_details'])}}" class="btn btn-primary m-b-10 m-l-5"><i class="fa fa-check-circle"></i> View</a>
+              @endif
               </td>
             </tr>
             @endforeach
           </tbody>
         </table>
-                
-                
-                
-              
-      </div>
+       </div>
     </div>
   </div>
 </div>

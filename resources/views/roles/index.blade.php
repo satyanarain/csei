@@ -2,14 +2,15 @@
 @section('breadcrumb')
 <!-- Bread crumb -->
 <div class="row page-titles">
-	<div class="col-md-5 align-self-center">
-	      <div class="col-md-7 align-self-center">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-				<li class="breadcrumb-item active">All Roles</li>
-			</ol>
-		</div>
-	</div>
+    <div class="col-md-5 align-self-center">
+        <h3 class="text-primary">All Roles</h3> </div>
+        <div class="col-md-7 align-self-center">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
+                <li class="breadcrumb-item">All Roles</li>
+             </ol>
+        </div>
+    </div>
 	<!-- End Bread crumb -->
 	@endsection
 
@@ -52,4 +53,4 @@
 			</div>
 		</div>
 	</div>
-	@endsection
+@endsection

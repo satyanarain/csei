@@ -176,10 +176,7 @@
                        </tr>
                        @endif
                       <?php       
-                     //echo  $requests->id;
-                   // echo  $vendor_value->vendor_id;
-                    //  echo  $allready = alreadyComment('vendor_finalise_for_purchase_orders', $requests->id,$vendor_value->vendor_id,'request_id','vendor_id');
-                        $allready = DB::table('vendor_finalise_for_purchase_orders')->select('id','request_id')->where('request_id',$requests->request_id)->count();  
+                     $allready = DB::table('vendor_finalise_for_purchase_orders')->select('id','request_id')->where('request_id',$requests->id)->count();  
                    ?>
                     @endforeach
                 </table>

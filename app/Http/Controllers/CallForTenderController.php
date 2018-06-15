@@ -106,8 +106,6 @@ use activityLog;
      */
     public function store(Request $request)
     {
- 
-        
           $user_details=Auth::user();
           $logged_user= $user_details->name;
             

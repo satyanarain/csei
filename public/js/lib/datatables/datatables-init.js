@@ -47,6 +47,7 @@ $(document).ready(function() {
        dom: 'Bfrtip',
        order:[],
       buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            //'copy', 'csv', 'excel', 'pdf', 'print'
+            'excel', 'pdf', 'print'
         ]
    });

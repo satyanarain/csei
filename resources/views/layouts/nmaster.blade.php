@@ -10,6 +10,7 @@ $segments_var = Request::segments();
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
+    
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" href="{{URL::to('images/logonicons/favicon.ico')}}">
@@ -59,9 +60,7 @@ Advertising standards agencies might allow the use of a general disclaimer like 
          </div>
  </div>
     <div class="vendorpopup"  id="comment" style="display:none">
-        <div class="vendorpopup_sub" id="vendorpopup_sub" style=" background-color:#fff;">
-            
-       </div>
+        <div class="vendorpopup_sub" id="vendorpopup_sub" style=" background-color:#fff;"></div>
  </div>
   <body class="hold-transition skin-blue sidebar-mini">
        <div class="comment_content">
@@ -217,7 +216,7 @@ Advertising standards agencies might allow the use of a general disclaimer like 
                                   ?></a>
                               <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                   <ul class="dropdown-user">
-                                           <li>
+                                      <li>
                                           <a href="#"
                                              onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
@@ -327,13 +326,31 @@ Advertising standards agencies might allow the use of a general disclaimer like 
                                   <li class="{{($active2 == 'call_for_tender' && $active == 'receipt_of_quotation') ? 'active' : ''}}"><a href="{{route('receipt_of_quotation.call_for_tender')}}"><i class="fa fa-gavel" aria-hidden="true" style="color:green"></i> Receipt Quotation</a></li>
                               </ul>
                           </li>
-                          <li class="{{$active == 'purchaser' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Purchase Order</span></a>
+                          <li class="{{$active == 'purchases' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu"> Purchase Order</span></a>
                               <ul aria-expanded="false" class="collapse">
-                                  <li class="{{($active2 == 'purchaser' && $active == 'index') ? 'active' : ''}}"><a href="{{route('purchases.index')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> All Purchase Order</a></li>
-                                  <li class="{{($active2 == 'purchaser' && $active == 'index') ? 'active' : ''}}"><a href="{{route('purchases.single_vendor_purchase_order')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> All Single Vendor Order</a></li>
+                                  <li class="{{($active2 == 'index' && $active == 'purchases') ? 'active' : ''}}"><a href="{{route('purchases.index')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Purchase Order</a></li>
+                                  <li class="{{($active2 == 'purchases' && $active == 'purchases') ? 'active' : ''}}"><a href="{{route('purchases.single_vendor_purchase_order')}}"><i class="fa fa-shopping-cart" aria-hidden="true"></i> All Single Vendor Order</a></li>
                                   
                               </ul>
                           </li>
+                         @endif
+                           @if(Entrust::hasRole('administrator') || Entrust::hasRole('Finance Head'))
+                          <li class="{{$active == 'reports' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-newspaper-o"></i><span class="hide-menu"> Reports</span></a>
+                              <ul aria-expanded="false" class="collapse">
+                                  <li class="{{($active2 == 'call_for_tender' && $active == 'reports') ? 'active' : ''}}"><a href="{{route('reports.index')}}"><i class="fa fa-newspaper-o" aria-hidden="true" style="color:green"></i> All Requests Report</a></li>
+                                  <li class="{{($active2 == 'call_for_tender' && $active == 'reports') ? 'active' : ''}}"><a href="{{route('reports.purchaser_reports')}}"><i class="fa fa-newspaper-o" aria-hidden="true" style="color:green"></i> P.O Reports</a></li>
+                              </ul>
+                          </li>
+                         
+                         @endif
+                           @if(Entrust::hasRole('administrator') || Entrust::hasRole('Finance Head'))
+                          <li class="{{$active == 'goods_receiv_notes' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-newspaper-o"></i><span class="hide-menu">Goods Receive Notes</span></a>
+                              <ul aria-expanded="false" class="collapse">
+                                  <li class="{{($active2 == 'create' && $active == 'goods_receiv_notes') ? 'active' : ''}}"><a href="{{route('goods_receiv_notes.create')}}"><i class="fa fa-newspaper-o" aria-hidden="true" style="color:green"></i> New GRN</a></li>
+                                  <li class="{{($active2 == 'index' && $active == 'goods_receiv_notes') ? 'active' : ''}}"><a href="{{route('goods_receiv_notes.index')}}"><i class="fa fa-newspaper-o" aria-hidden="true" style="color:green"></i> All GRN</a></li>
+                              </ul>
+                          </li>
+                         
                          @endif
                              
                          <?php 
@@ -354,7 +371,7 @@ Advertising standards agencies might allow the use of a general disclaimer like 
                                <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-list"></i><span class="hide-menu">Setting</span>
                                </a>
                               <ul aria-expanded="false" class="collapse">
-                                  <li class="{{$active == 'roles' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-key"></i><span class="hide-menu"><i class="fas fa-role"></i>Roles</span></a>
+                                  <li class="{{$active == 'roles' ? 'active' : ''}}"> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-key"></i><span class="hide-menu"><i class="fas fa-role"></i> Roles</span></a>
                               <ul aria-expanded="false" class="collapse">
                                   <li class="{{($active2 == 'create' && $active == 'roles') ? 'active' : ''}}"><a href="{{route('roles.create')}}"><i class="fa fa-plus" aria-hidden="true"></i> New Role</a></li>
                                   <li class="{{($active2 == '' && $active == 'roles') ? 'active' : ''}}"><a href="{{route('roles.index')}}"><i class="fa fa-bars"></i> All Roles</a></li>
@@ -825,6 +842,56 @@ $(function () {
                 }
     }
         
+
+/***************************************************/
+
+
+
+//        $(document).on("click", ".remove_bank_row", function () {
+//              var $table = $(this).closest('table');
+//              $(this).closest('tr').remove();
+//              $table.trigger("recalc");
+//          });
+
+          $(document).on("keyup", ".bank_table input", function () {
+              $(this).trigger("recalc");
+          });
+
+          $(document).on("recalc", ".bank_table tr", function () {
+              
+              rate=$(this).find(".rate").val();
+             
+              var price = +$(this).find(".quantity2").val() * +rate;
+              
+               gst=  $(this).find(".gst").val()
+              gstPrice =  price * gst / 100
+              
+             total=price+gstPrice;
+             $(this).find(".tamnt").val(total.toFixed(2));
+          });
+
+          $(document).on("recalc", ".bank_table", function () {
+              var grandTotal = 0;
+              $(this).find(".tamnt").each(function () {
+                  grandTotal += +$(this).val();
+              });
+              $("#grandTotal").val(grandTotal.toFixed(2));
+          });
+
+          $(".bank_table").trigger("recalc");
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       </script>

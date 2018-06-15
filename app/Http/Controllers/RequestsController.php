@@ -68,6 +68,7 @@ use activityLog;
     {
      $user_details=Auth::user();
      $logged_user= $user_details->name;
+     
 //   echo "<pre>";
 //   print_r($_POST);
 //   echo "</pre>";
@@ -92,7 +93,7 @@ use activityLog;
           /****************************************************************************************/
           $requester = DB::table('requests')->select('*','requests.id as id')->leftjoin('users','users.id','requests.user_id')->where('requests.id',$id)->first();
           $status = 2; 
-          $result=CSEIRequest::where('id', $id)->update(['name_of_project'=>$name_of_project,'project_expense_head'=>$project_expense_head,'status' =>$status,'verifire_id'=>$verifire_id]); 
+          $result=CSEIRequest::where('id', $id)->update(['name_of_project'=>$name_of_project,'project_expense_head'=>$project_expense_head,'status' =>$status,'approver_id'=>$approver_id]); 
          
           // $result=  CSEIRequest::where('id', $id)->update(['status' =>$status,'approver_id'=>$approver_id]); 
         /******************************************email finance department*********************************/
@@ -170,7 +171,7 @@ use activityLog;
                 $status = 3;
                 $financer_id = Auth::id();
                 $id = $request->id;
-                $result = CSEIRequest::where('id', $id)->update(['status' => $status]);
+                $result = CSEIRequest::where('id', $id)->update(['status' => $status,'financer_id'=>$financer_id]);
                 $input = $request->all();
                 $input['request_id'] = $id;
                 $request_data = CSEIRequest::whereId($id)->first();

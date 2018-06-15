@@ -106,7 +106,7 @@ if($request->single_vendor=='single_vendor')
          $amount= $request_data->amount;
          
          /***************email to purchaser********************************************************************************************************************/
-         $role_user=DB::table('role_user')->where('role_id',11)->get();
+         $role_user=DB::table('role_user')->where('role_id',13)->get();
            foreach($role_user as $role_user) 
            {
            $all_coordinator_array[]= $role_user->user_id;  
@@ -114,16 +114,16 @@ if($request->single_vendor=='single_vendor')
            }
              $role_user=DB::table('users')->whereIn('id',$all_coordinator_array)->get();  
 
-    /******************************************email to all financer  *********************************/ 
-               if($result==1)
-          {
+    /******************************************email to purchasr  *********************************/ 
+            //   if($result==1)
+         // {
              foreach($role_user as $role_user_value)
              {
                     Mail::send( 'emails.material.email_to_purchaser_to_create_po',['name'=>$role_user_value->name,'request_no'=>$request_no,'amount'=>$amount,'logged_user'=>$logged_user], function ($m) use ($role_user_value) {
                    $m->from('info@opiant.online', 'CSEI');
                    $m->to($role_user_value->email, $role_user_value->name)->subject('CSEI |  Request Create PO.'); });
              }
-          }
+         // }
           /******************************************email for admin to apprved vender successfully*********************************/
           Mail::send( 'emails.material.main_admin_send_for_po_suuccessfully', ['request_no'=>$request_no,'name' => $user_id_login->name, 'amount' => $amount,'logged_user'=>$logged_user], function ($m) use ($user_id_login) {
            $m->from('info@opiant.online', 'CSEI');
@@ -158,15 +158,15 @@ if($request->single_vendor=='single_vendor')
              $role_user=DB::table('users')->whereIn('id',$all_coordinator_array)->get();  
 
     /******************************************email to all financer  *********************************/ 
-               if($result==1)
-          {
+             //  if($result==1)
+          //{
              foreach($role_user as $role_user_value)
              {
                     Mail::send( 'emails.material.email_to_purchaser_to_create_po',['name'=>$role_user_value->name,'request_no'=>$request_no,'amount'=>$amount,'logged_user'=>$logged_user], function ($m) use ($role_user_value) {
                    $m->from('info@opiant.online', 'CSEI');
                    $m->to($role_user_value->email, $role_user_value->name)->subject('CSEI |  Request Create PO.'); });
              }
-          }
+          //}
           /******************************************email for admin to apprved vender successfully*********************************/
           Mail::send( 'emails.material.main_admin_send_for_po_suuccessfully', ['request_no'=>$request_no,'name' => $user_id_login->name, 'amount' => $amount,'logged_user'=>$logged_user], function ($m) use ($user_id_login) {
            $m->from('info@opiant.online', 'CSEI');

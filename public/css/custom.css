@@ -36,25 +36,18 @@ background:rgba(0,0,0,0.6);
 .vendorpopup_sub
 {
 background-color: #000;
-
 height:auto; 
 width:50%;
 margin:0 auto;
 position:relative;
-  border:2px solid #cccccc; 
- border-radius:2px;  
+border:2px solid #cccccc; 
+border-radius:2px;  
 padding: 20px;
 text-align: justify;
 text-justify: inter-word;
 overflow-y: scroll;
   
 }
-
-
-
-
-
-
 
 /*****************************************************/
  #cover{ position:fixed; top:0; 

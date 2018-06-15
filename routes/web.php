@@ -82,10 +82,17 @@ Route::get('/', function () { return view('welcome'); })->name('/');
       
         Route::resource('call_for_tender', 'CallForTenderController');
         
-        /************************************************************************/
+        /************************Date 13-06-2018************************************************/
+        /************************@author satya************************************************/
+        /************************Report************************************************/
+        Route::get('reports/purchaser_reports', 'ReportsController@purchaserReports')->name('reports.purchaser_reports');
+        Route::resource('reports', 'ReportsController');
+        
         /************************************************************************/
         Route::get('purchases/single_vendor_purchase_order', 'PurchasesController@singleVendorOrder')->name('purchases.single_vendor_purchase_order');
         Route::resource('purchases', 'PurchasesController');
+        
+        Route::resource('goods_receiv_notes', 'GoodsReceivNotesController');
         /*
 	|--------------------------------------------------------------------
 	|Requests Verifier

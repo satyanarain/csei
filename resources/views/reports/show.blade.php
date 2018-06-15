@@ -7,63 +7,16 @@
 <!-- Bread crumb -->
 <div class="row page-titles">
     <div class="col-md-5 align-self-center" >
-        @if($view=='view')
-        <h3 class="text-primary">Requisition Details</h3>
-        @elseif($view=='requested_requests')
-        <h3 class="text-primary">Verified Request Details</h3>
-        @elseif($view=='verifireactive')
-        <h3 class="text-primary">Approved Request Details</h3>
        
-        @elseif($view=='finance_approval')
-           <h3 class="text-primary">
-            @if($requests->category_id==1 || $requests->category_id==2 ||  $requests->category_id==3)
-           Request for Finance Approval
-            @else
-           Request for Action Details
-            @endif
-        </h3>
-        @elseif($view=='mainadmin_approval')
-           <h3 class="text-primary">
-            @if($requests->category_id==1 || $requests->category_id==2 ||  $requests->category_id==3)
-           Request for Main Admin Approval
-            @else
-           Request for Action Details
-            @endif
-        </h3>
-        @elseif($view=='coordinator')
-           <h3 class="text-primary">
-            @if($requests->category_id==1 || $requests->category_id==2 ||  $requests->category_id==3)
-           Request for coordinator Action
-            @else
-           Request for Action Details
-            @endif
-        </h3>
-        @elseif($view=='downloads')
-        <h3 class="text-primary">Downloads Request Details</h3>
-        @else
-        <h3 class="text-primary">Request Details</h3> 
-        @endif
-        
-    </div>
+        <h3 class="text-primary">Reports Details</h3>
+     </div>
 
     <div class="col-md-7 align-self-center" >
-        <ol class="breadcrumb">
+      <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('home')}}">Dashboard</a></li>
-                 <?php if($view=='requested_requests')
-    { ?>
-            <li class="breadcrumb-item active"><a href="{{route('verifiers.requests')}}">Pending Verification</a></li>
-          <?php } ?>
-              <?php if($view=='verifireactive')
-    { ?>
-            <li class="breadcrumb-item active"><a href="{{route('approvers.requests')}}">Pending Approval</a></li>
-              <?php } ?>
-              <?php if($view=='view')
-    { ?>
-            <li class="breadcrumb-item active"><a href="{{route('requests.index')}}">All Requests</a></li>
-            <li class="breadcrumb-item active">Request Details</li>
-            
-              <?php } ?>
-             </ol>
+             <li class="breadcrumb-item active"><a href="{{route('reports.index')}}">All Reports</a></li>
+            <li class="breadcrumb-item active">Reports Details</li>
+     </ol>
     </div>
 </div>
 
