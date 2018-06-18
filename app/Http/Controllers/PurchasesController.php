@@ -67,11 +67,7 @@ use activityLog;
      * @return 07-06-2018
      */
        public function store(Request $request) {
-//   echo "<pre>";
-//    print_r($_POST);
-//    echo "</pre>";
-// 
-
+  
          $purchaser_id = Auth::id();
          $user_id_login= Auth::user();
          $logged_user=$user_id_login->name;
@@ -85,6 +81,8 @@ use activityLog;
              DB::table('purchase_orders')->insertGetId(
                         ['purchaser_id' => $purchaser_id, 'request_id' => $request_id,'vendor_id' => $vendor_id,'po_number' => $po_number,'category_id'=>$category_id]
                       );
+             
+             //exit();
           //  }
          // $finance_head = DB::table('users')->select('*')->whereIn('id',$user_id)->get();
          /****************************************************************************************/
