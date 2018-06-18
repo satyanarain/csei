@@ -97,11 +97,11 @@
                         ->get();
                 ?>
                 @foreach($vendor_quotation_list_all as $vendor_value_all)
-
-
-                <tr>
-                    @include('partials.item_list_sub')
-<?php   $allready = DB::table('vendor_finalise_for_purchase_orders')->select('*')->where([['request_id',$requests->id],['category_id',$requests->category_id]])->count();             ?>
+               <tr>
+               @include('partials.item_list_sub')
+                <?php   
+                $allready = DB::table('vendor_finalise_for_purchase_orders')->select('*')->where([['request_id',$requests->id],['category_id',$requests->category_id]])->count();      
+                ?>
                 </tr>
 
                 @endforeach
@@ -136,7 +136,7 @@
                             <button class="btn btn-primary submit" type="submit" name="single_vendor" value="single_vendor"><i class="fa fa-paper-plane"></i> Approve</button></td>
                     </tr>
                 </table> 
-@endif
+              @endif
             {!!Form::close()!!}        
               </div>  
      </div>
